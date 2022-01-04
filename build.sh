@@ -7,22 +7,22 @@ mkdir output
 cp -R data output
 
 # Dll
-cp ManicDigger.Common/bin/Release/ManicDigger.Common.dll output
+cp Arcanus.Common/bin/Release/Arcanus.Common.dll output
 
 # Scripting API
-cp ManicDigger.ScriptingApi/bin/Release/ManicDigger.ScriptingApi.dll output
+cp Arcanus.ScriptingApi/bin/Release/Arcanus.ScriptingApi.dll output
 
 # Game Client
-cp ManicDigger/bin/Release/*.exe output
+cp Arcanus/bin/Release/*.exe output
 
 # Server
-cp ManicDigger.Server/bin/Release/*.exe output
+cp Arcanus.Server/bin/Release/*.exe output
 
 # Monster editor
-cp ManicDigger.MonsterEditor/bin/Release/*.exe output
+cp Arcanus.MonsterEditor/bin/Release/*.exe output
 
 # Server Mods
-cp -R ManicDigger.Common/Server/Mods output
+cp -R Arcanus.Common/Server/Mods output
 
 # Third-party libraries
 cp Lib/* output

@@ -1,6 +1,6 @@
 sudo: false
 language: csharp
-solution: ManicDigger.sln
+solution: Arcanus.sln
 
 mono:
   - latest
@@ -15,14 +15,14 @@ addons:
     - innoextract
 
 script:
- - msbuild /p:Configuration=Release ManicDigger.sln
- - mono ./packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./ManicDigger.Tests/bin/Release/ManicDigger.Tests.dll
+ - msbuild /p:Configuration=Release Arcanus.sln
+ - mono ./packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./Arcanus.Tests/bin/Release/Arcanus.Tests.dll
  - ./build.sh
  - echo `date +%Y-%m-%d` > output/version.txt
 # binary zip file
- - mv output ManicDiggerBinary
- - zip -r -9 ManicDiggerBinary.zip ManicDiggerBinary
- - mv ManicDiggerBinary output
+ - mv output ArcanusBinary
+ - zip -r -9 ArcanusBinary.zip ArcanusBinary
+ - mv ArcanusBinary output
 # inno setup
 # release pinned to 5.5.8 due to innoextract compatibility issues
 # - wget http://www.jrsoftware.org/download.php/is-unicode.exe
@@ -30,13 +30,13 @@ script:
  - mv isetup-5.5.8-unicode.exe is-unicode.exe
  - innoextract is-unicode.exe
  - wine app/ISCC.exe setup.iss
- - mv output2/ManicDiggerSetup.exe ./
+ - mv output2/ArcanusSetup.exe ./
 # deploy builds
  - ./extra/travis_deploy_ghpages.sh
 
 env:
   global:
-  - GH_REF: github.com/manicdigger/manicdigger-builds
+  - GH_REF: github.com/Arcanus/arcanus-builds
   - secure: 0+XB4Y76gJ4kzJkbGNjsPHAT1zYLhJb4T5w8MWeOa8SQcla+6E5a2gtE/tMQSXMJHtmA+jDUJho5VJ8yRpIVwnnGVYOxzmAdEulrSk9dQaYs9YNSoE7qfxMkomffXyKTOsWdu75c5/iMxI0iqBg5IKm/lBB5BBDqMGWSrfW+3hk=
 
 deploy:
@@ -44,9 +44,9 @@ deploy:
   api_key:
     secure: nCSaKiJTAiONcbbZ3/PJ3IhDd4VMhI8DNvnoX5zxUI3nJ2Y1BonoCdkmRy4y0mXr6UHS/apNY6yGl2oSEZotp2GjmH88obBE4D83JL+mQmrDY/eIy6963/Hp+615p6nOXm8K/wxX3NVRr1dPKGV5v9bRu6GF+UsPT7piMOBWqpo=
   file:
-    - out/ManicDigger`date +%Y-%m-%d`Binary.zip
-    - out/ManicDigger`date +%Y-%m-%d`Setup.exe
+    - out/Arcanus`date +%Y-%m-%d`Binary.zip
+    - out/Arcanus`date +%Y-%m-%d`Setup.exe
   skip_cleanup: true
   on:
     tags: true
-    repo: manicdigger/manicdigger
+    repo: arcanus/arcanus

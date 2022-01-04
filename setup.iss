@@ -6,16 +6,16 @@
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{119E2FCB-5CDD-4C24-BCB2-56A824E2BF0A}
-AppName=Manic Digger
-AppVerName=Manic Digger
-AppPublisher=Manic Digger development team
-AppPublisherURL=http://www.manicdigger.sourceforge.net/
-AppSupportURL=http://www.manicdigger.sourceforge.net/
-AppUpdatesURL=http://www.manicdigger.sourceforge.net/
-DefaultDirName={pf}\Manic Digger
-DefaultGroupName=Manic Digger
+AppName=Arcanus
+AppVerName=Arcanus
+AppPublisher=Arcanus development team
+AppPublisherURL=http://www.worldofarcanus.com/
+AppSupportURL=http://www.worldofarcanus.com/
+AppUpdatesURL=http://www.worldofarcanus.com/
+DefaultDirName={pf}\Arcanus
+DefaultGroupName=Arcanus
 AllowNoIcons=yes
-OutputBaseFilename=ManicDiggerSetup
+OutputBaseFilename=ArcanusSetup
 Compression=lzma
 SolidCompression=yes
 OutputDir=output2
@@ -35,18 +35,18 @@ Source: "output\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs create
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\{cm:UninstallProgram,Manic Digger}"; Filename: "{uninstallexe}"
-Name: "{group}\Manic Digger"; Filename: "{app}\ManicDigger.exe"
+Name: "{group}\{cm:UninstallProgram,Arcanus}"; Filename: "{uninstallexe}"
+Name: "{group}\Arcanus"; Filename: "{app}\Arcanus.exe"
 Name: "{group}\Configuration"; Filename: "{app}\UserData"
-Name: "{commondesktop}\Manic Digger"; Filename: "{app}\ManicDigger.exe"; IconFilename: "{app}\data\local\md.ico"; Tasks: desktopicon
+Name: "{commondesktop}\Arcanus"; Filename: "{app}\Arcanus.exe"; IconFilename: "{app}\data\local\md.ico"; Tasks: desktopicon
 
 [Registry]
-Root: HKCR; Subkey: ".mdlink"; ValueType: string; ValueName: ""; ValueData: "ManicDigger"; Flags: uninsdeletevalue
-Root: HKCR; Subkey: "ManicDigger"; ValueType: string; ValueName: ""; ValueData: "Manic Digger multiplayer link"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "ManicDigger\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\ManicDigger.exe,0"
-Root: HKCR; Subkey: "ManicDigger\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\ManicDigger.exe"" ""%1"""
+Root: HKCR; Subkey: ".mdlink"; ValueType: string; ValueName: ""; ValueData: "Arcanus"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "Arcanus"; ValueType: string; ValueName: ""; ValueData: "Arcanus multiplayer link"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Arcanus\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Arcanus.exe,0"
+Root: HKCR; Subkey: "Arcanus\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\Arcanus.exe"" ""%1"""
 
-Root: HKCR; Subkey: "md"; ValueType: string; ValueName: ""; ValueData: "URL:Manic Digger"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "md"; ValueType: string; ValueName: ""; ValueData: "URL:Arcanus"; Flags: uninsdeletekey
 Root: HKCR; Subkey: "md"; ValueType: string; ValueName: "URL Protocol"; ValueData: ""; Flags: uninsdeletekey
-Root: HKCR; Subkey: "md\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\ManicDigger.exe,0"
-Root: HKCR; Subkey: "md\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\ManicDigger.exe"" ""%1"""
+Root: HKCR; Subkey: "md\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\Arcanus.exe,0"
+Root: HKCR; Subkey: "md\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\Arcanus.exe"" ""%1"""

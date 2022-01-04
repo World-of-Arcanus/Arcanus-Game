@@ -6,23 +6,23 @@ mkdir output
 xcopy /s data output\data\
 
 REM Dll
-xcopy /s ManicDigger.Common\bin\Release\ManicDigger.Common.dll output\
+xcopy /s Arcanus.Common\bin\Release\Arcanus.Common.dll output\
 
 REM Scripting API
-xcopy /s ManicDigger.ScriptingApi\bin\Release\ManicDigger.ScriptingApi.dll output\
+xcopy /s Arcanus.ScriptingApi\bin\Release\Arcanus.ScriptingApi.dll output\
 
 REM Game Client
-xcopy /s /y ManicDigger\bin\Release\*.exe output\
+xcopy /s /y Arcanus\bin\Release\*.exe output\
 
 REM Server
-xcopy /s /y ManicDigger.Server\bin\Release\*.exe output\
+xcopy /s /y Arcanus.Server\bin\Release\*.exe output\
 
 REM Monster editor
-xcopy /s /y ManicDigger.MonsterEditor\bin\Release\*.exe output\
+xcopy /s /y Arcanus.MonsterEditor\bin\Release\*.exe output\
 
 REM Server Mods
 mkdir output\Mods
-xcopy /s ManicDigger.Common\Server\Mods output\Mods\
+xcopy /s Arcanus.Common\Server\Mods output\Mods\
 
 REM Third-party libraries
 xcopy /y /s Lib\*.* output\

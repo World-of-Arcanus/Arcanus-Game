@@ -6,7 +6,7 @@ output2
 bin
 obj
 /Packet.Serializer.cs
-/ManicDiggerLib/Server/Mods/current.txt
+/ArcanusLib/Server/Mods/current.txt
 /Packet.Serializer.ci.cs
 /Packet.cs
 /ProtocolParser.cs

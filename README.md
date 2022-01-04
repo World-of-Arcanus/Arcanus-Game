@@ -3,9 +3,9 @@
 [![Latest GitHub Release](https://img.shields.io/github/release/manicdigger/manicdigger.svg?style=flat-square)](https://github.com/manicdigger/manicdigger/releases/latest)
 [![GitHub Downloads](https://img.shields.io/github/downloads/manicdigger/manicdigger/latest/total.svg?style=flat-square)](https://github.com/manicdigger/manicdigger/releases/latest)
 
-Manic Digger
+Arcanus
 ============
-Manic Digger is a 3D voxel building game similar to Minecraft.  
+Arcanus is a 3D voxel building game similar to Minecraft.  
 Build yourself a home in your own world or connect to an online server to team up with others to create great buildings!
 
 You can download the game directly from the GitHub releases page:  
@@ -42,7 +42,7 @@ Please note that this is still in development (no friendly/hostile mobs right no
 
 #### War Mod
 
-The War Mod is a gamemode that comes bundled with Manic Digger. It transforms the game into a fast-paced first-person shooter.
+The War Mod is a gamemode that comes bundled with Arcanus. It transforms the game into a fast-paced first-person shooter.
 
 [![War Mod 1](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2012-10-15_02-13-14-300x227.png)](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2012-10-15_02-13-14.png)
 [![War Mod 2](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2012-10-15_02-12-27-300x227.png)](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2012-10-15_02-12-27.png)
@@ -66,7 +66,7 @@ Server mods can be implemented in C# or interpreted Javascript.
 
 #### Contributing
 
-If you want to help developing Manic Digger feel free to fork this repository on GitHub and submit your changes by sending a pull request.  
+If you want to help developing Arcanus feel free to fork this repository on GitHub and submit your changes by sending a pull request.  
 Once you've contributed some good patches you can also get direct push access to the repository.
 
 
