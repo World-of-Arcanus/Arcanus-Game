@@ -594,7 +594,7 @@ namespace Arcanus.Server
 			{
 				using (TextReader textReader = new StreamReader(Path.Combine(GameStorePath.gamepathconfig, filename)))
 				{
-					XmlSerializer deserializer = new XmlSerializer(typeof(ServerBanlist));
+					XmlSerializer deserializer = new XmlSerializer(typeof(ServerBanlist), typeof(ServerBanlist).GetNestedTypes());
 					server.banlist = (ServerBanlist)deserializer.Deserialize(textReader);
 					textReader.Close();
 				}
@@ -626,7 +626,7 @@ namespace Arcanus.Server
 				Directory.CreateDirectory(GameStorePath.gamepathconfig);
 			}
 
-			XmlSerializer serializer = new XmlSerializer(typeof(ServerBanlist));
+			XmlSerializer serializer = new XmlSerializer(typeof(ServerBanlist), typeof(ServerBanlist).GetNestedTypes());
 			TextWriter textWriter = new StreamWriter(Path.Combine(GameStorePath.gamepathconfig, "ServerBanlist.txt"));
 
 			//Check to see if banlist has been initialized

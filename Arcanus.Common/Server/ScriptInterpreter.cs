@@ -17,16 +17,16 @@ namespace Arcanus.Server
 
 	public class JavaScriptInterpreter : IScriptInterpreter
 	{
-		private JintEngine m_engine;
+		private Engine m_engine;
 
 		public JavaScriptInterpreter()
 		{
 			Console.Write("Loading JavaScript interpreter: ");
 			try
 			{
-				m_engine = new JintEngine();
-				m_engine.AllowClr = false;
-				m_engine.DisableSecurity();
+				m_engine = new Engine();
+				// m_engine.AllowClr = false;
+				// m_engine.DisableSecurity();
 				Console.WriteLine("done.");
 			}
 			catch (Exception e)
@@ -48,7 +48,7 @@ namespace Arcanus.Server
 		{
 			try
 			{
-				result = m_engine.Run(script);
+				result = m_engine.Execute(script);
 			}
 			catch (Exception e)
 			{
@@ -67,12 +67,12 @@ namespace Arcanus.Server
 
 		public void SetVariable(string name, object value)
 		{
-			m_engine.SetParameter(name, value);
+			m_engine.SetValue(name, value);
 		}
 
 		public void SetFunction(string name, Delegate function)
 		{
-			m_engine.SetFunction(name, function);
+			m_engine.SetValue(name, function);
 		}
 	}
 }

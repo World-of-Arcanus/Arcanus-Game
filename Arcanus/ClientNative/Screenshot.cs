@@ -1,5 +1,4 @@
-﻿using OpenTK;
-using OpenTK.Graphics;
+﻿using OpenTK.Windowing.Desktop;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Drawing;
@@ -27,7 +26,8 @@ namespace Arcanus.ClientNative
 		// Returns a System.Drawing.Bitmap with the contents of the current framebuffer
 		public Bitmap GrabScreenshot()
 		{
-			if (GraphicsContext.CurrentContext == null)
+			/* disabled - this no longer works in OpenTK 4.6.7
+			if (d_GameWindow.Context == null)
 				throw new GraphicsContextMissingException();
 
 			Bitmap bmp = new Bitmap(d_GameWindow.ClientSize.Width, d_GameWindow.ClientSize.Height);
@@ -37,6 +37,10 @@ namespace Arcanus.ClientNative
 			bmp.UnlockBits(data);
 
 			bmp.RotateFlip(RotateFlipType.RotateNoneFlipY);
+			*/
+
+			Bitmap bmp = new Bitmap(1280, 720);
+
 			return bmp;
 		}
 	}

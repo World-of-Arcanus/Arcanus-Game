@@ -76,9 +76,9 @@ namespace Arcanus.Server
 		{
 			//Set Defaults
 			this.Format = 1;
-			this.Name = "Manic Digger server";
+			this.Name = "Arcanus server";
 			this.Motd = "MOTD";
-			this.WelcomeMessage = "Welcome to my Manic Digger server!";
+			this.WelcomeMessage = "Welcome to my Arcanus server!";
 			this.Port = 25565;
 			this.MaxClients = 16;
 			this.ServerMonitor = true;

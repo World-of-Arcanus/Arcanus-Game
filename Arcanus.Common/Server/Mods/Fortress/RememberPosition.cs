@@ -18,7 +18,8 @@ namespace Arcanus.Mods
 		}
 
 		ModManager m;
-		string filename = "UserData" + Path.DirectorySeparatorChar + "StoredPositions.txt";
+		string filename = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + 
+			Path.DirectorySeparatorChar + "UserData" + Path.DirectorySeparatorChar + "StoredPositions.txt";
 		public PositionStorage positions;
 
 		public void LoadData()

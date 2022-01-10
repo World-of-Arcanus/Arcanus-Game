@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Manic Digger Client")]
+[assembly: AssemblyTitle("Arcanus Client")]
 //[assembly: AssemblyDescription("")]
 //[assembly: AssemblyConfiguration("")]
 //[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Manic Digger")]
+[assembly: AssemblyProduct("Arcanus")]
 //[assembly: AssemblyCopyright("Copyright ©  2010")]
 //[assembly: AssemblyTrademark("")]
 //[assembly: AssemblyCulture("")]

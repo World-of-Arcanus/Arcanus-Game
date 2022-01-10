@@ -17,8 +17,8 @@ namespace Arcanus.ClientNative
 		}
 		public void ReadXml(System.Xml.XmlReader reader)
 		{
-			XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
-			XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
+			XmlSerializer keySerializer = new XmlSerializer(typeof(TKey), typeof(TKey).GetNestedTypes());
+			XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue), typeof(TValue).GetNestedTypes());
 
 			bool wasEmpty = reader.IsEmptyElement;
 			reader.Read();
@@ -51,8 +51,8 @@ namespace Arcanus.ClientNative
 
 		public void WriteXml(System.Xml.XmlWriter writer)
 		{
-			XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
-			XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
+			XmlSerializer keySerializer = new XmlSerializer(typeof(TKey), typeof(TKey).GetNestedTypes());
+			XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue), typeof(TValue).GetNestedTypes());
 
 			foreach (TKey key in this.Keys)
 			{

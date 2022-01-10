@@ -148,7 +148,7 @@ public class ScreenSingleplayer : MainMenuScreen
 			{
 				extension = "mdss";
 			}
-			string result = gamePlatform.FileOpenDialog(extension, "Manic Digger Savegame", gamePlatform.PathSavegames());
+			string result = gamePlatform.FileOpenDialog(extension, "Arcanus Savegame", gamePlatform.PathSavegames());
 			if (result != null)
 			{
 				menu.ConnectToSingleplayer(result);

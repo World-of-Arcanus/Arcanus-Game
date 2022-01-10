@@ -1,7 +1,7 @@
 ﻿namespace Arcanus.Mods.War
 {
 	/// <summary>
-	/// This class contains core settings for the Manic Digger server. Adapted for War Mod (light levels, render hint)
+	/// This class contains core settings for the Arcanus server. Adapted for War Mod (light levels, render hint)
 	/// </summary>
 	public class CoreWar : IMod
 	{

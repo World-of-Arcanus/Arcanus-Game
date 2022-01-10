@@ -1,7 +1,10 @@
 ﻿using Arcanus.Common;
-using OpenTK;
 using OpenTK.Graphics.OpenGL;
-using OpenTK.Input;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.Common.Input;
+using OpenTK.Windowing.Desktop;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -222,9 +225,10 @@ namespace Arcanus.ClientNative
 		{
 			System.Threading.ThreadPool.SetMinThreads(32, 32);
 			System.Threading.ThreadPool.SetMaxThreads(128, 128);
+			string AppRoot = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 			datapaths = new[] {
-				Path.Combine(Path.Combine(Path.Combine("..", ".."), ".."), "data"),
-				"data"
+				Path.Combine(AppRoot, Path.Combine(Path.Combine(Path.Combine(Path.Combine("..", ".."), ".."), ".."), "data")),
+				Path.Combine(AppRoot, "data")
 			};
 			start.Start();
 		}
@@ -1231,45 +1235,45 @@ namespace Arcanus.ClientNative
 
 		public override int GetCanvasWidth()
 		{
-			return window.Width;
+			return window.Size[0];
 		}
 
 		public override int GetCanvasHeight()
 		{
-			return window.Height;
+			return window.Size[1];
 		}
 
 		public void Start()
 		{
-			window.KeyDown += new EventHandler<KeyboardKeyEventArgs>(game_KeyDown);
-			window.KeyUp += new EventHandler<KeyboardKeyEventArgs>(game_KeyUp);
-			window.KeyPress += new EventHandler<OpenTK.KeyPressEventArgs>(game_KeyPress);
-			window.MouseDown += new EventHandler<MouseButtonEventArgs>(Mouse_ButtonDown);
-			window.MouseUp += new EventHandler<MouseButtonEventArgs>(Mouse_ButtonUp);
-			window.MouseMove += new EventHandler<MouseMoveEventArgs>(Mouse_Move);
-			window.MouseWheel += new EventHandler<OpenTK.Input.MouseWheelEventArgs>(Mouse_WheelChanged);
-			window.RenderFrame += new EventHandler<OpenTK.FrameEventArgs>(window_RenderFrame);
-			window.Closed += new EventHandler<EventArgs>(window_Closed);
-			window.Resize += new EventHandler<EventArgs>(window_Resized);
-			window.TargetRenderFrequency = 0;
-			window.Title = "Manic Digger";
+			window.KeyDown += new System.Action<KeyboardKeyEventArgs>(game_KeyDown);
+			window.KeyUp += new System.Action<KeyboardKeyEventArgs>(game_KeyUp);
+			// window.KeyPress += new System.Action<KeyPressEventArgs>(game_KeyPress);
+			window.MouseDown += new System.Action<MouseButtonEventArgs>(Mouse_ButtonDown);
+			window.MouseUp += new System.Action<MouseButtonEventArgs>(Mouse_ButtonUp);
+            window.MouseMove += new System.Action<MouseMoveEventArgs>(Mouse_Move);
+            window.MouseWheel += new System.Action<OpenTK.Windowing.Common.MouseWheelEventArgs>(Mouse_WheelChanged);
+			window.RenderFrame += new System.Action<FrameEventArgs>(window_RenderFrame);
+			window.Closed += new System.Action(window_Closed);
+			window.Resize += new System.Action<ResizeEventArgs>(window_Resized);
+			window.VSync = VSyncMode.On;
+			window.Title = "Arcanus";
 		}
 
-		void window_Closed(object sender, EventArgs e)
+		void window_Closed()
 		{
 			gameexit.SetExit(true);
 		}
 
-		void window_Resized(object sender, EventArgs e)
+		void window_Resized(ResizeEventArgs e)
 		{
 			Size sizeLimit = new Size(1280, 720);
-			if (window.Width < sizeLimit.Width)
+			if (window.Size[0] < sizeLimit.Width)
 			{
-				window.Width = sizeLimit.Width;
+				window.Size = new Vector2i(sizeLimit.Width, window.Size[1]);
 			}
-			if (window.Height < sizeLimit.Height)
+			if (window.Size[1] < sizeLimit.Height)
 			{
-				window.Height = sizeLimit.Height;
+				window.Size = new Vector2i(window.Size[0], sizeLimit.Height);
 			}
 		}
 
@@ -1301,7 +1305,7 @@ namespace Arcanus.ClientNative
 			{
 				gameexit.SetExit(true);
 			}
-			window.Exit();
+			window.Close();
 		}
 
 		public override void SetTitle(string applicationname)
@@ -1311,9 +1315,9 @@ namespace Arcanus.ClientNative
 
 		public override string KeyName(int key)
 		{
-			if (Enum.IsDefined(typeof(OpenTK.Input.Key), key))
+			if (Enum.IsDefined(typeof(OpenTK.Windowing.GraphicsLibraryFramework.Keys), key))
 			{
-				string s = Enum.GetName(typeof(OpenTK.Input.Key), key);
+				string s = Enum.GetName(typeof(OpenTK.Windowing.GraphicsLibraryFramework.Keys), key);
 				return s;
 			}
 			//if (Enum.IsDefined(typeof(SpecialKey), key))
@@ -1327,6 +1331,7 @@ namespace Arcanus.ClientNative
 		int resolutionsCount;
 		public override DisplayResolutionCi[] GetDisplayResolutions(IntRef retResolutionsCount)
 		{
+			/* disabled - this no longer works in OpenTK 4.6.7
 			if (resolutions == null)
 			{
 				resolutions = new DisplayResolutionCi[1024];
@@ -1344,7 +1349,15 @@ namespace Arcanus.ClientNative
 					resolutions[resolutionsCount++] = r2;
 				}
 			}
+
 			retResolutionsCount.SetValue(resolutionsCount);
+			*/
+
+			resolutions = new DisplayResolutionCi[1280];
+			resolutionsCount++;
+
+			retResolutionsCount.SetValue(resolutionsCount);
+
 			return resolutions;
 		}
 
@@ -1355,22 +1368,27 @@ namespace Arcanus.ClientNative
 
 		public override void SetWindowState(WindowState value)
 		{
-			window.WindowState = (OpenTK.WindowState)value;
+			window.WindowState = (OpenTK.Windowing.Common.WindowState)value;
 		}
 
 		public override void ChangeResolution(int width, int height, int bitsPerPixel, float refreshRate)
 		{
+			/* disabled - this no longer works in OpenTK 4.6.7
 			DisplayDevice.Default.ChangeResolution(width, height, bitsPerPixel, refreshRate);
+			*/
 		}
 
 		public override DisplayResolutionCi GetDisplayResolutionDefault()
 		{
-			DisplayDevice d = DisplayDevice.Default;
 			DisplayResolutionCi r = new DisplayResolutionCi();
+
+			/* disabled - this no longer works in OpenTK 4.6.7
 			r.Width = d.Width;
 			r.Height = d.Height;
 			r.BitsPerPixel = d.BitsPerPixel;
 			r.RefreshRate = d.RefreshRate;
+			*/
+
 			return r;
 		}
 
@@ -1452,15 +1470,15 @@ namespace Arcanus.ClientNative
 			GL.ColorPointer(4, ColorPointerType.UnsignedByte, 4 * 1, rgba);
 			GL.TexCoordPointer(2, TexCoordPointerType.Float, 2 * 4, uv);
 
-			BeginMode beginmode = BeginMode.Triangles;
+			PrimitiveType mode = PrimitiveType.Triangles;
 			if (data.getMode() == DrawModeEnum.Triangles)
 			{
-				beginmode = BeginMode.Triangles;
+				mode = PrimitiveType.Triangles;
 				GL.Enable(EnableCap.Texture2D);
 			}
 			else if (data.getMode() == DrawModeEnum.Lines)
 			{
-				beginmode = BeginMode.Lines;
+				mode = PrimitiveType.Lines;
 				GL.Disable(EnableCap.Texture2D);
 			}
 			else
@@ -1474,7 +1492,7 @@ namespace Arcanus.ClientNative
 				indices[i] = (ushort)dataIndices[i];
 			}
 
-			GL.DrawElements(beginmode, data.GetIndicesCount(), DrawElementsType.UnsignedShort, indices);
+			GL.DrawElements(mode, data.GetIndicesCount(), DrawElementsType.UnsignedShort, indices);
 
 			GL.DisableClientState(ArrayCap.VertexArray);
 			GL.DisableClientState(ArrayCap.ColorArray);
@@ -1994,7 +2012,7 @@ namespace Arcanus.ClientNative
 		}
 
 		public CrashReporter crashreporter;
-		OnCrashHandler onCrashHandler;
+		OnCrashHandler onCrashHandler = null;
 		public override void AddOnCrash(OnCrashHandler handler)
 		{
 #if !DEBUG
@@ -2016,7 +2034,6 @@ namespace Arcanus.ClientNative
 
 		bool mousePointerLocked;
 		bool mouseCursorVisible = true;
-		MouseState current, previous;
 		int lastX, lastY;
 
 		public override bool IsMousePointerLocked()
@@ -2068,7 +2085,7 @@ namespace Arcanus.ClientNative
 			window.Cursor = MouseCursor.Default;
 		}
 
-		public static int ToGlKey(OpenTK.Input.Key key)
+		public static int ToGlKey(OpenTK.Windowing.GraphicsLibraryFramework.Keys key)
 		{
 			return (int)key;
 		}
@@ -2087,6 +2104,7 @@ namespace Arcanus.ClientNative
 					return;
 				}
 				window.CursorVisible = false;
+				window.CursorGrabbed = true;
 				mouseCursorVisible = false;
 			}
 			else
@@ -2097,6 +2115,7 @@ namespace Arcanus.ClientNative
 					return;
 				}
 				window.CursorVisible = true;
+				window.CursorGrabbed = false;
 				mouseCursorVisible = true;
 			}
 		}
@@ -2115,10 +2134,10 @@ namespace Arcanus.ClientNative
 
 		public override bool Focused()
 		{
-			return window.Focused;
+			return window.IsFocused;
 		}
 
-		void window_RenderFrame(object sender, OpenTK.FrameEventArgs e)
+		void window_RenderFrame(FrameEventArgs e)
 		{
 			UpdateMousePosition();
 			foreach (NewFrameHandler h in newFrameHandlers)
@@ -2132,28 +2151,25 @@ namespace Arcanus.ClientNative
 
 		void UpdateMousePosition()
 		{
-			current = Mouse.GetState();
-			if (!window.Focused)
+			if (!window.IsFocused)
 			{
 				return;
 			}
-			if (current != previous)
+
+			// Mouse state has changed
+			int xdelta = (int) window.MouseState.X - (int) window.MouseState.PreviousX;
+			int ydelta = (int) window.MouseState.Y - (int) window.MouseState.PreviousY;
+			foreach (MouseEventHandler h in mouseEventHandlers)
 			{
-				// Mouse state has changed
-				int xdelta = current.X - previous.X;
-				int ydelta = current.Y - previous.Y;
-				foreach (MouseEventHandler h in mouseEventHandlers)
-				{
-					MouseEventArgs args = new MouseEventArgs();
-					args.SetX(lastX);
-					args.SetY(lastY);
-					args.SetMovementX(xdelta);
-					args.SetMovementY(ydelta);
-					args.SetEmulated(true);
-					h.OnMouseMove(args);
-				}
+				MouseEventArgs args = new MouseEventArgs();
+				args.SetX(lastX);
+				args.SetY(lastY);
+				args.SetMovementX(xdelta);
+				args.SetMovementY(ydelta);
+				args.SetEmulated(true);
+				h.OnMouseMove(args);
 			}
-			previous = current;
+
 			if (mousePointerLocked)
 			{
 				/*
@@ -2173,34 +2189,42 @@ namespace Arcanus.ClientNative
 				* Opening "mission control" by gesture does not free cursor
 				*/
 
-				int centerx = window.Bounds.Left + (window.Bounds.Width / 2);
-				int centery = window.Bounds.Top + (window.Bounds.Height / 2);
+			int centerx = window.Bounds.Min.X + (window.Bounds.Max.X / 2);
+			int centery = window.Bounds.Min.Y + (window.Bounds.Max.Y / 2);
 
-				// Setting cursor position this way works on Windows and Mac
-				Mouse.SetPosition(centerx, centery);
+			// Setting cursor position this way works on Windows and Mac
+			foreach (MouseEventHandler h in mouseEventHandlers)
+			{
+				MouseEventArgs argsLocked = new MouseEventArgs();
+				argsLocked.SetX(centerx);
+				argsLocked.SetY(centery);
+				argsLocked.SetEmulated(true);
+				h.OnMouseMove(argsLocked);
 			}
 		}
+	}
 
-		void Mouse_WheelChanged(object sender, OpenTK.Input.MouseWheelEventArgs e)
+		void Mouse_WheelChanged(OpenTK.Windowing.Common.MouseWheelEventArgs e)
 		{
 			foreach (MouseEventHandler h in mouseEventHandlers)
 			{
 				MouseWheelEventArgs args = new MouseWheelEventArgs();
-				args.SetDelta(e.Delta);
-				args.SetDeltaPrecise(e.DeltaPrecise);
+				args.SetDelta((int) window.MouseState.ScrollDelta.Y);
+				// args.SetDelta(e.Delta);
+				// args.SetDeltaPrecise(e.DeltaPrecise);
 				h.OnMouseWheel(args);
 			}
 		}
 
-		void Mouse_ButtonDown(object sender, MouseButtonEventArgs e)
+		void Mouse_ButtonDown(MouseButtonEventArgs e)
 		{
 			if (TouchTest)
 			{
 				foreach (TouchEventHandler h in touchEventHandlers)
 				{
 					TouchEventArgs args = new TouchEventArgs();
-					args.SetX(e.X);
-					args.SetY(e.Y);
+					args.SetX((int) window.MouseState.X);
+					args.SetY((int) window.MouseState.Y);
 					args.SetId(0);
 					h.OnTouchStart(args);
 				}
@@ -2210,23 +2234,23 @@ namespace Arcanus.ClientNative
 				foreach (MouseEventHandler h in mouseEventHandlers)
 				{
 					MouseEventArgs args = new MouseEventArgs();
-					args.SetX(e.X);
-					args.SetY(e.Y);
+					args.SetX((int) window.MouseState.X);
+					args.SetY((int) window.MouseState.Y);
 					args.SetButton((int)e.Button);
 					h.OnMouseDown(args);
 				}
 			}
 		}
 
-		void Mouse_ButtonUp(object sender, MouseButtonEventArgs e)
+		void Mouse_ButtonUp(MouseButtonEventArgs e)
 		{
 			if (TouchTest)
 			{
 				foreach (TouchEventHandler h in touchEventHandlers)
 				{
 					TouchEventArgs args = new TouchEventArgs();
-					args.SetX(e.X);
-					args.SetY(e.Y);
+					args.SetX((int) window.MouseState.X);
+					args.SetY((int) window.MouseState.Y);
 					args.SetId(0);
 					h.OnTouchEnd(args);
 				}
@@ -2236,25 +2260,25 @@ namespace Arcanus.ClientNative
 				foreach (MouseEventHandler h in mouseEventHandlers)
 				{
 					MouseEventArgs args = new MouseEventArgs();
-					args.SetX(e.X);
-					args.SetY(e.Y);
+					args.SetX((int) window.MouseState.X);
+					args.SetY((int) window.MouseState.Y);
 					args.SetButton((int)e.Button);
 					h.OnMouseUp(args);
 				}
 			}
 		}
 
-		void Mouse_Move(object sender, MouseMoveEventArgs e)
+		void Mouse_Move(MouseMoveEventArgs e)
 		{
-			lastX = e.X;
-			lastY = e.Y;
+			lastX = (int) e.X;
+			lastY = (int) e.Y;
 			if (TouchTest)
 			{
 				foreach (TouchEventHandler h in touchEventHandlers)
 				{
 					TouchEventArgs args = new TouchEventArgs();
-					args.SetX(e.X);
-					args.SetY(e.Y);
+					args.SetX((int) e.X);
+					args.SetY((int) e.Y);
 					args.SetId(0);
 					h.OnTouchMove(args);
 				}
@@ -2264,17 +2288,19 @@ namespace Arcanus.ClientNative
 				foreach (MouseEventHandler h in mouseEventHandlers)
 				{
 					MouseEventArgs args = new MouseEventArgs();
-					args.SetX(e.X);
-					args.SetY(e.Y);
-					args.SetMovementX(e.XDelta);
-					args.SetMovementY(e.YDelta);
+					args.SetX((int) e.X);
+					args.SetY((int) e.Y);
+					args.SetMovementX((int) e.DeltaX);
+					args.SetMovementY((int) e.DeltaY);
 					args.SetEmulated(false);
 					h.OnMouseMove(args);
 				}
 			}
 		}
 
-		void game_KeyPress(object sender, OpenTK.KeyPressEventArgs e)
+		/* disabled - this no longer exists in OpenTK 4.6.7
+		 * Note: We might be able to use TextInput and convert the Unicode
+		void game_KeyPress(KeyPressEventArgs e)
 		{
 			foreach (KeyEventHandler h in keyEventHandlers)
 			{
@@ -2283,8 +2309,9 @@ namespace Arcanus.ClientNative
 				h.OnKeyPress(args);
 			}
 		}
+		*/
 
-		void game_KeyDown(object sender, KeyboardKeyEventArgs e)
+		void game_KeyDown(KeyboardKeyEventArgs e)
 		{
 			foreach (KeyEventHandler h in keyEventHandlers)
 			{
@@ -2294,10 +2321,15 @@ namespace Arcanus.ClientNative
 				args.SetShiftPressed(e.Modifiers == KeyModifiers.Shift);
 				args.SetAltPressed(e.Modifiers == KeyModifiers.Alt);
 				h.OnKeyDown(args);
+
+				// added due to onKeyPress no longer being supported
+				KeyPressEventArgs argsKP = new KeyPressEventArgs();
+				argsKP.SetKeyChar((char) e.Key);
+				h.OnKeyPress(argsKP);
 			}
 		}
 
-		void game_KeyUp(object sender, KeyboardKeyEventArgs e)
+		void game_KeyUp(KeyboardKeyEventArgs e)
 		{
 			foreach (KeyEventHandler h in keyEventHandlers)
 			{
@@ -2418,14 +2450,20 @@ namespace Arcanus.ClientNative
 	}
 
 
-	public class GameWindowNative : OpenTK.GameWindow
+	public class GameWindowNative : GameWindow
 	{
 		public GamePlatformNative platform;
-		public GameWindowNative(OpenTK.Graphics.GraphicsMode mode)
-			: base(1280, 720, mode)
-		{
-			VSync = OpenTK.VSyncMode.On;
-			WindowState = OpenTK.WindowState.Normal;
-		}
+		public GameWindowNative()
+			: base(
+				  new GameWindowSettings()
+				  {
+					  RenderFrequency = 0
+				  },
+				  new NativeWindowSettings()
+				  {
+					  Size = new OpenTK.Mathematics.Vector2i(1280, 720),
+					  Profile = ContextProfile.Compatability
+				  }
+			) {}
 	}
 }

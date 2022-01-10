@@ -230,7 +230,7 @@
 
 	public override void OnMouseUp(Game game_, MouseEventArgs args)
 	{
-		if (game.guistate != GuiState.Inventory)
+		if (game != null && game.guistate != GuiState.Inventory)
 		{
 			return;
 		}

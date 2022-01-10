@@ -1,8 +1,13 @@
 ﻿using Arcanus.Common;
-using Microsoft.CSharp;
 using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+// using System.CodeDom.Compiler;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using System.Runtime.Loader;
 using System.IO;
 
 namespace Arcanus.Server
@@ -11,8 +16,8 @@ namespace Arcanus.Server
 	{
 		public ServerSystemModLoader()
 		{
-			jintEngine.DisableSecurity();
-			jintEngine.AllowClr = true;
+			// jintEngine.DisableSecurity();
+			// jintEngine.AllowClr = true;
 		}
 
 		bool started;
@@ -68,7 +73,8 @@ namespace Arcanus.Server
 
 		Dictionary<string, string> GetScriptSources(Server server)
 		{
-			string[] modpaths = new[] { Path.Combine(Path.Combine(Path.Combine(Path.Combine(Path.Combine("..", ".."), ".."), "Arcanus.Common"), "Server"), "Mods"), "Mods" };
+			string AppRoot = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+			string[] modpaths = new[] { Path.Combine(AppRoot, Path.Combine(Path.Combine(Path.Combine(Path.Combine(Path.Combine(Path.Combine("..", ".."), ".."), ".."), "Arcanus.Common"), "Server"), "Mods")), Path.Combine(AppRoot, "Mods")};
 
 			for (int i = 0; i < modpaths.Length; i++)
 			{
@@ -116,26 +122,10 @@ namespace Arcanus.Server
 			return scripts;
 		}
 
-		Jint.JintEngine jintEngine = new Jint.JintEngine();
+		Jint.Engine jintEngine = new Jint.Engine();
 		Dictionary<string, string> javascriptScripts = new Dictionary<string, string>();
 		public void CompileScripts(Dictionary<string, string> scripts, bool restart)
 		{
-			CSharpCodeProvider compiler = new CSharpCodeProvider(new Dictionary<String, String> { { "CompilerVersion", "v4.0" } });
-			var parms = new CompilerParameters();
-			parms.GenerateExecutable = false;
-			parms.CompilerOptions = "/unsafe";
-
-#if !DEBUG
-            parms.GenerateInMemory = true;
-#else
-			//Prepare for mod debugging
-			//IMPORTANT: Visual Studio breakpoints will not jump into a generatet .cs file
-			//Instead, call "System.Diagnostics.Debugger.Break()" to create a breakpoint in the mod-class
-
-			//Generate files to debug
-			parms.GenerateInMemory = false;
-			parms.IncludeDebugInformation = true;
-
 			//Use a local temp folder
 			DirectoryInfo dirTemp = new DirectoryInfo(Path.Combine(new FileInfo(GetType().Assembly.Location).DirectoryName, "ModDebugInfos"));
 
@@ -160,21 +150,6 @@ namespace Arcanus.Server
 				}
 			}
 
-			//created locally, this allows the debugger to find the .pdb
-			parms.OutputAssembly = Path.Combine(new DirectoryInfo(new FileInfo(GetType().Assembly.Location).DirectoryName).FullName, "Mods.dll");
-
-			//generatet .cs files are stored here
-			//they are rather important for this debug session, since the .pdb link to them
-			parms.TempFiles = new TempFileCollection(dirTemp.FullName, true);
-#endif
-
-			parms.ReferencedAssemblies.Add("System.dll");
-			parms.ReferencedAssemblies.Add("System.Drawing.dll");
-			parms.ReferencedAssemblies.Add("Arcanus.ScriptingApi.dll");
-			parms.ReferencedAssemblies.Add("LibNoise.dll");
-			parms.ReferencedAssemblies.Add("protobuf-net.dll");
-			parms.ReferencedAssemblies.Add("System.Xml.dll");
-
 			Dictionary<string, string> csharpScripts = new Dictionary<string, string>();
 			foreach (var k in scripts)
 			{
@@ -193,72 +168,87 @@ namespace Arcanus.Server
 				return;
 			}
 
-			string[] csharpScriptsValues = new string[csharpScripts.Values.Count];
+			SyntaxTree[] csharpScriptsValues = new SyntaxTree[csharpScripts.Values.Count];
 			int i = 0;
 			foreach (var k in csharpScripts)
 			{
-				csharpScriptsValues[i++] = k.Value;
+				csharpScriptsValues[i++] = CSharpSyntaxTree.ParseText(k.Value);
 			}
 
+			string AppCore = Path.GetDirectoryName(System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory());
+			string AppRoot = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+
+			var compilation = CSharpCompilation.Create("Mods")
+				.WithOptions(
+					new CSharpCompilationOptions(
+						OutputKind.DynamicallyLinkedLibrary,
+						allowUnsafe: true
+					)
+				)
+				.AddReferences(
+					MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+					MetadataReference.CreateFromFile(typeof(Color).Assembly.Location),
+					MetadataReference.CreateFromFile(typeof(Component).Assembly.Location),
+					MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
+					MetadataReference.CreateFromFile(typeof(File).Assembly.Location),
+					MetadataReference.CreateFromFile(typeof(Process).Assembly.Location),
+					MetadataReference.CreateFromFile(typeof(Stack<Vector3i[]>).Assembly.Location),
+					MetadataReference.CreateFromFile(typeof(Stopwatch).Assembly.Location),
+					MetadataReference.CreateFromFile(typeof(Uri).Assembly.Location),
+					MetadataReference.CreateFromFile(Path.Combine(AppCore, "System.dll")),
+					MetadataReference.CreateFromFile(Path.Combine(AppCore, "System.Drawing.dll")),
+					MetadataReference.CreateFromFile(Path.Combine(AppCore, "System.Runtime.dll")),
+					MetadataReference.CreateFromFile(Path.Combine(AppCore, "System.Xml.dll")),
+					MetadataReference.CreateFromFile(Path.Combine(AppCore, "mscorlib.dll")),
+					MetadataReference.CreateFromFile(Path.Combine(AppCore, "netstandard.dll")),
+					MetadataReference.CreateFromFile(Path.Combine(AppRoot, "Arcanus.ScriptingApi.dll")),
+					MetadataReference.CreateFromFile(Path.Combine(AppRoot, "LibNoise.dll")),
+					MetadataReference.CreateFromFile(Path.Combine(AppRoot, "protobuf-net.dll"))
+				)
+				.AddSyntaxTrees(
+					csharpScriptsValues
+				);
+
+#if !DEBUG
+			using (var memoryStream = new MemoryStream())
 			{
-				CompilerResults results = compiler.CompileAssemblyFromSource(parms, csharpScriptsValues);
+				var emitResult = compilation.Emit(memoryStream);
 
-				if (results.Errors.Count == 0)
+				if (emitResult.Success)
 				{
-					Use(results);
-					return;
-				}
-			}
+					memoryStream.Seek(0, SeekOrigin.Begin);
 
-			//Error. Load scripts separately.
+					var context = AssemblyLoadContext.Default;
+					var assembly = context.LoadFromStream(memoryStream);
 
-			foreach (var k in csharpScripts)
-			{
-				CompilerResults results = compiler.CompileAssemblyFromSource(parms, new string[] { k.Value });
-				if (results.Errors.Count != 0)
-				{
-					try
+					foreach (Type t in assembly.GetTypes())
 					{
-						string errors = "";
-						foreach (CompilerError error in results.Errors)
+						if (typeof(IMod).IsAssignableFrom(t))
 						{
-							//mono is treating warnings as errors.
-							//if (error.IsWarning)
-							{
-								//continue;
-							}
-							errors += string.Format("{0} Line:{1} {2}", error.ErrorNumber, error.Line, error.ErrorText);
+							mods[t.Name] = (IMod) assembly.CreateInstance(t.FullName);
+							Console.WriteLine("Loaded mod: {0}", t.Name);
 						}
-						string errormsg = "Can't load mod: " + k.Key + "\n" + errors;
-						try
-						{
-							System.Windows.Forms.MessageBox.Show(errormsg);
-						}
-						catch
-						{
-						}
-						Console.WriteLine(errormsg);
 					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.ToString());
-					}
-					continue;
 				}
-				Use(results);
 			}
-		}
+#else
+			string fileName = Path.Combine(AppRoot, "Mods.dll");
+			var emitResult = compilation.Emit(fileName);
 
-		void Use(CompilerResults results)
-		{
-			foreach (Type t in results.CompiledAssembly.GetTypes())
+			if (emitResult.Success)
 			{
-				if (typeof(IMod).IsAssignableFrom(t))
+				var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(fileName);
+
+				foreach (Type t in assembly.GetTypes())
 				{
-					mods[t.Name] = (IMod)results.CompiledAssembly.CreateInstance(t.FullName);
-					Console.WriteLine("Loaded mod: {0}", t.Name);
+					if (typeof(IMod).IsAssignableFrom(t))
+					{
+						mods[t.Name] = (IMod) assembly.CreateInstance(t.FullName);
+						Console.WriteLine("Loaded mod: {0}", t.Name);
+					}
 				}
 			}
+#endif
 		}
 
 		Dictionary<string, IMod> mods = new Dictionary<string, IMod>();
@@ -293,13 +283,13 @@ namespace Arcanus.Server
 
 		void StartJsMods(ModManager m)
 		{
-			jintEngine.SetParameter("m", m);
+			jintEngine.SetValue("m", m);
 			// TODO: javascript mod requirements
 			foreach (var k in javascriptScripts)
 			{
 				try
 				{
-					jintEngine.Run(k.Value);
+					jintEngine.Execute(k.Value);
 					Console.WriteLine("Loaded mod: {0}", k.Key);
 				}
 				catch

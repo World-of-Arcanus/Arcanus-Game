@@ -2541,6 +2541,7 @@
 
 	internal void KeyUp(int eKey)
 	{
+		if (eKey > 255) { eKey = 27; }
 		keyboardStateRaw[eKey] = false;
 		for (int i = 0; i < clientmodsCount; i++)
 		{
@@ -3260,6 +3261,7 @@
 	public const int DISCONNECTED_ICON_AFTER_SECONDS = 10;
 	internal void KeyDown(int eKey)
 	{
+		if (eKey > 255) { eKey = 27; }
 		keyboardStateRaw[eKey] = true;
 		if (guistate != GuiState.MapLoading)
 		{

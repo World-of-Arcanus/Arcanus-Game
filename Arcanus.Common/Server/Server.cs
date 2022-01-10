@@ -309,7 +309,8 @@ namespace Arcanus.Server
 			map.d_ChunkDb = chunkdb;
 
 			//Load assets (textures, sounds, etc.)
-			string[] datapaths = new[] { Path.Combine(Path.Combine(Path.Combine("..", ".."), ".."), "data"), "data" };
+			string AppRoot = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+			string[] datapaths = new[] { Path.Combine(AppRoot, Path.Combine(Path.Combine(Path.Combine(Path.Combine("..", ".."), ".."), ".."), "data")), Path.Combine(AppRoot, "data") };
 			string[] datapathspublic = new[] { Path.Combine(datapaths[0], "public"), Path.Combine(datapaths[1], "public") };
 			PublicDataPaths = datapathspublic;
 			assetLoader = new AssetLoader(datapathspublic);

@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.glControl1 = new OpenTK.GLControl();
+			this.glControl1 = new OpenTK.WinForms.GLControl();
 			this.trackBar1 = new System.Windows.Forms.TrackBar();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@
 			this.glControl1.Name = "glControl1";
 			this.glControl1.Size = new System.Drawing.Size(640, 360);
 			this.glControl1.TabIndex = 0;
-			this.glControl1.VSync = true;
+			// this.glControl1.VSync = true;
 			this.glControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.glControl1_MouseDown);
 			this.glControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.glControl1_MouseMove);
 			this.glControl1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.glControl1_MouseUp);
@@ -214,7 +214,7 @@
 
 		#endregion
 
-		private OpenTK.GLControl glControl1;
+		private OpenTK.WinForms.GLControl glControl1;
 		private System.Windows.Forms.TrackBar trackBar1;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;

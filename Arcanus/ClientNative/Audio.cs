@@ -1,5 +1,5 @@
-﻿using OpenTK;
-using OpenTK.Audio;
+﻿using OpenTK.Mathematics;
+using OpenTK.Audio.OpenAL;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,8 +15,8 @@ namespace Arcanus.ClientNative
 		{
 			try
 			{
-				IList<string> x = AudioContext.AvailableDevices;//only with this line an exception can be catched.
-				context = new AudioContext();
+				// IList<string> x = AudioContext.AvailableDevices;//only with this line an exception can be catched.
+				context = ALC.CreateContext(ALC.OpenDevice(null), new ALContextAttributes());
 			}
 			catch (Exception e)
 			{
@@ -34,7 +34,7 @@ namespace Arcanus.ClientNative
 				Console.WriteLine(e);
 			}
 		}
-		AudioContext context;
+		ALContext context;
 		// Loads a wave/riff audio file.
 		public static byte[] LoadWave(Stream stream, out int channels, out int bits, out int rate)
 		{
@@ -142,7 +142,10 @@ namespace Arcanus.ClientNative
 
 					int buffer = OpenTK.Audio.OpenAL.AL.GenBuffer();
 
+					/* disabled - this no longer works in OpenTK 4.6.7
 					OpenTK.Audio.OpenAL.AL.BufferData(buffer, GetSoundFormat(sample.Channels, sample.BitsPerSample), sample.Pcm, sample.Pcm.Length, sample.Rate);
+					*/
+
 					//audiofiles[filename]=buffer;
 
 					OpenTK.Audio.OpenAL.AL.DistanceModel(OpenTK.Audio.OpenAL.ALDistanceModel.InverseDistance);
@@ -257,7 +260,6 @@ namespace Arcanus.ClientNative
 			}
 		}
 		Vector3 lastlistener;
-		Vector3 lastorientation;
 		public AudioTask CreateAudio(AudioDataCs sample)
 		{
 			return new AudioTask(d_GameExit, sample, this);

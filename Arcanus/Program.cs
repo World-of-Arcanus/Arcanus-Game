@@ -2,7 +2,7 @@
 using Arcanus.ClientNative;
 using Arcanus.Common;
 using Arcanus.Server;
-using OpenTK.Graphics;
+using OpenTK.Windowing.Common;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -37,7 +37,7 @@ public class ArcanusProgram
 #endif
 	}
 
-	CrashReporter crashreporter;
+	CrashReporter crashreporter = null;
 
 	private void Start(string[] args)
 	{
@@ -54,10 +54,10 @@ public class ArcanusProgram
 		platform.singlePlayerServerDummyNetwork = dummyNetwork;
 		this.platform = platform;
 		platform.StartSinglePlayerServer = (filename) => { savefilename = filename; new Thread(ServerThreadStart).Start(); };
-		GraphicsMode mode = new GraphicsMode(OpenTK.DisplayDevice.Default.BitsPerPixel, 24);
-		using (GameWindowNative game = new GameWindowNative(mode))
+		using (GameWindowNative game = new GameWindowNative())
 		{
-			game.VSync = OpenTK.VSyncMode.Adaptive;
+			game.CenterWindow();
+			game.VSync = VSyncMode.Adaptive;
 			platform.window = game;
 			game.platform = platform;
 			mainmenu.Start(platform);

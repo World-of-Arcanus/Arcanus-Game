@@ -1,7 +1,7 @@
 ﻿namespace Arcanus.Mods
 {
 	/// <summary>
-	/// This class contains core settings for the Manic Digger server
+	/// This class contains core settings for the Arcanus server
 	/// </summary>
 	public class Core : IMod
 	{

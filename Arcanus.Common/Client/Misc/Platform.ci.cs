@@ -374,6 +374,9 @@ public class KeyPressEventArgs
 	public void SetHandled(bool value) { handled = value; }
 }
 
+// TODO: This should be scrapped and all references replaced with
+// OpenTK.Windowing.GraphicsLibraryFramework.Keys.X
+// I have only updated the movement keys to match so far
 public class GlKeys
 {
 	public const int Unknown = 0;
@@ -434,8 +437,8 @@ public class GlKeys
 	public const int Left = 47;
 	public const int Right = 48;
 	public const int Enter = 49;
-	public const int Escape = 50;
-	public const int Space = 51;
+	public const int Escape = 27;
+	public const int Space = 32;
 	public const int Tab = 52;
 	public const int Back = 53;
 	public const int BackSpace = 53;
@@ -470,32 +473,32 @@ public class GlKeys
 	public const int KeypadPlus = 80;
 	public const int KeypadDecimal = 81;
 	public const int KeypadEnter = 82;
-	public const int A = 83;
-	public const int B = 84;
-	public const int C = 85;
-	public const int D = 86;
-	public const int E = 87;
-	public const int F = 88;
-	public const int G = 89;
-	public const int H = 90;
-	public const int I = 91;
-	public const int J = 92;
-	public const int K = 93;
-	public const int L = 94;
-	public const int M = 95;
-	public const int N = 96;
-	public const int O = 97;
-	public const int P = 98;
-	public const int Q = 99;
-	public const int R = 100;
-	public const int S = 101;
-	public const int T = 102;
-	public const int U = 103;
-	public const int V = 104;
-	public const int W = 105;
-	public const int X = 106;
-	public const int Y = 107;
-	public const int Z = 108;
+	public const int A = 65;
+	public const int B = 66;
+	public const int C = 67;
+	public const int D = 68;
+	public const int E = 69;
+	public const int F = 70;
+	public const int G = 71;
+	public const int H = 72;
+	public const int I = 73;
+	public const int J = 74;
+	public const int K = 75;
+	public const int L = 76;
+	public const int M = 77;
+	public const int N = 78;
+	public const int O = 79;
+	public const int P = 80;
+	public const int Q = 81;
+	public const int R = 82;
+	public const int S = 83;
+	public const int T = 84;
+	public const int U = 85;
+	public const int V = 86;
+	public const int W = 87;
+	public const int X = 88;
+	public const int Y = 89;
+	public const int Z = 90;
 	public const int Number0 = 109;
 	public const int Number1 = 110;
 	public const int Number2 = 111;
@@ -580,8 +583,8 @@ public class MouseWheelEventArgs
 public class MouseButtonEnum
 {
 	public const int Left = 0;
-	public const int Middle = 1;
-	public const int Right = 2;
+	public const int Middle = 2;
+	public const int Right = 1;
 }
 
 public abstract class MouseEventHandler

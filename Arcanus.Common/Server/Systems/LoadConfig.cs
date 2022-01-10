@@ -36,7 +36,7 @@ namespace Arcanus.Server
 			{
 				using (TextReader textReader = new StreamReader(Path.Combine(GameStorePath.gamepathconfig, filename)))
 				{
-					XmlSerializer deserializer = new XmlSerializer(typeof(ServerConfig));
+					XmlSerializer deserializer = new XmlSerializer(typeof(ServerConfig), typeof(ServerConfig).GetNestedTypes());
 					server.config = (ServerConfig)deserializer.Deserialize(textReader);
 					textReader.Close();
 				}
@@ -113,7 +113,7 @@ namespace Arcanus.Server
 				Directory.CreateDirectory(GameStorePath.gamepathconfig);
 			}
 
-			XmlSerializer serializer = new XmlSerializer(typeof(ServerConfig));
+			XmlSerializer serializer = new XmlSerializer(typeof(ServerConfig), typeof(ServerConfig).GetNestedTypes());
 			TextWriter textWriter = new StreamWriter(Path.Combine(GameStorePath.gamepathconfig, "ServerConfig.txt"));
 
 			//Check to see if config has been initialized
