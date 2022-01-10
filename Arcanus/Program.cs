@@ -57,6 +57,7 @@ public class ArcanusProgram
 		using (GameWindowNative game = new GameWindowNative())
 		{
 			game.CenterWindow();
+			game.IsVisible = true;
 			game.VSync = VSyncMode.Adaptive;
 			platform.window = game;
 			game.platform = platform;
