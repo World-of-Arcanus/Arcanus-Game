@@ -1,4 +1,4 @@
-Arcanus
+![Arcanus](https://raw.githubusercontent.com/World-of-Arcanus/Arcanus-Game/main/data/local/gui/logo-small.png)
 ============
 
 Arcanus is a 3D voxel building game, with the ability to run as a first-person shooter. 
