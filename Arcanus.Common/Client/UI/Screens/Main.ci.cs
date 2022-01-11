@@ -77,10 +77,10 @@
 		float spacebetween = 5 * scale;
 		float offsetfromborder = 50 * scale;
 
-		wimg_logo.sizex = 1024 * scale;
-		wimg_logo.sizey = 256 * scale;
+		wimg_logo.sizex = 491 * scale;
+		wimg_logo.sizey = 157 * scale;
 		wimg_logo.x = windowX / 2 - wimg_logo.sizex / 2;
-		wimg_logo.y = 50 * scale;
+		wimg_logo.y = 75 * scale;
 
 		wbtn_singleplayer.x = windowX / 2 - (buttonwidth / 2);
 		wbtn_singleplayer.y = windowY - (3 * (buttonheight + spacebetween)) - offsetfromborder;

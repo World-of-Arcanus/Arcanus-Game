@@ -88,8 +88,8 @@
 
 	void DrawBackground(Game game)
 	{
-		backgroundW = 512;
-		backgroundH = 512;
+		backgroundW = 640;
+		backgroundH = 640;
 		//Background tiling
 		int countX = game.platform.FloatToInt(Width / backgroundW) + 1;
 		int countY = game.platform.FloatToInt(Height / backgroundH) + 1;

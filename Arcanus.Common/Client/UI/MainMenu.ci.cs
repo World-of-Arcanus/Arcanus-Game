@@ -32,7 +32,7 @@ public class MainMenu
 
 		// initialize background
 		background = new AnimatedBackgroundWidget();
-		background.Init("background.png", 512, 512);
+		background.Init("background.png", 640, 640);
 
 		// initialize translations
 		lang = new LanguageCi();
