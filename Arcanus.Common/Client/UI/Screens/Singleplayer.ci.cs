@@ -57,41 +57,47 @@ public class ScreenSingleplayer : MainMenuScreen
 	public override void Render(float dt)
 	{
 		float scale = menu.uiRenderer.GetScale();
-		float leftx = gamePlatform.GetCanvasWidth() / 2 - 128 * scale;
 		float y = gamePlatform.GetCanvasHeight() / 2 + 0 * scale;
+		float buttonheight = 64 * scale;
+		float buttonwidth = 244 * scale;
+		float spacebetween = 10 * scale;
+		float offsetfrommiddle = 100;
 
-		wbtn_playWorld.x = leftx;
+		float windowX = gamePlatform.GetCanvasWidth();
+		float windowY = gamePlatform.GetCanvasHeight();
+
+		wbtn_playWorld.x = windowX / 2 - (buttonwidth / 2);
 		wbtn_playWorld.y = y + 100 * scale;
-		wbtn_playWorld.sizex = 256 * scale;
-		wbtn_playWorld.sizey = 64 * scale;
+		wbtn_playWorld.sizex = buttonwidth;
+		wbtn_playWorld.sizey = buttonheight;
 
-		wbtn_newWorld.x = leftx;
+		wbtn_newWorld.x = windowX / 2 - (buttonwidth / 2);
 		wbtn_newWorld.y = y + 170 * scale;
-		wbtn_newWorld.sizex = 256 * scale;
-		wbtn_newWorld.sizey = 64 * scale;
+		wbtn_newWorld.sizex = buttonwidth;
+		wbtn_newWorld.sizey = buttonheight;
 
-		wbtn_modifyWorld.x = leftx;
+		wbtn_modifyWorld.x = windowX / 2 - (buttonwidth / 2);
 		wbtn_modifyWorld.y = y + 240 * scale;
-		wbtn_modifyWorld.sizex = 256 * scale;
-		wbtn_modifyWorld.sizey = 64 * scale;
+		wbtn_modifyWorld.sizex = buttonwidth;
+		wbtn_modifyWorld.sizey = buttonheight;
 
 		wbtn_back.x = 40 * scale;
 		wbtn_back.y = gamePlatform.GetCanvasHeight() - 104 * scale;
-		wbtn_back.sizex = 256 * scale;
-		wbtn_back.sizey = 64 * scale;
+		wbtn_back.sizex = buttonwidth;
+		wbtn_back.sizey = buttonheight;
 
-		wbtn_openFile.x = leftx;
-		wbtn_openFile.y = y + 0 * scale;
-		wbtn_openFile.sizex = 256 * scale;
-		wbtn_openFile.sizey = 64 * scale;
+		wbtn_openFile.x = windowX / 2 - (buttonwidth / 2);
+		wbtn_openFile.y = windowY / 2 - (2 * (buttonheight + spacebetween)) + offsetfrommiddle;
+		wbtn_openFile.sizex = buttonwidth;
+		wbtn_openFile.sizey = buttonheight;
 
-		wtxt_title.x = gamePlatform.GetCanvasWidth() / 2;
-		wtxt_title.y = 10;
+		wtxt_title.x = windowX / 2;
+		wtxt_title.y = windowY / 2 - 150;
 		wtxt_title.SetAlignment(TextAlign.Center);
 
-		wlst_worldList.x = leftx;
+		wlst_worldList.x = windowX / 2 - (buttonwidth / 2);
 		wlst_worldList.y = 100;
-		wlst_worldList.sizex = 256 * scale;
+		wlst_worldList.sizex = buttonwidth;
 		wlst_worldList.sizey = 400 * scale;
 
 		// TODO: Implement savegame handling in game menu

@@ -136,12 +136,12 @@
 
 	internal void AddEnglish()
 	{
-		Add("en", "MainMenu_AssetsLoadProgress", "Loading... {0}%");
+		Add("en", "MainMenu_AssetsLoadProgress", "Loading ... {0}%");
 		Add("en", "MainMenu_Singleplayer", "Singleplayer");
 		Add("en", "MainMenu_Multiplayer", "Multiplayer");
 		Add("en", "MainMenu_Quit", "&eQuit");
 		Add("en", "MainMenu_ButtonBack", "Back");
-		Add("en", "MainMenu_SingleplayerButtonCreate", "Create or open...");
+		Add("en", "MainMenu_SingleplayerButtonCreate", "Create or open ...");
 		Add("en", "MainMenu_Login", "Login");
 		Add("en", "MainMenu_LoginUsername", "Username");
 		Add("en", "MainMenu_LoginPassword", "Password");
@@ -150,11 +150,11 @@
 		Add("en", "MainMenu_ChoiceYes", "Yes");
 		Add("en", "MainMenu_ChoiceNo", "No");
 		Add("en", "MainMenu_LoginInvalid", "&4Invalid username or password");
-		Add("en", "MainMenu_LoginConnecting", "Connecting...");
+		Add("en", "MainMenu_LoginConnecting", "Connecting ...");
 		Add("en", "MainMenu_MultiplayerConnect", "Connect");
 		Add("en", "MainMenu_MultiplayerConnectIP", "Connect to IP");
 		Add("en", "MainMenu_MultiplayerRefresh", "Refresh");
-		Add("en", "MainMenu_MultiplayerLoading", "Loading...");
+		Add("en", "MainMenu_MultiplayerLoading", "Loading ...");
 		Add("en", "MainMenu_MultiplayerLogout", "Logout");
 		Add("en", "MainMenu_ConnectToIpConnect", "Connect");
 		Add("en", "MainMenu_ConnectToIpIp", "IP");
@@ -164,7 +164,7 @@
 
 		Add("en", "CannotWriteChatLog", "Cannot write to chat log file {0}.");
 		Add("en", "ChunkUpdates", "Chunk updates: {0}");
-		Add("en", "Connecting", "Connecting...");
+		Add("en", "Connecting", "Connecting ...");
 		Add("en", "ConnectingProgressKilobytes", "{0} KB");
 		Add("en", "ConnectingProgressPercent", "{0}%");
 		Add("en", "DefaultKeys", "Default keys");
@@ -233,7 +233,7 @@
 		Add("en", "OptionDarkenSides", "Darken block sides: {0}");
 
 		Add("en", "Server_CannotWriteLogFile", "Cannot write to server log file {0}.");
-		Add("en", "Server_LoadingSavegame", "Loading savegame...");
+		Add("en", "Server_LoadingSavegame", "Loading savegame ...");
 		Add("en", "Server_CreatingSavegame", "Creating new savegame file.");
 		Add("en", "Server_LoadedSavegame", "Savegame loaded: ");
 		Add("en", "Server_ConfigNotFound", "Server configuration file not found, creating new.");
@@ -245,9 +245,9 @@
 		Add("en", "Server_ClientConfigRegisteredGroupNotFound", "Default registered group not found!");
 		Add("en", "Server_ClientConfigLoaded", "Server client configuration loaded.");
 		Add("en", "Server_InvalidSpawnCoordinates", "Invalid default spawn coordinates!");
-		Add("en", "Server_ProgressDownloadingData", "Downloading data...");
-		Add("en", "Server_ProgressGenerating", "Generating world...");
-		Add("en", "Server_ProgressDownloadingMap", "Downloading map...");
+		Add("en", "Server_ProgressDownloadingData", "Downloading data ...");
+		Add("en", "Server_ProgressGenerating", "Generating world ...");
+		Add("en", "Server_ProgressDownloadingMap", "Downloading map ...");
 		Add("en", "Server_NoChatPrivilege", "{0}Insufficient privileges to chat.");
 		Add("en", "Server_FillAreaInvalid", "Fillarea is invalid or contains blocks in an area you are not allowed to build in.");
 		Add("en", "Server_FillAreaTooLarge", "Fill area is too large.");

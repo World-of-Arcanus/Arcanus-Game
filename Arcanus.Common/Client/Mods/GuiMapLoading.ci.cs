@@ -22,7 +22,7 @@
 		string connecting = game.language.Connecting();
 		if (game.issingleplayer && (!platform.SinglePlayerServerLoaded()))
 		{
-			connecting = "Starting game...";
+			connecting = "Starting game ...";
 		}
 		if (game.maploadingprogress.ProgressStatus != null)
 		{
