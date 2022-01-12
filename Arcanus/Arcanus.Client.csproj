@@ -7,7 +7,7 @@
     <TargetFrameworkSubset></TargetFrameworkSubset>
     <AssemblyOriginatorKeyFile>a.snk</AssemblyOriginatorKeyFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <ApplicationIcon>md.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -62,7 +62,7 @@
     <Content Include="..\Lib\OpenAL32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="md.ico" />
+    <EmbeddedResource Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arcanus.Common\Arcanus.Common.csproj" />

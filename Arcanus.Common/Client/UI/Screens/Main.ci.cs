@@ -73,28 +73,28 @@
 
 		float scale = menu.uiRenderer.GetScale();
 		float buttonheight = 64 * scale;
-		float buttonwidth = 256 * scale;
-		float spacebetween = 5 * scale;
-		float offsetfromborder = 50 * scale;
+		float buttonwidth = 244 * scale;
+		float spacebetween = 10 * scale;
+		float offsetfrommiddle = 100;
 
 		wimg_logo.sizex = 491 * scale;
 		wimg_logo.sizey = 157 * scale;
 		wimg_logo.x = windowX / 2 - wimg_logo.sizex / 2;
-		wimg_logo.y = 75 * scale;
+		wimg_logo.y = windowY / 2 - 275;
 
 		wbtn_singleplayer.x = windowX / 2 - (buttonwidth / 2);
-		wbtn_singleplayer.y = windowY - (3 * (buttonheight + spacebetween)) - offsetfromborder;
+		wbtn_singleplayer.y = windowY / 2 - (2 * (buttonheight + spacebetween)) + offsetfrommiddle;
 		wbtn_singleplayer.sizex = buttonwidth;
 		wbtn_singleplayer.sizey = buttonheight;
 
 		wbtn_multiplayer.x = windowX / 2 - (buttonwidth / 2);
-		wbtn_multiplayer.y = windowY - (2 * (buttonheight + spacebetween)) - offsetfromborder;
+		wbtn_multiplayer.y = windowY / 2 - (1 * (buttonheight + spacebetween)) + offsetfrommiddle;
 		wbtn_multiplayer.sizex = buttonwidth;
 		wbtn_multiplayer.sizey = buttonheight;
 
 		wbtn_exit.visible = menu.p.ExitAvailable();
 		wbtn_exit.x = windowX / 2 - (buttonwidth / 2);
-		wbtn_exit.y = windowY - (1 * (buttonheight + spacebetween)) - offsetfromborder;
+		wbtn_exit.y = windowY / 2 - (0 * (buttonheight + spacebetween)) + offsetfrommiddle;
 		wbtn_exit.sizex = buttonwidth;
 		wbtn_exit.sizey = buttonheight;
 

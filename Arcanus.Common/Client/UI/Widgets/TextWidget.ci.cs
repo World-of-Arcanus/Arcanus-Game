@@ -43,7 +43,7 @@
 			UpdateOffset_Alignment();
 			UpdateOffset_Baseline();
 
-			// Set widget size 
+			// Set widget size
 			sizex = _texture.textwidth;
 			sizey = _texture.textheight;
 		}
@@ -127,15 +127,15 @@
 	void UpdateOffset_Baseline()
 	{
 		if (_texture == null) { return; }
-		_offsetY = 0;
+		_offsetY = -2; // the rendering is off by 2 pixels
 		switch (_baseline)
 		{
-			case TextBaseline.Top:
+			case TextBaseline.Bottom:
 				break;
 			case TextBaseline.Middle:
 				_offsetY -= _texture.textheight / 2;
 				break;
-			case TextBaseline.Bottom:
+			case TextBaseline.Top:
 				_offsetY -= _texture.textheight;
 				break;
 		}
