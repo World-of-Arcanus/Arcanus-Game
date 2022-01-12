@@ -3189,7 +3189,8 @@
 
 	internal void UseTerrainTextures(string[] textureIds, int textureIdsCount)
 	{
-		//TODO: bigger than 32x32
+		// TODO: use 128 as the default (and look into supporting any size)
+		// we may have to update MAX_BLOCKTYPES_SQRT and other 32/f references
 		int tilesize = 32;
 		BitmapData_ atlas2d = BitmapData_.Create(tilesize * atlas2dtiles(), tilesize * atlas2dtiles());
 
@@ -3211,11 +3212,13 @@
 			BitmapCi bmp = platform.BitmapCreateFromPng(fileData, platform.ByteArrayLength(fileData));
 			if (platform.BitmapGetWidth(bmp) != tilesize)
 			{
+				// TODO: use an error block instead of deleting
 				platform.BitmapDelete(bmp);
 				continue;
 			}
 			if (platform.BitmapGetHeight(bmp) != tilesize)
 			{
+				// TODO: use an error block instead of deleting
 				platform.BitmapDelete(bmp);
 				continue;
 			}
