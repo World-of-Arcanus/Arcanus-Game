@@ -175,7 +175,7 @@
 		Add("en", "FrameRateUnlimited", "Frame rate: unlimited.");
 		Add("en", "FrameRateVsync", "Frame rate: vsync.");
 		Add("en", "FreemoveNotAllowed", "Freemove is not allowed on this server.");
-		Add("en", "GameName", "Manic Digger");
+		Add("en", "GameName", "Arcanus");
 		Add("en", "Graphics", "Graphics");
 		Add("en", "InvalidVersionConnectAnyway", "Invalid game version. Local: {0}, Server: {1}. Do you want to connect anyway?");
 		Add("en", "KeyBlockInfo", "Block information");
