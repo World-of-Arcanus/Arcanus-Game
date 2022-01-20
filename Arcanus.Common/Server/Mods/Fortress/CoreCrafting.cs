@@ -12,7 +12,7 @@
 		public void Start(ModManager m)
 		{
 			/* Crafting recipes are given in the following style:
-			 * 
+			 *
 			 * m.AddCraftingRecipe ("Result", 1, "Ingredient_1", 1);
 			 * m.AddCraftingRecipe2("Result", 1, "Ingredient_1", 1, "Ingredient_2", 1);
 			 * m.AddCraftingRecipe3("Result", 1, "Ingredient_1", 1, "Ingredient_2", 1, "Ingredient_3", 1);
@@ -56,9 +56,9 @@
 			m.AddCraftingRecipe("YellowCloth", 1, "OrangeCloth", 1);
 			m.AddCraftingRecipe("LightGreenCloth", 1, "YellowCloth", 1);
 			m.AddCraftingRecipe("GreenCloth", 1, "LightGreenCloth", 1);
-			m.AddCraftingRecipe("AquaGreenCloth", 1, "GreenCloth", 1);
-			m.AddCraftingRecipe("CyanCloth", 1, "AquaGreenCloth", 1);
-			m.AddCraftingRecipe("BlueCloth", 1, "CyanCloth", 1);
+			m.AddCraftingRecipe("CyanCloth", 1, "GreenCloth", 1);
+			m.AddCraftingRecipe("LightBlueCloth", 1, "CyanCloth", 1);
+			m.AddCraftingRecipe("BlueCloth", 1, "LightBlueCloth", 1);
 			m.AddCraftingRecipe("PurpleCloth", 1, "BlueCloth", 1);
 			m.AddCraftingRecipe("IndigoCloth", 1, "PurpleCloth", 1);
 			m.AddCraftingRecipe("VioletCloth", 1, "IndigoCloth", 1);
@@ -73,8 +73,8 @@
 			m.AddCraftingRecipe("YellowCloth", 1, "YellowCarpet", 4);
 			m.AddCraftingRecipe("LightGreenCloth", 1, "LightGreenCarpet", 4);
 			m.AddCraftingRecipe("GreenCloth", 1, "GreenCarpet", 4);
-			m.AddCraftingRecipe("AquaGreenCloth", 1, "AquaGreenCarpet", 4);
 			m.AddCraftingRecipe("CyanCloth", 1, "CyanCarpet", 4);
+			m.AddCraftingRecipe("LightBlueCloth", 1, "LightBlueCarpet", 4);
 			m.AddCraftingRecipe("BlueCloth", 1, "BlueCarpet", 4);
 			m.AddCraftingRecipe("PurpleCloth", 1, "PurpleCarpet", 4);
 			m.AddCraftingRecipe("IndigoCloth", 1, "IndigoCarpet", 4);
@@ -89,8 +89,8 @@
 			m.AddCraftingRecipe("YellowCarpet", 4, "YellowCloth", 1);
 			m.AddCraftingRecipe("LightGreenCarpet", 4, "LightGreenCloth", 1);
 			m.AddCraftingRecipe("GreenCarpet", 4, "GreenCloth", 1);
-			m.AddCraftingRecipe("AquaGreenCarpet", 4, "AquaGreenCloth", 1);
 			m.AddCraftingRecipe("CyanCarpet", 4, "CyanCloth", 1);
+			m.AddCraftingRecipe("LightBlueCarpet", 4, "LightBlueCloth", 1);
 			m.AddCraftingRecipe("BlueCarpet", 4, "BlueCloth", 1);
 			m.AddCraftingRecipe("PurpleCarpet", 4, "PurpleCloth", 1);
 			m.AddCraftingRecipe("IndigoCarpet", 4, "IndigoCloth", 1);

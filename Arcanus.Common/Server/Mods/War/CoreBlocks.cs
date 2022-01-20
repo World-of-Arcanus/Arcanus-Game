@@ -231,16 +231,16 @@
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(26, "AquaGreenCloth", new BlockType()
+			m.SetBlockType(27, "CyanCloth", new BlockType()
 			{
-				AllTextures = "AquaGreenCloth",
+				AllTextures = "CyanCloth",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(27, "CyanCloth", new BlockType()
+			m.SetBlockType(26, "LightBlueCloth", new BlockType()
 			{
-				AllTextures = "CyanCloth",
+				AllTextures = "LightBlueCloth",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
@@ -985,16 +985,16 @@
 				WalkableType = WalkableType.Empty,
 				Sounds = solidSounds
 			});
-			m.SetBlockType(246, "AquaGreenCarpet", new BlockType()
+			m.SetBlockType(247, "CyanCarpet", new BlockType()
 			{
-				AllTextures = "AquaGreenCloth",
+				AllTextures = "CyanCloth",
 				DrawType = DrawType.Flat,
 				WalkableType = WalkableType.Empty,
 				Sounds = solidSounds
 			});
-			m.SetBlockType(247, "CyanCarpet", new BlockType()
+			m.SetBlockType(246, "LightBlueCarpet", new BlockType()
 			{
-				AllTextures = "CyanCloth",
+				AllTextures = "LightBlueCloth",
 				DrawType = DrawType.Flat,
 				WalkableType = WalkableType.Empty,
 				Sounds = solidSounds
@@ -1087,8 +1087,8 @@
 			m.AddToCreativeInventory("YellowCloth");
 			m.AddToCreativeInventory("LightGreenCloth");
 			m.AddToCreativeInventory("GreenCloth");
-			m.AddToCreativeInventory("AquaGreenCloth");
 			m.AddToCreativeInventory("CyanCloth");
+			m.AddToCreativeInventory("LightBlueCloth");
 			m.AddToCreativeInventory("BlueCloth");
 			m.AddToCreativeInventory("PurpleCloth");
 			m.AddToCreativeInventory("IndigoCloth");
@@ -1103,8 +1103,8 @@
 			m.AddToCreativeInventory("YellowCarpet");
 			m.AddToCreativeInventory("LightGreenCarpet");
 			m.AddToCreativeInventory("GreenCarpet");
-			m.AddToCreativeInventory("AquaGreenCarpet");
 			m.AddToCreativeInventory("CyanCarpet");
+			m.AddToCreativeInventory("LightBlueCarpet");
 			m.AddToCreativeInventory("BlueCarpet");
 			m.AddToCreativeInventory("PurpleCarpet");
 			m.AddToCreativeInventory("IndigoCarpet");
