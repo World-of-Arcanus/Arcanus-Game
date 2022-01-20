@@ -3189,9 +3189,8 @@
 
 	internal void UseTerrainTextures(string[] textureIds, int textureIdsCount)
 	{
-		// TODO: use 128 as the default (and look into supporting any size)
-		// we may have to update MAX_BLOCKTYPES_SQRT and other 32/f references
-		int tilesize = 32;
+		// TODO: look into supporting any size (anything higher causes network issues)
+		int tilesize = 64;
 		BitmapData_ atlas2d = BitmapData_.Create(tilesize * atlas2dtiles(), tilesize * atlas2dtiles());
 
 		for (int i = 0; i < textureIdsCount; i++)

@@ -1,11 +1,11 @@
 ﻿//Block definition:
-// 
+//
 //      Z
 //      |
-//      | 
+//      |
 //      |
 //      +----- X
-//     / 
+//     /
 //    /
 //   Y
 //
@@ -223,12 +223,12 @@ public class TerrainChunkTesselatorCi
 
 		if (game.platform.IsFastSystem())
 		{
-			AtiArtifactFix = 1 / 32f * 0.25f;  // 32 pixels in block texture
+			AtiArtifactFix = 1 / 64f * 0.25f;  // 32 pixels in block texture
 		}
 		else
 		{
 			// WebGL
-			AtiArtifactFix = 1 / 32f * 1.5f;  // 32 pixels in block texture
+			AtiArtifactFix = 1 / 64f * 1.5f;  // 32 pixels in block texture
 		}
 
 		_texrecWidth = 1 - (AtiArtifactFix * 2);
