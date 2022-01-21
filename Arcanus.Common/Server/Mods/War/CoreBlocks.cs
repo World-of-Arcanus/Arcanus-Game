@@ -804,7 +804,7 @@
 			{
 				TopBottomTextures = "GoldBarTopBottom",
 				SideTextures = "GoldBarSide",
-				TextureIdForInventory = "GoldBarInvetory",
+				TextureIdForInventory = "GoldBarInventory",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
