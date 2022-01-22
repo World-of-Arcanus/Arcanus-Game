@@ -25,19 +25,7 @@ namespace Arcanus.Common
 			catch
 			{
 			}
-			string mdfolder = "UserData";
-			if (apppath.Contains(
-					Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)) && !IsMono)
-			{
-				string mdpath = Path.Combine(
-									Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-									mdfolder);
-				return mdpath;
-			}
-			else
-			{
-				return Path.Combine(apppath, mdfolder);
-			}
+			return Path.Combine(apppath, "UserData");
 		}
 
 		public static string gamepathconfig = Path.Combine(GameStorePath.GetStorePath(), "Configuration");

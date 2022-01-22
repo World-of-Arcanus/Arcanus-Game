@@ -285,7 +285,9 @@ namespace Arcanus.ClientNative
 
 		public override string PathSavegames()
 		{
-			return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			// we need to use the same path defined in /Common/GameStorePath.cs
+			string apppath = Path.GetDirectoryName(Application.ExecutablePath);
+			return Path.Combine(Path.Combine(apppath, "UserData"), "Saves");
 		}
 
 		public override string PathCombine(string part1, string part2)
