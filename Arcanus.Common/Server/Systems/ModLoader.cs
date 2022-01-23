@@ -7,6 +7,7 @@ using System.Drawing;
 // using System.CodeDom.Compiler;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using System.Reflection;
 using System.Runtime.Loader;
 using System.IO;
 
@@ -209,7 +210,7 @@ namespace Arcanus.Server
 					csharpScriptsValues
 				);
 
-#if !DEBUG
+// #if !DEBUG
 			using (var memoryStream = new MemoryStream())
 			{
 				var emitResult = compilation.Emit(memoryStream);
@@ -218,7 +219,7 @@ namespace Arcanus.Server
 				{
 					memoryStream.Seek(0, SeekOrigin.Begin);
 
-					var context = AssemblyLoadContext.Default;
+					var context = new CollectibleAssemblyLoadContext();
 					var assembly = context.LoadFromStream(memoryStream);
 
 					foreach (Type t in assembly.GetTypes())
@@ -231,13 +232,15 @@ namespace Arcanus.Server
 					}
 				}
 			}
+/*
 #else
 			string fileName = Path.Combine(AppRoot, "Mods.dll");
 			var emitResult = compilation.Emit(fileName);
 
 			if (emitResult.Success)
 			{
-				var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(fileName);
+				var context = new CollectibleAssemblyLoadContext();
+				var assembly = context.LoadFromAssemblyPath(fileName);
 
 				foreach (Type t in assembly.GetTypes())
 				{
@@ -249,6 +252,7 @@ namespace Arcanus.Server
 				}
 			}
 #endif
+*/
 		}
 
 		Dictionary<string, IMod> mods = new Dictionary<string, IMod>();
@@ -326,6 +330,17 @@ namespace Arcanus.Server
 			}
 			mod.Start(m);
 			loaded[name] = true;
+		}
+	}
+
+	public class CollectibleAssemblyLoadContext : AssemblyLoadContext
+	{
+		public CollectibleAssemblyLoadContext() : base(isCollectible: true)
+		{ }
+
+		protected override Assembly Load(AssemblyName assemblyName)
+		{
+			return null;
 		}
 	}
 }

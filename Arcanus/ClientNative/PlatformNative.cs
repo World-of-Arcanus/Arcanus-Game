@@ -763,6 +763,11 @@ namespace Arcanus.ClientNative
 
 		public override string FileOpenDialog(string extension, string extensionName, string initialDirectory)
 		{
+			if (!Directory.Exists(initialDirectory))
+			{
+				Directory.CreateDirectory(initialDirectory);
+			}
+
 			OpenFileDialog d = new OpenFileDialog();
 			d.InitialDirectory = initialDirectory;
 			d.FileName = "Default." + extension;
