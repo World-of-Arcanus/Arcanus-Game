@@ -20,7 +20,7 @@
 	internal Entity localMinecart;
 	internal float minecartheight() { return one / 2; }
 	internal bool wasqpressed;
-	internal bool wasepressed;
+	internal bool wasrclicked;
 
 	internal void RailOnNewFrame(Game game, float dt)
 	{
@@ -115,7 +115,7 @@
 		{
 			Reverse();
 		}
-		if (!wasepressed && game.keyboardState[game.GetKey(GlKeys.E)] && !railriding && (game.controls.GetFreemove() == FreemoveLevelEnum.None) && game.GuiTyping != TypingState.Typing)
+		if (!wasrclicked && game.mouseRight && !railriding && (game.controls.GetFreemove() == FreemoveLevelEnum.None))
 		{
 			currentrailblockX = game.platform.FloatToInt(game.player.position.x);
 			currentrailblockY = game.platform.FloatToInt(game.player.position.z);
@@ -162,13 +162,13 @@
 				lastdirection = currentdirection;
 			}
 		}
-		else if (!wasepressed && game.keyboardState[game.GetKey(GlKeys.E)] && railriding && game.GuiTyping != TypingState.Typing)
+		else if (!wasrclicked && game.mouseRight && railriding)
 		{
 			ExitVehicle(game);
 			game.player.position.y += one * 7 / 10;
 		}
 		wasqpressed = game.keyboardState[game.GetKey(GlKeys.Q)] && game.GuiTyping != TypingState.Typing;
-		wasepressed = game.keyboardState[game.GetKey(GlKeys.E)] && game.GuiTyping != TypingState.Typing;
+		wasrclicked = game.mouseRight;
 	}
 
 	internal VehicleDirection12 BestNewDirection(int dirVehicleDirection12Flags, bool turnleft, bool turnright, BoolRef retFound)

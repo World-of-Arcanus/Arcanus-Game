@@ -112,14 +112,14 @@
 		IntRef h = new IntRef();
 		game.platform.TextSize(name, font, w, h);
 		game.Draw2dText(name, font, game.xcenter(w.value), 40, null, false);
-		if (useInfo)
-		{
-			name = game.platform.StringFormat(game.language.PressToUse(), "E");
-			FontCi font2 = new FontCi();
-			font2.size = 10;
-			game.platform.TextSize(name, font2, w, h);
-			game.Draw2dText(name, font2, game.xcenter(w.value), 70, null, false);
-		}
+		// if (useInfo)
+		// {
+		//  	name = game.platform.StringFormat(game.language.PressToUse(), "E");
+		//  	FontCi font2 = new FontCi();
+		//  	font2.size = 10;
+		//  	game.platform.TextSize(name, font2, w, h);
+		//  	game.Draw2dText(name, font2, game.xcenter(w.value), 70, null, false);
+		// }
 	}
 
 	internal void DrawAim(Game game)

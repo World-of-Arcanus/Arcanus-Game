@@ -2541,7 +2541,7 @@
 
 	internal void KeyUp(int eKey)
 	{
-		if (eKey > 255) { eKey = 27; }
+		if (eKey > 255 || eKey < 0) { eKey = 27; }
 		keyboardStateRaw[eKey] = false;
 		for (int i = 0; i < clientmodsCount; i++)
 		{
@@ -3263,7 +3263,7 @@
 	public const int DISCONNECTED_ICON_AFTER_SECONDS = 10;
 	internal void KeyDown(int eKey)
 	{
-		if (eKey > 255) { eKey = 27; }
+		if (eKey > 255 || eKey < 0) { eKey = 27; }
 		keyboardStateRaw[eKey] = true;
 		if (guistate != GuiState.MapLoading)
 		{
@@ -3398,46 +3398,6 @@
 			if (eKey == GetKey(GlKeys.Tab))
 			{
 				SendPacketClient(ClientPackets.SpecialKeyTabPlayerList());
-			}
-			if (eKey == GetKey(GlKeys.E))
-			{
-				if (currentAttackedBlock != null)
-				{
-					int posX = currentAttackedBlock.X;
-					int posY = currentAttackedBlock.Y;
-					int posZ = currentAttackedBlock.Z;
-					int blocktype = map.GetBlock(currentAttackedBlock.X, currentAttackedBlock.Y, currentAttackedBlock.Z);
-					if (IsUsableBlock(blocktype))
-					{
-						if (d_Data.IsRailTile(blocktype))
-						{
-							player.position.x = posX + (one / 2);
-							player.position.y = posZ + 1;
-							player.position.z = posY + (one / 2);
-							// disable freemove when mounting rails
-							stopPlayerMove = true;
-							controls.SetFreemove(FreemoveLevelEnum.None);
-						}
-						else
-						{
-							SendSetBlock(posX, posY, posZ, Packet_BlockSetModeEnum.Use, 0, ActiveMaterial);
-						}
-					}
-				}
-				if (currentlyAttackedEntity != -1)
-				{
-					if (entities[currentlyAttackedEntity].usable)
-					{
-						for (int i = 0; i < clientmodsCount; i++)
-						{
-							if (clientmods[i] == null) { continue; }
-							OnUseEntityArgs args = new OnUseEntityArgs();
-							args.entityId = currentlyAttackedEntity;
-							clientmods[i].OnUseEntity(this, args);
-						}
-						SendPacketClient(ClientPackets.UseEntity(currentlyAttackedEntity));
-					}
-				}
 			}
 			if (eKey == GetKey(GlKeys.O))
 			{

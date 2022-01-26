@@ -449,12 +449,12 @@
 			{
 				if (middle)
 				{
-					int newtileX = game.platform.FloatToInt(pick0.Current()[0]);
-					int newtileY = game.platform.FloatToInt(pick0.Current()[1]);
-					int newtileZ = game.platform.FloatToInt(pick0.Current()[2]);
-					if (game.map.IsValidPos(newtileX, newtileZ, newtileY))
+					int blockX = game.platform.FloatToInt(pick0.Current()[0]);
+					int blockY = game.platform.FloatToInt(pick0.Current()[1]);
+					int blockZ = game.platform.FloatToInt(pick0.Current()[2]);
+					if (game.map.IsValidPos(blockX, blockZ, blockY))
 					{
-						int clonesource = game.map.GetBlock(newtileX, newtileZ, newtileY);
+						int clonesource = game.map.GetBlock(blockX, blockZ, blockY);
 						int clonesource2 = game.d_Data.WhenPlayerPlacesGetsConvertedTo()[clonesource];
 						bool gotoDone = false;
 						//find this block in another right hand.
@@ -510,92 +510,185 @@
 						}
 					}
 				}
-				if (left || right)
+				else if (left || right)
 				{
-					BlockPosSide tile = pick0;
-					int newtileX;
-					int newtileY;
-					int newtileZ;
+					// the block we selected
+					int blockXselected = game.platform.FloatToInt(pick0.Current()[0]);
+					int blockYselected = game.platform.FloatToInt(pick0.Current()[1]);
+					int blockZselected = game.platform.FloatToInt(pick0.Current()[2]);
+
+					// the block we will add or destroy
+					// defaults to the selected block
+					int blockX = blockXselected;
+					int blockY = blockYselected;
+					int blockZ = blockZselected;
+
+					// the side that was selected
+					float[] blockSide = pick0.collisionPos;
+
+					// the type of block it is
+					int blockType = game.map.GetBlock(blockX, blockZ, blockY);
+
+					// can the block be used
+					bool blockIsUsable = false;
+
+					// use / add
 					if (right)
 					{
-						newtileX = game.platform.FloatToInt(tile.Translated()[0]);
-						newtileY = game.platform.FloatToInt(tile.Translated()[1]);
-						newtileZ = game.platform.FloatToInt(tile.Translated()[2]);
+						// the block is usable
+						if (game.IsUsableBlock(blockType))
+						{
+							blockIsUsable = true;
+						}
+						// add a new block
+						else
+						{
+							// add it to the side we selected
+							blockX = game.platform.FloatToInt(pick0.Translated()[0]);
+							blockY = game.platform.FloatToInt(pick0.Translated()[1]);
+							blockZ = game.platform.FloatToInt(pick0.Translated()[2]);
+
+							// get the type of block we are adding (i.e. the block in our hand)
+							blockType = ((game.BlockInHand() == null) ? 1 : game.BlockInHand().value);
+						}
 					}
+					// destroy
 					else
 					{
-						newtileX = game.platform.FloatToInt(tile.Current()[0]);
-						newtileY = game.platform.FloatToInt(tile.Current()[1]);
-						newtileZ = game.platform.FloatToInt(tile.Current()[2]);
-					}
-					if (game.map.IsValidPos(newtileX, newtileZ, newtileY))
-					{
-						//Console.WriteLine(". newtile:" + newtile + " type: " + d_Map.GetBlock(newtileX, newtileZ, newtileY));
-						if (!(pick0.blockPos[0] == -1
-							 && pick0.blockPos[1] == -1
-							&& pick0.blockPos[2] == -1))
+						// you can not destroy bedrock
+						if (blockType == game.d_Data.BlockIdAdminium())
 						{
-							int blocktype;
-							if (left) { blocktype = game.map.GetBlock(newtileX, newtileZ, newtileY); }
-							else { blocktype = ((game.BlockInHand() == null) ? 1 : game.BlockInHand().value); }
-							if (left && blocktype == game.d_Data.BlockIdAdminium())
-							{
-								PickingEnd(left, right, middle, ispistol);
-								return;
-							}
-							string[] sound = left ? game.d_Data.BreakSound()[blocktype] : game.d_Data.BuildSound()[blocktype];
-							if (sound != null) // && sound.Length > 0)
-							{
-								game.AudioPlay(game.platform.StringFormat("{0}.ogg", sound[0])); //TODO: sound cycle
-							}
-						}
-						//normal attack
-						if (!right)
-						{
-							//attack
-							int posx = newtileX;
-							int posy = newtileZ;
-							int posz = newtileY;
-							game.currentAttackedBlock = Vector3IntRef.Create(posx, posy, posz);
-							if (!game.blockHealth.ContainsKey(posx, posy, posz))
-							{
-								game.blockHealth.Set(posx, posy, posz, game.GetCurrentBlockHealth(posx, posy, posz));
-							}
-							game.blockHealth.Set(posx, posy, posz, game.blockHealth.Get(posx, posy, posz) - game.WeaponAttackStrength());
-							float health = game.GetCurrentBlockHealth(posx, posy, posz);
-							if (health <= 0)
-							{
-								if (game.currentAttackedBlock != null)
-								{
-									game.blockHealth.Remove(posx, posy, posz);
-								}
-								game.currentAttackedBlock = null;
-								OnPick(game, game.platform.FloatToInt(newtileX), game.platform.FloatToInt(newtileZ), game.platform.FloatToInt(newtileY),
-									game.platform.FloatToInt(tile.Current()[0]), game.platform.FloatToInt(tile.Current()[2]), game.platform.FloatToInt(tile.Current()[1]),
-									tile.collisionPos,
-									right);
-							}
 							PickingEnd(left, right, middle, ispistol);
 							return;
 						}
-						if (!right)
+					}
+
+					// make sure the block is inside the map
+					if (game.map.IsValidPos(blockX, blockZ, blockY))
+					{
+						// make sure the block has all 3 coordinates
+						if (!(pick0.blockPos[0] == -1 && pick0.blockPos[1] == -1 && pick0.blockPos[2] == -1))
 						{
-							game.particleEffectBlockBreak.StartParticleEffect(newtileX, newtileY, newtileZ);//must be before deletion - gets ground type.
+							// use
+							if (right)
+							{
+								bool blockUsed = false;
+
+								// the block is usable
+								if (blockIsUsable)
+								{
+									// Note: Only picking related blocks should be used here
+									// All others will be handled in their respective mods
+									// e.g. Crafting is handled in ModGuiCrafting.OnMouseDown
+
+									// use the attacked block
+									if (game.currentAttackedBlock != null)
+									{
+										if (game.currentAttackedBlock.X == blockX &&
+											game.currentAttackedBlock.Y == blockY &&
+											game.currentAttackedBlock.Z == blockZ)
+                                        {
+											// mounting a rail
+											if (game.d_Data.IsRailTile(blockType))
+											{
+												game.player.position.x = blockX + (one / 2);
+												game.player.position.y = blockZ + 1;
+												game.player.position.z = blockY + (one / 2);
+
+												// disable player movement
+												game.stopPlayerMove = true;
+												game.controls.SetFreemove(FreemoveLevelEnum.None);
+											}
+											// everything else
+											else
+											{
+												game.SendSetBlock(blockX, blockY, blockZ, Packet_BlockSetModeEnum.Use, 0, game.ActiveMaterial);
+											}
+
+											blockUsed = true;
+										}
+									}
+								}
+
+								// use the attacked entity
+								// TODO: verify the mouse is still on the entity
+								if (game.currentlyAttackedEntity != -1)
+								{
+									if (game.entities[game.currentlyAttackedEntity].usable)
+									{
+										for (int i = 0; i < game.clientmodsCount; i++)
+										{
+											if (game.clientmods[i] == null) { continue; }
+
+											OnUseEntityArgs args = new OnUseEntityArgs();
+											args.entityId = game.currentlyAttackedEntity;
+											game.clientmods[i].OnUseEntity(game, args);
+										}
+
+										game.SendPacketClient(ClientPackets.UseEntity(game.currentlyAttackedEntity));
+
+										blockUsed = true;
+									}
+								}
+
+								// the block was used
+								if (blockUsed)
+								{
+									PickingEnd(left, right, middle, ispistol);
+									return;
+								}
+								// add a new block when the selected block is not used
+								else
+                                {
+									// add it to the side we selected
+									blockX = game.platform.FloatToInt(pick0.Translated()[0]);
+									blockY = game.platform.FloatToInt(pick0.Translated()[1]);
+									blockZ = game.platform.FloatToInt(pick0.Translated()[2]);
+
+									// get the type of block we are adding (i.e. the block in our hand)
+									blockType = ((game.BlockInHand() == null) ? 1 : game.BlockInHand().value);
+								}
+							}
+							// attack
+							else
+                            {
+								game.currentAttackedBlock = Vector3IntRef.Create(blockX, blockZ, blockY);
+
+								if (game.blockHealth.ContainsKey(blockX, blockZ, blockY) == false)
+								{
+									game.blockHealth.Set(blockX, blockZ, blockY, game.GetCurrentBlockHealth(blockX, blockZ, blockY));
+								}
+
+								game.blockHealth.Set(blockX, blockZ, blockY, game.blockHealth.Get(blockX, blockZ, blockY) - game.WeaponAttackStrength());
+
+								if (game.GetCurrentBlockHealth(blockX, blockZ, blockY) <= 0)
+								{
+									if (game.currentAttackedBlock != null)
+									{
+										game.blockHealth.Remove(blockX, blockZ, blockY);
+									}
+
+									game.currentAttackedBlock = null;
+								}
+							}
+
+							// add or destroy the block
+							OnPick(game, blockX, blockZ, blockY, blockXselected, blockZselected, blockYselected, blockSide, right);
+
+							// get the block's sound
+							string[] sound = left ? game.d_Data.BreakSound()[blockType] : game.d_Data.BuildSound()[blockType];
+
+							if (sound != null)
+							{
+								// play the block's sound
+								game.AudioPlay(game.platform.StringFormat("{0}.ogg", sound[0]));
+							}
 						}
-						if (!game.map.IsValidPos(newtileX, newtileZ, newtileY))
-						{
-							game.platform.ThrowException("Error in picking - NextBullet()");
-						}
-						OnPick(game, game.platform.FloatToInt(newtileX), game.platform.FloatToInt(newtileZ), game.platform.FloatToInt(newtileY),
-							game.platform.FloatToInt(tile.Current()[0]), game.platform.FloatToInt(tile.Current()[2]), game.platform.FloatToInt(tile.Current()[1]),
-							tile.collisionPos,
-							right);
-						//network.SendSetBlock(new Vector3((int)newtile.X, (int)newtile.Z, (int)newtile.Y),
-						//    right ? BlockSetMode.Create : BlockSetMode.Destroy, (byte)MaterialSlots[activematerial]);
 					}
 				}
 			}
 		}
+
 		PickingEnd(left, right, middle, ispistol);
 	}
 
@@ -736,6 +829,10 @@
 					fillend = null;
 					return;
 				}
+
+				// TODO: display particle effects when destroying a block
+				// game.particleEffectBlockBreak.StartParticleEffect(x, y, z);
+				// return;
 			}
 			game.SendSetBlockAndUpdateSpeculative(activematerial, x, y, z, mode);
 		}

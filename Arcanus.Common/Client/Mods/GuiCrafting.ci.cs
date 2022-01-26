@@ -147,25 +147,51 @@
 		}
 	}
 
-	public override void OnKeyDown(Game game, KeyEventArgs args)
+	public override void OnMouseDown(Game game, MouseEventArgs args)
 	{
-		int eKey = args.GetKeyCode();
-		if (eKey == (game.GetKey(GlKeys.E)) && game.GuiTyping == TypingState.None)
+		// use the selected block
+		if (game.mouseRight)
 		{
-			if (!(game.SelectedBlockPositionX == -1 && game.SelectedBlockPositionY == -1 && game.SelectedBlockPositionZ == -1))
+			// get the block's position
+			int blockX = game.SelectedBlockPositionX;
+			int blockY = game.SelectedBlockPositionZ;
+			int blockZ = game.SelectedBlockPositionY;
+
+			// make sure the block has all 3 coordinates
+			if (!(blockX == -1 && blockY == -1 && blockZ == -1))
 			{
-				int posx = game.SelectedBlockPositionX;
-				int posy = game.SelectedBlockPositionZ;
-				int posz = game.SelectedBlockPositionY;
-				if (game.map.GetBlock(posx, posy, posz) == game.d_Data.BlockIdCraftingTable())
+				// crafting table
+				if (game.map.GetBlock(blockX, blockY, blockZ) == game.d_Data.BlockIdCraftingTable())
 				{
-					//draw crafting recipes list.
-					IntRef tableCount = new IntRef();
-					Vector3IntRef[] table = d_CraftingTableTool.GetTable(posx, posy, posz, tableCount);
-					IntRef onTableCount = new IntRef();
-					int[] onTable = d_CraftingTableTool.GetOnTable(table, tableCount.value, onTableCount);
-					CraftingRecipesStart(game, d_CraftingRecipes, d_CraftingRecipesCount, onTable, onTableCount.value, posx, posy, posz);
-					args.SetHandled(true);
+					// make sure the crafting table isn't open
+					if (game.guistate != GuiState.CraftingRecipes)
+					{
+						// get all the tables that are joined together
+						IntRef tableCount = new IntRef();
+						Vector3IntRef[] table = d_CraftingTableTool.GetTable(blockX, blockY, blockZ, tableCount);
+
+						// get all the blocks on the tables
+						IntRef onTableCount = new IntRef();
+						int[] onTable = d_CraftingTableTool.GetOnTable(table, tableCount.value, onTableCount);
+
+						// get the number of blocks on the table that is selected
+						IntRef onTableCountSel = new IntRef();
+						Vector3IntRef[] tableSel = new Vector3IntRef[1];
+						tableSel[0] = Vector3IntRef.Create(table[0].X, table[0].Y, table[0].Z);
+						d_CraftingTableTool.GetOnTable(tableSel, 1, onTableCountSel);
+
+						// open the crafting table when ...
+						// there is nothing in our hand OR
+						// there is a block on the selected table
+						if (game.BlockInHand() == null || game.BlockInHand().value == 0 || onTableCountSel.value > 0)
+						{
+							// draw the list of crafting recipes
+							CraftingRecipesStart(game, d_CraftingRecipes, d_CraftingRecipesCount, onTable, onTableCount.value, blockX, blockY, blockZ);
+
+							// stop handling all other mouse down events
+							args.SetHandled(true);
+						}
+					}
 				}
 			}
 		}
@@ -217,7 +243,10 @@ public class CraftingTableTool
 		{
 			Vector3IntRef v = table[i];
 			int t = d_Map.GetBlock(v.X, v.Y, v.Z + 1);
-			ontable[ontableCount++] = t;
+			if (t != 0)
+            {
+				ontable[ontableCount++] = t;
+			}
 		}
 		retCount.value = ontableCount;
 		return ontable;
