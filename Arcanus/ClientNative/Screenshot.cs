@@ -1,8 +1,10 @@
-﻿using OpenTK.Windowing.Desktop;
+﻿using Arcanus.Common;
+using OpenTK.Windowing.Desktop;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Arcanus.ClientNative
 {
@@ -13,33 +15,41 @@ namespace Arcanus.ClientNative
 	public class Screenshot : IScreenshot
 	{
 		public GameWindow d_GameWindow;
-		public string SavePath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+
 		public void SaveScreenshot()
 		{
 			using (Bitmap bmp = GrabScreenshot())
 			{
 				string time = string.Format("{0:yyyy-MM-dd_HH-mm-ss}", DateTime.Now);
-				string filename = Path.Combine(SavePath, time + ".png");
+				string filename = Path.Combine(GameStorePath.gamepathscreenshots, time + ".png");
+
+				if (!Directory.Exists(GameStorePath.gamepathscreenshots))
+				{
+					Directory.CreateDirectory(GameStorePath.gamepathscreenshots);
+				}
+
 				bmp.Save(filename);
 			}
 		}
 		// Returns a System.Drawing.Bitmap with the contents of the current framebuffer
 		public Bitmap GrabScreenshot()
 		{
-			/* disabled - this no longer works in OpenTK 4.6.7
-			if (d_GameWindow.Context == null)
-				throw new GraphicsContextMissingException();
+			// if (d_GameWindow.Context == null)
+			// 	throw new GraphicsContextMissingException();
 
-			Bitmap bmp = new Bitmap(d_GameWindow.ClientSize.Width, d_GameWindow.ClientSize.Height);
+			int screenW = d_GameWindow.ClientRectangle.Max.X - d_GameWindow.ClientRectangle.Min.X;
+			int screenH = d_GameWindow.ClientRectangle.Max.Y - d_GameWindow.ClientRectangle.Min.Y;
+
+			Bitmap bmp = new Bitmap(screenW, screenH);
+			Rectangle rec = new Rectangle(0, 0, screenW, screenH);
+
 			System.Drawing.Imaging.BitmapData data =
-				bmp.LockBits(d_GameWindow.ClientRectangle, System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-			GL.ReadPixels(0, 0, d_GameWindow.ClientSize.Width, d_GameWindow.ClientSize.Height, OpenTK.Graphics.OpenGL.PixelFormat.Bgr, PixelType.UnsignedByte, data.Scan0);
+				bmp.LockBits(rec, System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+			GL.ReadPixels(0, 0, screenW, screenH, PixelFormat.Bgr, PixelType.UnsignedByte, data.Scan0);
+
 			bmp.UnlockBits(data);
-
 			bmp.RotateFlip(RotateFlipType.RotateNoneFlipY);
-			*/
-
-			Bitmap bmp = new Bitmap(1280, 720);
 
 			return bmp;
 		}

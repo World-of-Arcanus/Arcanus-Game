@@ -31,6 +31,7 @@ namespace Arcanus.Common
 		public static string gamepathconfig = Path.Combine(GameStorePath.GetStorePath(), "Configuration");
 		public static string gamepathsaves = Path.Combine(GameStorePath.GetStorePath(), "Saves");
 		public static string gamepathbackup = Path.Combine(GameStorePath.GetStorePath(), "Backup");
+		public static string gamepathscreenshots = Path.Combine(GameStorePath.GetStorePath(), "Screenshots");
 
 		public static bool IsValidName(string s)
 		{
