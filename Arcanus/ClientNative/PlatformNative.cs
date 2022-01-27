@@ -2094,7 +2094,7 @@ namespace Arcanus.ClientNative
 
 		public static int ToGlKey(OpenTK.Windowing.GraphicsLibraryFramework.Keys key)
 		{
-			return (int)key;
+			return (int) key;
 		}
 
 		public override void MouseCursorSetVisible(bool value)

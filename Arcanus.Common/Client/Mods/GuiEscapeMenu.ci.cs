@@ -590,7 +590,6 @@
 		helps[count++] = KeyHelpCreate(language.KeyTeamChat(), GlKeys.Y);
 		helps[count++] = KeyHelpCreate(language.KeyCraft(), GlKeys.C);
 		helps[count++] = KeyHelpCreate(language.KeyBlockInfo(), GlKeys.I);
-		helps[count++] = KeyHelpCreate(language.KeyUse(), GlKeys.E);
 		helps[count++] = KeyHelpCreate(language.KeyReverseMinecart(), GlKeys.Q);
 		return helps;
 	}

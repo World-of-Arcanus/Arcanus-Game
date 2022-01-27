@@ -84,7 +84,7 @@
 		}
 		entitiesCount = 512;
 		PlayerPushDistance = 2;
-		const int KeysMax = 256;
+		const int KeysMax = GlKeys.LastKey;
 		keyboardState = new bool[KeysMax];
 		for (int i = 0; i < KeysMax; i++)
 		{
@@ -2541,7 +2541,7 @@
 
 	internal void KeyUp(int eKey)
 	{
-		if (eKey > 255 || eKey < 0) { eKey = 27; }
+		if (eKey > GlKeys.LastKey || eKey < 0) { eKey = 27; }
 		keyboardStateRaw[eKey] = false;
 		for (int i = 0; i < clientmodsCount; i++)
 		{
@@ -3263,7 +3263,7 @@
 	public const int DISCONNECTED_ICON_AFTER_SECONDS = 10;
 	internal void KeyDown(int eKey)
 	{
-		if (eKey > 255 || eKey < 0) { eKey = 27; }
+		if (eKey > GlKeys.LastKey || eKey < 0) { eKey = 27; }
 		keyboardStateRaw[eKey] = true;
 		if (guistate != GuiState.MapLoading)
 		{

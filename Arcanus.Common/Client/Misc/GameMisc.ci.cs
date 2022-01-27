@@ -971,7 +971,7 @@ public class OptionsCi
 		Smoothshadows = true;
 		BlockShadowSave = one * 6 / 10;
 		EnableBlockShadow = true;
-		Keys = new int[256];
+		Keys = new int[GlKeys.LastKey];
 	}
 	internal bool Shadows;
 	internal int Font;
