@@ -22,7 +22,7 @@
 		string connecting = game.language.Connecting();
 		if (game.issingleplayer && (!platform.SinglePlayerServerLoaded()))
 		{
-			connecting = "Starting game ...";
+			connecting = "Starting Game ...";
 		}
 		if (game.maploadingprogress.ProgressStatus != null)
 		{
@@ -32,7 +32,7 @@
 		if (game.invalidVersionDrawMessage != null)
 		{
 			game.Draw2dText(game.invalidVersionDrawMessage, game.fontMapLoading, game.xcenter(game.TextSizeWidth(game.invalidVersionDrawMessage, game.fontMapLoading)), Height / 2 - 50, null, false);
-			string connect = "Click to connect";
+			string connect = "Click to Connect";
 			game.Draw2dText(connect, game.fontMapLoading, game.xcenter(game.TextSizeWidth(connect, game.fontMapLoading)), Height / 2 + 50, null, false);
 			return;
 		}

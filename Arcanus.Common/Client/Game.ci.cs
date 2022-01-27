@@ -3297,16 +3297,6 @@
 		{
 			string strFreemoveNotAllowed = "You are not allowed to enable freemove.";
 
-			if (eKey == GetKey(GlKeys.F1))
-			{
-				if (!this.AllowFreemove)
-				{
-					Log(strFreemoveNotAllowed);
-					return;
-				}
-				movespeed = basemovespeed * 1;
-				Log("Move speed: 1x.");
-			}
 			if (eKey == GetKey(GlKeys.F2))
 			{
 				if (!this.AllowFreemove)
@@ -3314,8 +3304,19 @@
 					Log(strFreemoveNotAllowed);
 					return;
 				}
-				movespeed = basemovespeed * 10;
-				Log(platform.StringFormat(language.MoveSpeed(), platform.IntToString(10)));
+
+				int speedmultipier = 10;
+
+				if (movespeed > basemovespeed)
+                {
+					movespeed = basemovespeed;
+					Log(language.MoveSpeedNormal());
+				}
+                else
+                {
+					movespeed = basemovespeed * speedmultipier;
+					Log(platform.StringFormat(language.MoveSpeed(), platform.IntToString(speedmultipier)));
+				}
 			}
 			if (eKey == GetKey(GlKeys.F3))
 			{
@@ -3332,14 +3333,19 @@
 				}
 				else if (controls.GetFreemove() == FreemoveLevelEnum.Freemove)
 				{
-					controls.SetFreemove(FreemoveLevelEnum.Noclip);
-					Log(language.MoveFreeNoclip());
-				}
-				else if (controls.GetFreemove() == FreemoveLevelEnum.Noclip)
-				{
 					controls.SetFreemove(FreemoveLevelEnum.None);
 					Log(language.MoveNormal());
 				}
+				// else if (controls.GetFreemove() == FreemoveLevelEnum.Freemove)
+				// {
+				//     controls.SetFreemove(FreemoveLevelEnum.Noclip);
+				//     Log(language.MoveFreeNoclip());
+				// }
+				// else if (controls.GetFreemove() == FreemoveLevelEnum.Noclip)
+				// {
+				//     controls.SetFreemove(FreemoveLevelEnum.None);
+				//     Log(language.MoveNormal());
+				// }
 			}
 			if (eKey == GetKey(GlKeys.I))
 			{
@@ -3425,7 +3431,7 @@
 				Log(platform.StringFormat(language.FogDistance(), platform.IntToString(platform.FloatToInt(d_Config3d.viewdistance))));
 				OnResize();
 			}
-			if (eKey == GetKey(GlKeys.B))
+			if (eKey == GetKey(GlKeys.E))
 			{
 				ShowInventory();
 				return;
@@ -3434,7 +3440,7 @@
 		}
 		if (guistate == GuiState.Inventory)
 		{
-			if (eKey == GetKey(GlKeys.B)
+			if (eKey == GetKey(GlKeys.E)
 				|| eKey == GetKey(GlKeys.Escape))
 			{
 				GuiStateBackToGame();

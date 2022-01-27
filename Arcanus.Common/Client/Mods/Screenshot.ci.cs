@@ -44,8 +44,8 @@
 
 	public override void OnKeyDown(Game game, KeyEventArgs args)
 	{
-		// queue screenshot to be taken when pressing F12
-		if (args.GetKeyCode() == game.GetKey(GlKeys.F12))
+		// queue screenshot to be taken when pressing F1
+		if (args.GetKeyCode() == game.GetKey(GlKeys.F1))
 		{
 			takeScreenshot = true;
 			args.SetHandled(true);
