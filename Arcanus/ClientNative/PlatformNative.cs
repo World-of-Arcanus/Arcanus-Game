@@ -651,7 +651,11 @@ namespace Arcanus.ClientNative
 			char c = (char)c_;
 			return (char.IsLetterOrDigit(c) || char.IsWhiteSpace(c)
 			|| char.IsPunctuation(c) || char.IsSeparator(c) || char.IsSymbol(c))
-			&& c != '\r' && c != '\t';
+			&& c_ != GlKeys.Enter && c_ != GlKeys.Tab && c_ != GlKeys.BackSpace && c_ != GlKeys.ShiftLeft && c_ != GlKeys.ShiftRight
+			&& c_ != GlKeys.ControlLeft && c_ != GlKeys.ControlRight && c_ != GlKeys.AltLeft && c_ != GlKeys.AltRight
+			&& c_ != GlKeys.SuperLeft && c_ != GlKeys.SuperRight && c_ != GlKeys.Menu && c_ != GlKeys.PrintScreen
+			&& c_ != GlKeys.CapsLock && c_ != GlKeys.NumLock && c_ != GlKeys.PageUp && c_ != GlKeys.PageDown
+			&& c_ != GlKeys.Up && c_ != GlKeys.Down && c_ != GlKeys.Left && c_ != GlKeys.Right;
 		}
 
 		public override void MessageBoxShowError(string text, string caption)
@@ -2329,10 +2333,106 @@ namespace Arcanus.ClientNative
 				args.SetAltPressed(e.Modifiers == KeyModifiers.Alt);
 				h.OnKeyDown(args);
 
-				// added due to onKeyPress no longer being supported
-				KeyPressEventArgs argsKP = new KeyPressEventArgs();
-				argsKP.SetKeyChar((char) e.Key);
-				h.OnKeyPress(argsKP);
+				// added due to onKeyPress no longer being supported in OpenTK
+				// this translates the pressed key to it's character
+				// TODO: support international characters
+				int keyInt = ToGlKey(e.Key);
+				char keyChar = (char)e.Key;
+
+				if (IsValidTypingChar(keyInt))
+				{
+					if (char.IsLetter(keyChar))
+					{
+						if (e.Shift)
+						{
+							keyChar = (char)keyInt;
+						}
+						else
+						{
+							keyChar = (char)(keyInt + 32);
+						}
+					}
+					else
+					{
+						if (e.Shift)
+						{
+							switch (keyChar)
+							{
+								case '`':
+									keyChar = '~';
+									break;
+								case '1':
+									keyChar = '!';
+									break;
+								case '2':
+									keyChar = '@';
+									break;
+								case '3':
+									keyChar = '#';
+									break;
+								case '4':
+									keyChar = '$';
+									break;
+								case '5':
+									keyChar = '%';
+									break;
+								case '6':
+									keyChar = '^';
+									break;
+								case '7':
+									keyChar = '&';
+									break;
+								case '8':
+									keyChar = '*';
+									break;
+								case '9':
+									keyChar = '(';
+									break;
+								case '0':
+									keyChar = ')';
+									break;
+								case '-':
+									keyChar = '_';
+									break;
+								case '=':
+									keyChar = '+';
+									break;
+								case '[':
+									keyChar = '{';
+									break;
+								case ']':
+									keyChar = '}';
+									break;
+								case '\\':
+									keyChar = '|';
+									break;
+								case ';':
+									keyChar = ':';
+									break;
+								case '\'':
+									keyChar = '"';
+									break;
+								case ',':
+									keyChar = '<';
+									break;
+								case '.':
+									keyChar = '>';
+									break;
+								case '/':
+									keyChar = '?';
+									break;
+							}
+						}
+						else
+						{
+							keyChar = (char)keyInt;
+						}
+					}
+
+					KeyPressEventArgs argsKP = new KeyPressEventArgs();
+					argsKP.SetKeyChar(keyChar);
+					h.OnKeyPress(argsKP);
+				}
 			}
 		}
 

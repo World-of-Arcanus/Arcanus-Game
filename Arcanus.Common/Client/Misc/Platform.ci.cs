@@ -508,6 +508,8 @@ public class GlKeys
 	public const int Period = 46;
 	public const int Slash = 47;
 	public const int BackSlash = 92;
+	public const int SuperLeft = 343;
+	public const int SuperRight = 347;
 	public const int LastKey = Menu;
 }
 
