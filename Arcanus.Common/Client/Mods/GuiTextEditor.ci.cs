@@ -47,52 +47,53 @@
 	int cursorLine;
 	public override void OnKeyDown(Game game_, KeyEventArgs e)
 	{
-		if (e.GetKeyCode() == game.GetKey(GlKeys.F9))
-		{
-			visible = !visible;
-		}
-		if (!visible)
-		{
-			return;
-		}
-		if (e.GetKeyCode() == GlKeys.Escape)
-		{
-			visible = false;
-		}
-		if (e.GetKeyCode() == GlKeys.Left)
-		{
-			cursorColumn--;
-		}
-		if (e.GetKeyCode() == GlKeys.Right)
-		{
-			cursorColumn++;
-		}
-		if (e.GetKeyCode() == GlKeys.Up)
-		{
-			cursorLine--;
-		}
-		if (e.GetKeyCode() == GlKeys.Down)
-		{
-			cursorLine++;
-		}
-		if (e.GetKeyCode() == GlKeys.BackSpace)
-		{
-			cursorColumn--;
-			e.SetKeyCode(GlKeys.Delete);
-		}
-		if (cursorColumn < 0) { cursorColumn = 0; }
-		if (cursorLine < 0) { cursorLine = 0; }
-		if (cursorColumn >= maxColumns) { cursorColumn = maxColumns; }
-		if (cursorLine > maxLines) { cursorLine = maxLines; }
-		if (cursorColumn > LineLength(buffer[cursorLine])) { cursorColumn = LineLength(buffer[cursorLine]); }
-		if (e.GetKeyCode() == GlKeys.Delete)
-		{
-			for (int i = cursorColumn; i < maxColumns - 1; i++)
-			{
-				buffer[cursorLine][i] = buffer[cursorLine][i + 1];
-			}
-		}
-		e.SetHandled(true);
+		// disabled for now
+		// if (e.GetKeyCode() == game.GetKey(GlKeys.F9))
+		// {
+		// 	visible = !visible;
+		// }
+		// if (!visible)
+		// {
+		// 	return;
+		// }
+		// if (e.GetKeyCode() == GlKeys.Escape)
+		// {
+		// 	visible = false;
+		// }
+		// if (e.GetKeyCode() == GlKeys.Left)
+		// {
+		// 	cursorColumn--;
+		// }
+		// if (e.GetKeyCode() == GlKeys.Right)
+		// {
+		// 	cursorColumn++;
+		// }
+		// if (e.GetKeyCode() == GlKeys.Up)
+		// {
+		// 	cursorLine--;
+		// }
+		// if (e.GetKeyCode() == GlKeys.Down)
+		// {
+		// 	cursorLine++;
+		// }
+		// if (e.GetKeyCode() == GlKeys.BackSpace)
+		// {
+		// 	cursorColumn--;
+		// 	e.SetKeyCode(GlKeys.Delete);
+		// }
+		// if (cursorColumn < 0) { cursorColumn = 0; }
+		// if (cursorLine < 0) { cursorLine = 0; }
+		// if (cursorColumn >= maxColumns) { cursorColumn = maxColumns; }
+		// if (cursorLine > maxLines) { cursorLine = maxLines; }
+		// if (cursorColumn > LineLength(buffer[cursorLine])) { cursorColumn = LineLength(buffer[cursorLine]); }
+		// if (e.GetKeyCode() == GlKeys.Delete)
+		// {
+		// 	for (int i = cursorColumn; i < maxColumns - 1; i++)
+		// 	{
+		// 		buffer[cursorLine][i] = buffer[cursorLine][i + 1];
+		// 	}
+		// }
+		// e.SetHandled(true);
 	}
 	public override void OnKeyPress(Game game_, KeyPressEventArgs e)
 	{
