@@ -206,7 +206,7 @@ public class MainMenu
 		int count = 0;
 		for (int i = 0; i < length.value; i++)
 		{
-			if (StringEndsWith(files[i], ".mddbs"))
+			if (StringEndsWith(files[i], ".arcanus"))
 			{
 				savegames[count++] = files[i];
 			}

@@ -148,13 +148,13 @@ public class ScreenSingleplayer : MainMenuScreen
 			string extension;
 			if (gamePlatform.SinglePlayerServerAvailable())
 			{
-				extension = "mddbs";
+				extension = "arcanus";
 			}
 			else
 			{
-				extension = "mdss";
+				extension = "arcanusdbg";
 			}
-			string result = gamePlatform.FileOpenDialog(extension, "Arcanus Savegame", gamePlatform.PathSavegames());
+			string result = gamePlatform.FileOpenDialog(extension, "Arcanus Game", gamePlatform.PathSavegames());
 			if (result != null)
 			{
 				menu.ConnectToSingleplayer(result);

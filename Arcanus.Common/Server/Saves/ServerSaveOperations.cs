@@ -169,7 +169,7 @@ namespace Arcanus.Server
 			d_Map.d_ChunkDb.SetChunks(tosave);
 		}
 
-		public string SaveFilenameWithoutExtension = "default";
+		public string SaveFilenameWithoutExtension = "World";
 		public string SaveFilenameOverride;
 		public string GetSaveFilename()
 		{

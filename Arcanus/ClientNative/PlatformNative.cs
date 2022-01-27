@@ -774,7 +774,7 @@ namespace Arcanus.ClientNative
 
 			OpenFileDialog d = new OpenFileDialog();
 			d.InitialDirectory = initialDirectory;
-			d.FileName = "Default." + extension;
+			d.FileName = "World." + extension;
 			d.Filter = string.Format("{1}|*.{0}|All files|*.*", extension, extensionName);
 			d.CheckFileExists = false;
 			d.CheckPathExists = true;

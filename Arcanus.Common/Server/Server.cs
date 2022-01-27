@@ -3876,7 +3876,7 @@ namespace Arcanus.Server
 	}
 	public class MapManipulator
 	{
-		public const string BinSaveExtension = ".mddbs";
+		public const string BinSaveExtension = ".arcanus";
 	}
 	public class Timer
 	{
