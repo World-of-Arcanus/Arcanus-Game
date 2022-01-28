@@ -51,9 +51,6 @@
     <Reference Update="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <HintPath>..\Lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.SQLite">
       <HintPath>..\Lib\System.Data.SQLite.dll</HintPath>
     </Reference>
