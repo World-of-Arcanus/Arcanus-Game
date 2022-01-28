@@ -12,7 +12,7 @@ Features
 - A large 9984 x 9984 x 128 world
 
 Game Modes
------------
+----------
 
 **Creative Mode**
 
