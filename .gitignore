@@ -1,5 +1,5 @@
-# MD specific #
-###############
+# Arcanus #
+###########
 output
 output2
 /cito/output
@@ -11,6 +11,7 @@ obj
 /Packet.cs
 /ProtocolParser.cs
 /Assets.ci.cs
+*.lck
 
 # General #
 ###########
