@@ -33,6 +33,7 @@ namespace Arcanus.Mods
 			{
 				return;
 			}
+
 			try
 			{
 				string[] lines = File.ReadAllLines(filename);
@@ -156,6 +157,7 @@ namespace Arcanus.Mods
 			UserEntry entry = new UserEntry();
 			entry.Name = player;
 			entry.Position = PosToString(x, y, z, heading, pitch, stance);
+
 			PlayerPositions.Add(entry);
 
 			// Console.WriteLine("[INFO] Position Saved: {0}({1})", entry.Name, entry.Position);
