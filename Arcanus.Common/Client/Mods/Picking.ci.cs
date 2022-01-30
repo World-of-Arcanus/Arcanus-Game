@@ -577,33 +577,39 @@
 								// the block is usable
 								if (blockIsUsable)
 								{
-									// Note: Only picking related blocks should be used here
-									// All others will be handled in their respective mods
-									// e.g. Crafting is handled in ModGuiCrafting.OnMouseDown
-
 									// use the attacked block
+									// i.e. an attacked block is any usable block
+									// that is currently displaying it's info
+									// see ModDraw2dMisc.DrawBlockInfo
 									if (game.currentAttackedBlock != null)
 									{
-										if (game.currentAttackedBlock.X == blockX &&
-											game.currentAttackedBlock.Y == blockY &&
-											game.currentAttackedBlock.Z == blockZ)
-                                        {
-											// mounting a rail
-											if (game.d_Data.IsRailTile(blockType))
-											{
-												game.player.position.x = blockX + (one / 2);
-												game.player.position.y = blockZ + 1;
-												game.player.position.z = blockY + (one / 2);
+										blockX = game.currentAttackedBlock.X;
+										blockY = game.currentAttackedBlock.Y;
+										blockZ = game.currentAttackedBlock.Z;
 
-												// disable player movement
-												game.stopPlayerMove = true;
-												game.controls.SetFreemove(FreemoveLevelEnum.None);
-											}
-											// everything else
-											else
-											{
-												game.SendSetBlock(blockX, blockY, blockZ, Packet_BlockSetModeEnum.Use, 0, game.ActiveMaterial);
-											}
+										// crafting table
+										if (blockType == game.d_Data.BlockIdCraftingTable())
+										{
+											// this will be handled in ModGuiCrafting.OnMouseDown
+											// and we must continue past this and run OnPick()
+										}
+										// mounting a rail
+										else if (game.d_Data.IsRailTile(blockType))
+										{
+											game.player.position.x = blockX + (one / 2);
+											game.player.position.y = blockZ + 1;
+											game.player.position.z = blockY + (one / 2);
+
+											// disable player movement
+											game.stopPlayerMove = true;
+											game.controls.SetFreemove(FreemoveLevelEnum.None);
+
+											blockUsed = true;
+										}
+										// everything else
+										else
+										{
+											game.SendSetBlock(blockX, blockY, blockZ, Packet_BlockSetModeEnum.Use, 0, game.ActiveMaterial);
 
 											blockUsed = true;
 										}
