@@ -73,7 +73,7 @@
 		constRotationSpeed = one * 180 / 20;
 		modmanager = new ClientModManager1();
 		particleEffectBlockBreak = new ModDrawParticleEffectBlockBreak();
-		PICK_DISTANCE = 4.1f;
+		PICK_DISTANCE = 6.1f; // 6 blocks away
 		selectedmodelid = -1;
 		grenadetime = 3;
 		rotationspeed = one * 15 / 100;
