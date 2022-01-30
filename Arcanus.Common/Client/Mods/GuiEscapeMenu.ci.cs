@@ -677,9 +677,9 @@
 		game.d_TerrainChunkTesselator.BlockShadow = options.BlockShadowSave;
 		game.d_TerrainChunkTesselator.option_DarkenBlockSides = options.EnableBlockShadow;
 		game.ENABLE_LAG = options.Framerate;
-		UseFullscreen();
+		// UseFullscreen();
 		game.UseVsync();
-		UseResolution();
+		// UseResolution();
 	}
 
 	OptionsCi LoadOptions_()
