@@ -15,9 +15,11 @@ namespace Arcanus.Mods
 			TileIdGravel = m.GetBlockId("Gravel");
 			TileIdDirt = m.GetBlockId("Dirt");
 			TileIdGrass = m.GetBlockId("Grass");
+			TileIdDiamondOre = m.GetBlockId("DiamondOre");
 			TileIdGoldOre = m.GetBlockId("GoldOre");
+			TileIdEmeraldOre = m.GetBlockId("EmeraldOre");
+			TileIdLapisOre = m.GetBlockId("LapisOre");
 			TileIdIronOre = m.GetBlockId("IronOre");
-			TileIdSilverOre = m.GetBlockId("SilverOre");
 			TileIdSand = m.GetBlockId("Sand");
 			TileIdCoalOre = m.GetBlockId("CoalOre");
 			m.RegisterPopulateChunk(PopulateChunk);
@@ -29,9 +31,11 @@ namespace Arcanus.Mods
 		int TileIdGravel;
 		int TileIdDirt;
 		int TileIdGrass;
+		int TileIdDiamondOre;
 		int TileIdGoldOre;
+		int TileIdEmeraldOre;
+		int TileIdLapisOre;
 		int TileIdIronOre;
-		int TileIdSilverOre;
 		int TileIdSand;
 		int TileIdCoalOre;
 
@@ -41,7 +45,7 @@ namespace Arcanus.Mods
 			y *= m.GetChunkSize();
 			z *= m.GetChunkSize();
 
-			MakeCaves(x, y, z, m.GetChunkSize(), _rnd, this.EnableCaves, gravellength, goldorelength, ironorelength, coalorelength, dirtlength, silverlength);
+			MakeCaves(x, y, z, m.GetChunkSize(), _rnd, this.EnableCaves, gravellength, goldorelength, ironorelength, coalorelength, dirtlength, diamondlength, emeraldlength, lapislength);
 		}
 
 		public bool EnableCaves = false;
@@ -49,7 +53,9 @@ namespace Arcanus.Mods
 		public int ironorelength = 50;
 		public int coalorelength = 50;
 		public int gravellength = 50;
-		public int silverlength = 50;
+		public int diamondlength = 50;
+		public int emeraldlength = 50;
+		public int lapislength = 50;
 		public int dirtlength = 40;
 
 		void MakeCaves(int x, int y, int z, int chunksize, Random rnd,
@@ -59,7 +65,9 @@ namespace Arcanus.Mods
 					   int ironOreLength,
 					   int coalOreLength,
 					   int dirtOreLength,
-					   int silverOreLength)
+					   int diamondOreLength,
+					   int emeraldOreLength,
+					   int lapisOreLength)
 		{
 			//find cave start
 			double curx = x;
@@ -81,16 +89,19 @@ namespace Arcanus.Mods
 			int length = 200;
 			if (rnd.NextDouble() < 0.85)
 			{
-				int oretype = rnd.Next(6);
+				int oretype = rnd.Next(8);
 				if (oretype == 0) { length = gravelLength; }
 				if (oretype == 1) { length = goldOreLength; }
 				if (oretype == 2) { length = ironOreLength; }
 				if (oretype == 3) { length = coalOreLength; }
 				if (oretype == 4) { length = dirtOreLength; }
-				if (oretype == 5) { length = silverOreLength; }
+				if (oretype == 5) { length = diamondOreLength; }
+				if (oretype == 6) { length = emeraldOreLength; }
+				if (oretype == 7) { length = lapisOreLength; }
 
 				length = rnd.Next(length);
-				blocktype = oretype < 4 ? TileIdGravel + oretype : (oretype > 4 ? TileIdGravel + oretype + 115 : TileIdDirt);
+				// blocktype = oretype < 4 ? TileIdGravel + oretype : (oretype > 4 ? TileIdGravel + oretype + 115 : TileIdDirt);
+				blocktype = oretype == 4 ? TileIdDirt : TileIdGravel + oretype;
 			}
 			if (blocktype == 0 && (!enableCaves))
 			{
@@ -142,7 +153,9 @@ namespace Arcanus.Mods
 							TileIdGoldOre,
 							TileIdIronOre,
 							TileIdCoalOre,
-							TileIdSilverOre
+							TileIdDiamondOre,
+							TileIdEmeraldOre,
+							TileIdLapisOre
 						};
 					}
 					if (blocktype == TileIdGravel)
@@ -155,7 +168,9 @@ namespace Arcanus.Mods
 							TileIdGoldOre,
 							TileIdIronOre,
 							TileIdCoalOre,
-							TileIdSilverOre
+							TileIdDiamondOre,
+							TileIdEmeraldOre,
+							TileIdLapisOre
 						};
 					}
 

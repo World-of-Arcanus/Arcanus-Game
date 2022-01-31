@@ -145,9 +145,30 @@
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
+			m.SetBlockType(138, "DiamondOre", new BlockType()
+			{
+				AllTextures = "DiamondOre",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+			});
 			m.SetBlockType(14, "GoldOre", new BlockType()
 			{
 				AllTextures = "GoldOre",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(139, "EmeraldOre", new BlockType()
+			{
+				AllTextures = "EmeraldOre",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(140, "LapisOre", new BlockType()
+			{
+				AllTextures = "LapisOre",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
@@ -336,9 +357,30 @@
 				WalkableType = WalkableType.Empty,
 				Sounds = solidSounds,
 			});
+			m.SetBlockType(135, "DiamondBlock", new BlockType()
+			{
+				AllTextures = "DiamondBlock",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+			});
 			m.SetBlockType(41, "GoldBlock", new BlockType()
 			{
 				AllTextures = "GoldBlock",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(136, "EmeraldBlock", new BlockType()
+			{
+				AllTextures = "EmeraldBlock",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(137, "LapisBlock", new BlockType()
+			{
+				AllTextures = "LapisBlock",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
@@ -453,7 +495,8 @@
 			});
 			m.SetBlockType(57, "Cactus", new BlockType()
 			{
-				TopBottomTextures = "CactusTopBottom",
+				TextureIdTop = "CactusTop",
+				TextureIdBottom = "CactusBottom",
 				SideTextures = "CactusSide",
 				TextureIdForInventory = "CactusSide",
 				DrawType = DrawType.Cactus,
@@ -684,9 +727,12 @@
 			});
 			m.SetBlockType(112, "CraftingTable", new BlockType()
 			{
-				TopBottomTextures = "CraftingTableTopBottom",
-				SideTextures = "CraftingTableSide",
-				TextureIdForInventory = "CraftingTableTopBottom",
+				TextureIdTop = "CraftingTableTopBottom",
+				TextureIdBack = "CraftingTableSide",
+				TextureIdFront = "CraftingTableFront",
+				TextureIdLeft = "CraftingTableSide",
+				TextureIdRight = "CraftingTableSide",
+				TextureIdForInventory = "CraftingTableFront",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
@@ -810,20 +856,6 @@
 				Sounds = solidSounds,
 				LightRadius = 5,
 			});
-			m.SetBlockType(133, "SilverOre", new BlockType()
-			{
-				AllTextures = "SilverOre",
-				DrawType = DrawType.Solid,
-				WalkableType = WalkableType.Solid,
-				Sounds = solidSounds,
-			});
-			m.SetBlockType(135, "SilverCoin", new BlockType()
-			{
-				AllTextures = "SilverCoin",
-				DrawType = DrawType.Solid,
-				WalkableType = WalkableType.Solid,
-				Sounds = solidSounds,
-			});
 			m.SetBlockType(140, "DirtBrick", new BlockType()
 			{
 				AllTextures = "DirtBrick",
@@ -891,10 +923,10 @@
 			m.SetBlockType(148, "Cake", new BlockType()
 			{
 				TextureIdTop = "CakeTop",
-				TextureIdBottom = "Gray",
+				TextureIdBottom = "CakeBottom",
 				SideTextures = "CakeSide",
 				TextureIdForInventory = "CakeTop",
-				DrawType = DrawType.Solid,
+				DrawType = DrawType.HalfHeight,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 				IsUsable = true,
@@ -1071,12 +1103,16 @@
 			m.AddToCreativeInventory("Cobblestone");
 			m.AddToCreativeInventory("OakWood");
 			m.AddToCreativeInventory("OakSapling");
-			//m.AddToCreativeInventory("Adminium");
+			// m.AddToCreativeInventory("Adminium");
 			m.AddToCreativeInventory("Water");
 			m.AddToCreativeInventory("Lava");
 			m.AddToCreativeInventory("Sand");
 			m.AddToCreativeInventory("Gravel");
+			m.AddToCreativeInventory("DiamondOre");
 			m.AddToCreativeInventory("GoldOre");
+			m.AddToCreativeInventory("EmeraldOre");
+			// why does this cause blank blocks and / or crashes
+			// m.AddToCreativeInventory("LapisOre");
 			m.AddToCreativeInventory("IronOre");
 			m.AddToCreativeInventory("CoalOre");
 			m.AddToCreativeInventory("OakTreeTrunk");
@@ -1119,7 +1155,10 @@
 			m.AddToCreativeInventory("RedRoseDecorations");
 			m.AddToCreativeInventory("RedMushroom");
 			m.AddToCreativeInventory("BrownMushroom");
+			m.AddToCreativeInventory("DiamondBlock");
 			m.AddToCreativeInventory("GoldBlock");
+			m.AddToCreativeInventory("EmeraldBlock");
+			m.AddToCreativeInventory("LapisBlock");
 			m.AddToCreativeInventory("IronBlock");
 			m.AddToCreativeInventory("DoubleStair");
 			m.AddToCreativeInventory("Stair");
@@ -1145,8 +1184,6 @@
 			m.AddToCreativeInventory("GrassTrap");
 			m.AddToCreativeInventory("GoldCoin");
 			m.AddToCreativeInventory("GoldBar");
-			m.AddToCreativeInventory("SilverOre");
-			m.AddToCreativeInventory("SilverCoin");
 			m.AddToCreativeInventory("DirtBrick");
 			m.AddToCreativeInventory("LuxuryRoof");
 			m.AddToCreativeInventory("SandBrick");
@@ -1194,7 +1231,6 @@
 			m.AddToStartInventory("CraftingTable", 6);
 			m.AddToStartInventory("GoldCoin", 2);
 			m.AddToStartInventory("GoldBar", 5);
-			m.AddToStartInventory("SilverCoin", 1);
 			m.AddToStartInventory("Compass", 1);
 			#endregion
 		}

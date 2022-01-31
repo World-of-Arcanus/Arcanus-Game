@@ -113,8 +113,7 @@
 			m.AddCraftingRecipe("Fence", 1, "BirchTreeTrunk", 2);
 			m.AddCraftingRecipe("Fence", 1, "SpruceTreeTrunk", 2);
 			m.AddCraftingRecipe("Hay", 1, "Crops4", 4);
-			m.AddCraftingRecipe("SilverCoin", 1, "SilverOre", 1);
-			m.AddCraftingRecipe("SilverCoin", 30, "GoldCoin", 1);
+			// m.AddCraftingRecipe("SilverCoin", 30, "GoldCoin", 1);
 			m.AddCraftingRecipe("GoldCoin", 30, "GoldBar", 1);
 			m.AddCraftingRecipe("Ladder", 1, "OakWood", 4);
 			m.AddCraftingRecipe("Ladder", 1, "BirchWood", 4);
@@ -135,8 +134,10 @@
 			m.AddCraftingRecipe("SpruceWood", 1, "HalfSpruceWood", 2);
 			m.AddCraftingRecipe("Brick", 1, "HalfBrick", 2);
 			m.AddCraftingRecipe("SandBrick", 1, "HalfSandBrick", 2);
-
+			m.AddCraftingRecipe2("DiamondBlock", 1, "CoalOre", 1, "DiamondOre", 1);
 			m.AddCraftingRecipe2("GoldBlock", 1, "CoalOre", 1, "GoldOre", 1);
+			m.AddCraftingRecipe2("EmeraldBlock", 1, "CoalOre", 1, "EmeraldOre", 1);
+			m.AddCraftingRecipe2("LapisBlock", 1, "CoalOre", 1, "LapisOre", 1);
 			m.AddCraftingRecipe2("IronBlock", 1, "CoalOre", 1, "IronOre", 1);
 			m.AddCraftingRecipe2("Rail3", 4, "OakWood", 1, "IronBlock", 1);
 			m.AddCraftingRecipe2("Rail3", 4, "BirchWood", 1, "IronBlock", 1);
@@ -176,7 +177,7 @@
 			m.AddCraftingRecipe2("Fire", 1, "BirchTreeTrunk", 1, "Torch", 1);
 			m.AddCraftingRecipe2("Fire", 1, "SpruceTreeTrunk", 1, "Torch", 1);
 			m.AddCraftingRecipe2("GoldBar", 1, "GoldCoin", 25, "GoldBlock", 5);
-			m.AddCraftingRecipe2("GoldCoin", 1, "SilverCoin", 25, "GoldOre", 5);
+			// m.AddCraftingRecipe2("GoldCoin", 1, "SilverCoin", 25, "GoldOre", 5);
 
 			m.AddCraftingRecipe3("Mosaik", 1, "Sand", 2, "Gravel", 1, "Stone", 1);
 		}
