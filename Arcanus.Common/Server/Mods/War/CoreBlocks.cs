@@ -166,7 +166,7 @@
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(140, "LapisOre", new BlockType()
+			m.SetBlockType(154, "LapisOre", new BlockType()
 			{
 				AllTextures = "LapisOre",
 				DrawType = DrawType.Solid,
@@ -1110,8 +1110,7 @@
 			m.AddToCreativeInventory("DiamondOre");
 			m.AddToCreativeInventory("GoldOre");
 			m.AddToCreativeInventory("EmeraldOre");
-			// why does this cause blank blocks and / or crashes
-			// m.AddToCreativeInventory("LapisOre");
+			m.AddToCreativeInventory("LapisOre");
 			m.AddToCreativeInventory("IronOre");
 			m.AddToCreativeInventory("CoalOre");
 			m.AddToCreativeInventory("OakTreeTrunk");
