@@ -105,8 +105,8 @@
 	Button graphicsOptionDarkenSides;
 	Button graphicsViewDistanceOption;
 	Button graphicsOptionFramerate;
-	Button graphicsOptionResolution;
-	Button graphicsOptionFullscreen;
+	// Button graphicsOptionResolution;
+	// Button graphicsOptionFullscreen;
 	Button graphicsUseServerTexturesOption;
 	Button graphicsFontOption;
 	Button graphicsReturnToOptionsMenu;
@@ -122,10 +122,10 @@
 		graphicsViewDistanceOption.Text = game.platform.StringFormat(language.ViewDistanceOption(), game.platform.IntToString(game.platform.FloatToInt(game.d_Config3d.viewdistance)));
 		graphicsOptionFramerate = new Button();
 		graphicsOptionFramerate.Text = game.platform.StringFormat(language.OptionFramerate(), (VsyncString()));
-		graphicsOptionResolution = new Button();
-		graphicsOptionResolution.Text = game.platform.StringFormat(language.OptionResolution(), (ResolutionString()));
-		graphicsOptionFullscreen = new Button();
-		graphicsOptionFullscreen.Text = game.platform.StringFormat(language.OptionFullscreen(), options.Fullscreen ? language.On() : language.Off());
+		// graphicsOptionResolution = new Button();
+		// graphicsOptionResolution.Text = game.platform.StringFormat(language.OptionResolution(), (ResolutionString()));
+		// graphicsOptionFullscreen = new Button();
+		// graphicsOptionFullscreen.Text = game.platform.StringFormat(language.OptionFullscreen(), options.Fullscreen ? language.On() : language.Off());
 		graphicsUseServerTexturesOption = new Button();
 		graphicsUseServerTexturesOption.Text = game.platform.StringFormat(language.UseServerTexturesOption(), (options.UseServerTextures ? language.On() : language.Off()));
 		graphicsFontOption = new Button();
@@ -138,8 +138,8 @@
 		AddWidget(graphicsOptionDarkenSides);
 		AddWidget(graphicsViewDistanceOption);
 		AddWidget(graphicsOptionFramerate);
-		AddWidget(graphicsOptionResolution);
-		AddWidget(graphicsOptionFullscreen);
+		// AddWidget(graphicsOptionResolution);
+		// AddWidget(graphicsOptionFullscreen);
 		AddWidget(graphicsUseServerTexturesOption);
 		AddWidget(graphicsFontOption);
 		AddWidget(graphicsReturnToOptionsMenu);
@@ -177,14 +177,14 @@
 		{
 			game.ToggleVsync();
 		}
-		if (b == graphicsOptionResolution)
-		{
-			ToggleResolution();
-		}
-		if (b == graphicsOptionFullscreen)
-		{
-			options.Fullscreen = !options.Fullscreen;
-		}
+		// if (b == graphicsOptionResolution)
+		// {
+		// 	ToggleResolution();
+		// }
+		// if (b == graphicsOptionFullscreen)
+		// {
+		// 	options.Fullscreen = !options.Fullscreen;
+		// }
 		if (b == graphicsUseServerTexturesOption)
 		{
 			options.UseServerTextures = !options.UseServerTextures;
@@ -202,7 +202,7 @@
 	Button otherSoundOption;
 	Button otherReturnToOptionsMenu;
 	Button otherAutoJumpOption;
-	Button otherLanguageSetting;
+	// Button otherLanguageSetting;
 	void OtherSet()
 	{
 		LanguageCi language = game.language;
@@ -211,15 +211,15 @@
 		otherSoundOption.Text = game.platform.StringFormat(language.SoundOption(), (game.AudioEnabled ? language.On() : language.Off()));
 		otherAutoJumpOption = new Button();
 		otherAutoJumpOption.Text = game.platform.StringFormat(language.AutoJumpOption(), (game.AutoJumpEnabled ? language.On() : language.Off()));
-		otherLanguageSetting = new Button();
-		otherLanguageSetting.Text = game.platform.StringFormat(language.ClientLanguageOption(), language.GetUsedLanguage());
+		// otherLanguageSetting = new Button();
+		// otherLanguageSetting.Text = game.platform.StringFormat(language.ClientLanguageOption(), language.GetUsedLanguage());
 		otherReturnToOptionsMenu = new Button();
 		otherReturnToOptionsMenu.Text = language.ReturnToOptionsMenu();
 
 		WidgetsClear();
 		AddWidget(otherSoundOption);
 		AddWidget(otherAutoJumpOption);
-		AddWidget(otherLanguageSetting);
+		// AddWidget(otherLanguageSetting);
 		AddWidget(otherReturnToOptionsMenu);
 	}
 
@@ -233,11 +233,11 @@
 		{
 			game.AutoJumpEnabled = !game.AutoJumpEnabled;
 		}
-		if (b == otherLanguageSetting)
-		{
-			//Switch language based on available languages
-			game.language.NextLanguage();
-		}
+		// if (b == otherLanguageSetting)
+		// {
+		// 	//Switch language based on available languages
+		// 	game.language.NextLanguage();
+		// }
 		if (b == otherReturnToOptionsMenu)
 		{
 			SetEscapeMenuState(EscapeMenuState.Options);
