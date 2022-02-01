@@ -1005,18 +1005,6 @@
 					Rail = i,
 				});
 			}
-			m.SetBlockType(155, "RailCorner", new BlockType()
-			{
-				TextureIdTop = "RailCorner",
-				TextureIdBottom = "RailBottom",
-				TextureIdBack = "RailTop",
-				SideTextures = "RailSide",
-				TextureIdForInventory = "RailCorner",
-				DrawType = DrawType.Solid,
-				WalkableType = WalkableType.Solid,
-				Sounds = solidSounds,
-				Rail = 155,
-			});
 			m.SetBlockType(241, "RedCarpet", new BlockType()
 			{
 				AllTextures = "RedCloth",
@@ -1234,7 +1222,10 @@
 			m.AddToCreativeInventory("Ladder");
 			m.AddToCreativeInventory("Rail1");
 			m.AddToCreativeInventory("Rail2");
-			m.AddToCreativeInventory("RailCorner");
+			m.AddToCreativeInventory("Rail4");
+			m.AddToCreativeInventory("Rail8");
+			m.AddToCreativeInventory("Rail16");
+			m.AddToCreativeInventory("Rail32");
 			m.AddToCreativeInventory("Clay");
 			m.AddToCreativeInventory("Marble");
 			m.AddToCreativeInventory("Granite");
