@@ -146,6 +146,9 @@
 			m.AddCraftingRecipe2("Rail2", 2, "OakWood", 1, "IronBlock", 1);
 			m.AddCraftingRecipe2("Rail2", 2, "BirchWood", 1, "IronBlock", 1);
 			m.AddCraftingRecipe2("Rail2", 2, "SpruceWood", 1, "IronBlock", 1);
+			m.AddCraftingRecipe2("RailCorner", 2, "OakWood", 1, "IronBlock", 1);
+			m.AddCraftingRecipe2("RailCorner", 2, "BirchWood", 1, "IronBlock", 1);
+			m.AddCraftingRecipe2("RailCorner", 2, "SpruceWood", 1, "IronBlock", 1);
 			m.AddCraftingRecipe2("Trampoline", 1, "BrushedMetal", 1, "OakWood", 1);
 			m.AddCraftingRecipe2("Trampoline", 1, "BrushedMetal", 1, "BirchWood", 1);
 			m.AddCraftingRecipe2("Trampoline", 1, "BrushedMetal", 1, "SpruceWood", 1);
