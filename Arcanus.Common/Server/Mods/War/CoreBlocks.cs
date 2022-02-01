@@ -740,8 +740,12 @@
 			});
 			m.SetBlockType(113, "Minecart", new BlockType()
 			{
-				AllTextures = "Minecart",
-				DrawType = DrawType.Solid,
+				TextureIdTop = "MinecartTop",
+				TextureIdBack = "Minecart",
+				TextureIdFront = "Minecart",
+				TextureIdLeft = "Minecart",
+				TextureIdRight = "Minecart",
+				DrawType = DrawType.HalfHeight,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
@@ -838,23 +842,6 @@
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Empty,
 				Sounds = solidSounds,
-			});
-			m.SetBlockType(131, "GoldCoin", new BlockType()
-			{
-				AllTextures = "GoldCoin",
-				DrawType = DrawType.Solid,
-				WalkableType = WalkableType.Solid,
-				Sounds = solidSounds,
-			});
-			m.SetBlockType(132, "GoldBar", new BlockType()
-			{
-				TopBottomTextures = "GoldBarTopBottom",
-				SideTextures = "GoldBarSide",
-				TextureIdForInventory = "GoldBarInventory",
-				DrawType = DrawType.Solid,
-				WalkableType = WalkableType.Solid,
-				Sounds = solidSounds,
-				LightRadius = 5,
 			});
 			m.SetBlockType(140, "DirtBrick", new BlockType()
 			{
@@ -973,10 +960,11 @@
 				m.SetBlockType(176 + i, "Rail" + i.ToString(), new BlockType()
 				{
 					TextureIdTop = "Rail" + i.ToString(),
-					TextureIdBottom = "Cobblestone",
-					SideTextures = "Cobblestone",
+					TextureIdBottom = "RailBottom",
+					TextureIdBack = "RailTop",
+					SideTextures = "RailSide",
 					TextureIdForInventory = "Rail" + i.ToString(),
-					DrawType = DrawType.Transparent,
+					DrawType = DrawType.Solid,
 					WalkableType = WalkableType.Solid,
 					Sounds = solidSounds,
 					Rail = i,
@@ -1180,8 +1168,6 @@
 			m.AddToCreativeInventory("Cuboid");
 			m.AddToCreativeInventory("FillArea");
 			m.AddToCreativeInventory("GrassTrap");
-			m.AddToCreativeInventory("GoldCoin");
-			m.AddToCreativeInventory("GoldBar");
 			m.AddToCreativeInventory("DirtBrick");
 			m.AddToCreativeInventory("LuxuryRoof");
 			m.AddToCreativeInventory("SandBrick");
@@ -1195,8 +1181,8 @@
 			m.AddToCreativeInventory("Fence");
 			m.AddToCreativeInventory("Compass");
 			m.AddToCreativeInventory("Ladder");
-			m.AddToCreativeInventory("Rail3");
-			m.AddToCreativeInventory("Rail60");
+			m.AddToCreativeInventory("Rail1");
+			m.AddToCreativeInventory("Rail2");
 			m.AddToCreativeInventory("Clay");
 			m.AddToCreativeInventory("Marble");
 			m.AddToCreativeInventory("Granite");
@@ -1227,8 +1213,6 @@
 			m.AddToStartInventory("Torch", 6);
 			m.AddToStartInventory("Crops1", 1);
 			m.AddToStartInventory("CraftingTable", 6);
-			m.AddToStartInventory("GoldCoin", 2);
-			m.AddToStartInventory("GoldBar", 5);
 			m.AddToStartInventory("Compass", 1);
 			#endregion
 		}
