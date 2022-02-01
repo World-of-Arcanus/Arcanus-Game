@@ -986,7 +986,7 @@
 			});
 			m.SetBlockType(153, "EmptyHand", new BlockType()
 			{
-				AllTextures = "YellowThing",
+				AllTextures = "EmptyHand",
 				DrawType = DrawType.Torch,
 				WalkableType = WalkableType.Empty,
 				Sounds = noSound,
