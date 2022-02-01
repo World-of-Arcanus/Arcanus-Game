@@ -661,9 +661,9 @@
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(103, "Roof", new BlockType()
+			m.SetBlockType(103, "StoneRoof", new BlockType()
 			{
-				AllTextures = "Roof",
+				AllTextures = "StoneRoof",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
@@ -843,6 +843,27 @@
 				WalkableType = WalkableType.Empty,
 				Sounds = solidSounds,
 			});
+			m.SetBlockType(131, "WoodWindow", new BlockType()
+			{
+				AllTextures = "WoodWindow",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(132, "IronWindow", new BlockType()
+			{
+				AllTextures = "IronWindow",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(133, "IronBars", new BlockType()
+			{
+				AllTextures = "IronBars",
+				DrawType = DrawType.Fence,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+			});
 			m.SetBlockType(140, "DirtBrick", new BlockType()
 			{
 				AllTextures = "DirtBrick",
@@ -850,9 +871,9 @@
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(141, "LuxuryRoof", new BlockType()
+			m.SetBlockType(141, "WoodRoof", new BlockType()
 			{
-				AllTextures = "LuxuryRoof",
+				AllTextures = "WoodRoof",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
@@ -1157,7 +1178,7 @@
 			m.AddToCreativeInventory("BrushedMetal");
 			m.AddToCreativeInventory("ChemicalGreen");
 			m.AddToCreativeInventory("Salt");
-			m.AddToCreativeInventory("Roof");
+			m.AddToCreativeInventory("StoneRoof");
 			m.AddToCreativeInventory("Camouflage");
 			m.AddToCreativeInventory("DirtForFarming");
 			m.AddToCreativeInventory("Apples");
@@ -1169,8 +1190,11 @@
 			m.AddToCreativeInventory("Cuboid");
 			m.AddToCreativeInventory("FillArea");
 			m.AddToCreativeInventory("GrassTrap");
+			m.AddToCreativeInventory("WoodWindow");
+			m.AddToCreativeInventory("IronWindow");
+			m.AddToCreativeInventory("IronBars");
 			m.AddToCreativeInventory("DirtBrick");
-			m.AddToCreativeInventory("LuxuryRoof");
+			m.AddToCreativeInventory("WoodRoof");
 			m.AddToCreativeInventory("SandBrick");
 			m.AddToCreativeInventory("FakeBookcase");
 			m.AddToCreativeInventory("WoodDesk");
