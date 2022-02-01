@@ -174,8 +174,7 @@
 			m.AddCraftingRecipe2("Fire", 1, "OakTreeTrunk", 1, "Torch", 1);
 			m.AddCraftingRecipe2("Fire", 1, "BirchTreeTrunk", 1, "Torch", 1);
 			m.AddCraftingRecipe2("Fire", 1, "SpruceTreeTrunk", 1, "Torch", 1);
-
-			m.AddCraftingRecipe3("Mosaik", 1, "Sand", 2, "Gravel", 1, "Stone", 1);
+			m.AddCraftingRecipe3("Mosaic", 1, "Sand", 2, "Gravel", 1, "Stone", 1);
 		}
 	}
 }

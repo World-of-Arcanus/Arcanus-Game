@@ -893,9 +893,9 @@
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(146, "Mosaik", new BlockType()
+			m.SetBlockType(146, "Mosaic", new BlockType()
 			{
-				AllTextures = "Mosaik",
+				AllTextures = "Mosaic",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
@@ -1175,7 +1175,7 @@
 			m.AddToCreativeInventory("FakeBookcase");
 			m.AddToCreativeInventory("WoodDesk");
 			m.AddToCreativeInventory("GlassDesk");
-			m.AddToCreativeInventory("Mosaik");
+			m.AddToCreativeInventory("Mosaic");
 			m.AddToCreativeInventory("Asphalt");
 			m.AddToCreativeInventory("Cake");
 			m.AddToCreativeInventory("Fire");
