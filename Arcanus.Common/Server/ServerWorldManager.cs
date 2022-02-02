@@ -22,6 +22,48 @@ namespace Arcanus.Server
 			return d_Map.MapSizeZ / chunksize;
 		}
 
+		// generates a new spawn, near the initial one, if the player is not on a specific block type
+		public Vector3i SpawnPlayerOnBlockType(Vector3i initialSpawn, string[] blockTypes)
+		{
+			Vector3i pos = initialSpawn;
+
+			for (int i = 0; i < playerareasize / 8; i++)
+			{
+				if (IsPlayerOnBlockType(pos, blockTypes))
+				{
+					break;
+				}
+
+				pos.x++;
+
+				// get the height of the tallest block and position the player above it
+				int blockHeight = MapUtil.blockheight(d_Map, 0, pos.x, pos.y);
+				pos.z = blockHeight + 1;
+			}
+
+			return pos;
+		}
+
+		bool IsPlayerOnBlockType(Vector3i pos, string[] blockTypes)
+		{
+			int x = pos.x;
+			int y = pos.y;
+			int z = pos.z;
+
+			if (MapUtil.IsValidPos(d_Map, x, y, z - 1))
+			{
+				// check the block under the player
+				string blockName = BlockTypes[d_Map.GetBlock(x, y, z - 1)].Name;
+
+				if (Array.Exists(blockTypes, val => val == blockName))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		// generates a new spawn near initial spawn if initial spawn is in water
 		public Vector3i DontSpawnPlayerInWater(Vector3i initialSpawn)
 		{

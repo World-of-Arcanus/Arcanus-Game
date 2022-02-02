@@ -66,7 +66,16 @@ namespace Arcanus.Server
 				// server sets a default spawn (middle of map)
 				int x = server.d_Map.MapSizeX / 2;
 				int y = server.d_Map.MapSizeY / 2;
-				server.defaultPlayerSpawn = server.DontSpawnPlayerInWater(new Vector3i(x, y, MapUtil.blockheight(server.d_Map, 0, x, y)));
+
+				// server.defaultPlayerSpawn = server.DontSpawnPlayerInWater(new Vector3i(x, y, MapUtil.blockheight(server.d_Map, 0, x, y)));
+
+				// attempt to spawn the user on a grass block (near the middle of the map)
+				// this gives the player an easier starting position and avoids water
+				// but it doesn't always work due to the block sometimes not being there
+				server.defaultPlayerSpawn = server.SpawnPlayerOnBlockType(
+					new Vector3i(x, y, MapUtil.blockheight(server.d_Map, 0, x, y)),
+					new string[] { "Grass", "SpringGrass", "AutumnGrass", "WinterGrass" }
+				);
 			}
 			else
 			{
