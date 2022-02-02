@@ -14,14 +14,14 @@ namespace Arcanus.Mods
 
 			m.SetBlockType(75, "EntitySign", new BlockType()
 			{
-				AllTextures = "VandalFinder",
+				AllTextures = "Sign",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				IsUsable = true,
 				IsTool = true,
 			});
-			m.AddToCreativeInventory("EntitySign");
 
+			m.AddToCreativeInventory("EntitySign");
 			m.RegisterOnBlockUseWithTool(OnUseWithTool);
 			m.RegisterOnEntityUse(OnEntityUse);
 			m.RegisterOnEntityUpdate(OnEntityUpdate);
