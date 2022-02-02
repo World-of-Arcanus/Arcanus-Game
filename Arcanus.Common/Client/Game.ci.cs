@@ -6,7 +6,7 @@
 		map = new Map();
 		performanceinfo = new DictionaryStringString();
 		AudioEnabled = true;
-		AutoJumpEnabled = false;
+		AutoJumpEnabled = true;
 		playerPositionSpawnX = 15 + one / 2;
 		playerPositionSpawnY = 64;
 		playerPositionSpawnZ = 15 + one / 2;

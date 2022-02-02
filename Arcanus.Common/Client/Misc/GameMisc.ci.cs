@@ -963,7 +963,7 @@ public class OptionsCi
 		DrawDistance = 32;
 		UseServerTextures = true;
 		EnableSound = true;
-		EnableAutoJump = false;
+		EnableAutoJump = true;
 		ClientLanguage = "";
 		Framerate = 0;
 		Resolution = 0;

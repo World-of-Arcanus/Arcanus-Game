@@ -692,7 +692,7 @@
 		options.DrawDistance = preferences.GetInt("DrawDistance", game.platform.IsFastSystem() ? 128 : 32);
 		options.UseServerTextures = preferences.GetBool("UseServerTextures", true);
 		options.EnableSound = preferences.GetBool("EnableSound", true);
-		options.EnableAutoJump = preferences.GetBool("EnableAutoJump", false);
+		options.EnableAutoJump = preferences.GetBool("EnableAutoJump", true);
 		options.ClientLanguage = preferences.GetString("ClientLanguage", "");
 		options.Framerate = preferences.GetInt("Framerate", 0);
 		options.Resolution = preferences.GetInt("Resolution", 0);
