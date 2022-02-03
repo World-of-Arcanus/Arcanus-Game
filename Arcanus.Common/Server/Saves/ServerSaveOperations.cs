@@ -10,6 +10,8 @@ namespace Arcanus.Server
 	{
 		public int Seed;
 		public int LastMonsterId;
+		public string GameName;
+		public string GamePath;
 
 		public List<Arcanus.Action> onload = new List<Arcanus.Action>();
 		public List<Arcanus.Action> onsave = new List<Arcanus.Action>();
@@ -60,6 +62,8 @@ namespace Arcanus.Server
 			this._time.Init(save.TimeOfDay);
 			this.LastMonsterId = save.LastMonsterId;
 			this.moddata = save.moddata;
+			this.GameName = save.GameName;
+			this.GamePath = save.GamePath;
 		}
 
 		private void SaveGameMetadata()
@@ -86,6 +90,8 @@ namespace Arcanus.Server
 			save.TimeOfDay = _time.Time.Ticks;
 			save.LastMonsterId = LastMonsterId;
 			save.moddata = moddata;
+			save.GameName = Path.GetFileNameWithoutExtension(GetSaveFilename());
+			save.GamePath = Path.GetDirectoryName(GetSaveFilename());
 			Serializer.Serialize(s, save);
 		}
 

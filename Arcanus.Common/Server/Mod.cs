@@ -1146,6 +1146,14 @@ namespace Arcanus.Server
 			}
 			server.DespawnEntity(id);
 		}
+		public string GetGameName()
+		{
+			return server.GameName;
+		}
+		public string GetGamePath()
+		{
+			return server.GamePath;
+		}
 
 		#region Deprecated methods
 		public double GetCurrentYearTotal()

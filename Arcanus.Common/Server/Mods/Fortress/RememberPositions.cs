@@ -4,12 +4,10 @@ using System.IO;
 
 namespace Arcanus.Mods
 {
-	public class RememberPosition : IMod
+	public class RememberPositions : IMod
 	{
 		ModManager m;
-
-		string filename = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) +
-			Path.DirectorySeparatorChar + "UserData" + Path.DirectorySeparatorChar + "StoredPositions.txt";
+		string filename;
 
 		public PositionStorage positions;
 
@@ -18,6 +16,8 @@ namespace Arcanus.Mods
 		public void Start(ModManager manager)
 		{
 			m = manager;
+			filename = Path.Combine(m.GetGamePath(), m.GetGameName() + ".positions");
+
 			LoadData();
 
 			m.RegisterOnSave(SaveData);
@@ -56,7 +56,7 @@ namespace Arcanus.Mods
 			}
 			catch
 			{
-				Console.WriteLine("[ERROR] StoredPositions.txt could not be read!");
+				Console.WriteLine("[ERROR] positions could not be read!");
 			}
 		}
 

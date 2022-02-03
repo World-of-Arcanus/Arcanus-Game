@@ -27,7 +27,8 @@ namespace Arcanus.Server
 		{
 			Vector3i pos = initialSpawn;
 
-			for (int i = 0; i < playerareasize / 8; i++)
+			// we divide by 4 to limit our search to the nearby area
+			for (int i = 0; i < playerareasize / 4; i++)
 			{
 				if (IsPlayerOnBlockType(pos, blockTypes))
 				{
@@ -40,6 +41,16 @@ namespace Arcanus.Server
 				int blockHeight = MapUtil.blockheight(d_Map, 0, pos.x, pos.y);
 				pos.z = blockHeight + 1;
 			}
+
+			// add 4 to spawn in the air above the block
+			// this prevents the player from getting stuck
+
+			// players always spawn on the edge of a block
+			// and this can cause them to get stuck inside
+			// the geometry of an adjacent block when it
+			// is higher than their spawn position
+
+			pos.z += 4;
 
 			return pos;
 		}

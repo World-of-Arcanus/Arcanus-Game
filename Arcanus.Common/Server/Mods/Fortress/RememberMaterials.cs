@@ -7,9 +7,7 @@ namespace Arcanus.Mods
 	public class RememberMaterials : IMod
 	{
 		ModManager m;
-
-		string filename = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) +
-			Path.DirectorySeparatorChar + "UserData" + Path.DirectorySeparatorChar + "StoredMaterials.txt";
+		string filename;
 
 		public MaterialStorage materials;
 
@@ -18,6 +16,8 @@ namespace Arcanus.Mods
 		public void Start(ModManager manager)
 		{
 			m = manager;
+			filename = Path.Combine(m.GetGamePath(), m.GetGameName() + ".materials");
+
 			LoadData();
 
 			m.RegisterOnSave(SaveData);
@@ -56,7 +56,7 @@ namespace Arcanus.Mods
 			}
 			catch
 			{
-				Console.WriteLine("[ERROR] StoredMaterials.txt could not be read!");
+				Console.WriteLine("[ERROR] materials could not be read!");
 			}
 		}
 
