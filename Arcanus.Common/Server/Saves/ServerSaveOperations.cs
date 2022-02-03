@@ -42,7 +42,7 @@ namespace Arcanus.Server
 				MemoryStream ms = new MemoryStream();
 				SerializeGameMetadata(ms);
 				d_Map.d_ChunkDb.SetGlobalData(ms.ToArray());
-				this._time.Init(TimeSpan.Parse("08:00").Ticks);
+				this._time.Init(DateTime.Parse("8:00 AM").Ticks);
 				return;
 			}
 
