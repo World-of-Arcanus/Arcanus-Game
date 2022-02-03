@@ -26,9 +26,5 @@ namespace Arcanus.Server
 		public Dictionary<string, byte[]> moddata;
 		[ProtoMember(12, IsRequired = false)]
 		public long TimeOfDay;
-		[ProtoMember(13, IsRequired = false)]
-		public string GameName;
-		[ProtoMember(14, IsRequired = false)]
-		public string GamePath;
 	}
 }

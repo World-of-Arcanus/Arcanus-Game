@@ -16,7 +16,11 @@ namespace Arcanus.Mods
 		public void Start(ModManager manager)
 		{
 			m = manager;
-			filename = Path.Combine(m.GetGamePath(), m.GetGameName() + ".positions");
+
+			string saveFile = m.CurrentWorld();
+			string savePath = Path.GetDirectoryName(saveFile);
+			string saveName = Path.GetFileNameWithoutExtension(saveFile);
+			filename = Path.Combine(savePath, saveName + ".positions");
 
 			LoadData();
 
