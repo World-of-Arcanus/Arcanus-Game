@@ -84,7 +84,7 @@
 
 				newenter.EnterDirection = DirectionUtils.ResultEnter(DirectionUtils.ResultExit(currentdirection));
 				BoolRef newdirFound = new BoolRef();
-				VehicleDirection12 newdir = BestNewDirection(PossibleRails(game, newenter), turnleft, turnright, newdirFound);
+				VehicleDirection12 newdir = BestNewDirection(game, newenter, turnleft, turnright, newdirFound);
 				if (!newdirFound.value)
 				{
 					//end of rail
@@ -171,8 +171,11 @@
 		wasrclicked = game.mouseRight;
 	}
 
-	internal VehicleDirection12 BestNewDirection(int dirVehicleDirection12Flags, bool turnleft, bool turnright, BoolRef retFound)
+	internal VehicleDirection12 BestNewDirection(Game game, TileEnterData newenter, bool turnleft, bool turnright, BoolRef retFound)
 	{
+		int dirVehicleDirection12Flags = PossibleRails(game, newenter);
+		int newpositionrail = game.d_Data.Rail()[game.map.GetBlock(newenter.BlockPositionX, newenter.BlockPositionY, newenter.BlockPositionZ)];
+
 		// 0-- x
 		// |
 		// y
@@ -200,17 +203,27 @@
 			{
 				return VehicleDirection12.DownLeftDown;
 			}
-			if ((dirVehicleDirection12Flags & VehicleDirection12Flags.VerticalDown) != 0)
+			if (newpositionrail == 3)
 			{
-				return VehicleDirection12.DownRightDown;
-			}
-			if ((dirVehicleDirection12Flags & VehicleDirection12Flags.VerticalUp) != 0)
-			{
-				return VehicleDirection12.DownRightDown;
-			}
-			if ((dirVehicleDirection12Flags & VehicleDirection12Flags.HorizontalRight) != 0)
-			{
-				return VehicleDirection12.DownRightDown;
+				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.VerticalDown) != 0)
+				{
+					return VehicleDirection12.DownLeftLeft;
+				}
+
+				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.VerticalUp) != 0)
+				{
+					return VehicleDirection12.UpRightRight;
+				}
+
+				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.HorizontalLeft) != 0)
+				{
+					return VehicleDirection12.DownRightRight;
+				}
+
+				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.HorizontalRight) != 0)
+				{
+					return VehicleDirection12.UpLeftLeft;
+				}
 			}
 		}
 		if (turnleft)
@@ -232,17 +245,27 @@
 			{
 				return VehicleDirection12.DownLeftLeft;
 			}
-			if ((dirVehicleDirection12Flags & VehicleDirection12Flags.VerticalDown) != 0)
-			{
-				return VehicleDirection12.DownLeftDown;
-			}
-			if ((dirVehicleDirection12Flags & VehicleDirection12Flags.VerticalUp) != 0)
-			{
-				return VehicleDirection12.DownLeftDown;
-			}
-			if ((dirVehicleDirection12Flags & VehicleDirection12Flags.HorizontalLeft) != 0)
-			{
-				return VehicleDirection12.DownLeftDown;
+			if (newpositionrail == 3)
+            {
+				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.VerticalDown) != 0)
+				{
+					return VehicleDirection12.DownRightRight;
+				}
+
+				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.VerticalUp) != 0)
+				{
+					return VehicleDirection12.UpLeftLeft;
+				}
+
+				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.HorizontalLeft) != 0)
+				{
+					return VehicleDirection12.DownLeftLeft;
+				}
+
+				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.HorizontalRight) != 0)
+				{
+					return VehicleDirection12.UpRightRight;
+				}
 			}
 		}
 
