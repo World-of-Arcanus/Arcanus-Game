@@ -7,7 +7,7 @@ namespace Arcanus.Mods
 	public class RememberPositions : IMod
 	{
 		ModManager m;
-		string filename;
+		string ext = ".positions";
 
 		public PositionStorage positions;
 
@@ -16,11 +16,6 @@ namespace Arcanus.Mods
 		public void Start(ModManager manager)
 		{
 			m = manager;
-
-			string saveFile = m.CurrentWorld();
-			string savePath = Path.GetDirectoryName(saveFile);
-			string saveName = Path.GetFileNameWithoutExtension(saveFile);
-			filename = Path.Combine(savePath, saveName + ".positions");
 
 			LoadData();
 
@@ -31,16 +26,23 @@ namespace Arcanus.Mods
 
 		public void LoadData()
 		{
-			positions = new PositionStorage();
-
-			if (!File.Exists(filename))
-			{
-				return;
-			}
-
 			try
 			{
-				string[] lines = File.ReadAllLines(filename);
+				positions = new PositionStorage();
+
+				string saveFile = m.CurrentWorld();
+				if (saveFile == null) { return; }
+
+				string savePath = Path.GetDirectoryName(saveFile);
+				string saveName = Path.GetFileNameWithoutExtension(saveFile);
+				string fileName = Path.Combine(savePath, saveName + ext);
+
+				if (!File.Exists(fileName))
+				{
+					return;
+				}
+
+				string[] lines = File.ReadAllLines(fileName);
 
 				for (int i = 0; i < lines.Length; i++)
 				{
@@ -71,10 +73,20 @@ namespace Arcanus.Mods
 				List<string> lines = new List<string>();
 				foreach (UserEntry entry in positions.PlayerPositions)
 				{
-					lines.Add(string.Format("{0};{1}", entry.Name, entry.Position));
+					if (entry.Name != null && entry.Position != null)
+                    {
+						lines.Add(string.Format("{0};{1}", entry.Name, entry.Position));
+					}
 				}
 
-				File.WriteAllLines(filename, lines.ToArray());
+				string saveFile = m.CurrentWorld();
+				if (saveFile == null) { return; }
+
+				string savePath = Path.GetDirectoryName(saveFile);
+				string saveName = Path.GetFileNameWithoutExtension(saveFile);
+				string fileName = Path.Combine(savePath, saveName + ext);
+
+				File.WriteAllLines(fileName, lines.ToArray());
 			}
 			catch
 			{
@@ -126,6 +138,8 @@ namespace Arcanus.Mods
 					positions.Store(m.GetPlayerName(player), x, y, z, heading, pitch, stance);
 				}
 			}
+
+			SaveData();
 		}
 	}
 

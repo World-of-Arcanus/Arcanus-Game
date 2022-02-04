@@ -7,7 +7,7 @@ namespace Arcanus.Mods
 	public class RememberMaterials : IMod
 	{
 		ModManager m;
-		string filename;
+		string ext = ".materials";
 
 		public MaterialStorage materials;
 
@@ -16,11 +16,6 @@ namespace Arcanus.Mods
 		public void Start(ModManager manager)
 		{
 			m = manager;
-
-			string saveFile = m.CurrentWorld();
-			string savePath = Path.GetDirectoryName(saveFile);
-			string saveName = Path.GetFileNameWithoutExtension(saveFile);
-			filename = Path.Combine(savePath, saveName + ".materials");
 
 			LoadData();
 
@@ -31,16 +26,23 @@ namespace Arcanus.Mods
 
 		public void LoadData()
 		{
-			materials = new MaterialStorage();
-
-			if (!File.Exists(filename))
-			{
-				return;
-			}
-
 			try
 			{
-				string[] lines = File.ReadAllLines(filename);
+				materials = new MaterialStorage();
+
+				string saveFile = m.CurrentWorld();
+				if (saveFile == null) { return; }
+
+				string savePath = Path.GetDirectoryName(saveFile);
+				string saveName = Path.GetFileNameWithoutExtension(saveFile);
+				string fileName = Path.Combine(savePath, saveName + ext);
+
+				if (!File.Exists(fileName))
+				{
+					return;
+				}
+
+				string[] lines = File.ReadAllLines(fileName);
 
 				for (int i = 0; i < lines.Length; i++)
 				{
@@ -71,10 +73,20 @@ namespace Arcanus.Mods
 				List<string> lines = new List<string>();
 				foreach (UserEntryMat entry in materials.PlayerMaterials)
 				{
-					lines.Add(string.Format("{0};{1}", entry.Name, entry.Materials));
+					if (entry.Name != null && entry.Materials != null)
+					{
+						lines.Add(string.Format("{0};{1}", entry.Name, entry.Materials));
+					}
 				}
 
-				File.WriteAllLines(filename, lines.ToArray());
+				string saveFile = m.CurrentWorld();
+				if (saveFile == null) { return; }
+
+				string savePath = Path.GetDirectoryName(saveFile);
+				string saveName = Path.GetFileNameWithoutExtension(saveFile);
+				string fileName = Path.Combine(savePath, saveName + ext);
+
+				File.WriteAllLines(fileName, lines.ToArray());
 			}
 			catch
 			{
@@ -107,6 +119,8 @@ namespace Arcanus.Mods
 
 			Item[] mat = m.GetInventory(player).RightHand;
 			materials.Store(m.GetPlayerName(player), mat);
+
+			SaveData();
 		}
 	}
 
@@ -144,7 +158,6 @@ namespace Arcanus.Mods
 			entry.Materials = MatToString(materials);
 
 			PlayerMaterials.Add(entry);
-
 		}
 
 		public void Delete(string player)
