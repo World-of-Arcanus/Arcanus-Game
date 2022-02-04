@@ -991,21 +991,102 @@
 				WalkableType = WalkableType.Empty,
 				Sounds = noSound,
 			});
-			for (int i = 0; i < 64; i++)
+			m.SetBlockType(176, "Rail0", new BlockType()
 			{
-				m.SetBlockType(176 + i, "Rail" + i.ToString(), new BlockType()
-				{
-					TextureIdTop = "Rail" + i.ToString(),
-					TextureIdBottom = "RailBottom",
-					TextureIdBack = "RailTop",
-					SideTextures = "RailSide",
-					TextureIdForInventory = "Rail" + i.ToString(),
-					DrawType = DrawType.Solid,
-					WalkableType = WalkableType.Solid,
-					Sounds = solidSounds,
-					Rail = i,
-				});
-			}
+				TextureIdTop = "Rail0",
+				TextureIdBottom = "RailBottom",
+				TextureIdBack = "RailTop",
+				SideTextures = "RailSide",
+				TextureIdForInventory = "Rail0",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+				Rail = 0,
+			});
+			m.SetBlockType(177, "Rail1", new BlockType()
+			{
+				TextureIdTop = "Rail1",
+				TextureIdBottom = "RailBottom",
+				TextureIdBack = "RailTop",
+				SideTextures = "RailSide",
+				TextureIdForInventory = "Rail1",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+				Rail = 1,
+			});
+			m.SetBlockType(178, "Rail2", new BlockType()
+			{
+				TextureIdTop = "Rail2",
+				TextureIdBottom = "RailBottom",
+				TextureIdBack = "RailTop",
+				SideTextures = "RailSide",
+				TextureIdForInventory = "Rail2",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+				Rail = 2,
+			});
+			m.SetBlockType(179, "Rail3", new BlockType()
+			{
+				TextureIdTop = "Rail3",
+				TextureIdBottom = "RailBottom",
+				TextureIdBack = "RailTop",
+				SideTextures = "RailSide",
+				TextureIdForInventory = "Rail3",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+				Rail = 3,
+			});
+			m.SetBlockType(180, "Rail4", new BlockType()
+			{
+				TextureIdTop = "Rail4",
+				TextureIdBottom = "RailBottom",
+				TextureIdBack = "RailTop",
+				SideTextures = "RailSide",
+				TextureIdForInventory = "Rail4",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+				Rail = 4,
+			});
+			m.SetBlockType(181, "Rail5", new BlockType()
+			{
+				TextureIdTop = "Rail5",
+				TextureIdBottom = "RailBottom",
+				TextureIdBack = "RailTop",
+				SideTextures = "RailSide",
+				TextureIdForInventory = "Rail5",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+				Rail = 8,
+			});
+			m.SetBlockType(182, "Rail6", new BlockType()
+			{
+				TextureIdTop = "Rail6",
+				TextureIdBottom = "RailBottom",
+				TextureIdBack = "RailTop",
+				SideTextures = "RailSide",
+				TextureIdForInventory = "Rail6",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+				Rail = 16,
+			});
+			m.SetBlockType(183, "Rail7", new BlockType()
+			{
+				TextureIdTop = "Rail7",
+				TextureIdBottom = "RailBottom",
+				TextureIdBack = "RailTop",
+				SideTextures = "RailSide",
+				TextureIdForInventory = "Rail7",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = solidSounds,
+				Rail = 32,
+			});
 			m.SetBlockType(241, "RedCarpet", new BlockType()
 			{
 				AllTextures = "RedCloth",
@@ -1223,10 +1304,11 @@
 			m.AddToCreativeInventory("Ladder");
 			m.AddToCreativeInventory("Rail1");
 			m.AddToCreativeInventory("Rail2");
+			m.AddToCreativeInventory("Rail3");
 			m.AddToCreativeInventory("Rail4");
-			m.AddToCreativeInventory("Rail8");
-			m.AddToCreativeInventory("Rail16");
-			m.AddToCreativeInventory("Rail32");
+			m.AddToCreativeInventory("Rail5");
+			m.AddToCreativeInventory("Rail6");
+			m.AddToCreativeInventory("Rail7");
 			m.AddToCreativeInventory("Clay");
 			m.AddToCreativeInventory("Marble");
 			m.AddToCreativeInventory("Granite");
