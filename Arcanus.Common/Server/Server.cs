@@ -2047,6 +2047,7 @@ namespace Arcanus.Server
 			s.d_InventoryUtil = GetInventoryUtil(inventory);
 			s.d_Items = d_DataItems;
 			s.d_DropItem = this;
+			s.d_Player = clients[player_id];
 
 			switch (cmd.Action)
 			{

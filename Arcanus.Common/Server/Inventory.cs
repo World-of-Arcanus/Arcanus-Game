@@ -307,6 +307,7 @@ namespace Arcanus.Server
 		public Inventory d_Inventory;
 		public InventoryUtil d_InventoryUtil;
 		public IDropItem d_DropItem;
+		public ClientOnServer d_Player;
 
 		public override void InventoryClick(Packet_InventoryPosition pos)
 		{
@@ -322,14 +323,78 @@ namespace Arcanus.Server
 						selected = new Point(k.Key.X, k.Key.Y);
 					}
 				}
-				//drag
+
+				// drag
 				if (selected != null && d_Inventory.DragDropItem == null)
 				{
-					d_Inventory.DragDropItem = d_Inventory.Items[new ProtoPoint(selected.Value.X, selected.Value.Y)];
-					d_Inventory.Items.Remove(new ProtoPoint(selected.Value.X, selected.Value.Y));
-					SendInventory();
+					// the old logic to handle drag
+					// d_Inventory.DragDropItem = d_Inventory.Items[new ProtoPoint(selected.Value.X, selected.Value.Y)];
+					// d_Inventory.Items.Remove(new ProtoPoint(selected.Value.X, selected.Value.Y));
+
+					// TODO: The active material slot does not get updated when a new block is added or when a number is pressed
+
+					int slot = d_Player.ActiveMaterialSlot;
+					int slotCount = d_Inventory.RightHand.Length;
+					bool slotFound = false;
+
+					Item material = d_Inventory.Items[new ProtoPoint(selected.Value.X, selected.Value.Y)];
+					bool materialExists = false;
+
+					// make sure the material doesn't exist in our right hand already
+					for (int i = 0; i < slotCount; i++)
+					{
+						if (d_Inventory.RightHand[i] == null)
+                        {
+							continue;
+                        }
+
+						if (d_Inventory.RightHand[i].BlockId == material.BlockId)
+                        {
+							materialExists = true; break;
+						}
+					}
+
+					if (!materialExists)
+					{
+						// start at the currently selected slot
+						// and add our item to the first free slot
+						for (int i = 0; i < slotCount; i++)
+						{
+							// wrap around to the slots at the beginning
+							if (slot >= slotCount)
+							{
+								slot = slot - slotCount;
+							}
+
+							Item slotMaterial = d_Inventory.RightHand[slot];
+
+							// is the slot empty
+							if (slotMaterial == null || slotMaterial.BlockId == 0)
+							{
+								// add the item from our inventory
+								d_Inventory.RightHand[slot] = material;
+
+								// update the active slot
+								d_Player.ActiveMaterialSlot = slot;
+
+								slotFound = true; break;
+							}
+
+							slot++;
+						}
+
+						// no free slots were found
+						if (!slotFound)
+						{
+							// swap with the currently selected material
+							d_Inventory.RightHand[d_Player.ActiveMaterialSlot] = material;
+						}
+
+						SendInventory();
+					}
 				}
-				//drop
+
+				// drop
 				else
 				if (d_Inventory.DragDropItem != null)
 				{
@@ -350,7 +415,7 @@ namespace Arcanus.Server
 					else //1
 					{
 						var swapWith = itemsAtArea[0];
-						//try to stack                        
+						//try to stack
 						Item stackResult = d_Items.Stack(d_Inventory.Items[new ProtoPoint(swapWith.X, swapWith.Y)], d_Inventory.DragDropItem);
 						if (stackResult != null)
 						{
@@ -374,17 +439,18 @@ namespace Arcanus.Server
 			if (pos.Type == Packet_InventoryPositionTypeEnum.Ground)
 			{
 				/*
-            if (d_Inventory.DragDropItem != null)
-            {
-                d_DropItem.DropItem(ref d_Inventory.DragDropItem,
-                    new Vector3i(pos.GroundPositionX, pos.GroundPositionY, pos.GroundPositionZ));
-                SendInventory();
-            }
-            */
+				if (d_Inventory.DragDropItem != null)
+				{
+					d_DropItem.DropItem(ref d_Inventory.DragDropItem,
+						new Vector3i(pos.GroundPositionX, pos.GroundPositionY, pos.GroundPositionZ));
+					SendInventory();
+				}
+				*/
 			}
 			else
 			if (pos.Type == Packet_InventoryPositionTypeEnum.MaterialSelector)
 			{
+				/* the old logic to handle drag/drop from our right hand
 				if (d_Inventory.DragDropItem == null && d_Inventory.RightHand[pos.MaterialId] != null)
 				{
 					d_Inventory.DragDropItem = d_Inventory.RightHand[pos.MaterialId];
@@ -409,6 +475,14 @@ namespace Arcanus.Server
 						d_Inventory.DragDropItem = oldHand;
 					}
 				}
+				*/
+
+				// remove the material
+				d_Inventory.RightHand[pos.MaterialId] = null;
+
+				// update the active slot
+				d_Player.ActiveMaterialSlot = pos.MaterialId;
+
 				SendInventory();
 			}
 			else

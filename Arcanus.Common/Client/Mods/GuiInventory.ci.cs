@@ -69,6 +69,11 @@
 		if (keyChar == 56) { game.ActiveMaterial = 7; }
 		if (keyChar == 57) { game.ActiveMaterial = 8; }
 		if (keyChar == 48) { game.ActiveMaterial = 9; }
+
+		if (keyChar >= 48 && keyChar <= 57)
+		{
+			game.SendPacketClient(ClientPackets.ActiveMaterialSlot(game.ActiveMaterial));
+		}
 	}
 
 	int ScrollButtonSize() { return CellDrawSize; }
