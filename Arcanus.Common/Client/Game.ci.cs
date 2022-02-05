@@ -1522,7 +1522,10 @@
 
 	internal void SetCharacterEyesHeight(float value)
 	{
-		entities[LocalPlayerId].drawModel.eyeHeight = value;
+		if (LocalPlayerId > -1)
+        {
+			entities[LocalPlayerId].drawModel.eyeHeight = value;
+		}
 	}
 
 	public float EyesPosX() { return player.position.x; }
