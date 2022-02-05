@@ -1303,12 +1303,8 @@
 			m.AddToCreativeInventory("Compass");
 			m.AddToCreativeInventory("Ladder");
 			m.AddToCreativeInventory("Rail1");
-			m.AddToCreativeInventory("Rail2");
 			m.AddToCreativeInventory("Rail3");
-			m.AddToCreativeInventory("Rail4");
-			m.AddToCreativeInventory("Rail5");
 			m.AddToCreativeInventory("Rail6");
-			m.AddToCreativeInventory("Rail7");
 			m.AddToCreativeInventory("Clay");
 			m.AddToCreativeInventory("Marble");
 			m.AddToCreativeInventory("Granite");

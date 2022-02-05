@@ -292,13 +292,13 @@ public class RailDirectionFlags
 	public const int Horizontal = 1;
 	public const int Vertical = 2;
 	public const int UpLeft = 4;
-	public const int UpRight = 8;
-	public const int DownLeft = 16;
-	public const int DownRight = 32;
+	public const int UpRight = 5;
+	public const int DownLeft = 6;
+	public const int DownRight = 7;
 
 	public const int Full = Horizontal | Vertical | UpLeft | UpRight | DownLeft | DownRight;
-	public const int TwoHorizontalVertical = Horizontal | Vertical;
-	public const int Corners = UpLeft | UpRight | DownLeft | DownRight;
+	public const int TwoHorizontalVertical = 1; // Horizontal | Vertical;
+	public const int Corners = 6; // UpLeft | UpRight | DownLeft | DownRight;
 }
 
 public enum RailSlope
