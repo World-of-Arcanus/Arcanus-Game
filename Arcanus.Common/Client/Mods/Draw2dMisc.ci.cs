@@ -60,12 +60,9 @@
 			int z = game.currentAttackedBlock.Z;
 			int blocktype = game.map.GetBlock(x, y, z);
 			float health = game.GetCurrentBlockHealth(x, y, z);
-			float progress = health / game.d_Data.Strength()[blocktype];
-			if (game.IsUsableBlock(blocktype))
-			{
-				DrawEnemyHealthUseInfo(game, game.language.Get(StringTools.StringAppend(game.platform, "Block_", game.blocktypes[blocktype].Name)), progress, true);
-			}
-			DrawEnemyHealthCommon(game, game.language.Get(StringTools.StringAppend(game.platform, "Block_", game.blocktypes[blocktype].Name)), progress);
+			float strength = game.d_Data.Strength()[blocktype];
+			float progress = (strength > 0) ? health / strength : 1;
+			DrawEnemyHealthUseInfo(game, game.blocktypes[blocktype].Name, progress, blocktype, null);
 		}
 		if (game.currentlyAttackedEntity != -1)
 		{
@@ -88,31 +85,45 @@
 			{
 				name = e.drawName.Name;
 			}
-			if (e.usable)
-			{
-				DrawEnemyHealthUseInfo(game, game.language.Get(name), health, true);
-			}
-			DrawEnemyHealthCommon(game, game.language.Get(name), health);
+			DrawEnemyHealthUseInfo(game, game.language.Get(name), health, 0, e);
 		}
 	}
 
 	internal void DrawEnemyHealthCommon(Game game, string name, float progress)
 	{
-		DrawEnemyHealthUseInfo(game, name, 1, false);
+		DrawEnemyHealthUseInfo(game, name, 1, 0, null);
 	}
 
-	internal void DrawEnemyHealthUseInfo(Game game, string name, float progress, bool useInfo)
+	internal void DrawEnemyHealthUseInfo(Game game, string name, float progress, int block, Entity entity)
 	{
-		int y = useInfo ? 55 : 35;
-		game.Draw2dTexture(game.WhiteTexture(), game.xcenter(300), 40, 300, y, null, 0, ColorCi.FromArgb(255, 0, 0, 0), false);
-		game.Draw2dTexture(game.WhiteTexture(), game.xcenter(300), 40, 300 * progress, y, null, 0, ColorCi.FromArgb(255, 255, 0, 0), false);
+		int y = 35;
+
+		int healthBarBG =
+			ColorCi.FromArgb(255, 0, 0, 0);       // black
+
+		int healthBar = (block > 0) ?
+			ColorCi.FromArgb(255, 81, 146, 178) : // blue = block
+			ColorCi.FromArgb(255, 178, 81, 81);   // red = entity
+
+		game.Draw2dTexture(game.WhiteTexture(), game.xcenter(300), 40, 300, y, null, 0, healthBarBG, false);
+		game.Draw2dTexture(game.WhiteTexture(), game.xcenter(300), 40, 300 * progress, y, null, 0, healthBar, false);
+
 		FontCi font = new FontCi();
 		font.size = 14;
+
 		IntRef w = new IntRef();
 		IntRef h = new IntRef();
+		IntRef c = IntRef.Create(ColorCi.FromArgb(255, 255, 255, 255)); // white
+
 		game.platform.TextSize(name, font, w, h);
-		game.Draw2dText(name, font, game.xcenter(w.value), 40, null, false);
-		// if (useInfo)
+
+		game.Draw2dText(game.platform.StringSplitCamelCase(name), font, game.xcenter(w.value), 45, c, false);
+
+		// TODO: look into adding an expandable help section that uses an InfoTitle/Help property on blocks
+
+		// bool usable = (block > 0 && game.blocktypes[block].IsUsable) || (entity != null && entity.usable);
+		//
+		// if (usable)
 		// {
 		//  	name = game.platform.StringFormat(game.language.PressToUse(), "E");
 		//  	FontCi font2 = new FontCi();

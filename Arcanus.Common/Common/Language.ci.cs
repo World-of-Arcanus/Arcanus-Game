@@ -209,7 +209,7 @@
 		Add("en", "MoveNormal", "Move: Normal");
 		Add("en", "MoveSpeedNormal", "Move Speed: Normal");
 		Add("en", "MoveSpeed", "Move Speed: {0}x");
-		Add("en", "NoMaterialsForCrafting", "No materials for crafting.");
+		Add("en", "NoMaterialsForCrafting", "You must place a material on the crafting table.");
 		Add("en", "Off", "OFF");
 		Add("en", "On", "ON");
 		Add("en", "Options", "Options");

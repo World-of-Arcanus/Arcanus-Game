@@ -217,6 +217,11 @@ namespace Arcanus.ClientNative
 			return s.IndexOf(p);
 		}
 
+		public override string StringSplitCamelCase(string s)
+        {
+			return Regex.Replace(s, "([A-Z0-9])", " $1", RegexOptions.Compiled).Trim();
+		}
+
 		#endregion
 
 		#region Misc
