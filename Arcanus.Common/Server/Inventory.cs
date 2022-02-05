@@ -331,8 +331,6 @@ namespace Arcanus.Server
 					// d_Inventory.DragDropItem = d_Inventory.Items[new ProtoPoint(selected.Value.X, selected.Value.Y)];
 					// d_Inventory.Items.Remove(new ProtoPoint(selected.Value.X, selected.Value.Y));
 
-					// TODO: The active material slot does not get updated when a new block is added or when a number is pressed
-
 					int slot = d_Player.ActiveMaterialSlot;
 					int slotCount = d_Inventory.RightHand.Length;
 					bool slotFound = false;
