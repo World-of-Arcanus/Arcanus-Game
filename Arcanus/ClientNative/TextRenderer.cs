@@ -153,8 +153,8 @@ namespace Arcanus.Renderers
 					g2.SmoothingMode = SmoothingMode.AntiAlias;
 					g2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 #if DEBUG // Display measured text sizes
-					g2.DrawRectangle(new Pen(Color.FromArgb(255, 0, 255, 0)), 0, 0, (int)size.Width, (int)size.Height);
-					g2.DrawRectangle(new Pen(Color.FromArgb(255, 255, 255, 0)), 0, 0, (int)size2.Width - 1, (int)size2.Height - 1);
+					// g2.DrawRectangle(new Pen(Color.FromArgb(255, 0, 255, 0)), 0, 0, (int)size.Width, (int)size.Height);
+					// g2.DrawRectangle(new Pen(Color.FromArgb(255, 255, 255, 0)), 0, 0, (int)size2.Width - 1, (int)size2.Height - 1);
 #endif
 					// Draw text shadow
 					Matrix mx = new Matrix(1f, 0, 0, 1f, 1, 1);
