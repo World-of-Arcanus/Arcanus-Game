@@ -130,27 +130,28 @@
 			}
 			else
 			{
-				{
-					Packet_InventoryPosition p = new Packet_InventoryPosition();
-					p.Type = Packet_InventoryPositionTypeEnum.MainArea;
-					p.AreaX = cellInPage.X;
-					p.AreaY = cellInPage.Y + ScrollLine;
-					controller.InventoryClick(p);
-				}
-				{
-					Packet_InventoryPosition p = new Packet_InventoryPosition();
-					p.Type = Packet_InventoryPositionTypeEnum.WearPlace;
-					p.WearPlace = WearPlace_.RightHand;
-					p.ActiveMaterial = game.ActiveMaterial;
-					controller.InventoryClick(p);
-				}
-				{
-					Packet_InventoryPosition p = new Packet_InventoryPosition();
-					p.Type = Packet_InventoryPositionTypeEnum.MainArea;
-					p.AreaX = cellInPage.X;
-					p.AreaY = cellInPage.Y + ScrollLine;
-					controller.InventoryClick(p);
-				}
+				// no longer needed
+				// {
+				// 	Packet_InventoryPosition p = new Packet_InventoryPosition();
+				// 	p.Type = Packet_InventoryPositionTypeEnum.MainArea;
+				// 	p.AreaX = cellInPage.X;
+				// 	p.AreaY = cellInPage.Y + ScrollLine;
+				// 	controller.InventoryClick(p);
+				// }
+				// {
+				// 	Packet_InventoryPosition p = new Packet_InventoryPosition();
+				// 	p.Type = Packet_InventoryPositionTypeEnum.WearPlace;
+				// 	p.WearPlace = WearPlace_.RightHand;
+				// 	p.ActiveMaterial = game.ActiveMaterial;
+				// 	controller.InventoryClick(p);
+				// }
+				// {
+				// 	Packet_InventoryPosition p = new Packet_InventoryPosition();
+				// 	p.Type = Packet_InventoryPositionTypeEnum.MainArea;
+				// 	p.AreaX = cellInPage.X;
+				// 	p.AreaY = cellInPage.Y + ScrollLine;
+				// 	controller.InventoryClick(p);
+				// }
 			}
 			if (game.guistate == GuiState.Inventory)
 			{

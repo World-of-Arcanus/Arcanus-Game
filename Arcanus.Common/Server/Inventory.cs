@@ -396,24 +396,26 @@ namespace Arcanus.Server
 				else
 				if (d_Inventory.DragDropItem != null)
 				{
-					//make sure there is nothing blocking drop.
+					/* no longer needed
 					IntRef itemsAtAreaCount = new IntRef();
 					PointRef[] itemsAtArea = d_InventoryUtil.ItemsAtArea(pos.AreaX, pos.AreaY,
-															d_Items.ItemSizeX(d_Inventory.DragDropItem), d_Items.ItemSizeY(d_Inventory.DragDropItem), itemsAtAreaCount);
+						d_Items.ItemSizeX(d_Inventory.DragDropItem), d_Items.ItemSizeY(d_Inventory.DragDropItem), itemsAtAreaCount);
+
 					if (itemsAtArea == null || itemsAtAreaCount.value > 1)
 					{
-						//invalid area
-						return;
+						return; // invalid area
 					}
+
 					if (itemsAtAreaCount.value == 0)
 					{
 						d_Inventory.Items.Add(new ProtoPoint(pos.AreaX, pos.AreaY), d_Inventory.DragDropItem);
 						d_Inventory.DragDropItem = null;
 					}
-					else //1
+					else
 					{
 						var swapWith = itemsAtArea[0];
-						//try to stack
+
+						// try to stack
 						Item stackResult = d_Items.Stack(d_Inventory.Items[new ProtoPoint(swapWith.X, swapWith.Y)], d_Inventory.DragDropItem);
 						if (stackResult != null)
 						{
@@ -422,15 +424,17 @@ namespace Arcanus.Server
 						}
 						else
 						{
-							//try to swap
-							//swap (swapWith, dragdropitem)
+							// try to swap
+							// swap (swapWith, dragdropitem)
 							Item z = d_Inventory.Items[new ProtoPoint(swapWith.X, swapWith.Y)];
 							d_Inventory.Items.Remove(new ProtoPoint(swapWith.X, swapWith.Y));
 							d_Inventory.Items[new ProtoPoint(pos.AreaX, pos.AreaY)] = d_Inventory.DragDropItem;
 							d_Inventory.DragDropItem = z;
 						}
 					}
+
 					SendInventory();
+					*/
 				}
 			}
 			else
@@ -486,13 +490,15 @@ namespace Arcanus.Server
 			else
 			if (pos.Type == Packet_InventoryPositionTypeEnum.WearPlace)
 			{
-				//just swap.
+				// swap
 				Item wear = d_InventoryUtil.ItemAtWearPlace(pos.WearPlace, pos.ActiveMaterial);
+
 				if (d_Items.CanWear(pos.WearPlace, d_Inventory.DragDropItem))
 				{
 					d_InventoryUtil.SetItemAtWearPlace(pos.WearPlace, pos.ActiveMaterial, d_Inventory.DragDropItem);
 					d_Inventory.DragDropItem = wear;
 				}
+
 				SendInventory();
 			}
 			else
