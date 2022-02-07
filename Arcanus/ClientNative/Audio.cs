@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace Arcanus.ClientNative
@@ -11,30 +12,38 @@ namespace Arcanus.ClientNative
 	public class AudioOpenAl
 	{
 		public GameExit d_GameExit;
+
 		public AudioOpenAl()
 		{
 			try
 			{
-				// IList<string> x = AudioContext.AvailableDevices;//only with this line an exception can be catched.
-				context = ALC.CreateContext(ALC.OpenDevice(null), new ALContextAttributes());
+				// get all the devices and create a context for the first one
+				List<string> devices = ALC.GetString(AlcGetStringList.DeviceSpecifier);
+				context = ALC.CreateContext(ALC.OpenDevice(devices[0]), new ALContextAttributes());
+
+				// enable the current device's context
+				// this is required or we will hear no sound
+				ALC.MakeContextCurrent(context);
 			}
 			catch (Exception e)
 			{
+				// try to install the OpenAL library
 				string oalinst = "oalinst.exe";
+
 				if (File.Exists(oalinst))
 				{
 					try
 					{
 						Process.Start(oalinst, "/s");
-					}
-					catch
-					{
-					}
+					} catch {}
 				}
+
 				Console.WriteLine(e);
 			}
 		}
+
 		ALContext context;
+
 		// Loads a wave/riff audio file.
 		public static byte[] LoadWave(Stream stream, out int channels, out int bits, out int rate)
 		{
@@ -80,14 +89,14 @@ namespace Arcanus.ClientNative
 				return reader.ReadBytes((int)reader.BaseStream.Length);
 			}
 		}
-		public static OpenTK.Audio.OpenAL.ALFormat GetSoundFormat(int channels, int bits)
+		public static ALFormat GetSoundFormat(int channels, int bits)
 		{
 			switch (channels)
 			{
 				case 1:
-					return bits == 8 ? OpenTK.Audio.OpenAL.ALFormat.Mono8 : OpenTK.Audio.OpenAL.ALFormat.Mono16;
+					return bits == 8 ? ALFormat.Mono8 : ALFormat.Mono16;
 				case 2:
-					return bits == 8 ? OpenTK.Audio.OpenAL.ALFormat.Stereo8 : OpenTK.Audio.OpenAL.ALFormat.Stereo16;
+					return bits == 8 ? ALFormat.Stereo8 : ALFormat.Stereo16;
 				default:
 					throw new NotSupportedException("The specified sound format is not supported.");
 			}
@@ -132,92 +141,111 @@ namespace Arcanus.ClientNative
 				}
 			}
 
-			private void DoPlay()
+			unsafe private void DoPlay()
 			{
-				int source = OpenTK.Audio.OpenAL.AL.GenSource();
 				int state;
-				//using ()
+
+				// create the buffers for playback
+				int source = AL.GenSource();
+				int buffer = AL.GenBuffer();
+
+				// copy the audio data into unmanaged memory so we can buffer it
+				int pcmSize = Marshal.SizeOf(typeof(IntPtr)) * sample.Pcm.Length;
+				IntPtr pcm = Marshal.AllocHGlobal(pcmSize);
+				Marshal.Copy(sample.Pcm, 0, pcm, sample.Pcm.Length);
+
+				// buffer the data so we can play it
+				AL.BufferData(buffer, GetSoundFormat(sample.Channels, sample.BitsPerSample), pcm, pcmSize, sample.Rate);
+
+				// various sound effects
+				AL.DistanceModel(ALDistanceModel.InverseDistance);
+				AL.Source(source, ALSourcef.RolloffFactor, 0.3f);
+				AL.Source(source, ALSourcef.ReferenceDistance, 1);
+				AL.Source(source, ALSourcef.MaxDistance, (int)(64 * 1));
+
+				// copy the buffer to our playable source
+				AL.Source(source, ALSourcei.Buffer, buffer);
+
+				// play the audio
+				AL.SourcePlay(source);
+
+				// the audio plays in a new thread and so we need to
+				// query its state to know when the sound has stopped
+				// and only after can we run the clean up methods
+				for (;;)
 				{
-					//Trace.WriteLine("Testing WaveReader({0}).ReadToEnd()", filename);
+					// get the audio state (i.e. playing, paused, etc)
+					AL.GetSource(source, ALGetSourcei.SourceState, out state);
 
-					int buffer = OpenTK.Audio.OpenAL.AL.GenBuffer();
-
-					/* disabled - this no longer works in OpenTK 4.6.7
-					OpenTK.Audio.OpenAL.AL.BufferData(buffer, GetSoundFormat(sample.Channels, sample.BitsPerSample), sample.Pcm, sample.Pcm.Length, sample.Rate);
-					*/
-
-					//audiofiles[filename]=buffer;
-
-					OpenTK.Audio.OpenAL.AL.DistanceModel(OpenTK.Audio.OpenAL.ALDistanceModel.InverseDistance);
-					OpenTK.Audio.OpenAL.AL.Source(source, OpenTK.Audio.OpenAL.ALSourcef.RolloffFactor, 0.3f);
-					OpenTK.Audio.OpenAL.AL.Source(source, OpenTK.Audio.OpenAL.ALSourcef.ReferenceDistance, 1);
-					OpenTK.Audio.OpenAL.AL.Source(source, OpenTK.Audio.OpenAL.ALSourcef.MaxDistance, (int)(64 * 1));
-					OpenTK.Audio.OpenAL.AL.Source(source, OpenTK.Audio.OpenAL.ALSourcei.Buffer, buffer);
-					OpenTK.Audio.OpenAL.AL.SourcePlay(source);
-
-					// Query the source to find out when it stops playing.
-					for (; ; )
+					if (!loop && (ALSourceState)state != ALSourceState.Playing)
 					{
-						OpenTK.Audio.OpenAL.AL.GetSource(source, OpenTK.Audio.OpenAL.ALGetSourcei.SourceState, out state);
-						if ((!loop) && (OpenTK.Audio.OpenAL.ALSourceState)state != OpenTK.Audio.OpenAL.ALSourceState.Playing)
-						{
-							break;
-						}
-						if (stop)
-						{
-							break;
-						}
-						if (gameexit.GetExit())
-						{
-							break;
-						}
-						if (loop)
-						{
-							if (state == (int)OpenTK.Audio.OpenAL.ALSourceState.Playing && (!shouldplay))
-							{
-								OpenTK.Audio.OpenAL.AL.SourcePause(source);
-							}
-							if (state != (int)OpenTK.Audio.OpenAL.ALSourceState.Playing && (shouldplay))
-							{
-								if (restart)
-								{
-									OpenTK.Audio.OpenAL.AL.SourceRewind(source);
-									restart = false;
-								}
-								OpenTK.Audio.OpenAL.AL.SourcePlay(source);
-							}
-						}
-
-						OpenTK.Audio.OpenAL.AL.Source(source, OpenTK.Audio.OpenAL.ALSource3f.Position, position.X, position.Y, position.Z);
-
-						/*
-                        if (stop)
-                        {
-                            AL.SourcePause(source);
-                            resume = false;
-                        }
-                        if (resume)
-                        {
-                            AL.SourcePlay(source);
-                            resume = false;
-                        }
-                        */
-						Thread.Sleep(1);
+						break;
 					}
-					Finished = true;
-					OpenTK.Audio.OpenAL.AL.SourceStop(source);
-					OpenTK.Audio.OpenAL.AL.DeleteSource(source);
-					OpenTK.Audio.OpenAL.AL.DeleteBuffer(buffer);
+
+					if (stop)
+					{
+						break;
+					}
+
+					if (gameexit.GetExit())
+					{
+						break;
+					}
+
+					if (loop)
+					{
+						if (state == (int)ALSourceState.Playing && !shouldplay)
+						{
+							AL.SourcePause(source);
+						}
+
+						if (state != (int)ALSourceState.Playing && shouldplay)
+						{
+							if (restart)
+							{
+								AL.SourceRewind(source);
+								restart = false;
+							}
+
+							AL.SourcePlay(source);
+						}
+					}
+
+					AL.Source(source, ALSource3f.Position, position.X, position.Y, position.Z);
+
+					/*
+                    if (stop)
+                    {
+                        AL.SourcePause(source);
+                        resume = false;
+                    }
+                    if (resume)
+                    {
+                        AL.SourcePlay(source);
+                        resume = false;
+                    }
+                    */
+
+					Thread.Sleep(1);
 				}
+
+				Finished = true;
+				AL.SourceStop(source);
+				AL.DeleteSource(source);
+				AL.DeleteBuffer(buffer);
 			}
+
 			public bool loop = false;
 			bool stop;
+
 			public void Stop()
 			{
 				stop = true;
 			}
+
 			public bool shouldplay;
 			public bool restart;
+
 			public void Restart()
 			{
 				restart = true;
@@ -227,7 +255,6 @@ namespace Arcanus.ClientNative
 			{
 				shouldplay = false;
 			}
-
 
 			internal bool Finished;
 		}
@@ -267,9 +294,9 @@ namespace Arcanus.ClientNative
 		public void UpdateListener(Vector3 position, Vector3 orientation)
 		{
 			lastlistener = position;
-			OpenTK.Audio.OpenAL.AL.Listener(OpenTK.Audio.OpenAL.ALListener3f.Position, position.X, position.Y, position.Z);
+			AL.Listener(ALListener3f.Position, position.X, position.Y, position.Z);
 			Vector3 up = Vector3.UnitY;
-			OpenTK.Audio.OpenAL.AL.Listener(OpenTK.Audio.OpenAL.ALListenerfv.Orientation, ref orientation, ref up);
+			AL.Listener(ALListenerfv.Orientation, ref orientation, ref up);
 		}
 	}
 }
