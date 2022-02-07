@@ -18,7 +18,7 @@ namespace Arcanus.Mods
 			m.RequireMod("Tnt");
 			m.RequireMod("PermissionBlock");
 			m.RequireMod("VandalFinder");
-
+			m.RequireMod("Jukebox");
 		}
 		public void Start(ModManager manager)
 		{

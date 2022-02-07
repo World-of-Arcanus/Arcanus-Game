@@ -1287,7 +1287,6 @@
 			m.AddToCreativeInventory("WoodWindow");
 			m.AddToCreativeInventory("IronWindow");
 			m.AddToCreativeInventory("IronBars");
-			m.AddToCreativeInventory("Jukebox");
 			m.AddToCreativeInventory("DirtBrick");
 			m.AddToCreativeInventory("WoodRoof");
 			m.AddToCreativeInventory("SandBrick");

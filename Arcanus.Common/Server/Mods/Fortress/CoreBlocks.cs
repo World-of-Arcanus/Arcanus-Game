@@ -864,20 +864,6 @@
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(134, "Jukebox", new BlockType()
-			{
-				TextureIdTop = "JukeboxTop",
-				TextureIdBack = "JukeboxSide",
-				TextureIdFront = "JukeboxSide",
-				TextureIdLeft = "JukeboxSide",
-				TextureIdRight = "JukeboxSide",
-				TextureIdBottom = "JukeboxBottom",
-				TextureIdForInventory = "JukeboxTop",
-				DrawType = DrawType.Solid,
-				WalkableType = WalkableType.Solid,
-				Sounds = solidSounds,
-				IsUsable = true,
-			});
 			m.SetBlockType(140, "DirtBrick", new BlockType()
 			{
 				AllTextures = "DirtBrick",
@@ -1288,7 +1274,6 @@
 			m.AddToCreativeInventory("WoodWindow");
 			m.AddToCreativeInventory("IronWindow");
 			m.AddToCreativeInventory("IronBars");
-			m.AddToCreativeInventory("Jukebox");
 			m.AddToCreativeInventory("DirtBrick");
 			m.AddToCreativeInventory("WoodRoof");
 			m.AddToCreativeInventory("SandBrick");
