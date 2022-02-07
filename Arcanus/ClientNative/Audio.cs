@@ -141,7 +141,7 @@ namespace Arcanus.ClientNative
 				}
 			}
 
-			unsafe private void DoPlay()
+			private void DoPlay()
 			{
 				int state;
 
@@ -150,7 +150,7 @@ namespace Arcanus.ClientNative
 				int buffer = AL.GenBuffer();
 
 				// copy the audio data into unmanaged memory so we can buffer it
-				int pcmSize = Marshal.SizeOf(typeof(IntPtr)) * sample.Pcm.Length;
+				int pcmSize = Marshal.SizeOf(typeof(IntPtr)) + sample.Pcm.Length;
 				IntPtr pcm = Marshal.AllocHGlobal(pcmSize);
 				Marshal.Copy(sample.Pcm, 0, pcm, sample.Pcm.Length);
 
@@ -231,8 +231,10 @@ namespace Arcanus.ClientNative
 
 				Finished = true;
 				AL.SourceStop(source);
-				AL.DeleteSource(source);
+
+				Marshal.FreeHGlobal(pcm);
 				AL.DeleteBuffer(buffer);
+				AL.DeleteSource(source);
 			}
 
 			public bool loop = false;
