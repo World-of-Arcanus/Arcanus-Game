@@ -3308,7 +3308,7 @@
 					return;
 				}
 
-				int speedmultipier = 10;
+				int speedmultipier = 5;
 
 				if (movespeed > basemovespeed)
                 {

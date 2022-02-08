@@ -190,7 +190,7 @@
 		Add("en", "KeyMoveFoward", "Move Foward");
 		Add("en", "KeyMoveLeft", "Move Left");
 		Add("en", "KeyMoveRight", "Move Right");
-		Add("en", "KeyMoveSpeed", "{0}x Move Speed");
+		Add("en", "KeyMoveSpeed", "Move Speed");
 		Add("en", "KeyPlayersList", "Players List");
 		Add("en", "KeyReloadWeapon", "Reload Weapon");
 		Add("en", "KeyRespawn", "Respawn");

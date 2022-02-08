@@ -579,7 +579,7 @@
 		helps[count++] = KeyHelpCreate(language.KeyReloadWeapon(), GlKeys.R);
 		helps[count++] = KeyHelpCreate(language.KeyToggleFogDistance(), GlKeys.F);
 		helps[count++] = KeyHelpCreate(language.KeyScreenshot(), GlKeys.F1);
-		helps[count++] = KeyHelpCreate(game.platform.StringFormat(language.KeyMoveSpeed(), "10"), GlKeys.F2);
+		helps[count++] = KeyHelpCreate(language.KeyMoveSpeed(), GlKeys.F2);
 		helps[count++] = KeyHelpCreate(language.KeyFreeMove(), GlKeys.F3);
 		helps[count++] = KeyHelpCreate(language.KeyThirdPersonCamera(), GlKeys.F5);
 		// helps[count++] = KeyHelpCreate(language.KeyTextEditor(), GlKeys.F9);
