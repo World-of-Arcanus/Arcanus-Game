@@ -182,10 +182,16 @@ namespace Arcanus.ClientNative
 						break;
 					}
 
+					/* this is causing loops to end early
+					 * and it isn't used for anything else
+					 * see Game.ci.cs @ AudioPlayLoop()
+
 					if (stop)
 					{
 						break;
 					}
+
+					 */
 
 					if (gameexit.GetExit())
 					{

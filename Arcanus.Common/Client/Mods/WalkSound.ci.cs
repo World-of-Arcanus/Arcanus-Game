@@ -5,7 +5,11 @@
 		one = 1;
 		walksoundtimer = 0;
 		lastwalksound = 0;
-		stepsoundduration = one * 4 / 10;
+
+		// one step every 0.5 seconds
+		// the sound must be 0.1s below this
+		// otherwise it introduces crackling
+		stepsoundduration = one * 5 / 10;
 	}
 	float one;
 	public override void OnNewFrameFixed(Game game, NewFrameEventArgs args)
