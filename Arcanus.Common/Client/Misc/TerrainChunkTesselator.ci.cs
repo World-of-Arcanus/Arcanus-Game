@@ -869,7 +869,7 @@ public class TerrainChunkTesselatorCi
 		{
 			//Cactus is thin
 			float fScale = 0.875f;
-			float fOffset = (1f - fScale) / 2f;
+			float fOffset = (1f - fScale) / 6f;
 
 			//left right
 			float vLROffsetX = fOffset;

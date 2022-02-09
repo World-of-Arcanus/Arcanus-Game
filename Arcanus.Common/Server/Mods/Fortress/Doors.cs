@@ -8,6 +8,7 @@ namespace Arcanus.Mods
 		}
 		public void Start(ModManager manager)
 		{
+			/*
 			m = manager;
 
 			m.RegisterOnBlockBuild(OnBuild);
@@ -72,6 +73,7 @@ namespace Arcanus.Mods
 			DoorTopClosed = m.GetBlockId("DoorTopClosed");
 			DoorBottomOpen = m.GetBlockId("DoorBottomOpen");
 			DoorTopOpen = m.GetBlockId("DoorTopOpen");
+			*/
 		}
 
 		ModManager m;

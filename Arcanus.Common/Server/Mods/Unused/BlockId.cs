@@ -14,7 +14,7 @@ namespace Arcanus.Mods
 		{
 			// Add all modfiles here which contain block definitions.
 			m.RequireMod("CoreBlocks");
-			m.RequireMod("Doors");
+			// m.RequireMod("Doors");
 			m.RequireMod("Tnt");
 			m.RequireMod("PermissionBlock");
 			m.RequireMod("VandalFinder");

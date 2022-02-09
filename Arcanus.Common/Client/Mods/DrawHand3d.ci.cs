@@ -84,6 +84,34 @@
 			&& item.ItemClass == Packet_ItemClassEnum.Block
 			&& game.blocktypes[item.BlockId].DrawType == Packet_DrawTypeEnum.Torch;
 	}
+	public bool IsPlant()
+	{
+		Packet_Item item = game.d_Inventory.RightHand[game.ActiveMaterial];
+		return item != null
+			&& item.ItemClass == Packet_ItemClassEnum.Block
+			&& game.blocktypes[item.BlockId].DrawType == Packet_DrawTypeEnum.Plant;
+	}
+	public bool IsCactus()
+	{
+		Packet_Item item = game.d_Inventory.RightHand[game.ActiveMaterial];
+		return item != null
+			&& item.ItemClass == Packet_ItemClassEnum.Block
+			&& game.blocktypes[item.BlockId].DrawType == Packet_DrawTypeEnum.Cactus;
+	}
+	public bool IsFence()
+	{
+		Packet_Item item = game.d_Inventory.RightHand[game.ActiveMaterial];
+		return item != null
+			&& item.ItemClass == Packet_ItemClassEnum.Block
+			&& game.blocktypes[item.BlockId].DrawType == Packet_DrawTypeEnum.Fence;
+	}
+	public bool IsLadder()
+	{
+		Packet_Item item = game.d_Inventory.RightHand[game.ActiveMaterial];
+		return item != null
+			&& item.ItemClass == Packet_ItemClassEnum.Block
+			&& game.blocktypes[item.BlockId].DrawType == Packet_DrawTypeEnum.Ladder;
+	}
 	public bool IsCompass()
 	{
 		Packet_Item item = game.d_Inventory.RightHand[game.ActiveMaterial];
@@ -156,17 +184,28 @@
 			int x = 0;
 			int y = 0;
 			int z = 0;
-			if (IsEmptyHand() || IsCompass())
+			if (IsEmptyHand() || IsCompass() || IsTorch())
 			{
 				d_BlockRendererTorch.TopTexture = GetWeaponTextureId(TileSide.Top);
 				d_BlockRendererTorch.SideTexture = GetWeaponTextureId(TileSide.Front);
-				d_BlockRendererTorch.AddTorch(game.d_Data, game, modelData, x, y, z, TorchType.Normal);
+				d_BlockRendererTorch.AddTorch(game.d_Data, game, modelData, x, y, z, TorchType.Normal, false);
 			}
-			else if (IsTorch())
+			// a temporary hack to display a 2D representation for some items
+			// otherwise we get a repeating block pattern that looks unrealistic
+			// this should be fixed when we add proper hands and 3D inventory items
+			else if (IsPlant() || IsCactus() || IsFence() || IsLadder())
 			{
-				d_BlockRendererTorch.TopTexture = GetWeaponTextureId(TileSide.Top);
-				d_BlockRendererTorch.SideTexture = GetWeaponTextureId(TileSide.Front);
-				d_BlockRendererTorch.AddTorch(game.d_Data, game, modelData, x, y, z, TorchType.Normal);
+				// crops
+				if (item.BlockId == 108)
+                {
+					d_BlockRendererTorch.SideTexture = game.TextureId[item.BlockId + 3][TileSide.Front];
+				}
+				else
+                {
+					d_BlockRendererTorch.SideTexture = GetWeaponTextureId(TileSide.Front);
+				}
+
+				d_BlockRendererTorch.AddTorch(game.d_Data, game, modelData, x, y, z, TorchType.Normal, true);
 			}
 			else
 			{
@@ -403,19 +442,19 @@ public class BlockRendererTorch
 {
 	internal int TopTexture;
 	internal int SideTexture;
-	public void AddTorch(GameData d_Data, Game d_TerainRenderer, ModelData m, int x, int y, int z, TorchType type)
+	public void AddTorch(GameData d_Data, Game d_TerainRenderer, ModelData m, int x, int y, int z, TorchType type, bool is2D)
 	{
 		float one = 1;
 		int curcolor = ColorCi.FromArgb(255, 255, 255, 255);
-		float torchsizexy = one * 16 / 100;
+		float torchsizexy = one * (is2D ? 64: 16) / 100;
 		float topx = one / 2 - torchsizexy / 2;
 		float topy = one / 2 - torchsizexy / 2;
 		float bottomx = one / 2 - torchsizexy / 2;
 		float bottomy = one / 2 - torchsizexy / 2;
 
-		topx += x;
+		topx += x + ((is2D) ? 1 : 0);
 		topy += y;
-		bottomx += x;
+		bottomx += x + ((is2D) ? 1 : 0);
 		bottomy += y;
 
 		if (type == TorchType.Front) { bottomx = x - torchsizexy; }
@@ -457,7 +496,8 @@ public class BlockRendererTorch
 		Vector3Ref bottom10 = Vector3Ref.Create(bottomx + torchsizexy, z + 0, bottomy);
 		Vector3Ref bottom11 = Vector3Ref.Create(bottomx + torchsizexy, z + 0, bottomy + torchsizexy);
 
-		//top
+		// top
+		if (!is2D)
 		{
 			int sidetexture = TopTexture;
 			RectFRef texrec = TextureAtlas.TextureCoords2d(sidetexture, d_TerainRenderer.texturesPacked());
@@ -474,7 +514,8 @@ public class BlockRendererTorch
 			m.indices[m.indicesCount++] = (lastelement + 2);
 		}
 
-		//bottom - same as top, but z is 1 less.
+		// bottom - same as top, but z is 1 less
+		if (!is2D)
 		{
 			int sidetexture = SideTexture;
 			RectFRef texrec = TextureAtlas.TextureCoords2d(sidetexture, d_TerainRenderer.texturesPacked());
@@ -491,7 +532,7 @@ public class BlockRendererTorch
 			m.indices[m.indicesCount++] = (lastelement + 2);
 		}
 
-		//front
+		// front
 		{
 			int sidetexture = SideTexture;
 			RectFRef texrec = TextureAtlas.TextureCoords2d(sidetexture, d_TerainRenderer.texturesPacked());
@@ -508,7 +549,8 @@ public class BlockRendererTorch
 			m.indices[m.indicesCount++] = (lastelement + 2);
 		}
 
-		//back - same as front, but x is 1 greater.
+		// back - same as front, but x is 1 greater
+		if (!is2D)
 		{
 			int sidetexture = SideTexture;
 			RectFRef texrec = TextureAtlas.TextureCoords2d(sidetexture, d_TerainRenderer.texturesPacked());
@@ -525,6 +567,7 @@ public class BlockRendererTorch
 			m.indices[m.indicesCount++] = (lastelement + 2);
 		}
 
+		if (!is2D)
 		{
 			int sidetexture = SideTexture;
 			RectFRef texrec = TextureAtlas.TextureCoords2d(sidetexture, d_TerainRenderer.texturesPacked());
@@ -541,7 +584,8 @@ public class BlockRendererTorch
 			m.indices[m.indicesCount++] = (lastelement + 2);
 		}
 
-		//right - same as left, but y is 1 greater.
+		// right - same as left, but y is 1 greater
+		if (!is2D)
 		{
 			int sidetexture = SideTexture;
 			RectFRef texrec = TextureAtlas.TextureCoords2d(sidetexture, d_TerainRenderer.texturesPacked());

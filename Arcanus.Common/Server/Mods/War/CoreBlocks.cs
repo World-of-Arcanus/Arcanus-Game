@@ -671,7 +671,7 @@
 			m.SetBlockType(104, "Camouflage", new BlockType()
 			{
 				AllTextures = "Camouflage",
-				DrawType = DrawType.Solid,
+				DrawType = DrawType.Fence,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
@@ -700,6 +700,7 @@
 			m.SetBlockType(108, "Crops1", new BlockType()
 			{
 				AllTextures = "Crops1",
+				TextureIdForInventory = "Crops4",
 				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Empty,
 				Sounds = solidSounds,
@@ -845,14 +846,26 @@
 			});
 			m.SetBlockType(131, "WoodWindow", new BlockType()
 			{
-				AllTextures = "WoodWindow",
+				TextureIdTop = "WoodBlock",
+				TextureIdBack = "WoodWindow",
+				TextureIdFront = "WoodWindow",
+				TextureIdLeft = "WoodBlock",
+				TextureIdRight = "WoodBlock",
+				TextureIdBottom = "WoodBlock",
+				TextureIdForInventory = "WoodWindow",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
 			m.SetBlockType(132, "IronWindow", new BlockType()
 			{
-				AllTextures = "IronWindow",
+				TextureIdTop = "IronBlock",
+				TextureIdBack = "IronWindow",
+				TextureIdFront = "IronWindow",
+				TextureIdLeft = "IronBlock",
+				TextureIdRight = "IronBlock",
+				TextureIdBottom = "IronBlock",
+				TextureIdForInventory = "IronWindow",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
