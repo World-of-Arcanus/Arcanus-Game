@@ -583,7 +583,7 @@
 		helps[count++] = KeyHelpCreate(language.KeyFreeMove(), GlKeys.F3);
 		helps[count++] = KeyHelpCreate(language.KeyThirdPersonCamera(), GlKeys.F5);
 		// helps[count++] = KeyHelpCreate(language.KeyTextEditor(), GlKeys.F9);
-		// helps[count++] = KeyHelpCreate(language.KeyFullscreen(), GlKeys.F11);
+		helps[count++] = KeyHelpCreate(language.KeyFullscreen(), GlKeys.F11);
 		helps[count++] = KeyHelpCreate(language.KeyPlayersList(), GlKeys.Tab);
 		helps[count++] = KeyHelpCreate(language.KeyChat(), GlKeys.T);
 		helps[count++] = KeyHelpCreate(language.KeyTeamChat(), GlKeys.Y);
@@ -635,23 +635,22 @@
 				args.SetHandled(true);
 			}
 		}
-		// disabled for now
-		// if (eKey == game.GetKey(GlKeys.F11))
-		// {
-		// 	if (game.platform.GetWindowState() == WindowState.Fullscreen)
-		// 	{
-		// 		game.platform.SetWindowState(WindowState.Normal);
-		// 		RestoreResolution();
-		// 		SaveOptions();
-		// 	}
-		// 	else
-		// 	{
-		// 		game.platform.SetWindowState(WindowState.Fullscreen);
-		// 		UseResolution();
-		// 		SaveOptions();
-		// 	}
-		// 	args.SetHandled(true);
-		// }
+		if (eKey == game.GetKey(GlKeys.F11))
+		{
+			if (game.platform.GetWindowState() == WindowState.Fullscreen)
+			{
+				game.platform.SetWindowState(WindowState.Normal);
+				RestoreResolution();
+				// SaveOptions();
+			}
+			else
+			{
+				game.platform.SetWindowState(WindowState.Fullscreen);
+				// UseResolution();
+				// SaveOptions();
+			}
+			args.SetHandled(true);
+		}
 	}
 	public void LoadOptions()
 	{
