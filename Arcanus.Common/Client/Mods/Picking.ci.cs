@@ -21,6 +21,7 @@
 	{
 		if (game.guistate == GuiState.Normal)
 		{
+			mouseup = true;
 			UpdatePicking(game);
 		}
 	}
@@ -29,6 +30,7 @@
 	{
 		if (game.guistate == GuiState.Normal)
 		{
+			mouseup = false;
 			UpdatePicking(game);
 			UpdateEntityHit(game);
 		}
@@ -68,8 +70,21 @@
 		}
 		else
 		{
+			// mouse up
 			if (game.mouseleftdeclick)
 			{
+				if (game.currentAttackedBlock != null)
+				{
+					int blockX = game.currentAttackedBlock.X;
+					int blockY = game.currentAttackedBlock.Z;
+					int blockZ = game.currentAttackedBlock.Y;
+
+					// restore the block's health on mouse up
+					// blocks can only be destroyed by holding the mouse down
+					// this may need to change when we integrate War mode
+					game.blockHealth.Remove(blockX, blockZ, blockY);
+				}
+
 				game.leftpressedpicking = false;
 				left = false;
 			}
@@ -662,10 +677,13 @@
 
 								if (game.blockHealth.ContainsKey(blockX, blockZ, blockY) == false)
 								{
+									// set the block's health to its strength when it's never been hit before
+									// most blocks default to 4 and require four hits when weapon strength is 1
 									game.blockHealth.Set(blockX, blockZ, blockY, game.GetCurrentBlockHealth(blockX, blockZ, blockY));
 								}
 
-								game.blockHealth.Set(blockX, blockZ, blockY, game.blockHealth.Get(blockX, blockZ, blockY) - game.WeaponAttackStrength());
+								// TODO: get WeaponAttackStrength() working when we integrate War mode
+								game.blockHealth.Set(blockX, blockZ, blockY, game.blockHealth.Get(blockX, blockZ, blockY) - 1); // game.WeaponAttackStrength());
 
 								if (game.GetCurrentBlockHealth(blockX, blockZ, blockY) <= 0)
 								{
@@ -675,6 +693,12 @@
 									}
 
 									game.currentAttackedBlock = null;
+								}
+								else
+                                {
+									// the block hasn't been destroyed yet
+									PickingEnd(left, right, middle, ispistol);
+									return;
 								}
 							}
 
@@ -718,6 +742,7 @@
 	internal DictionaryVector3Float fillarea;
 	internal Vector3IntRef fillstart;
 	internal Vector3IntRef fillend;
+	internal bool mouseup;
 
 	internal void OnPick(Game game, int blockposX, int blockposY, int blockposZ, int blockposoldX, int blockposoldY, int blockposoldZ, float[] collisionPos, bool right)
 	{

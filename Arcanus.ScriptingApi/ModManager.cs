@@ -1246,7 +1246,7 @@ namespace Arcanus
 		[ProtoMember(15)]
 		public int StartInventoryAmount;
 		[ProtoMember(16)]
-		public int Strength;
+		public int Strength = 4;
 		[ProtoMember(17)]
 		public string Name;
 		[ProtoMember(18)]

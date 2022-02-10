@@ -97,16 +97,18 @@
 	internal void DrawEnemyHealthUseInfo(Game game, string name, float progress, int block, Entity entity)
 	{
 		int y = 35;
+		float healthMax = 300;
+		float healthCur = healthMax * progress;
 
 		int healthBarBG =
 			ColorCi.FromArgb(255, 0, 0, 0);       // black
 
-		int healthBar = (block > 0) ?
+		int healthBar = (block > 0 && healthCur == healthMax) ?
 			ColorCi.FromArgb(255, 81, 146, 178) : // blue = block
-			ColorCi.FromArgb(255, 178, 81, 81);   // red = entity
+			ColorCi.FromArgb(255, 178, 81, 81);   // red = entity or damaged block
 
-		game.Draw2dTexture(game.WhiteTexture(), game.xcenter(300), 40, 300, y, null, 0, healthBarBG, false);
-		game.Draw2dTexture(game.WhiteTexture(), game.xcenter(300), 40, 300 * progress, y, null, 0, healthBar, false);
+		game.Draw2dTexture(game.WhiteTexture(), game.xcenter(healthMax), 40, healthMax, y, null, 0, healthBarBG, false);
+		game.Draw2dTexture(game.WhiteTexture(), game.xcenter(healthMax), 40, healthCur, y, null, 0, healthBar, false);
 
 		FontCi font = new FontCi();
 		font.size = 14;
