@@ -13,8 +13,8 @@ namespace Arcanus.Mods
 		{
 			m = manager;
 			m.RegisterWorldGenerator(GetChunk);
-			m.RegisterOptionBool("DefaultGenCaves", false);
-			m.RegisterOptionBool("DefaultGenLavaCaves", false);
+			m.RegisterOptionBool("DefaultGenCaves", true);
+			m.RegisterOptionBool("DefaultGenLavaCaves", true);
 
 			BLOCK_STONE = m.GetBlockId("Stone");
 			BLOCK_DIRT = m.GetBlockId("Dirt");
