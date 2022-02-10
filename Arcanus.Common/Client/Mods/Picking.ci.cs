@@ -21,7 +21,6 @@
 	{
 		if (game.guistate == GuiState.Normal)
 		{
-			mouseup = true;
 			UpdatePicking(game);
 		}
 	}
@@ -30,7 +29,6 @@
 	{
 		if (game.guistate == GuiState.Normal)
 		{
-			mouseup = false;
 			UpdatePicking(game);
 			UpdateEntityHit(game);
 		}
@@ -742,7 +740,6 @@
 	internal DictionaryVector3Float fillarea;
 	internal Vector3IntRef fillstart;
 	internal Vector3IntRef fillend;
-	internal bool mouseup;
 
 	internal void OnPick(Game game, int blockposX, int blockposY, int blockposZ, int blockposoldX, int blockposoldY, int blockposoldZ, float[] collisionPos, bool right)
 	{
