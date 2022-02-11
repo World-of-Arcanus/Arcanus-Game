@@ -3,9 +3,9 @@
 	public override void OnNewFrameDraw2d(Game game, float deltaTime)
 	{
 		healthPosX = game.Width() / 2 - baseSizeX - centerOffset;
-		healthPosY = game.Height() - 122;
+		healthPosY = game.Height() - 131;
 		oxygenPosX = game.Width() / 2 + centerOffset;
-		oxygenPosY = game.Height() - 122;
+		oxygenPosY = game.Height() - 131;
 
 		if (game.guistate != GuiState.MapLoading)
 		{

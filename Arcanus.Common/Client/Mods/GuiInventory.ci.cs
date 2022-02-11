@@ -42,9 +42,9 @@
 	public int CellsStartX() { return 33 + InventoryStartX(); }
 	public int CellsStartY() { return 180 + InventoryStartY(); }
 	int MaterialSelectorStartX() { return game.platform.FloatToInt(MaterialSelectorBackgroundStartX() + 17 * game.Scale()); }
-	int MaterialSelectorStartY() { return game.platform.FloatToInt(MaterialSelectorBackgroundStartY() + 17 * game.Scale()); }
+	int MaterialSelectorStartY() { return game.platform.FloatToInt(MaterialSelectorBackgroundStartY() + 26 * game.Scale()); }
 	int MaterialSelectorBackgroundStartX() { return game.platform.FloatToInt(game.Width() / 2 - (512 / 2) * game.Scale()); }
-	int MaterialSelectorBackgroundStartY() { return game.platform.FloatToInt(game.Height() - 90 * game.Scale()); }
+	int MaterialSelectorBackgroundStartY() { return game.platform.FloatToInt(game.Height() - 99 * game.Scale()); }
 	int CellCountInPageX;
 	int CellCountInPageY;
 	int CellCountTotalX;
