@@ -71,7 +71,7 @@
 
 		// Go a little faster when flying
 		// For some reason it is slower than the default walking speed
-		if (move.freemove)
+		if (move.freemove && !move.moveup && !move.movedown)
 		{
 			// 2x the current speed when a multiplier has already been applied (i.e. F2)
 			// otherwise it defaults to 5x the normal flying speed (which makes it similar to walking)
