@@ -31,25 +31,17 @@
 	{
 		float movedz = game.movedz;
 
-		//fallspeed 4 is 10 blocks high
-		//fallspeed 5.5 is 20 blocks high
+		// fallspeed 4 is 10 blocks high
+		// fallspeed 5.5 is 20 blocks high
 		float fallspeed = movedz / (-game.basemovespeed);
 
 		int posX = game.GetPlayerEyesBlockX();
 		int posY = game.GetPlayerEyesBlockY();
 		int posZ = game.GetPlayerEyesBlockZ();
-		if ((game.blockheight(posX, posY, posZ) < posZ - 8)
-			|| fallspeed > 3)
-		{
-			SetFallSoundActive(game, fallspeed > 2);
-		}
-		else
-		{
-			SetFallSoundActive(game, false);
-		}
 
-		//fall damage
+		SetFallSoundActive(game, false);
 
+		// fall damage
 		if (game.map.IsValidPos(posX, posY, posZ - 3))
 		{
 			int blockBelow = game.map.GetBlock(posX, posY, posZ - 3);
@@ -66,6 +58,7 @@
 				{
 					return;
 				}
+				SetFallSoundActive(game, true);
 				lastfalldamagetimeMilliseconds = game.platform.TimeMillisecondsFromStart();
 				game.ApplyDamageToPlayer(game.platform.FloatToInt(severity * game.PlayerStats.MaxHealth), Packet_DeathReasonEnum.FallDamage, 0);    //Maybe give ID of last player touched?
 			}
