@@ -100,22 +100,326 @@
 
 <script>
     var blocks = {
+        'Stone': {
+            all: 'Stone'
+        },
+        'Dirt': {
+            all: 'Dirt'
+        },
+        'Cobblestone': {
+            all: 'Cobblestone'
+        },
+        'Oak Wood': {
+            all: 'OakWood'
+        },
         'Adminium': {
             all: 'Adminium'
+        },
+        'Water': {
+            all: 'Water'
+        },
+        'Lava': {
+            all: 'Lava'
+        },
+        'Sand': {
+            all: 'Sand'
+        },
+        'Gravel': {
+            all: 'Gravel'
+        },
+        'Diamond Ore': {
+            all: 'DiamondOre'
+        },
+        'Gold Ore': {
+            all: 'GoldOre'
+        },
+        'Emerald Ore': {
+            all: 'EmeraldOre'
+        },
+        'Lapis Ore': {
+            all: 'LapisOre'
+        },
+        'Iron Ore': {
+            all: 'IronOre'
+        },
+        'Coal Ore': {
+            all: 'Coal Ore'
+        },
+        'Oak Tree Trunk': {
+            side: 'OakTreeTrunk',
+            top: 'OakTreeTrunkTopBottom',
+            bottom: 'OakTreeTrunkTopBottom'
+        },
+        'Oak Leaves': {
+            all: 'OakLeaves'
+        },
+        'Sponge': {
+            all: 'Sponge'
+        },
+        'Glass': {
+            all: 'Glass'
+        },
+        'Red Cloth': {
+            all: 'RedCloth'
+        },
+        'Orange Cloth': {
+            all: 'OrangeCloth'
+        },
+        'Yellow Cloth': {
+            all: 'YellowCloth'
+        },
+        'Light Green Cloth': {
+            all: 'LightGreenCloth'
+        },
+        'Green Cloth': {
+            all: 'GreenCloth'
+        },
+        'Cyan Cloth': {
+            all: 'CyanCloth'
+        },
+        'Light Blue Cloth': {
+            all: 'LightBlueCloth'
+        },
+        'Blue Cloth': {
+            all: 'BlueCloth'
+        },
+        'Purple Cloth': {
+            all: 'PurpleCloth'
+        },
+        'Brown Cloth': {
+            all: 'BrownCloth'
+        },
+        'Silver Cloth': {
+            all: 'SilverCloth'
+        },
+        'Magenta Cloth': {
+            all: 'MagentaCloth'
+        },
+        'Pink Cloth': {
+            all: 'PinkCloth'
+        },
+        'Black Cloth': {
+            all: 'BlackCloth'
+        },
+        'Gray Cloth': {
+            all: 'GrayCloth'
+        },
+        'White Cloth': {
+            all: 'WhiteCloth'
+        },
+        'Diamond Block': {
+            all: 'DiamondBlock'
+        },
+        'Gold Block': {
+            all: 'GoldBlock'
+        },
+        'Emerald Block': {
+            all: 'EmeraldBlock'
+        },
+        'Lapis Block': {
+            all: 'LapisBlock'
+        },
+        'Iron Block': {
+            all: 'IronBlock'
+        },
+        'Double Stair': {
+            side: 'DoubleStairSide',
+            top: 'Stair',
+            bottom: 'Stair'
+        },
+        'Stair': {
+            side: 'StairSide',
+            top: 'Stair',
+            bottom: 'Stair'
+        },
+        'Brick': {
+            all: 'Brick'
+        },
+        'Bookcase': {
+            side: 'Bookcase',
+            top: 'OakWood',
+            bottom: 'OakWood'
+        },
+        'Mossy Cobblestone': {
+            all: 'MossyCobblestone'
+        },
+        'Obsidian': {
+            all: 'Obsidian'
+        },
+        'Torch': {
+            all: 'Torch'
+        },
+        'Brushed Metal': {
+            all: 'BrushedMetal'
+        },
+        'Salt': {
+            all: 'Salt'
+        },
+        'Stone Roof': {
+            all: 'StoneRoof'
+        },
+        'Camouflage': {
+            all: 'Camouflage'
+        },
+        'Dirt For Farming': {
+            all: 'DirtForFarming'
         },
         'Apples': {
             all: 'Apples'
         },
-        'Grass': {
-            side: 'GrassSide',
-            top: 'Grass',
-            bottom: 'Dirt'
-        }
+        'Hay': {
+            all: 'Hay'
+        },
+        'Crafting Table': {
+            left: 'CraftingTableSide',
+            right: 'CraftingTableSide',
+            back: 'CraftingTableSide',
+            front: 'CraftingTableFront',
+            top: 'CraftingTableTopBottom',
+        },
+        'Trampoline': {
+            all: 'Trampoline'
+        },
+        'Wood Window': {
+            left: 'WoodBlock',
+            right: 'WoodBlock',
+            back: 'WoodWindow',
+            front: 'WoodWindow',
+            top: 'WoodBlock',
+            bottom: 'WoodBlock'
+        },
+        'Iron Window': {
+            left: 'IronBlock',
+            right: 'IronBlock',
+            back: 'IronWindow',
+            front: 'IronWindow',
+            top: 'IronBlock',
+            bottom: 'IronBlock'
+        },
+        'Dirt Brick': {
+            all: 'DirtBrick',
+        },
+        'Wood Roof': {
+            all: 'WoodRoof',
+        },
+        'Sand Brick': {
+            all: 'SandBrick',
+        },
+        'Fake Bookcase': {
+            side: 'Bookcase',
+            top: 'OakWood',
+            bottom: 'OakWood'
+        },
+        'Wood Desk': {
+            side: 'GlassDeskSide',
+            top: 'WoodBlock',
+            bottom: 'Empty'
+        },
+        'Glass Desk': {
+            side: 'GlassDeskSide',
+            top: 'Glass',
+            bottom: 'Empty'
+        },
+        'Mosaic': {
+            all: 'Mosaic',
+        },
+        'Asphalt': {
+            all: 'Asphalt',
+        },
+        'Cake': {
+            side: 'CakeSide',
+            top: 'CakeTop',
+            bottom: 'CakeBottom'
+        },
+        'Rail 1': {
+            side: 'RailSide',
+            top: 'Rail1',
+            bottom: 'RailBottom'
+        },
+        'Rail 3': {
+            side: 'RailSide',
+            top: 'Rail3',
+            bottom: 'RailBottom'
+        },
+        'Rail 6': {
+            side: 'RailSide',
+            top: 'Rail6',
+            bottom: 'RailBottom'
+        },
+        'Clay': {
+            all: 'Clay',
+        },
+        'Marble': {
+            all: 'Marble',
+        },
+        'Granite': {
+            all: 'Granite',
+        },
+        'Sandstone': {
+            all: 'Sandstone',
+        },
+        'Red Sand': {
+            all: 'RedSand',
+        },
+        'Red Sandstone': {
+            all: 'RedSandstone',
+        },
+        'Birch Tree Trunk': {
+            side: 'BirchTreeTrunk',
+            top: 'BirchTreeTrunkTopBottom',
+            bottom: 'BirchTreeTrunkTopBottom'
+        },
+        'Birch Leaves': {
+            all: 'BirchLeaves',
+        },
+        'Birch Wood': {
+            all: 'BirchWood',
+        },
+        'Spruce Tree Trunk': {
+            side: 'SpruceTreeTrunk',
+            top: 'SpruceTreeTrunkTopBottom',
+            bottom: 'SpruceTreeTrunkTopBottom'
+        },
+        'Spruce Leaves': {
+            all: 'SpruceLeaves',
+        },
+        'Spruce Wood': {
+            all: 'SpruceWood',
+        },
+        'Half Cobblestone': {
+            all: 'HalfCobblestone'
+        },
+        'Half Mossy Cobblestone': {
+            all: 'HalfMossyCobblestone'
+        },
+        'Half Oak Wood': {
+            all: 'HalfOakWood'
+        },
+        'Half Birch Wood': {
+            all: 'HalfBirchWood'
+        },
+        'Half Spruce Wood': {
+            all: 'HalfSpruceWood'
+        },
+        'Half Brick': {
+            all: 'HalfBrick'
+        },
+        'Half Sand Brick': {
+            all: 'HalfSandBrick'
+        },
     }
     
     let select = document.querySelector('select');
     
-    for (block in blocks) {
+    // sort by name
+    let sorted = Object.keys(blocks).sort().reduce(
+        (obj, key) => { 
+            obj[key] = blocks[key]; 
+            return obj;
+        }, {}
+    );
+    
+    for (block in sorted) {
         let option = document.createElement('option');
         option.value = block;
         
