@@ -834,9 +834,10 @@
 				WalkableType = WalkableType.Fluid,
 				Sounds = solidSounds,
 			});
+			/*
 			m.SetBlockType(130, "GrassTrap", new BlockType()
 			{
-				TextureIdTop = "Grass",
+				TextureIdTop = "Camouflage",
 				SideTextures = "GrassSide",
 				TextureIdForInventory = "GrassSide",
 				TextureIdBottom = "Dirt",
@@ -844,6 +845,7 @@
 				WalkableType = WalkableType.Empty,
 				Sounds = solidSounds,
 			});
+			*/
 			m.SetBlockType(131, "WoodWindow", new BlockType()
 			{
 				TextureIdTop = "WoodBlock",
@@ -1006,7 +1008,6 @@
 			{
 				TextureIdTop = "Rail1",
 				TextureIdBottom = "RailBottom",
-				TextureIdBack = "RailTop",
 				SideTextures = "RailSide",
 				TextureIdForInventory = "Rail1",
 				DrawType = DrawType.Solid,
@@ -1018,7 +1019,6 @@
 			{
 				TextureIdTop = "Rail2",
 				TextureIdBottom = "RailBottom",
-				TextureIdBack = "RailTop",
 				SideTextures = "RailSide",
 				TextureIdForInventory = "Rail2",
 				DrawType = DrawType.Solid,
@@ -1030,7 +1030,6 @@
 			{
 				TextureIdTop = "Rail3",
 				TextureIdBottom = "RailBottom",
-				TextureIdBack = "RailTop",
 				SideTextures = "RailSide",
 				TextureIdForInventory = "Rail3",
 				DrawType = DrawType.Solid,
@@ -1042,7 +1041,6 @@
 			{
 				TextureIdTop = "Rail4",
 				TextureIdBottom = "RailBottom",
-				TextureIdBack = "RailTop",
 				SideTextures = "RailSide",
 				TextureIdForInventory = "Rail4",
 				DrawType = DrawType.Solid,
@@ -1054,7 +1052,6 @@
 			{
 				TextureIdTop = "Rail5",
 				TextureIdBottom = "RailBottom",
-				TextureIdBack = "RailTop",
 				SideTextures = "RailSide",
 				TextureIdForInventory = "Rail5",
 				DrawType = DrawType.Solid,
@@ -1066,7 +1063,6 @@
 			{
 				TextureIdTop = "Rail6",
 				TextureIdBottom = "RailBottom",
-				TextureIdBack = "RailTop",
 				SideTextures = "RailSide",
 				TextureIdForInventory = "Rail6",
 				DrawType = DrawType.Solid,
@@ -1078,7 +1074,6 @@
 			{
 				TextureIdTop = "Rail7",
 				TextureIdBottom = "RailBottom",
-				TextureIdBack = "RailTop",
 				SideTextures = "RailSide",
 				TextureIdForInventory = "Rail7",
 				DrawType = DrawType.Solid,
@@ -1270,7 +1265,7 @@
 			m.AddToCreativeInventory("Obsidian");
 			m.AddToCreativeInventory("Torch");
 			m.AddToCreativeInventory("BrushedMetal");
-			m.AddToCreativeInventory("ChemicalGreen");
+			// m.AddToCreativeInventory("ChemicalGreen");
 			m.AddToCreativeInventory("Salt");
 			m.AddToCreativeInventory("StoneRoof");
 			m.AddToCreativeInventory("Camouflage");
@@ -1280,10 +1275,10 @@
 			m.AddToCreativeInventory("Crops1");
 			m.AddToCreativeInventory("CraftingTable");
 			m.AddToCreativeInventory("Trampoline");
-			m.AddToCreativeInventory("FillStart");
-			m.AddToCreativeInventory("Cuboid");
-			m.AddToCreativeInventory("FillArea");
-			m.AddToCreativeInventory("GrassTrap");
+			// m.AddToCreativeInventory("FillStart");
+			// m.AddToCreativeInventory("Cuboid");
+			// m.AddToCreativeInventory("FillArea");
+			// m.AddToCreativeInventory("GrassTrap");
 			m.AddToCreativeInventory("WoodWindow");
 			m.AddToCreativeInventory("IronWindow");
 			m.AddToCreativeInventory("IronBars");
