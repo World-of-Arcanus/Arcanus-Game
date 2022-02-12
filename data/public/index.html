@@ -28,9 +28,11 @@
     
     let canvas = document.getElementById('cube');
     
-    let renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-	renderer.setPixelRatio(window.devicePixelRatio);
-	renderer.setSize(canvas.width, canvas.height);
+    let renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    // renderer.setClearColor(new THREE.Color(0x000000)); // 0x303030
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(canvas.width, canvas.height);
+    renderer.clear();
 	
     function change(block) {
         if (block == "") { return; }
@@ -82,7 +84,6 @@
 		mesh.rotation.z += 0.8;
 		
 		scene = new THREE.Scene();
-		scene.background = new THREE.Color(0x000000);
 		scene.add(mesh);
 
         if (renderer) { renderer.clear(); }
@@ -407,6 +408,11 @@
         'Half Sand Brick': {
             all: 'HalfSandBrick'
         },
+        'TNT': {
+            side: 'TNT',
+            top: 'TNTTop',
+            bottom: 'TNTBottom'
+        }
     }
     
     let select = document.querySelector('select');
@@ -426,6 +432,14 @@
         option.appendChild(document.createTextNode(block));
         select.appendChild(option);
     }
+
+    // How to Convert the Block Viewer to an Inventory Item
+    // - view in Chrome and Right Click > Save As to download a PNG of the canvas
+    // - move the block 9 pixels up and the background should be left transparent
+    // - reduce the image size to 64 x 64 (the game will adjust it as needed)
+    // - name the image as XxInventory and save it as a PSD in blocks/source/
+    // - use Save for Web & Devices and save it as a PNG-24 to blocks/
+    // - add the TextureIdForInventory property in CoreBlock.cs
 </script>
 
 </html>
