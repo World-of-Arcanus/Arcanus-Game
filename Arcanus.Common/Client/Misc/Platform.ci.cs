@@ -2,6 +2,7 @@
 {
 	// Primitive
 	public abstract int FloatToInt(float value);
+	public abstract int FloatToIntCeiling(float value);
 	public abstract float MathSin(float a);
 	public abstract float MathCos(float a);
 	public abstract float MathSqrt(float value);

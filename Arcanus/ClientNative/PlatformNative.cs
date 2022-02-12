@@ -29,6 +29,11 @@ namespace Arcanus.ClientNative
 			return (int)value;
 		}
 
+		public override int FloatToIntCeiling(float value)
+		{
+			return (int)Math.Ceiling(value);
+		}
+
 		public override float MathSin(float a)
 		{
 			return (float)Math.Sin(a);

@@ -23,11 +23,11 @@
 			wearPlaceCells[3] = PointRef.Create(1, 1); //Helmet,
 			wearPlaceCells[4] = PointRef.Create(1, 1); //Gauntlet,
 		}
-		CellCountInPageX = 12;
-		CellCountInPageY = 7;
-		CellCountTotalX = 12;
-		CellCountTotalY = 7 * 6;
-		CellDrawSize = 40;
+		CellCountInPageX = 6;
+		CellCountInPageY = 3;
+		CellCountTotalX = 6;
+		CellCountTotalY = 3 * 10;
+		CellDrawSize = 79;
 	}
 
 	internal Game game;
@@ -37,9 +37,9 @@
 
 	internal int CellDrawSize;
 
-	public int InventoryStartX() { return game.Width() / 2 - 560 / 2; }
+	public int InventoryStartX() { return game.Width() / 2 - 549 / 2; }
 	public int InventoryStartY() { return game.Height() / 2 - 600 / 2; }
-	public int CellsStartX() { return 33 + InventoryStartX(); }
+	public int CellsStartX() { return 34 + InventoryStartX(); }
 	public int CellsStartY() { return 180 + InventoryStartY(); }
 	int MaterialSelectorStartX() { return game.platform.FloatToInt(MaterialSelectorBackgroundStartX() + 17 * game.Scale()); }
 	int MaterialSelectorStartY() { return game.platform.FloatToInt(MaterialSelectorBackgroundStartY() + 26 * game.Scale()); }
@@ -318,7 +318,8 @@
 		//the3d.Draw2dTexture(terrain, 50, 50, 50, 50, 0);
 		//the3d.Draw2dBitmapFile("inventory_weapon_shovel.png", 100, 100, 60 * 2, 60 * 4);
 		//the3d.Draw2dBitmapFile("inventory_gauntlet_gloves.png", 200, 200, 60 * 2, 60 * 2);
-		//main inventory
+
+		// main inventory
 		for (int i = 0; i < game.d_Inventory.ItemsCount; i++)
 		{
 			Packet_PositionItem k = game.d_Inventory.Items[i];
@@ -326,11 +327,29 @@
 			{
 				continue;
 			}
-			int screeny = k.Y - ScrollLine;
-			if (screeny >= 0 && screeny < CellCountInPageY)
-			{
-				DrawItem(CellsStartX() + k.X * CellDrawSize, CellsStartY() + screeny * CellDrawSize, k.Value_, 0, 0);
-			}
+
+			// int screeny = k.Y - ScrollLine;
+			// if (screeny >= 0 && screeny < CellCountInPageY)
+			// {
+
+				int col = i % CellCountInPageX;
+				int row = game.platform.FloatToIntCeiling(i / CellCountInPageX);
+
+				int padding = 4;
+				int blkSize = CellDrawSize - (padding * 2);
+
+				// start + border + padding
+				int xOffset = 1 + col + padding;
+				int yOffset = 1 + row + padding;
+
+				DrawItem(CellsStartX() + xOffset + (col * CellDrawSize), CellsStartY() + yOffset + (row * CellDrawSize), k.Value_, blkSize, blkSize);
+
+			// }
+
+			if (i == (CellCountInPageX * CellCountInPageY) - 1)
+            {
+				break;
+            }
 		}
 
 		//draw area selection
@@ -459,8 +478,8 @@
 			Packet_Item item = game.d_Inventory.RightHand[i];
 			if (item != null)
 			{
-				DrawItem(materialSelectorStartX_ + i * ActiveMaterialCellSize(), materialSelectorStartY_,
-					item, ActiveMaterialCellSize(), ActiveMaterialCellSize());
+				DrawItem(materialSelectorStartX_ + 4 + (i * ActiveMaterialCellSize()), materialSelectorStartY_ + 4,
+					item, ActiveMaterialCellSize() - 8, ActiveMaterialCellSize() - 8);
 			}
 		}
 		game.Draw2dBitmapFile("activematerial.png",
