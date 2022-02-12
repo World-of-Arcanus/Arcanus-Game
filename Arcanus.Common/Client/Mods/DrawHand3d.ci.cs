@@ -181,14 +181,12 @@
 			modelData.xyz = new float[128];
 			modelData.uv = new float[128];
 			modelData.rgba = new byte[128];
-			int x = 0;
-			int y = 0;
-			int z = 0;
+
 			if (IsEmptyHand() || IsCompass() || IsTorch())
 			{
 				d_BlockRendererTorch.TopTexture = GetWeaponTextureId(TileSide.Top);
 				d_BlockRendererTorch.SideTexture = GetWeaponTextureId(TileSide.Front);
-				d_BlockRendererTorch.AddTorch(game.d_Data, game, modelData, x, y, z, TorchType.Normal, false);
+				d_BlockRendererTorch.AddTorch(game.d_Data, game, modelData, 0.5f, 0, 0, TorchType.Normal, false);
 			}
 			// a temporary hack to display a 2D representation for some items
 			// otherwise we get a repeating block pattern that looks unrealistic
@@ -205,11 +203,11 @@
 					d_BlockRendererTorch.SideTexture = GetWeaponTextureId(TileSide.Front);
 				}
 
-				d_BlockRendererTorch.AddTorch(game.d_Data, game, modelData, x, y, z, TorchType.Normal, true);
+				d_BlockRendererTorch.AddTorch(game.d_Data, game, modelData, 0, 0, 0, TorchType.Normal, true);
 			}
 			else
 			{
-				DrawCube(modelData, x, y, z, ColorCi.FromArgb(255, light, light, light));
+				DrawCube(modelData, 0, 0, 0, ColorCi.FromArgb(255, light, light, light));
 			}
 		}
 		oldMaterial = curmaterial;
@@ -442,7 +440,7 @@ public class BlockRendererTorch
 {
 	internal int TopTexture;
 	internal int SideTexture;
-	public void AddTorch(GameData d_Data, Game d_TerainRenderer, ModelData m, int x, int y, int z, TorchType type, bool is2D)
+	public void AddTorch(GameData d_Data, Game d_TerainRenderer, ModelData m, float x, float y, float z, TorchType type, bool is2D)
 	{
 		float one = 1;
 		int curcolor = ColorCi.FromArgb(255, 255, 255, 255);

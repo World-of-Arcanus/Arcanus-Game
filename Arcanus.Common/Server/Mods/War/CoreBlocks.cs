@@ -1000,6 +1000,7 @@
 			});
 			m.SetBlockType(153, "EmptyHand", new BlockType()
 			{
+				// a walking stick
 				AllTextures = "EmptyHand",
 				DrawType = DrawType.Torch,
 				WalkableType = WalkableType.Empty,
