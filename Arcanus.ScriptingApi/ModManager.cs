@@ -1192,6 +1192,26 @@ namespace Arcanus
 		Solid,
 	}
 
+	public enum InventoryType
+	{
+		Empty,
+		Block,
+		Nature,
+		Tool,
+		Item,
+		Animal
+	}
+
+	public enum WearableType
+	{
+		Empty,
+		Head,
+		Torso,
+		Hands,
+		Legs,
+		Feet
+	}
+
 	[ProtoContract]
 	public class SoundSet
 	{
@@ -1305,6 +1325,10 @@ namespace Arcanus
 		public int WhenPlayerPlacesGetsConvertedTo;
 		[ProtoMember(45)]
 		public float PickDistanceWhenUsed;
+		[ProtoMember(46)]
+		public InventoryType InventoryType;
+		[ProtoMember(47)]
+		public WearableType WearableType;
 
 		public string AllTextures
 		{

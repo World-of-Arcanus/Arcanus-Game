@@ -295,6 +295,8 @@ message BlockType {
 	optional int32 damageToPlayer = 43;
 	optional int32 whenPlacedGetsConvertedTo = 44;
 	optional int32 pickDistanceWhenUsedFloat = 45;
+	optional InventoryType inventoryType = 46 [default = Empty];
+	optional WearableType wearableType = 47 [default = Empty];
 }
 
 enum DrawType {
@@ -318,6 +320,24 @@ enum WalkableType {
 	Empty = 0;
 	Fluid = 1;
 	Solid = 2;
+}
+
+enum InventoryType {
+	Empty = 0;
+	Block = 1;
+	Nature = 2;
+	Tool = 3;
+	Item = 4;
+	Animal = 5;
+}
+
+enum WearableType {
+	Empty = 0;
+	Head = 1;
+	Torso = 2;
+	Hands = 3;
+	Legs = 4;
+	Feet = 5;
 }
 
 enum PistolType {

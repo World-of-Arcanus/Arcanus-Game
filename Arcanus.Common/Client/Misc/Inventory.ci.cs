@@ -229,3 +229,22 @@ public abstract class IInventoryController
 	public abstract void WearItem(Packet_InventoryPosition from, Packet_InventoryPosition to);
 	public abstract void MoveToInventory(Packet_InventoryPosition from);
 }
+
+public class InventoryItemPos
+{
+	public int xMin;
+	public int xMax;
+	public int yMin;
+	public int yMax;
+
+	public static InventoryItemPos Create(int xMinPos, int xMaxPos, int yMinPos, int yMaxPos)
+	{
+		InventoryItemPos pos = new InventoryItemPos();
+		pos.xMin = xMinPos;
+		pos.xMax = xMaxPos;
+		pos.yMin = yMinPos;
+		pos.yMax = yMaxPos;
+
+		return pos;
+	}
+}

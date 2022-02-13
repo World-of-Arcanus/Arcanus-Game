@@ -3662,6 +3662,8 @@ namespace Arcanus.Server
 			p.TextureIdRight = block.TextureIdRight;
 			p.TextureIdTop = block.TextureIdTop;
 			p.WalkableType = (int)block.WalkableType;
+			p.InventoryType = (int)block.InventoryType;
+			p.WearableType = (int)block.WearableType;
 			p.WalkSpeedFloat = Server.SerializeFloat(block.WalkSpeed);
 			p.WalkSpeedWhenUsedFloat = Server.SerializeFloat(block.WalkSpeedWhenUsed);
 			p.WhenPlacedGetsConvertedTo = block.WhenPlayerPlacesGetsConvertedTo;
