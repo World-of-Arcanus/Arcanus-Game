@@ -31,6 +31,8 @@
 		CellDrawSize = 79;
 
 		InventoryType = 1;
+		InventoryPage = 1;
+		InventoryPageTotal = 1;
 	}
 
 	internal Game game;
@@ -90,20 +92,16 @@
 
 		if (args.GetButton() == MouseButtonEnum.Left)
 		{
-			// materials click
-			if (SelectedMaterialSelectorSlot(scaledMouse) != null)
+			// page prev click
+			if (GetMouseOverForPagePrev(scaledMouse))
 			{
-				game.ActiveMaterial = SelectedMaterialSelectorSlot(scaledMouse).value;
+				InventoryPage--;
+			}
 
-				Packet_InventoryPosition p = new Packet_InventoryPosition();
-				p.Type = Packet_InventoryPositionTypeEnum.MaterialSelector;
-				p.MaterialId = game.ActiveMaterial;
-
-				controller.InventoryClick(p);
-
-				args.SetHandled(true);
-
-				return;
+			// page next click
+			if (GetMouseOverForPageNext(scaledMouse))
+			{
+				InventoryPage++;
 			}
 
 			// inventory click
@@ -138,6 +136,22 @@
 
 					return;
 				}
+			}
+
+			// materials click
+			if (SelectedMaterialSelectorSlot(scaledMouse) != null)
+			{
+				game.ActiveMaterial = SelectedMaterialSelectorSlot(scaledMouse).value;
+
+				Packet_InventoryPosition p = new Packet_InventoryPosition();
+				p.Type = Packet_InventoryPositionTypeEnum.MaterialSelector;
+				p.MaterialId = game.ActiveMaterial;
+
+				controller.InventoryClick(p);
+
+				args.SetHandled(true);
+
+				return;
 			}
 		}
 
@@ -215,21 +229,6 @@
 		return null;
 	}
 
-	PointRef SelectedCell(PointRef scaledMouse)
-	{
-		if (scaledMouse.X < CellsStartX() || scaledMouse.Y < CellsStartY()
-			|| scaledMouse.X > CellsStartX() + CellCountInPageX * CellDrawSize
-			|| scaledMouse.Y > CellsStartY() + CellCountInPageY * CellDrawSize)
-		{
-			return null;
-		}
-
-		PointRef cell = PointRef.Create((scaledMouse.X - CellsStartX()) / CellDrawSize,
-			(scaledMouse.Y - CellsStartY()) / CellDrawSize);
-
-		return cell;
-	}
-
 	bool SelectedCellOrScrollbar(int scaledMouseX, int scaledMouseY)
 	{
 		if (scaledMouseX < CellsStartX() || scaledMouseY < CellsStartY()
@@ -243,6 +242,8 @@
 	}
 
 	public int InventoryType;
+	public int InventoryPage;
+	public int InventoryPageTotal;
 	public Packet_Item[] InventoryItems;
 	public InventoryItemPos[] InventoryItemsPos;
 
@@ -277,9 +278,10 @@
 
 		game.Draw2dBitmapFile("inventory.png", InventoryStartX(), InventoryStartY(), 1024, 1024);
 
-		int b = 0;
+		int b = 0; // blocks on page
+		int t = 0; // blocks on tab
 
-		// get blocks for the current tab and page
+		// get the blocks for the current tab and page
 		for (int i = 0; i < game.d_Inventory.ItemsCount; i++)
 		{
 			Packet_Item item = game.d_Inventory.Items[i].Value_;
@@ -289,10 +291,21 @@
 				continue;
 			}
 
+			// filter by the current tab
 			if (game.blocktypes[item.BlockId].InventoryType == InventoryType)
-            {
-				InventoryItems[b] = item;
-				b++;
+			{
+				// filter by the current page
+				float pageFloat = (t + 1 + 0.0f) / (CellCountInPageX * CellCountInPageY);
+				int page = game.platform.FloatToIntCeiling(pageFloat);
+
+				if (page == InventoryPage)
+				{
+					InventoryItems[b] = item;
+					b++;
+				}
+
+				InventoryPageTotal = page;
+				t++;
 			}
 		}
 
@@ -325,12 +338,19 @@
 			DrawItem(xMin, yMin, item, blkSize, blkSize);
 
 			InventoryItemsPos[i] = InventoryItemPos.Create(xMin, xMax, yMin, yMax);
-
-			if (i == (CellCountInPageX * CellCountInPageY) - 1)
-            {
-				break;
-            }
 		}
+
+		if (InventoryPage < 1)
+        {
+			InventoryPage = InventoryPageTotal;
+		}
+        else if (InventoryPage > InventoryPageTotal)
+        {
+			InventoryPage = 1;
+		}
+
+		// display paging
+		DrawPagingText();
 
 		// display wearables
 		// DrawItem(wearPlaceStart[WearPlace_.RightHand].X + InventoryStartX(), wearPlaceStart[WearPlace_.RightHand].Y + InventoryStartY(), game.d_Inventory.RightHand[game.ActiveMaterial], 0, 0);
@@ -342,12 +362,24 @@
 		// display materials
 		DrawMaterialSelector();
 
+		bool canClick = false;
+
+		// tab paging
+		bool pagePrev = GetMouseOverForPagePrev(scaledMouse);
+		bool pageNext = GetMouseOverForPageNext(scaledMouse);
+
+		if (pagePrev || pageNext)
+		{
+			canClick = true;
+		}
+
 		// info for inventory
 		Packet_Item itemForInventory = GetMouseOverForInventory(scaledMouse);
 
 		if (itemForInventory != null)
 		{
 			DrawItemInfo(scaledMouse.X, scaledMouse.Y, itemForInventory);
+			canClick = true;
 		}
 
 		// info for wearables
@@ -360,6 +392,7 @@
 			if (itemAtWearPlace != null)
 			{
 				DrawItemInfo(scaledMouse.X, scaledMouse.Y, itemAtWearPlace);
+				canClick = true;
 			}
 		}
 
@@ -373,7 +406,23 @@
 			if (item != null)
 			{
 				DrawItemInfo(scaledMouse.X, scaledMouse.Y, item);
+				canClick = true;
 			}
+		}
+
+		if (canClick)
+        {
+			game.platform.SetWindowCursor(0, 0, 32, 32,
+				game.uiRenderer.GetFile("mousecursor-click.png"),
+				game.uiRenderer.GetFileLength("mousecursor-click.png")
+			);
+		}
+        else
+        {
+			game.platform.SetWindowCursor(0, 0, 32, 32,
+				game.uiRenderer.GetFile("mousecursor.png"),
+				game.uiRenderer.GetFileLength("mousecursor.png")
+			);
 		}
 	}
 
@@ -479,6 +528,76 @@
 		Packet_Item item2 = new Packet_Item();
 		item2.BlockId = item.BlockId;
 		DrawItem(screenposX - w + 2, screenposY - h + 2, item2, 0, 0);
+	}
+
+	public void DrawPagingText()
+    {
+		string page = game.platform.IntToString(InventoryPage);
+		string total = game.platform.IntToString(InventoryPageTotal);
+		string pagingText = game.platform.StringFormat2("Page  {0}  of  {1}", page, total);
+
+		FontCi pagingFont = new FontCi();
+		pagingFont.style = 1; // bold
+		pagingFont.size = 9;
+
+		// border + middle point of the 2nd to last cell
+		float pagingX = CellsStartX() + (1 + CellCountInPageX - 1) + (CellDrawSize * (CellCountInPageX - 1.5f)) - 6;
+
+		// center between the arrows
+		float pagingY = CellsStartY() - (CellDrawSize / 3) - 2;
+
+		// white text
+		IntRef pagingColor = IntRef.Create(ColorCi.FromArgb(255, 255, 255, 255));
+
+		game.Draw2dText(pagingText, pagingFont, pagingX, pagingY, pagingColor, false);
+	}
+
+	public bool GetMouseOverForPagePrev(PointRef scaledMouse)
+	{
+		int bordersX = 1 + CellCountInPageX - 2;
+		int bordersY = 1;
+
+		// 23 = left gui edge to right arrow edge
+		//  5 = extra spacing to left cursor edge
+		int leaveX = 23 + 5;
+
+		// 1 = top border
+		// 5 = finger tip
+		int enterY = 1 + 5;
+
+		if (scaledMouse.X >= (CellsStartX() + bordersX + (CellDrawSize * (CellCountInPageX - 2)) + 1) &&
+			scaledMouse.X <= (CellsStartX() + bordersX + (CellDrawSize * (CellCountInPageX - 2)) + leaveX) &&
+			scaledMouse.Y >= (CellsStartY() + bordersY - (CellDrawSize / 2)) &&
+			scaledMouse.Y <= (CellsStartY() + bordersY - enterY))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	public bool GetMouseOverForPageNext(PointRef scaledMouse)
+    {
+		int bordersX = 1 + CellCountInPageX;
+		int bordersY = 1;
+
+		// 23 = right gui edge to left arrow edge
+		// 13 = 2nd knuckle after the pointer
+		int leaveX = 23 + 13;
+
+		// 1 = top border
+		// 5 = finger tip
+		int enterY = 1 + 5;
+
+		if (scaledMouse.X >= (CellsStartX() + bordersX + (CellDrawSize * CellCountInPageX) - leaveX) &&
+			scaledMouse.X <= (CellsStartX() + bordersX + (CellDrawSize * CellCountInPageX) - 1) &&
+			scaledMouse.Y >= (CellsStartY() + bordersY - (CellDrawSize / 2)) &&
+			scaledMouse.Y <= (CellsStartY() + bordersY - enterY))
+		{
+			return true;
+		}
+
+		return false;
 	}
 
 	public Packet_Item GetMouseOverForInventory(PointRef scaledMouse)
