@@ -207,7 +207,7 @@
 
 	public bool IsMouseOverCells()
 	{
-		return SelectedCellOrScrollbar(game.mouseCurrentX, game.mouseCurrentY);
+		return SelectedCell(game.mouseCurrentX, game.mouseCurrentY);
 	}
 
 	public override void OnMouseUp(Game game_, MouseEventArgs args)
@@ -229,7 +229,7 @@
 		return null;
 	}
 
-	bool SelectedCellOrScrollbar(int scaledMouseX, int scaledMouseY)
+	bool SelectedCell(int scaledMouseX, int scaledMouseY)
 	{
 		if (scaledMouseX < CellsStartX() || scaledMouseY < CellsStartY()
 			|| scaledMouseX > CellsStartX() + (CellCountInPageX + 1) * CellDrawSize
@@ -387,7 +387,7 @@
 
 		if (itemForInventory != null)
 		{
-			DrawItemInfo(scaledMouse.X, scaledMouse.Y, itemForInventory);
+			DrawItemInfo(itemForInventory);
 			canClick = true;
 		}
 
@@ -396,11 +396,11 @@
 		{
 			int selected = SelectedWearPlace(scaledMouse).value;
 
-			Packet_Item itemAtWearPlace = inventoryUtil.ItemAtWearPlace(selected, game.ActiveMaterial);
+			Packet_Item itemForWearables = inventoryUtil.ItemAtWearPlace(selected, game.ActiveMaterial);
 
-			if (itemAtWearPlace != null)
+			if (itemForWearables != null)
 			{
-				DrawItemInfo(scaledMouse.X, scaledMouse.Y, itemAtWearPlace);
+				DrawItemInfo(itemForWearables);
 				canClick = true;
 			}
 		}
@@ -410,11 +410,11 @@
 		{
 			int selected = SelectedMaterialSelectorSlot(scaledMouse).value;
 
-			Packet_Item item = game.d_Inventory.RightHand[selected];
+			Packet_Item itemForMaterials = game.d_Inventory.RightHand[selected];
 
-			if (item != null)
+			if (itemForMaterials != null)
 			{
-				DrawItemInfo(scaledMouse.X, scaledMouse.Y, item);
+				DrawItemInfo(itemForMaterials);
 				canClick = true;
 			}
 		}
@@ -513,30 +513,29 @@
 		}
 	}
 
-	public void DrawItemInfo(int screenposX, int screenposY, Packet_Item item)
-	{
-		int sizex = dataItems.ItemSizeX(item);
-		int sizey = dataItems.ItemSizeY(item);
-		IntRef tw = new IntRef();
-		IntRef th = new IntRef();
-		float one = 1;
+	public void DrawItemInfo(Packet_Item item)
+    {
+		// this should look similar to Draw2dMisc > DrawEnemyHealthUseInfo()
+
+		int height = 35;
+		float width = 300;
+
+		int background = ColorCi.FromArgb(255, 81, 146, 178); // blue
+
+		game.Draw2dTexture(game.WhiteTexture(), game.xcenter(width), 40, width, height, null, 0, background, false);
+
+		string name = game.blocktypes[item.BlockId].Name;
+
 		FontCi font = new FontCi();
-		font.size = 10;
-		game.platform.TextSize(dataItems.ItemInfo(item), font, tw, th);
-		tw.value += 6;
-		th.value += 4;
-		int w = game.platform.FloatToInt(tw.value + CellDrawSize * sizex);
-		int h = game.platform.FloatToInt(th.value < CellDrawSize * sizey ? CellDrawSize * sizey + 4 : th.value);
-		if (screenposX < w + 20) { screenposX = w + 20; }
-		if (screenposY < h + 20) { screenposY = h + 20; }
-		if (screenposX > game.Width() - (w + 20)) { screenposX = game.Width() - (w + 20); }
-		if (screenposY > game.Height() - (h + 20)) { screenposY = game.Height() - (h + 20); }
-		game.Draw2dTexture(game.WhiteTexture(), screenposX - w, screenposY - h, w, h, null, 0, ColorCi.FromArgb(255, 0, 0, 0), false);
-		game.Draw2dTexture(game.WhiteTexture(), screenposX - w + 2, screenposY - h + 2, w - 4, h - 4, null, 0, ColorCi.FromArgb(255, 105, 105, 105), false);
-		game.Draw2dText(dataItems.ItemInfo(item), font, screenposX - tw.value + 4, screenposY - h + 2, null, false);
-		Packet_Item item2 = new Packet_Item();
-		item2.BlockId = item.BlockId;
-		DrawItem(screenposX - w + 2, screenposY - h + 2, item2, 0, 0);
+		font.size = 14;
+
+		IntRef w = new IntRef();
+		IntRef h = new IntRef();
+		IntRef c = IntRef.Create(ColorCi.FromArgb(255, 255, 255, 255)); // white
+
+		game.platform.TextSize(name, font, w, h);
+
+		game.Draw2dText(game.platform.StringSplitCamelCase(name), font, game.xcenter(w.value), 45, c, false);
 	}
 
 	public void DrawPagingText()
