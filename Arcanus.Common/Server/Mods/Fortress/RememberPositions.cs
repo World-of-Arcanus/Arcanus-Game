@@ -104,7 +104,11 @@ namespace Arcanus.Mods
 
 				if (pos != null)
 				{
-					m.SetPlayerPosition(player, pos[0], pos[1], pos[2]);
+					// add 4 to spawn in the air above their saved position
+					// this prevents the player from getting stuck
+					int z = pos[2] + 4;
+
+					m.SetPlayerPosition(player, pos[0], pos[1], z);
 
 					if (pos.Length == 6)
                     {
