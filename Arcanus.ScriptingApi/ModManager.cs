@@ -1329,6 +1329,8 @@ namespace Arcanus
 		public InventoryType InventoryType;
 		[ProtoMember(47)]
 		public WearableType WearableType;
+		[ProtoMember(48)]
+		public int Sort;
 
 		public string AllTextures
 		{

@@ -278,13 +278,22 @@
 
 		game.Draw2dBitmapFile("inventory.png", InventoryStartX(), InventoryStartY(), 1024, 1024);
 
-		int b = 0; // blocks on page
-		int t = 0; // blocks on tab
+		// sort by the order they got added to the inventory (instead of by id)
+		Packet_Item[] sorted = new Packet_Item[game.d_Inventory.ItemsCount];
 
-		// get the blocks for the current tab and page
 		for (int i = 0; i < game.d_Inventory.ItemsCount; i++)
 		{
 			Packet_Item item = game.d_Inventory.Items[i].Value_;
+			sorted[game.blocktypes[item.BlockId].Sort] = item;
+		}
+
+		int b = 0; // blocks on page
+		int t = 0; // blocks on tab
+
+		// get the items for the current tab and page
+		for (int i = 0; i < game.d_Inventory.ItemsCount; i++)
+		{
+			Packet_Item item = sorted[i];
 
 			if (item == null)
 			{

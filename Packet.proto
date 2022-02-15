@@ -297,6 +297,7 @@ message BlockType {
 	optional int32 pickDistanceWhenUsedFloat = 45;
 	optional InventoryType inventoryType = 46 [default = Empty];
 	optional WearableType wearableType = 47 [default = Empty];
+	optional int32 sort = 48;
 }
 
 enum DrawType {

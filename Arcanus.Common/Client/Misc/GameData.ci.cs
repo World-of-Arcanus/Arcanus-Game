@@ -17,7 +17,7 @@
 		mBlockIdCuboid = -1;
 		mBlockIdFillArea = -1;
 		mBlockIdMinecart = -1;
-		mBlockIdRailstart = -128; // 64 rail tiles
+		mBlockIdRailstart = -26; // 13 rail tiles
 	}
 	public void Start()
 	{
@@ -117,7 +117,7 @@
 	int mBlockIdCuboid;
 	int mBlockIdFillArea;
 	int mBlockIdMinecart;
-	int mBlockIdRailstart; // 64 rail tiles
+	int mBlockIdRailstart; // 13 rail tiles
 
 	public int BlockIdEmpty() { return mBlockIdEmpty; }
 	public int BlockIdDirt() { return mBlockIdDirt; }
@@ -196,7 +196,7 @@
 
 	public bool IsRailTile(int id)
 	{
-		return id >= BlockIdRailstart() && id < BlockIdRailstart() + 64;
+		return id >= BlockIdRailstart() && id < BlockIdRailstart() + 13;
 	}
 
 	public void UseBlockTypes(Packet_BlockType[] blocktypes, int count)

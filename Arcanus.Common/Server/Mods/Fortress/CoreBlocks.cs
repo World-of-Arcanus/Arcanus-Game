@@ -235,7 +235,7 @@
 				AllTextures = "Glass",
 				DrawType = DrawType.Transparent,
 				WalkableType = WalkableType.Solid,
-				InventoryType = InventoryType.Block,
+				InventoryType = InventoryType.Item,
 				Sounds = solidSounds,
 			});
 			m.SetBlockType(21, "RedCloth", new BlockType()
@@ -701,9 +701,9 @@
 				InventoryType = InventoryType.Block,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(100, "BrushedMetal", new BlockType()
+			m.SetBlockType(100, "CoalBlock", new BlockType()
 			{
-				AllTextures = "BrushedMetal",
+				AllTextures = "CoalBlock",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				InventoryType = InventoryType.Block,
@@ -953,6 +953,7 @@
 				InventoryType = InventoryType.Item,
 				Sounds = solidSounds,
 			});
+			// 134 - 139 is used
 			m.SetBlockType(140, "DirtBrick", new BlockType()
 			{
 				AllTextures = "DirtBrick",
@@ -1176,6 +1177,39 @@
 				Sounds = solidSounds,
 				Rail = 32,
 			});
+			// 184 - 189 is reserved for Rail blocks
+			m.SetBlockType(190, "StoneBrick", new BlockType()
+			{
+				AllTextures = "StoneBrick",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				InventoryType = InventoryType.Block,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(191, "StoneBrickCracked", new BlockType()
+			{
+				AllTextures = "StoneBrickCracked",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				InventoryType = InventoryType.Block,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(192, "WoodBlock", new BlockType()
+			{
+				AllTextures = "WoodBlock",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				InventoryType = InventoryType.Block,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(193, "WoodPlanks", new BlockType()
+			{
+				AllTextures = "WoodPlanks",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				InventoryType = InventoryType.Block,
+				Sounds = solidSounds,
+			});
 			m.SetBlockType(241, "RedCarpet", new BlockType()
 			{
 				AllTextures = "RedCloth",
@@ -1304,45 +1338,132 @@
 				InventoryType = InventoryType.Item,
 				Sounds = solidSounds
 			});
+
 			#endregion
 
 			#region Creative inventory
-			m.AddToCreativeInventory("Stone");
-			m.AddToCreativeInventory("Dirt");
+
+			/* BLOCKS */
+
+			// page 1 - row 1
 			m.AddToCreativeInventory("Cobblestone");
+			m.AddToCreativeInventory("MossyCobblestone");
+			m.AddToCreativeInventory("Brick");
 			m.AddToCreativeInventory("OakWood");
-			m.AddToCreativeInventory("OakSapling");
-			// m.AddToCreativeInventory("Adminium");
-			m.AddToCreativeInventory("Water");
-			m.AddToCreativeInventory("Lava");
-			m.AddToCreativeInventory("Sand");
-			m.AddToCreativeInventory("Gravel");
+			m.AddToCreativeInventory("SpruceWood");
+			m.AddToCreativeInventory("BirchWood");
+
+			// page 1 - row 2
+			m.AddToCreativeInventory("StoneBrick");
+			m.AddToCreativeInventory("StoneBrickCracked");
+			m.AddToCreativeInventory("DirtBrick");
+			m.AddToCreativeInventory("SandBrick");
+			m.AddToCreativeInventory("WoodBlock");
+			m.AddToCreativeInventory("WoodPlanks");
+
+			// page 1 - row 3
+			m.AddToCreativeInventory("CoalBlock");
+			m.AddToCreativeInventory("IronBlock");
+			m.AddToCreativeInventory("LapisBlock");
+			m.AddToCreativeInventory("EmeraldBlock");
+			m.AddToCreativeInventory("DiamondBlock");
+			m.AddToCreativeInventory("GoldBlock");
+
+			// page 2 - row 1
+			m.AddToCreativeInventory("HalfCobblestone");
+			m.AddToCreativeInventory("HalfMossyCobblestone");
+			m.AddToCreativeInventory("HalfBrick");
+			m.AddToCreativeInventory("HalfOakWood");
+			m.AddToCreativeInventory("HalfSpruceWood");
+			m.AddToCreativeInventory("HalfBirchWood");
+
+			// page 2 - row 2
+			m.AddToCreativeInventory("HalfSandBrick");
+			m.AddToCreativeInventory("Asphalt");
+
+			// TODO: add better stairs
+			// m.AddToCreativeInventory("Stair");
+			// m.AddToCreativeInventory("DoubleStair");
+
+			/* NATURE */
+
+			// page 1 - row 1
+			m.AddToCreativeInventory("Dirt");
+			m.AddToCreativeInventory("IronOre");
+			m.AddToCreativeInventory("LapisOre");
+			m.AddToCreativeInventory("EmeraldOre");
 			m.AddToCreativeInventory("DiamondOre");
 			m.AddToCreativeInventory("GoldOre");
-			m.AddToCreativeInventory("EmeraldOre");
-			m.AddToCreativeInventory("LapisOre");
-			m.AddToCreativeInventory("IronOre");
-			m.AddToCreativeInventory("CoalOre");
+
+			// page 1 - row 2
+			m.AddToCreativeInventory("DirtForFarming");
+			m.AddToCreativeInventory("Stone");
+			m.AddToCreativeInventory("Gravel");
+			m.AddToCreativeInventory("Sand");
+			m.AddToCreativeInventory("Sandstone");
+			m.AddToCreativeInventory("RedSand");
+			m.AddToCreativeInventory("RedSandstone");
+
+			// page 1 - row 3
+			m.AddToCreativeInventory("Clay");
+			m.AddToCreativeInventory("Marble");
+			m.AddToCreativeInventory("Granite");
+			m.AddToCreativeInventory("Grass");
+			m.AddToCreativeInventory("Lava");
+			m.AddToCreativeInventory("Water");
+
+			// page 1 - row 3
+
 			m.AddToCreativeInventory("OakTreeTrunk");
+			m.AddToCreativeInventory("SpruceTreeTrunk");
+			m.AddToCreativeInventory("BirchTreeTrunk");
+
+			// page 2 - row 1
 			m.AddToCreativeInventory("OakLeaves");
+			m.AddToCreativeInventory("SpruceLeaves");
+			m.AddToCreativeInventory("BirchLeaves");
+
+			m.AddToCreativeInventory("OakSapling");
+			m.AddToCreativeInventory("SpruceSapling");
+			m.AddToCreativeInventory("BirchSapling");
+
+			m.AddToCreativeInventory("Salt");
+			m.AddToCreativeInventory("Obsidian");
+			m.AddToCreativeInventory("Cactus");
+			m.AddToCreativeInventory("DeadPlant");
+			m.AddToCreativeInventory("GrassPlant");
+			m.AddToCreativeInventory("YellowFlowerDecorations");
+			m.AddToCreativeInventory("RedRoseDecorations");
+			m.AddToCreativeInventory("RedMushroom");
+			m.AddToCreativeInventory("BrownMushroom");
+			m.AddToCreativeInventory("CoalOre");
 			m.AddToCreativeInventory("Sponge");
-			m.AddToCreativeInventory("Glass");
-			m.AddToCreativeInventory("RedCloth");
-			m.AddToCreativeInventory("OrangeCloth");
-			m.AddToCreativeInventory("YellowCloth");
-			m.AddToCreativeInventory("LightGreenCloth");
-			m.AddToCreativeInventory("GreenCloth");
-			m.AddToCreativeInventory("CyanCloth");
-			m.AddToCreativeInventory("LightBlueCloth");
-			m.AddToCreativeInventory("BlueCloth");
-			m.AddToCreativeInventory("PurpleCloth");
-			m.AddToCreativeInventory("BrownCloth");
-			m.AddToCreativeInventory("SilverCloth");
-			m.AddToCreativeInventory("MagentaCloth");
-			m.AddToCreativeInventory("PinkCloth");
-			m.AddToCreativeInventory("BlackCloth");
-			m.AddToCreativeInventory("GrayCloth");
-			m.AddToCreativeInventory("WhiteCloth");
+			m.AddToCreativeInventory("Apples");
+			m.AddToCreativeInventory("Hay");
+			m.AddToCreativeInventory("Crops1");
+			m.AddToCreativeInventory("Cake");
+			m.AddToCreativeInventory("Fire");
+
+			// TODO
+			m.AddToCreativeInventory("Bookcase");
+			m.AddToCreativeInventory("Torch");
+			m.AddToCreativeInventory("StoneRoof");
+			m.AddToCreativeInventory("Camouflage");
+			m.AddToCreativeInventory("CraftingTable");
+			m.AddToCreativeInventory("Trampoline");
+			m.AddToCreativeInventory("WoodWindow");
+			m.AddToCreativeInventory("IronWindow");
+			m.AddToCreativeInventory("IronBars");
+			m.AddToCreativeInventory("FakeBookcase");
+			m.AddToCreativeInventory("WoodDesk");
+			m.AddToCreativeInventory("GlassDesk");
+			m.AddToCreativeInventory("Mosaic");
+			m.AddToCreativeInventory("Fence");
+			m.AddToCreativeInventory("Compass");
+			m.AddToCreativeInventory("Ladder");
+			m.AddToCreativeInventory("Rail1");
+			m.AddToCreativeInventory("Rail3");
+			m.AddToCreativeInventory("Rail6");
 			m.AddToCreativeInventory("RedCarpet");
 			m.AddToCreativeInventory("OrangeCarpet");
 			m.AddToCreativeInventory("YellowCarpet");
@@ -1359,80 +1480,7 @@
 			m.AddToCreativeInventory("BlackCarpet");
 			m.AddToCreativeInventory("GrayCarpet");
 			m.AddToCreativeInventory("WhiteCarpet");
-			m.AddToCreativeInventory("YellowFlowerDecorations");
-			m.AddToCreativeInventory("RedRoseDecorations");
-			m.AddToCreativeInventory("RedMushroom");
-			m.AddToCreativeInventory("BrownMushroom");
-			m.AddToCreativeInventory("DiamondBlock");
-			m.AddToCreativeInventory("GoldBlock");
-			m.AddToCreativeInventory("EmeraldBlock");
-			m.AddToCreativeInventory("LapisBlock");
-			m.AddToCreativeInventory("IronBlock");
-			m.AddToCreativeInventory("DoubleStair");
-			m.AddToCreativeInventory("Stair");
-			m.AddToCreativeInventory("Brick");
-			m.AddToCreativeInventory("Bookcase");
-			m.AddToCreativeInventory("MossyCobblestone");
-			m.AddToCreativeInventory("Obsidian");
-			m.AddToCreativeInventory("Torch");
-			m.AddToCreativeInventory("BrushedMetal");
-			// m.AddToCreativeInventory("ChemicalGreen");
-			m.AddToCreativeInventory("Salt");
-			m.AddToCreativeInventory("StoneRoof");
-			m.AddToCreativeInventory("Camouflage");
-			m.AddToCreativeInventory("DirtForFarming");
-			m.AddToCreativeInventory("Apples");
-			m.AddToCreativeInventory("Hay");
-			m.AddToCreativeInventory("Crops1");
-			m.AddToCreativeInventory("CraftingTable");
-			m.AddToCreativeInventory("Trampoline");
-			// m.AddToCreativeInventory("FillStart");
-			// m.AddToCreativeInventory("Cuboid");
-			// m.AddToCreativeInventory("FillArea");
-			// m.AddToCreativeInventory("GrassTrap");
-			m.AddToCreativeInventory("WoodWindow");
-			m.AddToCreativeInventory("IronWindow");
-			m.AddToCreativeInventory("IronBars");
-			m.AddToCreativeInventory("DirtBrick");
-			m.AddToCreativeInventory("WoodRoof");
-			m.AddToCreativeInventory("SandBrick");
-			m.AddToCreativeInventory("FakeBookcase");
-			m.AddToCreativeInventory("WoodDesk");
-			m.AddToCreativeInventory("GlassDesk");
-			m.AddToCreativeInventory("Mosaic");
-			m.AddToCreativeInventory("Asphalt");
-			m.AddToCreativeInventory("Cake");
-			m.AddToCreativeInventory("Fire");
-			m.AddToCreativeInventory("Fence");
-			m.AddToCreativeInventory("Compass");
-			m.AddToCreativeInventory("Ladder");
-			m.AddToCreativeInventory("Rail1");
-			m.AddToCreativeInventory("Rail3");
-			m.AddToCreativeInventory("Rail6");
-			m.AddToCreativeInventory("Clay");
-			m.AddToCreativeInventory("Marble");
-			m.AddToCreativeInventory("Granite");
-			m.AddToCreativeInventory("Sandstone");
-			m.AddToCreativeInventory("RedSand");
-			m.AddToCreativeInventory("RedSandstone");
-			m.AddToCreativeInventory("Cactus");
-			m.AddToCreativeInventory("DeadPlant");
-			m.AddToCreativeInventory("GrassPlant");
-			m.AddToCreativeInventory("BirchTreeTrunk");
-			m.AddToCreativeInventory("BirchLeaves");
-			m.AddToCreativeInventory("BirchSapling");
-			m.AddToCreativeInventory("BirchWood");
-			m.AddToCreativeInventory("SpruceTreeTrunk");
-			m.AddToCreativeInventory("SpruceLeaves");
-			m.AddToCreativeInventory("SpruceSapling");
-			m.AddToCreativeInventory("SpruceWood");
-			m.AddToCreativeInventory("HalfCobblestone");
-			m.AddToCreativeInventory("HalfMossyCobblestone");
-			m.AddToCreativeInventory("HalfOakWood");
-			m.AddToCreativeInventory("HalfBirchWood");
-			m.AddToCreativeInventory("HalfSpruceWood");
-			m.AddToCreativeInventory("HalfBrick");
-			m.AddToCreativeInventory("HalfSandBrick");
+
 			#endregion
 
 			#region Start inventory

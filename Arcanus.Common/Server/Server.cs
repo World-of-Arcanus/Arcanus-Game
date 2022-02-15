@@ -2803,6 +2803,7 @@ namespace Arcanus.Server
 			SendPacket(clientid, Serialize(new Packet_Server() { Id = Packet_ServerIdEnum.BlobFinalize, BlobFinalize = p }));
 		}
 		public BlockType[] BlockTypes = new BlockType[GlobalVar.MAX_BLOCKTYPES];
+		public int BlockSort = 0;
 		public void SendBlockTypes(int clientid)
 		{
 			for (int i = 0; i < BlockTypes.Length; i++)
@@ -3668,6 +3669,7 @@ namespace Arcanus.Server
 			p.WalkSpeedWhenUsedFloat = Server.SerializeFloat(block.WalkSpeedWhenUsed);
 			p.WhenPlacedGetsConvertedTo = block.WhenPlayerPlacesGetsConvertedTo;
 			p.PickDistanceWhenUsedFloat = Server.SerializeFloat(block.PickDistanceWhenUsed);
+			p.Sort = (int)block.Sort;
 			return p;
 		}
 

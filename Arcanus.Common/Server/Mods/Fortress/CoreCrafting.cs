@@ -106,7 +106,7 @@
 			m.AddCraftingRecipe("DirtForFarming", 1, "Dirt", 2);
 			m.AddCraftingRecipe("DirtForFarming", 1, "Grass", 2);
 			m.AddCraftingRecipe("Crops1", 2, "Crops4", 1);
-			m.AddCraftingRecipe("Minecart", 1, "BrushedMetal", 5);
+			m.AddCraftingRecipe("Minecart", 1, "CoalBlock", 5);
 			m.AddCraftingRecipe("Salt", 1, "Crops4", 2);
 			m.AddCraftingRecipe("IronBars", 1, "IronBlock", 2);
 			m.AddCraftingRecipe("IronWindow", 1, "IronBlock", 2);
@@ -161,9 +161,9 @@
 			m.AddCraftingRecipe2("Rail7", 2, "OakWood", 1, "IronBlock", 1);
 			m.AddCraftingRecipe2("Rail7", 2, "BirchWood", 1, "IronBlock", 1);
 			m.AddCraftingRecipe2("Rail7", 2, "SpruceWood", 1, "IronBlock", 1);
-			m.AddCraftingRecipe2("Trampoline", 1, "BrushedMetal", 1, "OakWood", 1);
-			m.AddCraftingRecipe2("Trampoline", 1, "BrushedMetal", 1, "BirchWood", 1);
-			m.AddCraftingRecipe2("Trampoline", 1, "BrushedMetal", 1, "SpruceWood", 1);
+			m.AddCraftingRecipe2("Trampoline", 1, "CoalBlock", 1, "OakWood", 1);
+			m.AddCraftingRecipe2("Trampoline", 1, "CoalBlock", 1, "BirchWood", 1);
+			m.AddCraftingRecipe2("Trampoline", 1, "CoalBlock", 1, "SpruceWood", 1);
 			m.AddCraftingRecipe2("Torch", 1, "OakWood", 1, "CoalOre", 1);
 			m.AddCraftingRecipe2("Torch", 1, "BirchWood", 1, "CoalOre", 1);
 			m.AddCraftingRecipe2("Torch", 1, "SpruceWood", 1, "CoalOre", 1);
@@ -172,7 +172,7 @@
 			m.AddCraftingRecipe2("BirchSapling", 10, "Apples", 5, "DirtForFarming", 1);
 			m.AddCraftingRecipe2("SpruceSapling", 10, "Apples", 5, "DirtForFarming", 1);
 			m.AddCraftingRecipe2("DirtBrick", 1, "Dirt", 2, "Stone", 1);
-			m.AddCraftingRecipe2("BrushedMetal", 1, "IronBlock", 1, "CoalOre", 1);
+			m.AddCraftingRecipe2("CoalBlock", 1, "IronBlock", 1, "CoalOre", 1);
 			m.AddCraftingRecipe2("SandBrick", 1, "Sand", 1, "Stone", 2);
 			m.AddCraftingRecipe2("FakeBookcase", 1, "Bookcase", 1, "Camouflage", 5);
 			m.AddCraftingRecipe2("WoodDesk", 1, "OakWood", 2, "OakTreeTrunk", 1);

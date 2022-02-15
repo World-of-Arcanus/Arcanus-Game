@@ -47,11 +47,16 @@ namespace Arcanus.Server
 		public void AddToCreativeInventory(string blockType)
 		{
 			int id = GetBlockId(blockType);
+
 			if (id == -1)
 			{
 				throw new Exception(blockType);
 			}
+
 			server.BlockTypes[id].IsBuildable = true;
+			server.BlockTypes[id].Sort = server.BlockSort;
+			server.BlockSort++;
+
 			server.d_Data.UseBlockType(id, BlockTypeConverter.GetBlockType(server.BlockTypes[id]));
 		}
 
