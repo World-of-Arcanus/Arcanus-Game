@@ -196,7 +196,7 @@
 
 	public bool IsRailTile(int id)
 	{
-		return id >= BlockIdRailstart() && id < BlockIdRailstart() + 13;
+		return id >= BlockIdRailstart() && id < BlockIdRailstart() + 64;
 	}
 
 	public void UseBlockTypes(Packet_BlockType[] blocktypes, int count)

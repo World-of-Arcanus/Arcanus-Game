@@ -747,11 +747,11 @@
 		float zfract = collisionPos[2] - game.MathFloor(collisionPos[2]);
 		int activematerial = game.MaterialSlots_(game.ActiveMaterial);
 		int railstart = game.d_Data.BlockIdRailstart();
-		if (activematerial == railstart + RailDirectionFlags.TwoHorizontalVertical
-			|| activematerial == railstart + RailDirectionFlags.Corners)
+		if (game.d_Data.IsRailTile(activematerial) && activematerial != 179)
 		{
 			RailDirection dirnew;
-			if (activematerial == railstart + RailDirectionFlags.TwoHorizontalVertical)
+			if (activematerial == railstart + RailDirectionFlags.Horizontal ||
+				activematerial == railstart + RailDirectionFlags.Vertical)
 			{
 				dirnew = PickHorizontalVertical(xfract, zfract);
 			}

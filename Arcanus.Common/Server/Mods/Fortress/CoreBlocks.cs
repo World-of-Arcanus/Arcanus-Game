@@ -1141,7 +1141,7 @@
 				Sounds = solidSounds,
 				Rail = 4,
 			});
-			m.SetBlockType(181, "Rail5", new BlockType()
+			m.SetBlockType(184, "Rail5", new BlockType()
 			{
 				TextureIdTop = "Rail5",
 				TextureIdBottom = "RailBottom",
@@ -1153,7 +1153,7 @@
 				Sounds = solidSounds,
 				Rail = 8,
 			});
-			m.SetBlockType(182, "Rail6", new BlockType()
+			m.SetBlockType(192, "Rail6", new BlockType()
 			{
 				TextureIdTop = "Rail6",
 				TextureIdBottom = "RailBottom",
@@ -1165,7 +1165,7 @@
 				Sounds = solidSounds,
 				Rail = 16,
 			});
-			m.SetBlockType(183, "Rail7", new BlockType()
+			m.SetBlockType(208, "Rail7", new BlockType()
 			{
 				TextureIdTop = "Rail7",
 				TextureIdBottom = "RailBottom",
@@ -1177,95 +1177,8 @@
 				Sounds = solidSounds,
 				Rail = 32,
 			});
-			// 184 - 189 is reserved for Rail blocks
-			m.SetBlockType(190, "StoneBrick", new BlockType()
-			{
-				AllTextures = "StoneBrick",
-				DrawType = DrawType.Solid,
-				WalkableType = WalkableType.Solid,
-				InventoryType = InventoryType.Block,
-				Sounds = solidSounds,
-			});
-			m.SetBlockType(191, "StoneBrickCracked", new BlockType()
-			{
-				AllTextures = "StoneBrickCracked",
-				DrawType = DrawType.Solid,
-				WalkableType = WalkableType.Solid,
-				InventoryType = InventoryType.Block,
-				Sounds = solidSounds,
-			});
-			m.SetBlockType(192, "WoodBlock", new BlockType()
-			{
-				AllTextures = "WoodBlock",
-				DrawType = DrawType.Solid,
-				WalkableType = WalkableType.Solid,
-				InventoryType = InventoryType.Block,
-				Sounds = solidSounds,
-			});
-			m.SetBlockType(193, "WoodPlanks", new BlockType()
-			{
-				AllTextures = "WoodPlanks",
-				DrawType = DrawType.Solid,
-				WalkableType = WalkableType.Solid,
-				InventoryType = InventoryType.Block,
-				Sounds = solidSounds,
-			});
-			m.SetBlockType(194, "Allium", new BlockType()
-			{
-				AllTextures = "FlowerAllium",
-				DrawType = DrawType.Plant,
-				WalkableType = WalkableType.Empty,
-				InventoryType = InventoryType.Nature,
-				Sounds = solidSounds,
-			});
-			m.SetBlockType(195, "Orchid", new BlockType()
-			{
-				AllTextures = "FlowerOrchid",
-				DrawType = DrawType.Plant,
-				WalkableType = WalkableType.Empty,
-				InventoryType = InventoryType.Nature,
-				Sounds = solidSounds,
-			});
-			m.SetBlockType(196, "Fern", new BlockType()
-			{
-				AllTextures = "Fern",
-				DrawType = DrawType.Plant,
-				WalkableType = WalkableType.Empty,
-				InventoryType = InventoryType.Nature,
-				Sounds = solidSounds,
-			});
-			m.SetBlockType(197, "Daisy", new BlockType()
-			{
-				AllTextures = "FlowerDaisy",
-				DrawType = DrawType.Plant,
-				WalkableType = WalkableType.Empty,
-				InventoryType = InventoryType.Nature,
-				Sounds = solidSounds,
-			});
-			m.SetBlockType(198, "Paeonia", new BlockType()
-			{
-				AllTextures = "FlowerPaeonia",
-				DrawType = DrawType.Plant,
-				WalkableType = WalkableType.Empty,
-				InventoryType = InventoryType.Nature,
-				Sounds = solidSounds,
-			});
-			m.SetBlockType(199, "Tulip", new BlockType()
-			{
-				AllTextures = "FlowerTulip",
-				DrawType = DrawType.Plant,
-				WalkableType = WalkableType.Empty,
-				InventoryType = InventoryType.Nature,
-				Sounds = solidSounds,
-			});
-			m.SetBlockType(200, "SpiderWeb", new BlockType()
-			{
-				AllTextures = "SpiderWeb",
-				DrawType = DrawType.Plant,
-				WalkableType = WalkableType.Fluid,
-				InventoryType = InventoryType.Nature,
-				Sounds = solidSounds,
-			});
+			// 176 - 240 is reserved for Rail blocks
+			// the ID must be 176 + current Rail
 			m.SetBlockType(241, "RedCarpet", new BlockType()
 			{
 				AllTextures = "RedCloth",
@@ -1393,6 +1306,94 @@
 				WalkableType = WalkableType.Empty,
 				InventoryType = InventoryType.Item,
 				Sounds = solidSounds
+			});
+			m.SetBlockType(257, "StoneBrick", new BlockType()
+			{
+				AllTextures = "StoneBrick",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				InventoryType = InventoryType.Block,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(258, "StoneBrickCracked", new BlockType()
+			{
+				AllTextures = "StoneBrickCracked",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				InventoryType = InventoryType.Block,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(259, "WoodBlock", new BlockType()
+			{
+				AllTextures = "WoodBlock",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				InventoryType = InventoryType.Block,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(260, "WoodPlanks", new BlockType()
+			{
+				AllTextures = "WoodPlanks",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				InventoryType = InventoryType.Block,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(261, "Allium", new BlockType()
+			{
+				AllTextures = "FlowerAllium",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Nature,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(262, "Orchid", new BlockType()
+			{
+				AllTextures = "FlowerOrchid",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Nature,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(263, "Fern", new BlockType()
+			{
+				AllTextures = "Fern",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Nature,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(264, "Daisy", new BlockType()
+			{
+				AllTextures = "FlowerDaisy",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Nature,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(265, "Paeonia", new BlockType()
+			{
+				AllTextures = "FlowerPaeonia",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Nature,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(266, "Tulip", new BlockType()
+			{
+				AllTextures = "FlowerTulip",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Nature,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(267, "SpiderWeb", new BlockType()
+			{
+				AllTextures = "SpiderWeb",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Fluid,
+				InventoryType = InventoryType.Nature,
+				Sounds = solidSounds,
 			});
 
 			#endregion
