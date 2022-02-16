@@ -329,16 +329,16 @@
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(37, "YellowFlowerDecorations", new BlockType()
+			m.SetBlockType(37, "Dandelion", new BlockType()
 			{
-				AllTextures = "YellowFlowerDecorations",
+				AllTextures = "FlowerDandelion",
 				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Empty,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(38, "RedRoseDecorations", new BlockType()
+			m.SetBlockType(38, "Rose", new BlockType()
 			{
-				AllTextures = "RedRoseDecorations",
+				AllTextures = "FlowerRose",
 				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Empty,
 				Sounds = solidSounds,
@@ -697,7 +697,7 @@
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(108, "Crops1", new BlockType()
+			m.SetBlockType(108, "Wheat", new BlockType()
 			{
 				AllTextures = "Crops1",
 				TextureIdForInventory = "Crops4",
@@ -1261,8 +1261,8 @@
 			m.AddToCreativeInventory("BlackCarpet");
 			m.AddToCreativeInventory("GrayCarpet");
 			m.AddToCreativeInventory("WhiteCarpet");
-			m.AddToCreativeInventory("YellowFlowerDecorations");
-			m.AddToCreativeInventory("RedRoseDecorations");
+			m.AddToCreativeInventory("Dandelion");
+			m.AddToCreativeInventory("Rose");
 			m.AddToCreativeInventory("RedMushroom");
 			m.AddToCreativeInventory("BrownMushroom");
 			m.AddToCreativeInventory("DiamondBlock");
@@ -1285,7 +1285,7 @@
 			m.AddToCreativeInventory("DirtForFarming");
 			m.AddToCreativeInventory("Apples");
 			m.AddToCreativeInventory("Hay");
-			m.AddToCreativeInventory("Crops1");
+			m.AddToCreativeInventory("Wheat");
 			m.AddToCreativeInventory("CraftingTable");
 			m.AddToCreativeInventory("Trampoline");
 			// m.AddToCreativeInventory("FillStart");
@@ -1339,7 +1339,7 @@
 
 			#region Start inventory
 			m.AddToStartInventory("Torch", 6);
-			m.AddToStartInventory("Crops1", 1);
+			m.AddToStartInventory("Wheat", 1);
 			m.AddToStartInventory("CraftingTable", 6);
 			m.AddToStartInventory("Compass", 1);
 			#endregion

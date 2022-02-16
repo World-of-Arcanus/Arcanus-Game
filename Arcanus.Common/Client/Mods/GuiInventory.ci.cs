@@ -491,9 +491,7 @@
 	}
 
 	const int wearPlaceStartLength = 5;
-	//indexed by enum WearPlace
 	PointRef[] wearPlaceStart;
-	//indexed by enum WearPlace
 	PointRef[] wearPlaceCells;
 
 	void DrawItem(int screenposX, int screenposY, Packet_Item item, int drawsizeX, int drawsizeY)
@@ -543,6 +541,7 @@
 		game.Draw2dTexture(game.WhiteTexture(), game.xcenter(width), 40, width, height, null, 0, background, false);
 
 		string name = game.blocktypes[item.BlockId].Name;
+		if (name == null) { name = "Unknown"; }
 
 		FontCi font = new FontCi();
 		font.size = 14;

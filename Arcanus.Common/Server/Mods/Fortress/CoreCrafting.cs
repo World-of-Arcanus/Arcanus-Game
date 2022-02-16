@@ -32,12 +32,12 @@
 			m.AddCraftingRecipe("DoubleStair", 1, "Stone", 2);
 			m.AddCraftingRecipe("DoubleStair", 1, "Stair", 2);
 			m.AddCraftingRecipe("Glass", 1, "Sand", 2);
-			m.AddCraftingRecipe("RedRoseDecorations", 1, "OakLeaves", 10);
-			m.AddCraftingRecipe("RedRoseDecorations", 1, "BirchLeaves", 10);
-			m.AddCraftingRecipe("RedRoseDecorations", 1, "SpruceLeaves", 10);
-			m.AddCraftingRecipe("YellowFlowerDecorations", 1, "OakLeaves", 10);
-			m.AddCraftingRecipe("YellowFlowerDecorations", 1, "BirchLeaves", 10);
-			m.AddCraftingRecipe("YellowFlowerDecorations", 1, "SpruceLeaves", 10);
+			m.AddCraftingRecipe("Rose", 1, "OakLeaves", 10);
+			m.AddCraftingRecipe("Rose", 1, "BirchLeaves", 10);
+			m.AddCraftingRecipe("Rose", 1, "SpruceLeaves", 10);
+			m.AddCraftingRecipe("Dandelion", 1, "OakLeaves", 10);
+			m.AddCraftingRecipe("Dandelion", 1, "BirchLeaves", 10);
+			m.AddCraftingRecipe("Dandelion", 1, "SpruceLeaves", 10);
 			m.AddCraftingRecipe("OakSapling", 1, "OakLeaves", 3);
 			m.AddCraftingRecipe("BirchSapling", 1, "BirchLeaves", 3);
 			m.AddCraftingRecipe("SpruceSapling", 1, "SpruceLeaves", 3);
@@ -105,7 +105,7 @@
 			m.AddCraftingRecipe("Camouflage", 1, "GoldBlock", 1);
 			m.AddCraftingRecipe("DirtForFarming", 1, "Dirt", 2);
 			m.AddCraftingRecipe("DirtForFarming", 1, "Grass", 2);
-			m.AddCraftingRecipe("Crops1", 2, "Crops4", 1);
+			m.AddCraftingRecipe("Wheat", 2, "Crops4", 1);
 			m.AddCraftingRecipe("Minecart", 1, "CoalBlock", 5);
 			m.AddCraftingRecipe("Salt", 1, "Crops4", 2);
 			m.AddCraftingRecipe("IronBars", 1, "IronBlock", 2);

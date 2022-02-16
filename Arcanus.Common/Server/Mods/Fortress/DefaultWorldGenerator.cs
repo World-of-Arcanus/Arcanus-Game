@@ -28,8 +28,8 @@ namespace Arcanus.Mods
 			BLOCK_WATER = m.GetBlockId("Water");
 			BLOCK_GRAVEL = m.GetBlockId("Gravel");
 			BLOCK_PUMPKIN = m.GetBlockId("Hay");
-			BLOCK_RED_ROSE = m.GetBlockId("RedRoseDecorations");
-			BLOCK_YELLOW_FLOWER = m.GetBlockId("YellowFlowerDecorations");
+			BLOCK_RED_ROSE = m.GetBlockId("Rose");
+			BLOCK_YELLOW_FLOWER = m.GetBlockId("Dandelion");
 			BLOCK_LAVA = m.GetBlockId("Lava");
 		}
 

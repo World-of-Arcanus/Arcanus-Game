@@ -17,11 +17,11 @@ namespace Arcanus.Mods
 			SpruceSapling = m.GetBlockId("SpruceSapling");
 			BrownMushroom = m.GetBlockId("BrownMushroom");
 			RedMushroom = m.GetBlockId("RedMushroom");
-			YellowFlowerDecorations = m.GetBlockId("YellowFlowerDecorations");
-			RedRoseDecorations = m.GetBlockId("RedRoseDecorations");
+			Dandelion = m.GetBlockId("Dandelion");
+			Rose = m.GetBlockId("Rose");
 			Dirt = m.GetBlockId("Dirt");
 			Grass = m.GetBlockId("Grass");
-			Crops1 = m.GetBlockId("Crops1");
+			Wheat = m.GetBlockId("Wheat");
 			Crops2 = m.GetBlockId("Crops2");
 			Crops3 = m.GetBlockId("Crops3");
 			Crops4 = m.GetBlockId("Crops4");
@@ -49,11 +49,11 @@ namespace Arcanus.Mods
 		int SpruceSapling;
 		int BrownMushroom;
 		int RedMushroom;
-		int YellowFlowerDecorations;
-		int RedRoseDecorations;
+		int Dandelion;
+		int Rose;
 		int Dirt;
 		int Grass;
-		int Crops1;
+		int Wheat;
 		int Crops2;
 		int Crops3;
 		int Crops4;
@@ -72,7 +72,7 @@ namespace Arcanus.Mods
 				if (m.IsValidPos(x, y, z + 1))
 				{
 					int blockabove = m.GetBlock(x, y, z + 1);
-					if (blockabove == Crops1) { blockabove = Crops2; }
+					if (blockabove == Wheat) { blockabove = Crops2; }
 					else if (blockabove == Crops2) { blockabove = Crops3; }
 					else if (blockabove == Crops3) { blockabove = Crops4; }
 					else { return; }
@@ -304,7 +304,7 @@ namespace Arcanus.Mods
 		void BlockTickFlowerDeath(int x, int y, int z)
 		{
 			int block = m.GetBlock(x, y, z);
-			if (block == YellowFlowerDecorations || block == RedRoseDecorations)
+			if (block == Dandelion || block == Rose)
 			{
 				if (rnd.NextDouble() < 0.02) { m.SetBlock(x, y, z, 0); return; }
 				if (IsShadow(x, y, z - 1))

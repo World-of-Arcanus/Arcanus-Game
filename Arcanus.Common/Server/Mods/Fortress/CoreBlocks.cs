@@ -350,17 +350,17 @@
 				WalkableType = WalkableType.Solid,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(37, "YellowFlowerDecorations", new BlockType()
+			m.SetBlockType(37, "Dandelion", new BlockType()
 			{
-				AllTextures = "YellowFlowerDecorations",
+				AllTextures = "FlowerDandelion",
 				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Empty,
 				InventoryType = InventoryType.Nature,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(38, "RedRoseDecorations", new BlockType()
+			m.SetBlockType(38, "Rose", new BlockType()
 			{
-				AllTextures = "RedRoseDecorations",
+				AllTextures = "FlowerRose",
 				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Empty,
 				InventoryType = InventoryType.Nature,
@@ -765,7 +765,7 @@
 				InventoryType = InventoryType.Nature,
 				Sounds = solidSounds,
 			});
-			m.SetBlockType(108, "Crops1", new BlockType()
+			m.SetBlockType(108, "Wheat", new BlockType()
 			{
 				AllTextures = "Crops1",
 				TextureIdForInventory = "Crops4",
@@ -1034,7 +1034,7 @@
 				TextureIdForInventory = "CakeTop",
 				DrawType = DrawType.HalfHeight,
 				WalkableType = WalkableType.Solid,
-				InventoryType = InventoryType.Nature,
+				InventoryType = InventoryType.Item,
 				Sounds = solidSounds,
 				IsUsable = true,
 			});
@@ -1044,7 +1044,7 @@
 				LightRadius = 15,
 				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Empty,
-				InventoryType = InventoryType.Nature,
+				InventoryType = InventoryType.Item,
 				Sounds = solidSounds,
 				DamageToPlayer = 2,
 			});
@@ -1208,6 +1208,62 @@
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				InventoryType = InventoryType.Block,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(194, "Allium", new BlockType()
+			{
+				AllTextures = "FlowerAllium",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Nature,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(195, "Orchid", new BlockType()
+			{
+				AllTextures = "FlowerOrchid",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Nature,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(196, "Fern", new BlockType()
+			{
+				AllTextures = "Fern",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Nature,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(197, "Daisy", new BlockType()
+			{
+				AllTextures = "FlowerDaisy",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Nature,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(198, "Paeonia", new BlockType()
+			{
+				AllTextures = "FlowerPaeonia",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Nature,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(199, "Tulip", new BlockType()
+			{
+				AllTextures = "FlowerTulip",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Nature,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(200, "SpiderWeb", new BlockType()
+			{
+				AllTextures = "SpiderWeb",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Fluid,
+				InventoryType = InventoryType.Nature,
 				Sounds = solidSounds,
 			});
 			m.SetBlockType(241, "RedCarpet", new BlockType()
@@ -1388,64 +1444,73 @@
 			/* NATURE */
 
 			// page 1 - row 1
+			m.AddToCreativeInventory("Grass");
+			m.AddToCreativeInventory("Granite");
+			m.AddToCreativeInventory("Marble");
+			m.AddToCreativeInventory("OakTreeTrunk");
+			m.AddToCreativeInventory("SpruceTreeTrunk");
+			m.AddToCreativeInventory("BirchTreeTrunk");
+
+			// page 1 - row 2
 			m.AddToCreativeInventory("Dirt");
+			m.AddToCreativeInventory("DirtForFarming");
+			m.AddToCreativeInventory("Obsidian");
+			m.AddToCreativeInventory("Gravel");
+			m.AddToCreativeInventory("Clay");
+			m.AddToCreativeInventory("Stone");
+
+			// page 1 - row 3
+			m.AddToCreativeInventory("CoalOre");
 			m.AddToCreativeInventory("IronOre");
 			m.AddToCreativeInventory("LapisOre");
 			m.AddToCreativeInventory("EmeraldOre");
 			m.AddToCreativeInventory("DiamondOre");
 			m.AddToCreativeInventory("GoldOre");
 
-			// page 1 - row 2
-			m.AddToCreativeInventory("DirtForFarming");
-			m.AddToCreativeInventory("Stone");
-			m.AddToCreativeInventory("Gravel");
+			// page 2 - row 1
 			m.AddToCreativeInventory("Sand");
-			m.AddToCreativeInventory("Sandstone");
 			m.AddToCreativeInventory("RedSand");
+			m.AddToCreativeInventory("Sandstone");
 			m.AddToCreativeInventory("RedSandstone");
-
-			// page 1 - row 3
-			m.AddToCreativeInventory("Clay");
-			m.AddToCreativeInventory("Marble");
-			m.AddToCreativeInventory("Granite");
-			m.AddToCreativeInventory("Grass");
 			m.AddToCreativeInventory("Lava");
 			m.AddToCreativeInventory("Water");
 
-			// page 1 - row 3
-
-			m.AddToCreativeInventory("OakTreeTrunk");
-			m.AddToCreativeInventory("SpruceTreeTrunk");
-			m.AddToCreativeInventory("BirchTreeTrunk");
-
-			// page 2 - row 1
+			// page 2 - row 2
 			m.AddToCreativeInventory("OakLeaves");
 			m.AddToCreativeInventory("SpruceLeaves");
 			m.AddToCreativeInventory("BirchLeaves");
-
 			m.AddToCreativeInventory("OakSapling");
 			m.AddToCreativeInventory("SpruceSapling");
 			m.AddToCreativeInventory("BirchSapling");
 
-			m.AddToCreativeInventory("Salt");
-			m.AddToCreativeInventory("Obsidian");
+			// page 2 - row 3
 			m.AddToCreativeInventory("Cactus");
-			m.AddToCreativeInventory("DeadPlant");
+			m.AddToCreativeInventory("Fern");
 			m.AddToCreativeInventory("GrassPlant");
-			m.AddToCreativeInventory("YellowFlowerDecorations");
-			m.AddToCreativeInventory("RedRoseDecorations");
+			m.AddToCreativeInventory("Dandelion");
+			m.AddToCreativeInventory("Rose");
+			m.AddToCreativeInventory("Orchid");
+
+			// page 3 - row 1
+			m.AddToCreativeInventory("Paeonia");
+			m.AddToCreativeInventory("Tulip");
+			m.AddToCreativeInventory("Daisy");
 			m.AddToCreativeInventory("RedMushroom");
 			m.AddToCreativeInventory("BrownMushroom");
-			m.AddToCreativeInventory("CoalOre");
-			m.AddToCreativeInventory("Sponge");
-			m.AddToCreativeInventory("Apples");
+			m.AddToCreativeInventory("SpiderWeb");
+
+			// page 3 - row 2
+			m.AddToCreativeInventory("Wheat");
 			m.AddToCreativeInventory("Hay");
-			m.AddToCreativeInventory("Crops1");
-			m.AddToCreativeInventory("Cake");
-			m.AddToCreativeInventory("Fire");
+
+			// not used
+			// m.AddToCreativeInventory("Sponge");
+			// m.AddToCreativeInventory("Salt");
 
 			// TODO
+			m.AddToCreativeInventory("Cake");
 			m.AddToCreativeInventory("Bookcase");
+			m.AddToCreativeInventory("Fire");
 			m.AddToCreativeInventory("Torch");
 			m.AddToCreativeInventory("StoneRoof");
 			m.AddToCreativeInventory("Camouflage");
@@ -1485,7 +1550,7 @@
 
 			#region Start inventory
 			m.AddToStartInventory("Torch", 6);
-			m.AddToStartInventory("Crops1", 1);
+			m.AddToStartInventory("Wheat", 1);
 			m.AddToStartInventory("CraftingTable", 6);
 			m.AddToStartInventory("Compass", 1);
 			#endregion
