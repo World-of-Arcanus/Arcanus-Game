@@ -217,12 +217,12 @@
 
 				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.HorizontalLeft) != 0)
 				{
-					return VehicleDirection12.DownRightRight;
+					return VehicleDirection12.UpRightUp;
 				}
 
 				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.HorizontalRight) != 0)
 				{
-					return VehicleDirection12.UpLeftLeft;
+					return VehicleDirection12.DownLeftDown;
 				}
 			}
 		}
@@ -249,22 +249,22 @@
             {
 				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.VerticalDown) != 0)
 				{
-					return VehicleDirection12.DownRightRight;
+					return VehicleDirection12.UpRightRight;
 				}
 
 				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.VerticalUp) != 0)
 				{
-					return VehicleDirection12.UpLeftLeft;
+					return VehicleDirection12.DownLeftLeft;
 				}
 
 				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.HorizontalLeft) != 0)
 				{
-					return VehicleDirection12.DownLeftLeft;
+					return VehicleDirection12.DownLeftDown;
 				}
 
 				if ((dirVehicleDirection12Flags & VehicleDirection12Flags.HorizontalRight) != 0)
 				{
-					return VehicleDirection12.UpRightRight;
+					return VehicleDirection12.UpRightUp;
 				}
 			}
 		}
