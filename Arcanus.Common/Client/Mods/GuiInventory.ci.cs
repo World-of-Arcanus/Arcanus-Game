@@ -138,6 +138,14 @@
 				}
 			}
 
+			// inventory tab click
+			int tab = GetMouseOverForInventoryTabs(scaledMouse);
+
+			if (tab != 0)
+			{
+				InventoryType = tab;
+			}
+
 			// materials click
 			if (SelectedMaterialSelectorSlot(scaledMouse) != null)
 			{
@@ -276,7 +284,9 @@
 
 		PointRef scaledMouse = PointRef.Create(game.mouseCurrentX, game.mouseCurrentY);
 
-		game.Draw2dBitmapFile("inventory.png", InventoryStartX(), InventoryStartY(), 1024, 1024);
+		string tabNumber = game.platform.IntToString(InventoryType);
+		string inventoryImage = game.platform.StringFormat("inventory{0}.png", tabNumber);
+		game.Draw2dBitmapFile(inventoryImage, InventoryStartX(), InventoryStartY(), 1024, 1024);
 
 		// sort by the order they got added to the inventory (instead of by id)
 		Packet_Item[] sorted = new Packet_Item[game.d_Inventory.ItemsCount];
@@ -373,11 +383,19 @@
 
 		bool canClick = false;
 
-		// tab paging
+		// over tab paging
 		bool pagePrev = GetMouseOverForPagePrev(scaledMouse);
 		bool pageNext = GetMouseOverForPageNext(scaledMouse);
 
 		if (pagePrev || pageNext)
+		{
+			canClick = true;
+		}
+
+		// over tab button
+		int tab = GetMouseOverForInventoryTabs(scaledMouse);
+
+		if (tab != 0)
 		{
 			canClick = true;
 		}
@@ -612,16 +630,21 @@
 	{
 		Packet_Item item = null;
 
+		// adjust the min / max to line up
+		// with the mouse's finger tip better
+		int minAdjust = 2;
+		int maxAdjust = 6;
+
 		if (InventoryItemsPos != null)
 		{
 			for (int i = 0; i < game.d_Inventory.ItemsCount; i++)
 			{
 				if (InventoryItemsPos[i] != null)
 				{
-					if (scaledMouse.X >= InventoryItemsPos[i].xMin &&
-						scaledMouse.X <= InventoryItemsPos[i].xMax &&
-						scaledMouse.Y >= InventoryItemsPos[i].yMin &&
-						scaledMouse.Y <= InventoryItemsPos[i].yMax)
+					if (scaledMouse.X >= InventoryItemsPos[i].xMin - minAdjust &&
+						scaledMouse.X <= InventoryItemsPos[i].xMax - maxAdjust &&
+						scaledMouse.Y >= InventoryItemsPos[i].yMin - minAdjust &&
+						scaledMouse.Y <= InventoryItemsPos[i].yMax - maxAdjust)
 					{
 						item = InventoryItems[i]; break;
 					}
@@ -630,6 +653,25 @@
 		}
 
 		return item;
+	}
+
+	public int GetMouseOverForInventoryTabs(PointRef scaledMouse)
+	{
+		for (int i = 1; i < 7; i++)
+		{
+			int bordersX = 1 * i;
+			int bordersY = 1 + CellCountInPageY;
+
+			if (scaledMouse.X >= (CellsStartX() + bordersX + (CellDrawSize * (i - 1))) &&
+				scaledMouse.X <= (CellsStartX() + bordersX + (CellDrawSize * i) - 1 - 8) &&
+				scaledMouse.Y >= (CellsStartY() + bordersY + (CellDrawSize * CellCountInPageY) + 1) &&
+				scaledMouse.Y <= (CellsStartY() + bordersY + (CellDrawSize * CellCountInPageY) + 1 + (CellDrawSize / 2)))
+			{
+				return i;
+			}
+		}
+
+		return 0;
 	}
 
 	public override void OnMouseWheelChanged(Game game_, MouseWheelEventArgs args)
