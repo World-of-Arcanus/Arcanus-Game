@@ -1197,8 +1197,8 @@ namespace Arcanus
 		Empty,
 		Block,
 		Nature,
-		Tool,
 		Item,
+		Tool,
 		Animal
 	}
 

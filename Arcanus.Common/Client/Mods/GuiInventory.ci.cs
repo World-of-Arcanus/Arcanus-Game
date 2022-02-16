@@ -144,6 +144,7 @@
 			if (tab != 0)
 			{
 				InventoryType = tab;
+				InventoryPage = 1;
 			}
 
 			// materials click

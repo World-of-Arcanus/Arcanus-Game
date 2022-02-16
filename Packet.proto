@@ -327,8 +327,8 @@ enum InventoryType {
 	Empty = 0;
 	Block = 1;
 	Nature = 2;
-	Tool = 3;
-	Item = 4;
+	Item = 3;
+	Tool = 4;
 	Animal = 5;
 }
 
