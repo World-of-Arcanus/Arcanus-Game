@@ -982,7 +982,7 @@
 			{
 				TopBottomTextures = "OakWood",
 				SideTextures = "Bookcase",
-				TextureIdForInventory = "Bookcase",
+				TextureIdForInventory = "FakeBookcaseInventory",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Empty,
 				InventoryType = InventoryType.Item,
@@ -1004,7 +1004,7 @@
 				TextureIdTop = "Glass",
 				TextureIdBottom = "Empty",
 				SideTextures = "GlassDeskSide",
-				TextureIdForInventory = "GlassDeskSide",
+				TextureIdForInventory = "Glass",
 				DrawType = DrawType.Transparent,
 				WalkableType = WalkableType.Solid,
 				InventoryType = InventoryType.Item,
@@ -1044,7 +1044,7 @@
 				LightRadius = 15,
 				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Empty,
-				InventoryType = InventoryType.Item,
+				InventoryType = InventoryType.Tool,
 				Sounds = solidSounds,
 				DamageToPlayer = 2,
 			});
@@ -1062,7 +1062,7 @@
 				TextureIdForInventory = "CompassInventory",
 				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Solid,
-				InventoryType = InventoryType.Item,
+				InventoryType = InventoryType.Tool,
 				Sounds = solidSounds,
 			});
 			m.SetBlockType(152, "Ladder", new BlockType()
@@ -1399,7 +1399,7 @@
 
 			#region Creative inventory
 
-			/* BLOCKS */
+			/* BLOCK */
 
 			// page 1 - row 1
 			m.AddToCreativeInventory("Cobblestone");
@@ -1507,44 +1507,61 @@
 			// m.AddToCreativeInventory("Sponge");
 			// m.AddToCreativeInventory("Salt");
 
-			// TODO
-			m.AddToCreativeInventory("Cake");
-			m.AddToCreativeInventory("Bookcase");
-			m.AddToCreativeInventory("Fire");
-			m.AddToCreativeInventory("Torch");
+			/* ITEM */
+
+			// page 1 - row 1
+			m.AddToCreativeInventory("WoodRoof");
 			m.AddToCreativeInventory("StoneRoof");
-			m.AddToCreativeInventory("Camouflage");
-			m.AddToCreativeInventory("CraftingTable");
-			m.AddToCreativeInventory("Trampoline");
-			m.AddToCreativeInventory("WoodWindow");
 			m.AddToCreativeInventory("IronWindow");
-			m.AddToCreativeInventory("IronBars");
-			m.AddToCreativeInventory("FakeBookcase");
+			m.AddToCreativeInventory("WoodWindow");
 			m.AddToCreativeInventory("WoodDesk");
 			m.AddToCreativeInventory("GlassDesk");
-			m.AddToCreativeInventory("Mosaic");
+
+			// page 1 - row 2
 			m.AddToCreativeInventory("Fence");
-			m.AddToCreativeInventory("Compass");
+			m.AddToCreativeInventory("Camouflage");
+			m.AddToCreativeInventory("IronBars");
+			m.AddToCreativeInventory("Bookcase");
+			m.AddToCreativeInventory("FakeBookcase");
 			m.AddToCreativeInventory("Ladder");
+
+			// page 1 - row 3
+			m.AddToCreativeInventory("Trampoline");
+			m.AddToCreativeInventory("Mosaic");
+			m.AddToCreativeInventory("Cake");
 			m.AddToCreativeInventory("Rail1");
 			m.AddToCreativeInventory("Rail3");
 			m.AddToCreativeInventory("Rail6");
+
+			// page 2 - row 1
 			m.AddToCreativeInventory("RedCarpet");
 			m.AddToCreativeInventory("OrangeCarpet");
 			m.AddToCreativeInventory("YellowCarpet");
 			m.AddToCreativeInventory("LightGreenCarpet");
 			m.AddToCreativeInventory("GreenCarpet");
 			m.AddToCreativeInventory("CyanCarpet");
+
+			// page 2 - row 2
 			m.AddToCreativeInventory("LightBlueCarpet");
 			m.AddToCreativeInventory("BlueCarpet");
+			m.AddToCreativeInventory("PinkCarpet");
+			m.AddToCreativeInventory("MagentaCarpet");
 			m.AddToCreativeInventory("PurpleCarpet");
 			m.AddToCreativeInventory("BrownCarpet");
-			m.AddToCreativeInventory("SilverCarpet");
-			m.AddToCreativeInventory("MagentaCarpet");
-			m.AddToCreativeInventory("PinkCarpet");
+
+			// page 2 - row 3
 			m.AddToCreativeInventory("BlackCarpet");
 			m.AddToCreativeInventory("GrayCarpet");
+			m.AddToCreativeInventory("SilverCarpet");
 			m.AddToCreativeInventory("WhiteCarpet");
+
+			/* TOOL */
+
+			// page 1 - row 1
+			m.AddToCreativeInventory("CraftingTable");
+			m.AddToCreativeInventory("Compass");
+			m.AddToCreativeInventory("Torch");
+			m.AddToCreativeInventory("Fire");
 
 			#endregion
 
