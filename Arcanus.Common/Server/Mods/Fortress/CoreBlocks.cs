@@ -1031,7 +1031,7 @@
 				TextureIdTop = "CakeTop",
 				TextureIdBottom = "CakeBottom",
 				SideTextures = "CakeSide",
-				TextureIdForInventory = "CakeTop",
+				TextureIdForInventory = "CakeInventory",
 				DrawType = DrawType.HalfHeight,
 				WalkableType = WalkableType.Solid,
 				InventoryType = InventoryType.Item,
@@ -1396,6 +1396,89 @@
 				Sounds = solidSounds,
 			});
 
+			m.SetBlockType(268, "RestoreManaPotion", new BlockType()
+			{
+				AllTextures = "PotionBlue",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Magic,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(269, "MassDamagePotion", new BlockType()
+			{
+				AllTextures = "PotionPurple",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Magic,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(270, "PoisonEffectPotion", new BlockType()
+			{
+				AllTextures = "PotionGreen",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Magic,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(271, "RestoreHealthPotion", new BlockType()
+			{
+				AllTextures = "PotionRed",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Magic,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(272, "InvinciblePotion", new BlockType()
+			{
+				AllTextures = "PotionSilver",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Magic,
+				Sounds = solidSounds,
+			});
+			m.SetBlockType(273, "CurePoisonPotion", new BlockType()
+			{
+				AllTextures = "PotionYellow",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Empty,
+				InventoryType = InventoryType.Magic,
+				Sounds = solidSounds,
+			});
+
+			m.SetBlockType(274, "SlimeBall", new BlockType()
+			{
+				AllTextures = "WeaponSlimeBall",
+				DrawType = DrawType.Solid,
+				WalkableType = WalkableType.Solid,
+				Sounds = new SoundSet()
+				{
+					Shoot = new string[] { "grenadestart" },
+					ShootEnd = new string[] { "grenadethrow" },
+					Reload = solidSounds.Reload,
+				},
+				handimage = "slimeballhand.png",
+				IsPistol = true,
+				AimRadius = 20,
+				Recoil = 0.04f,
+				Delay = 0.5f,
+				WalkSpeedWhenUsed = 1f,
+				IronSightsEnabled = false,
+				IronSightsMoveSpeed = 0.4f,
+				IronSightsImage = "slimeballhand.png",
+				IronSightsAimRadius = 10,
+				IronSightsFov = 0.5f,
+				AmmoMagazine = 6,
+				AmmoTotal = 6,
+				ReloadDelay = 2,
+				ExplosionRange = 10f,
+				ExplosionTime = 1f,
+				ProjectileSpeed = 25f,
+				ProjectileBounce = true,
+				DamageBody = 200,
+				PistolType = PistolType.Grenade,
+				InventoryType = InventoryType.Magic,
+			});
+
 			#endregion
 
 			#region Creative inventory
@@ -1563,6 +1646,19 @@
 			m.AddToCreativeInventory("Compass");
 			m.AddToCreativeInventory("Torch");
 			m.AddToCreativeInventory("Fire");
+
+			/* MAGIC */
+
+			// page 1 - row 1
+			m.AddToCreativeInventory("RestoreHealthPotion");
+			m.AddToCreativeInventory("InvinciblePotion");
+			m.AddToCreativeInventory("CurePoisonPotion");
+			m.AddToCreativeInventory("RestoreManaPotion");
+			m.AddToCreativeInventory("MassDamagePotion");
+			m.AddToCreativeInventory("PoisonEffectPotion");
+
+			// page 1 - row 2
+			m.AddToCreativeInventory("SlimeBall");
 
 			#endregion
 
