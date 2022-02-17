@@ -29,6 +29,14 @@
 					int x = game.SelectedBlockPositionX;
 					int y = game.SelectedBlockPositionY;
 					int z = game.SelectedBlockPositionZ;
+
+					int blockid = game.map.GetBlock(game.platform.FloatToInt(x), game.platform.FloatToInt(z), game.platform.FloatToInt(y));
+					Packet_BlockType block = game.blocktypes[blockid];
+
+					// do not draw a wireframe around plants, torches, fences or ladders
+					if (block != null && (block.DrawType == Packet_DrawTypeEnum.Plant || block.DrawType == Packet_DrawTypeEnum.Torch ||
+						block.DrawType == Packet_DrawTypeEnum.Fence || block.DrawType == Packet_DrawTypeEnum.Ladder)) { return; }
+
 					float pickcubeheight = game.getblockheight(game.platform.FloatToInt(x), game.platform.FloatToInt(z), game.platform.FloatToInt(y));
 					float posx = x + one / 2;
 					float posy = y + pickcubeheight * one / 2;
