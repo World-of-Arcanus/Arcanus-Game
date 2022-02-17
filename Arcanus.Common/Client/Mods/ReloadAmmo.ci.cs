@@ -30,7 +30,7 @@
 				&& game.blocktypes[item.BlockId].IsPistol
 				&& game.reloadstartMilliseconds == 0)
 			{
-				int sound = game.rnd.Next() % game.blocktypes[item.BlockId].Sounds.ReloadCount;
+				int sound = game.rnd.Next() % 1; // game.blocktypes[item.BlockId].Sounds.ReloadCount;
 				game.AudioPlay(StringTools.StringAppend(game.platform, game.blocktypes[item.BlockId].Sounds.Reload[sound], ".ogg"));
 				game.reloadstartMilliseconds = game.platform.TimeMillisecondsFromStart();
 				game.reloadblock = item.BlockId;
