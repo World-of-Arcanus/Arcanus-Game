@@ -329,7 +329,8 @@ enum InventoryType {
 	Nature = 2;
 	Item = 3;
 	Tool = 4;
-	Animal = 5;
+	Magic = 5;
+	Creature = 5;
 }
 
 enum WearableType {

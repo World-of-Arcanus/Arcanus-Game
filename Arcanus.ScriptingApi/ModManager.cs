@@ -1199,7 +1199,8 @@ namespace Arcanus
 		Nature,
 		Item,
 		Tool,
-		Animal
+		Magic,
+		Creature
 	}
 
 	public enum WearableType
