@@ -77,7 +77,7 @@ namespace Arcanus.Server
 			//Set Defaults
 			this.Format = 1;
 			this.Name = "Arcanus Server";
-			this.Motd = "MOTD";
+			this.Motd = "World of Arcanus";
 			this.WelcomeMessage = "Welcome to my Arcanus server!";
 			this.Port = 25565;
 			this.MaxClients = 16;
