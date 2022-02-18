@@ -17,9 +17,10 @@
 				Entity e = game.entities[game.SelectedEntityId];
 				if (e != null)
 				{
-					lines.DrawWireframeCube_(game,
-						e.position.x, e.position.y + e.drawModel.ModelHeight / 2, e.position.z,
-						size, size * e.drawModel.ModelHeight, size);
+					// do not draw a wireframe around entities
+					// lines.DrawWireframeCube_(game,
+					// 	e.position.x, e.position.y + e.drawModel.ModelHeight / 2, e.position.z,
+					// 	size, size * e.drawModel.ModelHeight, size);
 				}
 			}
 			else
