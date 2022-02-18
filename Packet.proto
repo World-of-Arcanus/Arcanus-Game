@@ -246,6 +246,8 @@ message SoundSet {
 	repeated string shoot = 5;
 	repeated string shootEnd = 6;
 	repeated string reload = 7;
+	repeated string bounce = 8;
+	repeated string explosion = 9;
 }
 
 

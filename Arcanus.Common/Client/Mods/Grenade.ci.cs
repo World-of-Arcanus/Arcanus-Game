@@ -26,6 +26,7 @@
 		float LocalPlayerPositionY = game.player.position.y;
 		float LocalPlayerPositionZ = game.player.position.z;
 
+		Packet_BlockType grenadeBlock = game.blocktypes[game.d_Inventory.RightHand[game.ActiveMaterial].BlockId];
 		Entity grenadeEntity = game.entities[grenadeEntityId];
 		Sprite grenadeSprite = grenadeEntity.sprite;
 		Grenade_ grenade = grenadeEntity.grenade;
@@ -39,7 +40,7 @@
 		grenade.velocityY += -projectilegravity * dt;
 
 		Vector3Ref velocity = Vector3Ref.Create(grenade.velocityX, grenade.velocityY, grenade.velocityZ);
-		Vector3Ref bouncePosition = GrenadeBounce(game, Vector3Ref.Create(oldposX, oldposY, oldposZ), Vector3Ref.Create(newposX, newposY, newposZ), velocity, dt);
+		Vector3Ref bouncePosition = GrenadeBounce(game, Vector3Ref.Create(oldposX, oldposY, oldposZ), Vector3Ref.Create(newposX, newposY, newposZ), velocity, dt, grenadeBlock);
 		grenade.velocityX = velocity.X;
 		grenade.velocityY = velocity.Y;
 		grenade.velocityZ = velocity.Z;
@@ -50,7 +51,7 @@
 	float projectilegravity;
 	float bouncespeedmultiply;
 	float walldistance;
-	internal Vector3Ref GrenadeBounce(Game game, Vector3Ref oldposition, Vector3Ref newposition, Vector3Ref velocity, float dt)
+	internal Vector3Ref GrenadeBounce(Game game, Vector3Ref oldposition, Vector3Ref newposition, Vector3Ref velocity, float dt, Packet_BlockType block)
 	{
 		bool ismoving = velocity.Length() > 100 * dt;
 		float modelheight = walldistance;
@@ -81,7 +82,7 @@
 					velocity.Z *= bouncespeedmultiply;
 					if (ismoving)
 					{
-						game.AudioPlayAt("grenadebounce.ogg", newposition.X, newposition.Y, newposition.Z);
+						game.AudioPlayAt(game.platform.StringFormat("{0}.ogg", block.Sounds.Bounce[0]), newposition.X, newposition.Y, newposition.Z);
 					}
 					//playerposition.Z = oldposition.Z - newposition.Z;
 				}
@@ -104,7 +105,7 @@
 					velocity.Z *= bouncespeedmultiply;
 					if (ismoving)
 					{
-						game.AudioPlayAt("grenadebounce.ogg", newposition.X, newposition.Y, newposition.Z);
+						game.AudioPlayAt(game.platform.StringFormat("{0}.ogg", block.Sounds.Bounce[0]), newposition.X, newposition.Y, newposition.Z);
 					}
 					//playerposition.X = oldposition.X - newposition.X;
 				}
@@ -134,7 +135,7 @@
 					velocity.Z *= bouncespeedmultiply;
 					if (ismoving)
 					{
-						game.AudioPlayAt("grenadebounce.ogg", newposition.X, newposition.Y, newposition.Z);
+						game.AudioPlayAt(game.platform.StringFormat("{0}.ogg", block.Sounds.Bounce[0]), newposition.X, newposition.Y, newposition.Z);
 					}
 					//playerposition.Y = oldposition.Y - newposition.Y;
 				}
@@ -157,7 +158,7 @@
 					velocity.Z *= bouncespeedmultiply;
 					if (ismoving)
 					{
-						game.AudioPlayAt("grenadebounce.ogg", newposition.X, newposition.Y, newposition.Z);
+						game.AudioPlayAt(game.platform.StringFormat("{0}.ogg", block.Sounds.Bounce[0]), newposition.X, newposition.Y, newposition.Z);
 					}
 					//playerposition.Z = oldposition.Z - newposition.Z;
 				}
@@ -180,7 +181,7 @@
 					velocity.Z *= bouncespeedmultiply;
 					if (ismoving)
 					{
-						game.AudioPlayAt("grenadebounce.ogg", newposition.X, newposition.Y, newposition.Z);
+						game.AudioPlayAt(game.platform.StringFormat("{0}.ogg", block.Sounds.Bounce[0]), newposition.X, newposition.Y, newposition.Z);
 					}
 					//playerposition.X = oldposition.X - newposition.X;
 				}
@@ -202,7 +203,7 @@
 					velocity.Z *= bouncespeedmultiply;
 					if (ismoving)
 					{
-						game.AudioPlayAt("grenadebounce.ogg", newposition.X, newposition.Y, newposition.Z);
+						game.AudioPlayAt(game.platform.StringFormat("{0}.ogg", block.Sounds.Bounce[0]), newposition.X, newposition.Y, newposition.Z);
 					}
 					//playerposition.Y = oldposition.Y - newposition.Y;
 				}

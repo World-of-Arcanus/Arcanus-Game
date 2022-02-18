@@ -25,11 +25,12 @@
 		float LocalPlayerPositionY = game.player.position.y;
 		float LocalPlayerPositionZ = game.player.position.z;
 
+		Packet_BlockType grenadeBlock = game.blocktypes[game.d_Inventory.RightHand[game.ActiveMaterial].BlockId];
 		Entity grenadeEntity = game.entities[grenadeEntityId];
 		Sprite grenadeSprite = grenadeEntity.sprite;
 		Grenade_ grenade = grenadeEntity.grenade;
 
-		game.AudioPlayAt("grenadeexplosion.ogg", grenadeSprite.positionX, grenadeSprite.positionY, grenadeSprite.positionZ);
+		game.AudioPlayAt(game.platform.StringFormat("{0}.ogg", grenadeBlock.Sounds.Explosion[0]), grenadeSprite.positionX, grenadeSprite.positionY, grenadeSprite.positionZ);
 
 		{
 			Entity entity = new Entity();

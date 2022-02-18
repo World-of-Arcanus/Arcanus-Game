@@ -1230,6 +1230,10 @@ namespace Arcanus
 		public string[] ShootEnd = new string[0];
 		[ProtoMember(7)]
 		public string[] Reload = new string[0];
+		[ProtoMember(8)]
+		public string[] Bounce = new string[0];
+		[ProtoMember(9)]
+		public string[] Explosion = new string[0];
 	}
 
 	[ProtoContract]

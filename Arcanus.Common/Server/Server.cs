@@ -3686,6 +3686,8 @@ namespace Arcanus.Server
 			p.SetReload(soundSet.Reload, soundSet.Reload.Length, soundSet.Reload.Length);
 			p.SetShoot(soundSet.Shoot, soundSet.Shoot.Length, soundSet.Shoot.Length);
 			p.SetShootEnd(soundSet.ShootEnd, soundSet.ShootEnd.Length, soundSet.ShootEnd.Length);
+			p.SetBounce(soundSet.Bounce, soundSet.Bounce.Length, soundSet.Bounce.Length);
+			p.SetExplosion(soundSet.Explosion, soundSet.Explosion.Length, soundSet.Explosion.Length);
 			p.SetWalk(soundSet.Walk, soundSet.Walk.Length, soundSet.Walk.Length);
 			return p;
 		}

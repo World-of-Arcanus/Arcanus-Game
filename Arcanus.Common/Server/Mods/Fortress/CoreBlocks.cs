@@ -1447,16 +1447,19 @@
 
 			m.SetBlockType(274, "SlimeBall", new BlockType()
 			{
-				AllTextures = "WeaponSlimeBall",
-				DrawType = DrawType.Solid,
+				AllTextures = "MagicStaff",
+				TextureIdForInventory = "WeaponSlimeBall",
+				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Solid,
 				Sounds = new SoundSet()
 				{
-					Shoot = new string[] { "grenadestart" },
-					ShootEnd = new string[] { "grenadethrow" },
+					Shoot = new string[] { "slimeballstart" },
+					ShootEnd = new string[] { "" },
+					Bounce = new string[] { "slimeballbounce" },
+					Explosion = new string[] { "slimeballexplosion" },
 					Reload = solidSounds.Reload,
 				},
-				handimage = "slimeballhand.png",
+				// handimage = "slimeballhand.png",
 				IsPistol = true,
 				AimRadius = 20,
 				Recoil = 0.04f,
@@ -1464,7 +1467,7 @@
 				WalkSpeedWhenUsed = 1f,
 				IronSightsEnabled = false,
 				IronSightsMoveSpeed = 0.4f,
-				IronSightsImage = "slimeballhand.png",
+				// IronSightsImage = "slimeballhand.png",
 				IronSightsAimRadius = 10,
 				IronSightsFov = 0.5f,
 				AmmoMagazine = 6,
