@@ -100,6 +100,9 @@
 		float healthMax = 300;
 		float healthCur = healthMax * progress;
 
+		// do not draw info for undamaged signs
+		if (entity != null && entity.drawText != null && healthCur == healthMax) { return; }
+
 		int healthBarBG =
 			ColorCi.FromArgb(255, 0, 0, 0);       // black
 

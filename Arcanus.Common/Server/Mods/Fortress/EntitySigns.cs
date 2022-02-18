@@ -12,16 +12,18 @@ namespace Arcanus.Mods
 			this.m = m;
 			editingSign = new ServerEntityId[m.GetMaxPlayers()];
 
-			m.SetBlockType(75, "EntitySign", new BlockType()
+			m.SetBlockType(75, "Sign", new BlockType()
 			{
-				AllTextures = "Sign",
-				DrawType = DrawType.Solid,
+				AllTextures = "SignInventory",
+				TextureIdForInventory = "SignInventory",
+				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Solid,
+				InventoryType = InventoryType.Item,
 				IsUsable = true,
 				IsTool = true,
 			});
 
-			m.AddToCreativeInventory("EntitySign");
+			m.AddToCreativeInventory("Sign");
 			m.RegisterOnBlockUseWithTool(OnUseWithTool);
 			m.RegisterOnEntityUse(OnEntityUse);
 			m.RegisterOnEntityUpdate(OnEntityUpdate);
@@ -115,7 +117,7 @@ namespace Arcanus.Mods
 
 		private void OnUseWithTool(int player, int x, int y, int z, int tool)
 		{
-			if (m.GetBlockName(tool) != "EntitySign")
+			if (m.GetBlockName(tool) != "Sign")
 			{
 				return;
 			}
@@ -129,7 +131,7 @@ namespace Arcanus.Mods
 			e.position.z = y + 0.5f;
 			e.position.heading = GetHeadingLookAt(m.GetPlayerPositionX(player), m.GetPlayerPositionY(player), e.position.x, e.position.z);
 			e.sign = new ServerEntitySign();
-			e.sign.text = "Hello world!";
+			e.sign.text = "Hello!";
 			m.EntityCreate(e);
 		}
 
