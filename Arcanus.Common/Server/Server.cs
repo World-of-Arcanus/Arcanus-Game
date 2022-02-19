@@ -659,8 +659,12 @@ namespace Arcanus.Server
 						item.Value_ = ConvertItem(k.Value);
 						item.X = k.Key.X;
 						item.Y = k.Key.Y;
+						item.Sort = modManager.GetBlockType(item.Value_.BlockId).Sort;
 						p.Inventory.Items[i++] = item;
 					}
+
+					// sort by the order they got added to the inventory (instead of by id)
+					Array.Sort(p.Inventory.Items, (a, b) => a.Sort.CompareTo(b.Sort));
 				}
 				p.Inventory.MainArmor = ConvertItem(inv.Inventory.MainArmor);
 				p.Inventory.RightHand = new Packet_Item[10];

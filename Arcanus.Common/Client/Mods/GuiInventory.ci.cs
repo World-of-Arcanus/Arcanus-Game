@@ -289,28 +289,13 @@
 		string inventoryImage = game.platform.StringFormat("inventory{0}.png", tabNumber);
 		game.Draw2dBitmapFile(inventoryImage, InventoryStartX(), InventoryStartY(), 1024, 1024);
 
-		// sort by the order they got added to the inventory (instead of by id)
-		Packet_Item[] sorted = new Packet_Item[game.d_Inventory.ItemsCount];
-
-		for (int i = 0; i < game.d_Inventory.ItemsCount; i++)
-		{
-			Packet_Item item = game.d_Inventory.Items[i].Value_;
-
-			// when new items are added to the game their Sort can temporarily be larger than ItemsCount
-			// so ignore these items and everything will correct itself on the next frame loop
-			if (game.blocktypes[item.BlockId].Sort < game.d_Inventory.ItemsCount)
-			{
-				sorted[game.blocktypes[item.BlockId].Sort] = item;
-			}
-		}
-
 		int b = 0; // blocks on page
 		int t = 0; // blocks on tab
 
 		// get the items for the current tab and page
 		for (int i = 0; i < game.d_Inventory.ItemsCount; i++)
 		{
-			Packet_Item item = sorted[i];
+			Packet_Item item = game.d_Inventory.Items[i].Value_;
 
 			if (item == null)
 			{

@@ -810,6 +810,7 @@ message PositionItem {
 	optional Item Value_ = 2;
 	optional int32 x = 3;
 	optional int32 y = 4;
+	optional int32 Sort = 5;
 }
 
 message Dialog {
