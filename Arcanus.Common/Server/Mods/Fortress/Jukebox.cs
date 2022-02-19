@@ -32,6 +32,8 @@ namespace Arcanus.Mods
 				TextureIdForInventory = "JukeboxTop",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
+				InventoryType = InventoryType.Item,
+				SortAfter = "Trampoline",
 				Sounds = solidSounds,
 				IsUsable = true,
 			});

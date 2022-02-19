@@ -19,6 +19,7 @@ namespace Arcanus.Mods
 				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Solid,
 				InventoryType = InventoryType.Item,
+				SortAfter = "Jukebox",
 				IsUsable = true,
 				IsTool = true,
 			});

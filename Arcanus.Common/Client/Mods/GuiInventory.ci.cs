@@ -295,7 +295,13 @@
 		for (int i = 0; i < game.d_Inventory.ItemsCount; i++)
 		{
 			Packet_Item item = game.d_Inventory.Items[i].Value_;
-			sorted[game.blocktypes[item.BlockId].Sort] = item;
+
+			// when new items are added to the game their Sort can temporarily be larger than ItemsCount
+			// so ignore these items and everything will correct itself on the next frame loop
+			if (game.blocktypes[item.BlockId].Sort < game.d_Inventory.ItemsCount)
+			{
+				sorted[game.blocktypes[item.BlockId].Sort] = item;
+			}
 		}
 
 		int b = 0; // blocks on page

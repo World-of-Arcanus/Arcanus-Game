@@ -1034,7 +1034,7 @@
 				TextureIdForInventory = "CakeInventory",
 				DrawType = DrawType.HalfHeight,
 				WalkableType = WalkableType.Solid,
-				InventoryType = InventoryType.Item,
+				InventoryType = InventoryType.Tool,
 				Sounds = solidSounds,
 				IsUsable = true,
 			});
@@ -1614,8 +1614,8 @@
 
 			// page 1 - row 3
 			m.AddToCreativeInventory("Trampoline");
-			m.AddToCreativeInventory("Mosaic");
-			m.AddToCreativeInventory("Cake");
+			// mod insert for Sign
+			// mod insert for Jukebox
 			m.AddToCreativeInventory("Rail1");
 			m.AddToCreativeInventory("Rail3");
 			m.AddToCreativeInventory("Rail6");
@@ -1641,14 +1641,17 @@
 			m.AddToCreativeInventory("GrayCarpet");
 			m.AddToCreativeInventory("SilverCarpet");
 			m.AddToCreativeInventory("WhiteCarpet");
+			m.AddToCreativeInventory("Mosaic");
 
 			/* TOOL */
 
 			// page 1 - row 1
 			m.AddToCreativeInventory("CraftingTable");
+			// mod insert for TNT
 			m.AddToCreativeInventory("Compass");
 			m.AddToCreativeInventory("Torch");
 			m.AddToCreativeInventory("Fire");
+			m.AddToCreativeInventory("Cake");
 
 			/* MAGIC */
 

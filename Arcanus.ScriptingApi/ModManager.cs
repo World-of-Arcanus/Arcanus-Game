@@ -1336,6 +1336,8 @@ namespace Arcanus
 		public WearableType WearableType;
 		[ProtoMember(48)]
 		public int Sort;
+		[ProtoMember(49)]
+		public string SortAfter;
 
 		public string AllTextures
 		{

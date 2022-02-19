@@ -300,6 +300,7 @@ message BlockType {
 	optional InventoryType inventoryType = 46 [default = Empty];
 	optional WearableType wearableType = 47 [default = Empty];
 	optional int32 sort = 48;
+	optional string sortAfter = 49;
 }
 
 enum DrawType {

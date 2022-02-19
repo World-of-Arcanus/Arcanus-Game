@@ -2806,15 +2806,69 @@ namespace Arcanus.Server
 		public int BlockSort = 0;
 		public void SendBlockTypes(int clientid)
 		{
+			// look for any blocks that want to be sorted after a specific block
+			// this is used for blocks that have been provided by mods because
+			// they can't control the order they are added to the inventory
+			BlockType[] BlockTypesNew = BlockTypes;
+			bool dirty = true;
+
+			while (dirty)
+			{
+				dirty = false;
+
+				for (int i = 0; i < BlockTypes.Length; i++)
+				{
+					if (BlockTypes[i].SortAfter != null)
+					{
+						SortBlockTypes(ref BlockTypesNew, i, ref dirty);
+					}
+				}
+			}
+
+			BlockTypes = BlockTypesNew;
+
 			for (int i = 0; i < BlockTypes.Length; i++)
 			{
 				Packet_ServerBlockType p1 = new Packet_ServerBlockType() { Id = i, Blocktype = BlockTypeConverter.GetBlockType(BlockTypes[i]) };
 				SendPacket(clientid, Serialize(new Packet_Server() { Id = Packet_ServerIdEnum.BlockType, BlockType = p1 }));
 			}
+
 			Packet_ServerBlockTypes p = new Packet_ServerBlockTypes() { };
 			SendPacket(clientid, Serialize(new Packet_Server() { Id = Packet_ServerIdEnum.BlockTypes, BlockTypes = p }));
 		}
+		public void SortBlockTypes(ref BlockType[] newArray, int block, ref bool dirty)
+		{
+			// get the block's ID that we want to sort after
+			int sortAfter = modManager.GetBlockId(newArray[block].SortAfter);
 
+			for (int i = 0; i < newArray.Length; i++)
+			{
+				// is this the block we are moving
+				if (i == block)
+				{
+					// get the new sort order
+					int newSort = newArray[sortAfter].Sort + 1;
+
+					if (newSort > newArray[i].Sort)
+					{
+						// the blocks will need to be re-sorted again
+						// because this one is supposed to go after
+						// another one that hasn't been sorted yet
+						dirty = true;
+					}
+					else
+					{
+						// change its Sort to the position it requested
+						newArray[i].Sort = newSort;
+					}
+				}
+				else if (newArray[i].Sort > newArray[sortAfter].Sort)
+				{
+					// bump up the Sort on all blocks after this
+					newArray[i].Sort++;
+				}
+			}
+		}
 		public void SendTranslations(int clientid)
 		{
 			//Read all lines from server translation and send them to the client
@@ -3670,6 +3724,7 @@ namespace Arcanus.Server
 			p.WhenPlacedGetsConvertedTo = block.WhenPlayerPlacesGetsConvertedTo;
 			p.PickDistanceWhenUsedFloat = Server.SerializeFloat(block.PickDistanceWhenUsed);
 			p.Sort = (int)block.Sort;
+			p.SortAfter = block.SortAfter;
 			return p;
 		}
 

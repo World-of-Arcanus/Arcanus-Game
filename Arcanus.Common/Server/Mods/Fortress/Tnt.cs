@@ -30,6 +30,8 @@ namespace Arcanus.Mods
 				TextureIdForInventory = "TNT",
 				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
+				InventoryType = InventoryType.Tool,
+				SortAfter = "CraftingTable",
 				Sounds = solidSounds,
 				IsUsable = true,
 			});
