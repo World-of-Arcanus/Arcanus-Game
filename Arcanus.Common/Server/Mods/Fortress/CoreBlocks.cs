@@ -1093,7 +1093,7 @@
 				Sounds = solidSounds,
 				Rail = 0,
 			});
-			m.SetBlockType(177, "Rail1", new BlockType()
+			m.SetBlockType(177, "RailTrack", new BlockType()
 			{
 				TextureIdTop = "Rail1",
 				TextureIdBottom = "RailBottom",
@@ -1105,7 +1105,7 @@
 				Sounds = solidSounds,
 				Rail = 1,
 			});
-			m.SetBlockType(178, "Rail2", new BlockType()
+			m.SetBlockType(178, "RailTrack", new BlockType()
 			{
 				TextureIdTop = "Rail2",
 				TextureIdBottom = "RailBottom",
@@ -1117,7 +1117,7 @@
 				Sounds = solidSounds,
 				Rail = 2,
 			});
-			m.SetBlockType(179, "Rail3", new BlockType()
+			m.SetBlockType(179, "RailJunction", new BlockType()
 			{
 				TextureIdTop = "Rail3",
 				TextureIdBottom = "RailBottom",
@@ -1129,7 +1129,7 @@
 				Sounds = solidSounds,
 				Rail = 3,
 			});
-			m.SetBlockType(180, "Rail4", new BlockType()
+			m.SetBlockType(180, "RailCorner", new BlockType()
 			{
 				TextureIdTop = "Rail4",
 				TextureIdBottom = "RailBottom",
@@ -1141,7 +1141,7 @@
 				Sounds = solidSounds,
 				Rail = 4,
 			});
-			m.SetBlockType(184, "Rail5", new BlockType()
+			m.SetBlockType(184, "RailCorner", new BlockType()
 			{
 				TextureIdTop = "Rail5",
 				TextureIdBottom = "RailBottom",
@@ -1153,7 +1153,7 @@
 				Sounds = solidSounds,
 				Rail = 8,
 			});
-			m.SetBlockType(192, "Rail6", new BlockType()
+			m.SetBlockType(192, "RailCorner", new BlockType()
 			{
 				TextureIdTop = "Rail6",
 				TextureIdBottom = "RailBottom",
@@ -1165,7 +1165,7 @@
 				Sounds = solidSounds,
 				Rail = 16,
 			});
-			m.SetBlockType(208, "Rail7", new BlockType()
+			m.SetBlockType(208, "RailCorner", new BlockType()
 			{
 				TextureIdTop = "Rail7",
 				TextureIdBottom = "RailBottom",
@@ -1616,9 +1616,9 @@
 			m.AddToCreativeInventory("Trampoline");
 			// mod insert for Sign
 			// mod insert for Jukebox
-			m.AddToCreativeInventory("Rail1");
-			m.AddToCreativeInventory("Rail3");
-			m.AddToCreativeInventory("Rail6");
+			m.AddToCreativeInventory("RailTrack");
+			m.AddToCreativeInventory("RailJunction");
+			m.AddToCreativeInventory("RailCorner");
 
 			// page 2 - row 1
 			m.AddToCreativeInventory("RedCarpet");
