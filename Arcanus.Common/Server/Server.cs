@@ -3452,7 +3452,7 @@ namespace Arcanus.Server
 			ServerChunk c = d_Map.GetChunk(x, y, z);
 			if (c.Entities == null)
 			{
-				c.Entities = new ServerEntity[256];
+				c.Entities = new ServerEntity[0];
 			}
 			if (c.Entities.Length < c.EntitiesCount + 1)
 			{
