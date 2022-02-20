@@ -40,15 +40,15 @@ namespace Arcanus.Mods.Fortress
 			players[playerid] = new Player();
 
 			Inventory inv = m.GetInventory(playerid);
-			for (int i = 0; i < 10; i++)
+			foreach (var item in inv.Items.Values)
 			{
-				Item item = inv.RightHand[i];
 				if (item != null && item.ItemClass == ItemClass.Block)
 				{
 					BlockType block = m.GetBlockType(item.BlockId);
+
 					if (block.IsPistol)
 					{
-						players[playerid].totalAmmo[item.BlockId] = block.AmmoTotal;
+						players[playerid].totalAmmo[item.BlockId] = block.AmmoTotal * block.AmmoMagazine;
 					}
 				}
 			}
