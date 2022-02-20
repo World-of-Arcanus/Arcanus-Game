@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 
+using Newtonsoft.Json;
+
 namespace Arcanus.Server
 {
 	public class ModManager1 : ModManager
@@ -1150,6 +1152,17 @@ namespace Arcanus.Server
 				throw new ArgumentNullException("id", "The entity ID must not be null!");
 			}
 			server.DespawnEntity(id);
+		}
+
+		public void Debug(int player, string msg)
+		{
+			SendMessage(player, "&4[ Debug ]&f");
+			SendMessage(player, msg);
+		}
+
+		public void Debug(int player, object? obj)
+		{
+			Debug(player, JsonConvert.SerializeObject(obj, Formatting.Indented));
 		}
 
 		#region Deprecated methods

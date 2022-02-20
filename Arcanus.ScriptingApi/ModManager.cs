@@ -703,6 +703,9 @@ namespace Arcanus
 		/// <param name="id">The ID of the entity to delete</param>
 		void EntityDelete(ServerEntityId id);
 
+		void Debug(int player, string msg);
+		void Debug(int player, object? obj);
+
 		#region Deprecated functions
 		[Obsolete("GetCurrentYearTotal is deprecated, please use GetYear instead.", false)]
 		double GetCurrentYearTotal();
