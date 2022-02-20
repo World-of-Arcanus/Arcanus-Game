@@ -3439,7 +3439,7 @@ namespace Arcanus.Server
 		internal void DespawnEntity(ServerEntityId id)
 		{
 			ServerChunk chunk = d_Map.GetChunk(id.chunkx * Server.chunksize, id.chunky * Server.chunksize, id.chunkz * Server.chunksize);
-			chunk.Entities[id.id] = null;
+			chunk.Entities[id.id] = new ServerEntity();
 			if (id.id == chunk.EntitiesCount - 1)
 			{
 				chunk.EntitiesCount--;
