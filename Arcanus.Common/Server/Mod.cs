@@ -1154,15 +1154,30 @@ namespace Arcanus.Server
 			server.DespawnEntity(id);
 		}
 
-		public void Debug(int player, string msg)
+		public void Debug(string msg, int player = 0)
 		{
-			SendMessage(player, "&4[ Debug ]&f");
-			SendMessage(player, msg);
+			string title = "&4[ Debug ]&f";
+
+			if (player == 0)
+            {
+				SendMessageToAll(title);
+				SendMessageToAll(msg);
+			}
+            else
+            {
+				SendMessage(player, title);
+				SendMessage(player, msg);
+			}
 		}
 
-		public void Debug(int player, object? obj)
+		public void Debug(int msg, int player = 0)
 		{
-			Debug(player, JsonConvert.SerializeObject(obj, Formatting.Indented));
+			Debug(msg.ToString(), player);
+		}
+
+		public void Debug(object? msg, int player = 0)
+		{
+			Debug(JsonConvert.SerializeObject(msg, Formatting.Indented), player);
 		}
 
 		#region Deprecated methods
