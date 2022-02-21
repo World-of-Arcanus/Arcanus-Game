@@ -707,6 +707,8 @@ namespace Arcanus
 		void Debug(int msg, int player = 0);
 		void Debug(object? msg, int player = 0);
 
+		List<ModDelegates.PlayerJoin> GetOnPlayerJoin();
+
 		#region Deprecated functions
 		[Obsolete("GetCurrentYearTotal is deprecated, please use GetYear instead.", false)]
 		double GetCurrentYearTotal();

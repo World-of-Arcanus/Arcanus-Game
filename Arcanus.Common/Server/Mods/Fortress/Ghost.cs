@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Arcanus.Mods
 {
@@ -20,9 +21,25 @@ namespace Arcanus.Mods
 		{
 			m.RegisterTimer(f, 0.1);
 			ghost = m.AddBot("Ghost");
+
+			List<ModDelegates.PlayerJoin> onplayerjoin = m.GetOnPlayerJoin();
+
+			for (int i = 0; i < onplayerjoin.Count; i++)
+			{
+				try
+				{
+					onplayerjoin[i](ghost);
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine("Mod exception: OnPlayerJoin");
+					Console.WriteLine(ex.Message);
+					Console.WriteLine(ex.StackTrace);
+				}
+			}
 		}
 
-		bool enabled = false;
+		bool enabled = true;
 
 		ModManager m;
 		int ghost;
@@ -61,8 +78,8 @@ namespace Arcanus.Mods
 			}
 			Pos p1 = history[0];
 			history.RemoveAt(0);
-			m.SetPlayerPosition(ghost, p1.x, p1.y, p1.z);
-			m.SetPlayerOrientation(ghost, p1.heading, p1.pitch, 0);
+			m.SetPlayerPosition(ghost, p1.x - 5, p1.y, p1.z);
+			m.SetPlayerOrientation(ghost, -p1.heading, p1.pitch, 0);
 		}
 	}
 }

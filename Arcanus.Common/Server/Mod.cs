@@ -1180,6 +1180,11 @@ namespace Arcanus.Server
 			Debug(JsonConvert.SerializeObject(msg, Formatting.Indented), player);
 		}
 
+		public List<ModDelegates.PlayerJoin> GetOnPlayerJoin()
+		{
+			return server.modEventHandlers.onplayerjoin;
+		}
+
 		#region Deprecated methods
 		public double GetCurrentYearTotal()
 		{
