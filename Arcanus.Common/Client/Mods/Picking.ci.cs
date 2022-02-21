@@ -470,7 +470,7 @@
 						int clonesource = game.map.GetBlock(blockX, blockZ, blockY);
 						int clonesource2 = game.d_Data.WhenPlayerPlacesGetsConvertedTo()[clonesource];
 						bool gotoDone = false;
-						//find this block in another right hand.
+						// find this block in another right hand
 						for (int i = 0; i < 10; i++)
 						{
 							if (game.d_Inventory.RightHand[i] != null
@@ -484,7 +484,7 @@
 						if (!gotoDone)
 						{
 							IntRef freehand = game.d_InventoryUtil.FreeHand(game.ActiveMaterial);
-							//find this block in inventory.
+							// find this block in the inventory
 							for (int i = 0; i < game.d_Inventory.ItemsCount; i++)
 							{
 								Packet_PositionItem k = game.d_Inventory.Items[i];
@@ -495,7 +495,7 @@
 								if (k.Value_.ItemClass == Packet_ItemClassEnum.Block
 									&& k.Value_.BlockId == clonesource2)
 								{
-									//free hand
+									// free hand
 									if (freehand != null)
 									{
 										game.WearItem(
@@ -503,16 +503,18 @@
 											game.InventoryPositionMaterialSelector(freehand.value));
 										break;
 									}
-									//try to replace current slot
-									if (game.d_Inventory.RightHand[game.ActiveMaterial] != null
-										&& game.d_Inventory.RightHand[game.ActiveMaterial].ItemClass == Packet_ItemClassEnum.Block)
-									{
-										game.MoveToInventory(
-											game.InventoryPositionMaterialSelector(game.ActiveMaterial));
+									// try to replace the current slot
+									// if (game.d_Inventory.RightHand[game.ActiveMaterial] != null
+									// 	&& game.d_Inventory.RightHand[game.ActiveMaterial].ItemClass == Packet_ItemClassEnum.Block)
+									// {
+									// 	game.MoveToInventory(
+									// 		game.InventoryPositionMaterialSelector(game.ActiveMaterial));
+										game.InventoryClick(
+											game.InventoryPositionMainArea(k.X, k.Y));
 										game.WearItem(
 											game.InventoryPositionMainArea(k.X, k.Y),
 											game.InventoryPositionMaterialSelector(game.ActiveMaterial));
-									}
+									// }
 								}
 							}
 						}
