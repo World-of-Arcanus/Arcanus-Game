@@ -3729,6 +3729,7 @@ namespace Arcanus.Server
 			p.PickDistanceWhenUsedFloat = Server.SerializeFloat(block.PickDistanceWhenUsed);
 			p.Sort = (int)block.Sort;
 			p.SortAfter = block.SortAfter;
+			p.Animations = GetAnimationSet(block.Animations);
 			return p;
 		}
 
@@ -3748,6 +3749,19 @@ namespace Arcanus.Server
 			p.SetBounce(soundSet.Bounce, soundSet.Bounce.Length, soundSet.Bounce.Length);
 			p.SetExplosion(soundSet.Explosion, soundSet.Explosion.Length, soundSet.Explosion.Length);
 			p.SetWalk(soundSet.Walk, soundSet.Walk.Length, soundSet.Walk.Length);
+			return p;
+		}
+
+		private static Packet_AnimationSet GetAnimationSet(AnimationSet animationSet)
+		{
+			if (animationSet == null)
+			{
+				return null;
+			}
+			Packet_AnimationSet p = new Packet_AnimationSet();
+			p.SetShot(animationSet.Shot, animationSet.Shot.Length, animationSet.Shot.Length);
+			p.SetHit(animationSet.Hit, animationSet.Hit.Length, animationSet.Hit.Length);
+			p.SetExplosion(animationSet.Explosion, animationSet.Explosion.Length, animationSet.Explosion.Length);
 			return p;
 		}
 	}

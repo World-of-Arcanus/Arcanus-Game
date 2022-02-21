@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Arcanus.Mods.Fortress
 {
@@ -17,10 +18,14 @@ namespace Arcanus.Mods.Fortress
 			m.RegisterOnPlayerJoin(PlayerJoin);
 			m.RegisterOnWeaponHit(Hit);
 			m.RegisterOnWeaponShot(Shot);
+			m.RegisterOnPlayerDeath(OnPlayerDeath);
 
 			m.RegisterTimer(UpdateMedicalKitAmmoPack, 0.1);
+			m.RegisterTimer(UpdateRespawnTimer, 1);
 		}
 
+		TimeSpan RespawnTime = TimeSpan.FromSeconds(15);
+		DateTime CurrentRespawnTime;
 		Dictionary<int, Player> players = new Dictionary<int, Player>();
 
 		public class Player
@@ -54,6 +59,71 @@ namespace Arcanus.Mods.Fortress
 			}
 
 			m.NotifyAmmo(playerid, players[playerid].totalAmmo);
+		}
+
+		void OnPlayerDeath(int player, DeathReason reason, int sourceID)
+		{
+			string deathMessage = "";
+			switch (reason)
+			{
+				case DeathReason.FallDamage:
+					Die(player);
+					deathMessage = string.Format("{0}{1} &7was doomed to fall.", m.GetPlayerName(player));
+					break;
+				case DeathReason.BlockDamage:
+					if (sourceID == m.GetBlockId("Lava"))
+					{
+						Die(player);
+						deathMessage = string.Format("{0}{1} &7thought they could swim in Lava.", m.GetPlayerName(player));
+					}
+					else if (sourceID == m.GetBlockId("Fire"))
+					{
+						Die(player);
+						deathMessage = string.Format("{0}{1} &7was burned alive.", m.GetPlayerName(player));
+					}
+					else
+					{
+						Die(player);
+						deathMessage = string.Format("{0}{1} &7was killed by {2}.", m.GetPlayerName(player), m.GetBlockName(sourceID));
+					}
+					break;
+				case DeathReason.Drowning:
+					Die(player);
+					deathMessage = string.Format("{0}{1} &7tried to breathe under water.", m.GetPlayerName(player));
+					break;
+				case DeathReason.Explosion:
+					//Check if one of the players is dead
+					if (players[player].isdead || players[sourceID].isdead)
+					{
+						break;
+					}
+					Die(player);
+					if (sourceID == player)
+					{
+						deathMessage = string.Format("{0}{1} &7blew himself up.", m.GetPlayerName(player));
+						break;
+					}
+					players[sourceID].kills = players[sourceID].kills + 1;
+					deathMessage = string.Format("{0}{1} &7was blown into pieces by {2}{3}&7.", m.GetPlayerName(player), m.GetPlayerName(sourceID));
+					break;
+				default:
+					Die(player);
+					deathMessage = string.Format("{0}{1} &7died.", m.GetPlayerName(player));
+					break;
+			}
+			if (!string.IsNullOrEmpty(deathMessage))
+			{
+				m.SendMessageToAll(deathMessage);
+			}
+		}
+
+		void Respawn(int playerid)
+		{
+			float posx = m.GetPlayerPositionX(playerid);
+			float posy = m.GetPlayerPositionY(playerid);
+			float posz = m.GetPlayerPositionZ(playerid);
+			// posz += 4; // add 4 to spawn in the air
+			m.SetPlayerPosition(playerid, posx, posy, posz);
 		}
 
 		void Shot(int sourceplayer, int block)
@@ -131,6 +201,66 @@ namespace Arcanus.Mods.Fortress
 
 			m.SetPlayerHealth(player, m.GetPlayerMaxHealth(player), m.GetPlayerMaxHealth(player));
 			m.FollowPlayer(player, player, true);
+			UpdatePlayerModel(player);
+		}
+
+		void UpdatePlayerModel(int player)
+		{
+			string model = "player.txt";
+
+			if (players[player].isdead) {
+				model = "playerdead.txt";
+			}
+
+			m.SetPlayerModel(player, model, "mineplayer.png");
+		}
+
+		void UpdateRespawnTimer()
+		{
+			int[] allplayers = m.AllPlayers();
+			int secondsToRespawn = (int)((CurrentRespawnTime + RespawnTime) - DateTime.UtcNow).TotalSeconds;
+			if (secondsToRespawn <= 0)
+			{
+				for (int i = 0; i < allplayers.Length; i++)
+				{
+					int p = allplayers[i];
+					if (!players.ContainsKey(p))
+					{
+						//Skip this player as he hasn't joined yet
+						continue;
+					}
+					if (players[p].isdead)
+					{
+						m.SendMessageToAll(string.Format("{0} respawns", m.GetPlayerName(p)));
+						m.SendDialog(p, "RespawnCountdown" + p, null);
+						m.FollowPlayer(p, -1, false);
+						Respawn(p);
+						players[p].isdead = false;
+						UpdatePlayerModel(p);
+					}
+				}
+				CurrentRespawnTime = DateTime.UtcNow;
+			}
+			for (int i = 0; i < allplayers.Length; i++)
+			{
+				int p = allplayers[i];
+				if (!players.ContainsKey(p))
+				{
+					//Skip this player as he hasn't joined yet
+					continue;
+				}
+				if (players[p].isdead)
+				{
+					Dialog d = new Dialog();
+					d.IsModal = false;
+					string text = secondsToRespawn.ToString();
+					DialogFont f = new DialogFont("Verdana", 60f, DialogFontStyle.Regular);
+					Widget w = Widget.MakeText(text, f, -m.MeasureTextSize(text, f)[0] / 2, -200, Color.Red.ToArgb());
+					d.Widgets = new Widget[1];
+					d.Widgets[0] = w;
+					m.SendDialog(p, "RespawnCountdown" + p, d);
+				}
+			}
 		}
 
 		void UpdateMedicalKitAmmoPack()

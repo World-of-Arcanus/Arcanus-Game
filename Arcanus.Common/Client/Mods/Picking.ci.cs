@@ -341,7 +341,7 @@
 								sprite.positionX = p[0];
 								sprite.positionY = p[1];
 								sprite.positionZ = p[2];
-								sprite.image = "blood.png";
+								sprite.image = game.platform.StringFormat("{0}.png", game.blocktypes[item.BlockId].Animations.Hit[0]);
 								entity.sprite = sprite;
 								entity.expires = Expires.Create(one * 2 / 10);
 								game.EntityAddLocal(entity);
@@ -366,7 +366,7 @@
 									sprite.positionX = p[0];
 									sprite.positionY = p[1];
 									sprite.positionZ = p[2];
-									sprite.image = "blood.png";
+									sprite.image = game.platform.StringFormat("{0}.png", game.blocktypes[item.BlockId].Animations.Hit[0]);
 									entity.sprite = sprite;
 									entity.expires = Expires.Create(one * 2 / 10);
 									game.EntityAddLocal(entity);
@@ -408,7 +408,7 @@
 						Entity grenadeEntity = new Entity();
 
 						Sprite sprite = new Sprite();
-						sprite.image = "ChemicalGreen.png";
+						sprite.image = game.platform.StringFormat("{0}.png", game.blocktypes[item.BlockId].Animations.Shot[0]);
 						sprite.size = 14;
 						sprite.animationcount = 0;
 						sprite.positionX = pick.Start[0];

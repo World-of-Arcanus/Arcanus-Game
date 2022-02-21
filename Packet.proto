@@ -250,6 +250,11 @@ message SoundSet {
 	repeated string explosion = 9;
 }
 
+message AnimationSet {
+	repeated string shot = 1;
+	repeated string hit = 2;
+	repeated string explosion = 3;
+}
 
 message BlockType {
 	optional string textureIdTop = 1;
@@ -301,6 +306,7 @@ message BlockType {
 	optional WearableType wearableType = 47 [default = Empty];
 	optional int32 sort = 48;
 	optional string sortAfter = 49;
+	optional AnimationSet animations = 50;
 }
 
 enum DrawType {

@@ -1459,11 +1459,17 @@
 					Explosion = new string[] { "slimeballexplosion" },
 					Reload = solidSounds.Reload,
 				},
+				Animations = new AnimationSet()
+				{
+					Shot = new string[] { "WeaponSlimeBall" },
+					Hit = new string[] { "blood" },
+					Explosion = new string[] { "ani5" },
+				},
 				// handimage = "slimeballhand.png",
 				IsPistol = true,
 				AimRadius = 20,
-				Recoil = 0.04f,
-				Delay = 0.5f,
+				Recoil = 0.0f,
+				Delay = 0.25f,
 				WalkSpeedWhenUsed = 1f,
 				IronSightsEnabled = false,
 				IronSightsMoveSpeed = 0.4f,
@@ -1472,13 +1478,49 @@
 				IronSightsFov = 0.5f,
 				AmmoMagazine = 6,
 				AmmoTotal = 6,
-				ReloadDelay = 2,
-				ExplosionRange = 10f,
+				ReloadDelay = 0,
+				ExplosionRange = 6f,
 				ExplosionTime = 1f,
 				ProjectileSpeed = 25f,
 				ProjectileBounce = true,
-				DamageBody = 200,
+				DamageBody = 50,
 				PistolType = PistolType.Grenade,
+				InventoryType = InventoryType.Magic,
+			});
+
+			m.SetBlockType(275, "Bow", new BlockType()
+			{
+				AllTextures = "Bow",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Solid,
+				Sounds = new SoundSet()
+				{
+					Shoot = new string[] { },
+					ShootEnd = new string[] { "build" },
+					Reload = new string[] { "grenadestart" },
+				},
+				Animations = new AnimationSet()
+				{
+					Hit = new string[] { "blood" },
+				},
+				// handimage = "pistolhand.png",
+				IsPistol = true,
+				AimRadius = 15,
+				Recoil = 0.04f,
+				Delay = 0.5f,
+				WalkSpeedWhenUsed = 1f,
+				IronSightsEnabled = true,
+				IronSightsMoveSpeed = 1f,
+				// IronSightsImage = "pistolhandsights.png",
+				IronSightsAimRadius = 15,
+				IronSightsFov = 0.8f,
+				AmmoMagazine = 12,
+				AmmoTotal = 120,
+				ReloadDelay = 2,
+				ExplosionRange = 0.2f,
+				ExplosionTime = 0.2f,
+				DamageBody = 15,
+				DamageHead = 50,
 				InventoryType = InventoryType.Magic,
 			});
 
@@ -1665,6 +1707,7 @@
 
 			// page 1 - row 2
 			m.AddToCreativeInventory("SlimeBall");
+			m.AddToCreativeInventory("Bow");
 
 			#endregion
 

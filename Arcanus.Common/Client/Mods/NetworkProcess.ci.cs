@@ -474,7 +474,7 @@ public class ProcessPacketTask : Action_
 					Entity entity = new Entity();
 
 					Sprite sprite = new Sprite();
-					sprite.image = "ChemicalGreen.png";
+					sprite.image = game.platform.StringFormat("{0}.png", game.blocktypes[packet.Projectile.BlockId].Animations.Shot[0]);
 					sprite.size = 14;
 					sprite.animationcount = 0;
 					sprite.positionX = game.DeserializeFloat(packet.Projectile.FromXFloat);

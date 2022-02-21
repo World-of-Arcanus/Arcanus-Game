@@ -36,7 +36,7 @@
 			Entity entity = new Entity();
 
 			Sprite spritenew = new Sprite();
-			spritenew.image = "ani5.png";
+			spritenew.image = game.platform.StringFormat("{0}.png", grenadeBlock.Animations.Explosion[0]);
 			spritenew.positionX = grenadeSprite.positionX;
 			spritenew.positionY = grenadeSprite.positionY + 1;
 			spritenew.positionZ = grenadeSprite.positionZ;

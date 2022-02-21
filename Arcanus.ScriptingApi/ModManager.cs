@@ -1242,6 +1242,16 @@ namespace Arcanus
 		public string[] Explosion = new string[0];
 	}
 
+	public class AnimationSet
+	{
+		[ProtoMember(1)]
+		public string[] Shot = new string[0];
+		[ProtoMember(2)]
+		public string[] Hit = new string[0];
+		[ProtoMember(3)]
+		public string[] Explosion = new string[0];
+	}
+
 	[ProtoContract]
 	public class BlockType
 	{
@@ -1344,6 +1354,8 @@ namespace Arcanus
 		public int Sort;
 		[ProtoMember(49)]
 		public string SortAfter;
+		[ProtoMember(50)]
+		public AnimationSet Animations;
 
 		public string AllTextures
 		{
