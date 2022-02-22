@@ -14,7 +14,7 @@
 			game.GLTranslate(b.positionX, b.positionY, b.positionZ);
 			Billboard(game);
 			game.GLScale((one * 2 / 100), (one * 2 / 100), (one * 2 / 100));
-			game.GLTranslate(0 - b.size / 2, 0 - b.size / 2, 0);
+			game.GLTranslate(0 - b.width / 2, 0 - b.height / 2, 0);
 			//d_Draw2d.Draw2dTexture(night ? moontexture : suntexture, 0, 0, ImageSize, ImageSize, null, Color.White);
 			IntRef n = null;
 			if (b.animationcount > 0)
@@ -22,7 +22,7 @@
 				float progress = one - (entity.expires.timeLeft / entity.expires.totalTime);
 				n = IntRef.Create(game.platform.FloatToInt(progress * (b.animationcount * b.animationcount - 1)));
 			}
-			game.Draw2dTexture(game.GetTexture(b.image), 0, 0, b.size, b.size, n, b.animationcount, ColorCi.FromArgb(255, 255, 255, 255), true);
+			game.Draw2dTexture(game.GetTexture(b.image), 0, 0, b.width, b.height, n, b.animationcount, ColorCi.FromArgb(255, 255, 255, 255), true);
 			game.GLPopMatrix();
 		}
 	}

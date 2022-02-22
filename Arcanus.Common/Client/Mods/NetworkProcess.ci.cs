@@ -475,7 +475,8 @@ public class ProcessPacketTask : Action_
 
 					Sprite sprite = new Sprite();
 					sprite.image = game.platform.StringFormat("{0}.png", game.blocktypes[packet.Projectile.BlockId].Animations.Shot[0]);
-					sprite.size = 14;
+					sprite.width = 14;
+					sprite.height = 14;
 					sprite.animationcount = 0;
 					sprite.positionX = game.DeserializeFloat(packet.Projectile.FromXFloat);
 					sprite.positionY = game.DeserializeFloat(packet.Projectile.FromYFloat);

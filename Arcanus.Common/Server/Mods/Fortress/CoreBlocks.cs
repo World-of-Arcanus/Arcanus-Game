@@ -1462,7 +1462,7 @@
 				Animations = new AnimationSet()
 				{
 					Shot = new string[] { "WeaponSlimeBall" },
-					Hit = new string[] { "blood" },
+					Hit = new string[] { "hit" },
 					Explosion = new string[] { "ani5" },
 				},
 				// handimage = "slimeballhand.png",
@@ -1501,12 +1501,12 @@
 				},
 				Animations = new AnimationSet()
 				{
-					Hit = new string[] { "blood" },
+					Hit = new string[] { "hit" },
 				},
 				// handimage = "pistolhand.png",
 				IsPistol = true,
 				AimRadius = 15,
-				Recoil = 0.04f,
+				Recoil = 0.00f,
 				Delay = 0.5f,
 				WalkSpeedWhenUsed = 1f,
 				IronSightsEnabled = true,

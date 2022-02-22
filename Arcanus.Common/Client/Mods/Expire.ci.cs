@@ -40,7 +40,8 @@
 			spritenew.positionX = grenadeSprite.positionX;
 			spritenew.positionY = grenadeSprite.positionY + 1;
 			spritenew.positionZ = grenadeSprite.positionZ;
-			spritenew.size = 200;
+			spritenew.width = 200;
+			spritenew.height = 200;
 			spritenew.animationcount = 4;
 
 			entity.sprite = spritenew;

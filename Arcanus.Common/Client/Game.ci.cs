@@ -2188,7 +2188,8 @@
 
 		entity.sprite = new Sprite();
 		entity.sprite.image = "Sponge.png";
-		entity.sprite.size = 4;
+		entity.sprite.width = 4;
+		entity.sprite.height = 4;
 		entity.sprite.animationcount = 0;
 
 		return entity;

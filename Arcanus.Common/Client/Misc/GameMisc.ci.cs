@@ -109,13 +109,15 @@ public class Sprite
 {
 	public Sprite()
 	{
-		size = 40;
+		width = 40;
+		height = 40;
 	}
 	internal float positionX;
 	internal float positionY;
 	internal float positionZ;
 	internal string image;
-	internal int size;
+	internal int width;
+	internal int height;
 	internal int animationcount;
 }
 

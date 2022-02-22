@@ -342,8 +342,11 @@
 								sprite.positionY = p[1];
 								sprite.positionZ = p[2];
 								sprite.image = game.platform.StringFormat("{0}.png", game.blocktypes[item.BlockId].Animations.Hit[0]);
+								sprite.animationcount = 5;
+								sprite.width = 40;
+								sprite.height = 40;
 								entity.sprite = sprite;
-								entity.expires = Expires.Create(one * 2 / 10);
+								entity.expires = Expires.Create(1.0f);
 								game.EntityAddLocal(entity);
 							}
 							shot.HitPlayer = i;
@@ -367,8 +370,11 @@
 									sprite.positionY = p[1];
 									sprite.positionZ = p[2];
 									sprite.image = game.platform.StringFormat("{0}.png", game.blocktypes[item.BlockId].Animations.Hit[0]);
+									sprite.animationcount = 5;
+									sprite.width = 40;
+									sprite.height = 40;
 									entity.sprite = sprite;
-									entity.expires = Expires.Create(one * 2 / 10);
+									entity.expires = Expires.Create(1.0f);
 									game.EntityAddLocal(entity);
 								}
 								shot.HitPlayer = i;
@@ -409,7 +415,8 @@
 
 						Sprite sprite = new Sprite();
 						sprite.image = game.platform.StringFormat("{0}.png", game.blocktypes[item.BlockId].Animations.Shot[0]);
-						sprite.size = 14;
+						sprite.width = 14;
+						sprite.height = 14;
 						sprite.animationcount = 0;
 						sprite.positionX = pick.Start[0];
 						sprite.positionY = pick.Start[1];
