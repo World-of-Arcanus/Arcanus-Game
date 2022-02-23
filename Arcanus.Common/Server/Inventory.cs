@@ -266,6 +266,9 @@ namespace Arcanus.Server
 		[ProtoMember(9, IsRequired = false)]
 		public int GroundPositionZ;
 
+		[ProtoMember(10, IsRequired = false)]
+		public MouseEventArgs MouseArgs;
+
 		public static InventoryPosition MaterialSelector(int materialId)
 		{
 			InventoryPosition pos = new InventoryPosition();
@@ -282,6 +285,21 @@ namespace Arcanus.Server
 			pos.AreaY = point.Y;
 			return pos;
 		}
+	}
+
+	[ProtoContract]
+	public class MouseEventArgs
+	{
+		[ProtoMember(1, IsRequired = false)]
+		public int x;
+		[ProtoMember(2, IsRequired = false)]
+		public int y;
+		[ProtoMember(3, IsRequired = false)]
+		public int movementX;
+		[ProtoMember(4, IsRequired = false)]
+		public int movementY;
+		[ProtoMember(5, IsRequired = false)]
+		public int buttonClicked;
 	}
 
 	public interface IGameDataItems
@@ -452,35 +470,39 @@ namespace Arcanus.Server
 			else
 			if (pos.Type == Packet_InventoryPositionTypeEnum.MaterialSelector)
 			{
-				/* the old logic to handle drag/drop from our right hand
-				if (d_Inventory.DragDropItem == null && d_Inventory.RightHand[pos.MaterialId] != null)
+				// remove
+				if (pos.MouseArgs.ButtonClicked == MouseButtonEnum.Right)
 				{
-					d_Inventory.DragDropItem = d_Inventory.RightHand[pos.MaterialId];
 					d_Inventory.RightHand[pos.MaterialId] = null;
 				}
+				// drag / drop
 				else
-				if (d_Inventory.DragDropItem != null && d_Inventory.RightHand[pos.MaterialId] == null)
 				{
-					if (d_Items.CanWear(WearPlace_.RightHand, d_Inventory.DragDropItem))
+					if (d_Inventory.DragDropItem == null && d_Inventory.RightHand[pos.MaterialId] != null)
 					{
-						d_Inventory.RightHand[pos.MaterialId] = d_Inventory.DragDropItem;
-						d_Inventory.DragDropItem = null;
+						d_Inventory.DragDropItem = d_Inventory.RightHand[pos.MaterialId];
+						d_Inventory.RightHand[pos.MaterialId] = null;
+					}
+					else
+					if (d_Inventory.DragDropItem != null && d_Inventory.RightHand[pos.MaterialId] == null)
+					{
+						if (d_Items.CanWear(WearPlace_.RightHand, d_Inventory.DragDropItem))
+						{
+							d_Inventory.RightHand[pos.MaterialId] = d_Inventory.DragDropItem;
+							d_Inventory.DragDropItem = null;
+						}
+					}
+					else
+					if (d_Inventory.DragDropItem != null && d_Inventory.RightHand[pos.MaterialId] != null)
+					{
+						if (d_Items.CanWear(WearPlace_.RightHand, d_Inventory.DragDropItem))
+						{
+							Item oldHand = d_Inventory.RightHand[pos.MaterialId];
+							d_Inventory.RightHand[pos.MaterialId] = d_Inventory.DragDropItem;
+							d_Inventory.DragDropItem = oldHand;
+						}
 					}
 				}
-				else
-				if (d_Inventory.DragDropItem != null && d_Inventory.RightHand[pos.MaterialId] != null)
-				{
-					if (d_Items.CanWear(WearPlace_.RightHand, d_Inventory.DragDropItem))
-					{
-						Item oldHand = d_Inventory.RightHand[pos.MaterialId];
-						d_Inventory.RightHand[pos.MaterialId] = d_Inventory.DragDropItem;
-						d_Inventory.DragDropItem = oldHand;
-					}
-				}
-				*/
-
-				// remove the material
-				d_Inventory.RightHand[pos.MaterialId] = null;
 
 				// update the active slot
 				d_Player.ActiveMaterialSlot = pos.MaterialId;

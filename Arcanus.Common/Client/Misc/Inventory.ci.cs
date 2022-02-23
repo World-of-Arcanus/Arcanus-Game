@@ -230,6 +230,11 @@ public abstract class IInventoryController
 	public abstract void MoveToInventory(Packet_InventoryPosition from);
 }
 
+public abstract class IInventoryControllerClient: IInventoryController
+{
+	public abstract Packet_MouseEventArgs ConvertMouseEventArgs(MouseEventArgs args);
+}
+
 public class InventoryItemPos
 {
 	public int xMin;

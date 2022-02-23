@@ -96,6 +96,8 @@ message InventoryPosition {
 	optional int32 GroundPositionX = 7;
 	optional int32 GroundPositionY = 8;
 	optional int32 GroundPositionZ = 9;
+
+	optional MouseEventArgs MouseArgs = 10;
 }
 
 enum InventoryPositionType {
@@ -103,6 +105,14 @@ enum InventoryPositionType {
 	Ground = 1;
 	MaterialSelector = 2;
 	WearPlace = 3;
+}
+
+message MouseEventArgs {
+	optional int32 x = 1;
+	optional int32 y = 2;
+	optional int32 movementX = 3;
+	optional int32 movementY = 4;
+	optional int32 buttonClicked = 5;
 }
 
 message PositionAndOrientation {

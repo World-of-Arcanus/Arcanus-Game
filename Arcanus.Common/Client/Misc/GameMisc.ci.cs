@@ -624,7 +624,7 @@ public class DirectionUtils
 	}
 }
 
-public class ClientInventoryController : IInventoryController
+public class ClientInventoryController : IInventoryControllerClient
 {
 	public static ClientInventoryController Create(Game game)
 	{
@@ -648,6 +648,18 @@ public class ClientInventoryController : IInventoryController
 	public override void MoveToInventory(Packet_InventoryPosition from)
 	{
 		g.MoveToInventory(from);
+	}
+
+	public override Packet_MouseEventArgs ConvertMouseEventArgs(MouseEventArgs args)
+	{
+		Packet_MouseEventArgs mouse = new Packet_MouseEventArgs();
+		mouse.X = args.GetX();
+		mouse.Y = args.GetY();
+		mouse.MovementX = args.GetMovementX();
+		mouse.MovementY = args.GetMovementY();
+		mouse.ButtonClicked = args.GetButton();
+
+		return mouse;
 	}
 }
 

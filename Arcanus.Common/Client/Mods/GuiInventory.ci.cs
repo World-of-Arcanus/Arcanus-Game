@@ -38,7 +38,7 @@
 	internal Game game;
 	internal GameDataItemsClient dataItems;
 	internal InventoryUtilClient inventoryUtil;
-	internal IInventoryController controller;
+	internal IInventoryControllerClient controller;
 
 	internal int CellDrawSize;
 
@@ -117,13 +117,13 @@
 				for (int i = 0; i < game.d_Inventory.ItemsCount; i++)
 				{
 					if (game.d_Inventory.Items[i].Value_ == itemForInventory)
-                    {
+					{
 						pos = game.d_Inventory.Items[i];
 					}
 				}
 
 				if (pos != null)
-                {
+				{
 					// send the position to the server
 					Packet_InventoryPosition p = new Packet_InventoryPosition();
 					p.Type = Packet_InventoryPositionTypeEnum.MainArea;
@@ -146,7 +146,10 @@
 				InventoryType = tab;
 				InventoryPage = 1;
 			}
+		}
 
+		if (args.GetButton() == MouseButtonEnum.Left || args.GetButton() == MouseButtonEnum.Right)
+		{
 			// materials click
 			if (SelectedMaterialSelectorSlot(scaledMouse) != null)
 			{
@@ -155,6 +158,7 @@
 				Packet_InventoryPosition p = new Packet_InventoryPosition();
 				p.Type = Packet_InventoryPositionTypeEnum.MaterialSelector;
 				p.MaterialId = game.ActiveMaterial;
+				p.MouseArgs = controller.ConvertMouseEventArgs(args);
 
 				controller.InventoryClick(p);
 
@@ -442,6 +446,11 @@
 				game.uiRenderer.GetFile("mousecursor.png"),
 				game.uiRenderer.GetFileLength("mousecursor.png")
 			);
+		}
+
+		if (game.d_Inventory.DragDropItem != null)
+		{
+			DrawItem(scaledMouse.X, scaledMouse.Y, game.d_Inventory.DragDropItem, 0, 0);
 		}
 	}
 
