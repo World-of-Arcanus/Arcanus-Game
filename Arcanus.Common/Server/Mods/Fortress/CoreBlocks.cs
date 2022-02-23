@@ -1398,7 +1398,7 @@
 
 			m.SetBlockType(268, "RestoreManaPotion", new BlockType()
 			{
-				AllTextures = "PotionBlue",
+				AllTextures = "PotionPurple",
 				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Empty,
 				InventoryType = InventoryType.Magic,
@@ -1406,7 +1406,7 @@
 			});
 			m.SetBlockType(269, "MassDamagePotion", new BlockType()
 			{
-				AllTextures = "PotionPurple",
+				AllTextures = "PotionBlack",
 				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Empty,
 				InventoryType = InventoryType.Magic,
@@ -1445,82 +1445,216 @@
 				Sounds = solidSounds,
 			});
 
-			m.SetBlockType(274, "SlimeBall", new BlockType()
+			m.SetBlockType(274, "EnchantedSword", new BlockType()
 			{
-				AllTextures = "MagicStaff",
-				TextureIdForInventory = "WeaponSlimeBall",
+				AllTextures = "WeaponSword",
+				TextureIdForInventory = "WeaponSword",
 				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Solid,
 				Sounds = new SoundSet()
 				{
-					Shoot = new string[] { "slimeballstart" },
-					ShootEnd = new string[] { "" },
+					Shoot = new string[] { "sword" },
+					HitHead = new string[] { "grunt1" },
+					HitBody = new string[] { "grunt2" },
+				},
+				Animations = new AnimationSet()
+				{
+					Hit = new string[] { "hit" },
+				},
+				IsPistol = true,
+				AimRadius = 0,
+				Recoil = 0.00f,
+				Delay = 0.0f,
+				// PickDistanceWhenUsed = 2,
+				WalkSpeedWhenUsed = 1f,
+				IronSightsEnabled = false,
+				AmmoMagazine = 4,
+				AmmoTotal = 25,
+				ReloadDelay = 4,
+				DamageBody = 25,
+				DamageHead = 100,
+				PistolType = PistolType.Melee,
+				InventoryType = InventoryType.Magic,
+			});
+			m.SetBlockType(275, "AttackMagic", new BlockType()
+			{
+				AllTextures = "WeaponMagic",
+				TextureIdForInventory = "WeaponMagicAttackInventory",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Solid,
+				Sounds = new SoundSet()
+				{
+					Shoot = new string[] { "magic" },
+					HitHead = new string[] { "grunt1" },
+					HitBody = new string[] { "grunt2" },
+				},
+				Animations = new AnimationSet()
+				{
+					Shot = new string[] { "magic-attack" },
+					Hit = new string[] { "hit" },
+				},
+				IsPistol = true,
+				AimRadius = 15,
+				Recoil = 0.00f,
+				Delay = 0.0f,
+				// PickDistanceWhenUsed = 10,
+				WalkSpeedWhenUsed = 1f,
+				IronSightsEnabled = true,
+				IronSightsMoveSpeed = 1f,
+				IronSightsAimRadius = 15,
+				IronSightsFov = 0.8f,
+				AmmoMagazine = 10,
+				AmmoTotal = 10,
+				ReloadDelay = 2,
+				DamageBody = 10,
+				DamageHead = 50,
+				PistolType = PistolType.Magic,
+				InventoryType = InventoryType.Magic,
+			});
+			m.SetBlockType(276, "FireMagic", new BlockType()
+			{
+				AllTextures = "WeaponMagic",
+				TextureIdForInventory = "WeaponMagicFireInventory",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Solid,
+				Sounds = new SoundSet()
+				{
+					Shoot = new string[] { "magic" },
+					HitHead = new string[] { "grunt1" },
+					HitBody = new string[] { "grunt2" },
+				},
+				Animations = new AnimationSet()
+				{
+					Shot = new string[] { "magic-fire" },
+					Hit = new string[] { "hit" },
+				},
+				IsPistol = true,
+				AimRadius = 15,
+				Recoil = 0.00f,
+				Delay = 0.0f,
+				// PickDistanceWhenUsed = 10,
+				WalkSpeedWhenUsed = 1f,
+				IronSightsEnabled = true,
+				IronSightsMoveSpeed = 1f,
+				IronSightsAimRadius = 15,
+				IronSightsFov = 0.8f,
+				AmmoMagazine = 10,
+				AmmoTotal = 10,
+				ReloadDelay = 2,
+				DamageBody = 10,
+				DamageHead = 50,
+				PistolType = PistolType.Magic,
+				InventoryType = InventoryType.Magic,
+			});
+			m.SetBlockType(277, "IceMagic", new BlockType()
+			{
+				AllTextures = "WeaponMagic",
+				TextureIdForInventory = "WeaponMagicIceInventory",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Solid,
+				Sounds = new SoundSet()
+				{
+					Shoot = new string[] { "magic" },
+					HitHead = new string[] { "grunt1" },
+					HitBody = new string[] { "grunt2" },
+				},
+				Animations = new AnimationSet()
+				{
+					Shot = new string[] { "magic-ice" },
+					Hit = new string[] { "hit" },
+				},
+				IsPistol = true,
+				AimRadius = 15,
+				Recoil = 0.00f,
+				Delay = 0.0f,
+				// PickDistanceWhenUsed = 10,
+				WalkSpeedWhenUsed = 1f,
+				IronSightsEnabled = true,
+				IronSightsMoveSpeed = 1f,
+				IronSightsAimRadius = 15,
+				IronSightsFov = 0.8f,
+				AmmoMagazine = 10,
+				AmmoTotal = 10,
+				ReloadDelay = 2,
+				DamageBody = 10,
+				DamageHead = 50,
+				PistolType = PistolType.Magic,
+				InventoryType = InventoryType.Magic,
+			});
+			m.SetBlockType(278, "ExplodingSlime", new BlockType()
+			{
+				AllTextures = "WeaponSlimeBall",
+				DrawType = DrawType.Plant,
+				WalkableType = WalkableType.Solid,
+				Sounds = new SoundSet()
+				{
+					Shoot = new string[] { "slimeball" },
 					Bounce = new string[] { "slimeballbounce" },
 					Explosion = new string[] { "slimeballexplosion" },
-					Reload = solidSounds.Reload,
 				},
 				Animations = new AnimationSet()
 				{
 					Shot = new string[] { "WeaponSlimeBall" },
-					Hit = new string[] { "hit" },
-					Explosion = new string[] { "ani5" },
+					Explosion = new string[] { "explosion" },
 				},
-				// handimage = "slimeballhand.png",
 				IsPistol = true,
-				AimRadius = 20,
+				AimRadius = 30,
 				Recoil = 0.0f,
-				Delay = 0.25f,
+				Delay = 0.0f,
+				// PickDistanceWhenUsed = 12,
 				WalkSpeedWhenUsed = 1f,
-				IronSightsEnabled = false,
-				IronSightsMoveSpeed = 0.4f,
-				// IronSightsImage = "slimeballhand.png",
-				IronSightsAimRadius = 10,
-				IronSightsFov = 0.5f,
-				AmmoMagazine = 6,
-				AmmoTotal = 6,
+				IronSightsEnabled = true,
+				IronSightsMoveSpeed = 1f,
+				IronSightsAimRadius = 30,
+				IronSightsFov = 0.8f,
+				AmmoMagazine = 5,
+				AmmoTotal = 20,
 				ReloadDelay = 0,
-				ExplosionRange = 6f,
+				ExplosionRange = 4f,
 				ExplosionTime = 1f,
 				ProjectileSpeed = 25f,
 				ProjectileBounce = true,
-				DamageBody = 50,
+				DamageBody = 25,
+				DamageHead = 25,
 				PistolType = PistolType.Grenade,
 				InventoryType = InventoryType.Magic,
 			});
-
-			m.SetBlockType(275, "Bow", new BlockType()
+			m.SetBlockType(279, "ProximitySlime", new BlockType()
 			{
-				AllTextures = "Bow",
+				AllTextures = "WeaponSlimeBall",
 				DrawType = DrawType.Plant,
 				WalkableType = WalkableType.Solid,
 				Sounds = new SoundSet()
 				{
-					Shoot = new string[] { },
-					ShootEnd = new string[] { "build" },
-					Reload = new string[] { "grenadestart" },
+					Shoot = new string[] { "slimeball" },
+					Bounce = new string[] { "slimeballbounce" },
+					Explosion = new string[] { "slimeballexplosion" },
 				},
 				Animations = new AnimationSet()
 				{
-					Hit = new string[] { "hit" },
+					Shot = new string[] { "WeaponSlimeBall" },
+					Explosion = new string[] { "explosion" },
 				},
-				// handimage = "pistolhand.png",
 				IsPistol = true,
-				AimRadius = 15,
-				Recoil = 0.00f,
-				Delay = 0.5f,
+				AimRadius = 30,
+				Recoil = 0.0f,
+				Delay = 0.0f,
+				// PickDistanceWhenUsed = 12,
 				WalkSpeedWhenUsed = 1f,
 				IronSightsEnabled = true,
 				IronSightsMoveSpeed = 1f,
-				// IronSightsImage = "pistolhandsights.png",
-				IronSightsAimRadius = 15,
+				IronSightsAimRadius = 30,
 				IronSightsFov = 0.8f,
-				AmmoMagazine = 12,
-				AmmoTotal = 120,
-				ReloadDelay = 2,
-				ExplosionRange = 0.2f,
-				ExplosionTime = 0.2f,
-				DamageBody = 15,
-				DamageHead = 50,
+				AmmoMagazine = 5,
+				AmmoTotal = 20,
+				ReloadDelay = 0,
+				ExplosionRange = 4f,
+				ExplosionTime = 1f,
+				ProjectileSpeed = 25f,
+				ProjectileBounce = true,
+				DamageBody = 25,
+				DamageHead = 25,
+				PistolType = PistolType.Grenade,
 				InventoryType = InventoryType.Magic,
 			});
 
@@ -1699,15 +1833,19 @@
 
 			// page 1 - row 1
 			m.AddToCreativeInventory("RestoreHealthPotion");
-			m.AddToCreativeInventory("InvinciblePotion");
 			m.AddToCreativeInventory("CurePoisonPotion");
+			m.AddToCreativeInventory("InvinciblePotion");
 			m.AddToCreativeInventory("RestoreManaPotion");
-			m.AddToCreativeInventory("MassDamagePotion");
 			m.AddToCreativeInventory("PoisonEffectPotion");
+			m.AddToCreativeInventory("MassDamagePotion");
 
 			// page 1 - row 2
-			m.AddToCreativeInventory("SlimeBall");
-			m.AddToCreativeInventory("Bow");
+			m.AddToCreativeInventory("EnchantedSword");
+			m.AddToCreativeInventory("AttackMagic");
+			m.AddToCreativeInventory("FireMagic");
+			m.AddToCreativeInventory("IceMagic");
+			m.AddToCreativeInventory("ExplodingSlime");
+			m.AddToCreativeInventory("ProximitySlime");
 
 			#endregion
 

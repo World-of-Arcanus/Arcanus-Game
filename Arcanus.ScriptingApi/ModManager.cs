@@ -1240,6 +1240,10 @@ namespace Arcanus
 		public string[] Bounce = new string[0];
 		[ProtoMember(9)]
 		public string[] Explosion = new string[0];
+		[ProtoMember(10)]
+		public string[] HitHead = new string[0];
+		[ProtoMember(11)]
+		public string[] HitBody = new string[0];
 	}
 
 	public class AnimationSet
@@ -1407,6 +1411,8 @@ namespace Arcanus
 	{
 		Normal,
 		Grenade,
+		Melee,
+		Magic,
 	}
 
 	public delegate void Action();

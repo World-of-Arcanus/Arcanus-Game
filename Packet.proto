@@ -248,6 +248,8 @@ message SoundSet {
 	repeated string reload = 7;
 	repeated string bounce = 8;
 	repeated string explosion = 9;
+	repeated string hitHead = 10;
+	repeated string hitBody = 11;
 }
 
 message AnimationSet {
@@ -354,6 +356,8 @@ enum WearableType {
 enum PistolType {
 	Normal = 0;
 	Grenade = 1;
+	Melee = 2;
+	Magic = 3;
 }
 
 enum ServerId {

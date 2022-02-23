@@ -93,25 +93,21 @@
 		}
 
 		Packet_Item item = game.d_Inventory.RightHand[game.ActiveMaterial];
-		bool ispistol = (item != null && game.blocktypes[item.BlockId].IsPistol);
+		Packet_BlockType itemBlock = game.blocktypes[item.BlockId];
+		bool ispistol = (item != null && itemBlock.IsPistol);
 		bool ispistolshoot = ispistol && left;
-		bool isgrenade = ispistol && game.blocktypes[item.BlockId].PistolType == Packet_PistolTypeEnum.Grenade;
+		bool isgrenade = ispistol && itemBlock.PistolType == Packet_PistolTypeEnum.Grenade;
 		if (ispistol && isgrenade)
 		{
 			ispistolshoot = game.mouseleftdeclick;
 		}
-		//grenade cooking - TODO: fix instant explosion when closing ESC menu
+
+		// grenade cooking - TODO: fix instant explosion when closing ESC menu
 		if (game.mouseleftclick)
 		{
 			game.grenadecookingstartMilliseconds = game.platform.TimeMillisecondsFromStart();
-			if (ispistol && isgrenade)
-			{
-				if (game.blocktypes[item.BlockId].Sounds.ShootCount > 0)
-				{
-					game.AudioPlay(game.platform.StringFormat("{0}.ogg", game.blocktypes[item.BlockId].Sounds.Shoot[0]));
-				}
-			}
 		}
+
 		float wait = ((one * (game.platform.TimeMillisecondsFromStart() - game.grenadecookingstartMilliseconds)) / 1000);
 		if (isgrenade && left)
 		{
@@ -144,6 +140,32 @@
 		if (left)
 		{
 			game.handSetAttackDestroy = true;
+
+			if (ispistol)
+			{
+				if (itemBlock.Sounds.ShootCount > 0)
+				{
+					game.AudioPlay(game.platform.StringFormat("{0}.ogg", itemBlock.Sounds.Shoot[0]));
+				}
+
+				if (!isgrenade && itemBlock.Animations.ShotCount > 0)
+				{
+					Entity entity = new Entity();
+
+					Sprite sprite = new Sprite();
+					sprite.image = game.platform.StringFormat("{0}.png", itemBlock.Animations.Shot[0]);
+					sprite.positionX = pick.Start[0];
+					sprite.positionY = pick.Start[1];
+					sprite.positionZ = pick.Start[2];
+					sprite.width = 10;
+					sprite.height = 10;
+					sprite.animationcount = 5;
+
+					entity.sprite = sprite;
+					entity.expires = Expires.Create(2.0f);
+					game.EntityAddLocal(entity);
+				}
+			}
 		}
 		else if (right)
 		{
@@ -341,7 +363,7 @@
 								sprite.positionX = p[0];
 								sprite.positionY = p[1];
 								sprite.positionZ = p[2];
-								sprite.image = game.platform.StringFormat("{0}.png", game.blocktypes[item.BlockId].Animations.Hit[0]);
+								sprite.image = game.platform.StringFormat("{0}.png", itemBlock.Animations.Hit[0]);
 								sprite.animationcount = 5;
 								sprite.width = 40;
 								sprite.height = 40;
@@ -369,7 +391,7 @@
 									sprite.positionX = p[0];
 									sprite.positionY = p[1];
 									sprite.positionZ = p[2];
-									sprite.image = game.platform.StringFormat("{0}.png", game.blocktypes[item.BlockId].Animations.Hit[0]);
+									sprite.image = game.platform.StringFormat("{0}.png", itemBlock.Animations.Hit[0]);
 									sprite.animationcount = 5;
 									sprite.width = 40;
 									sprite.height = 40;
@@ -386,7 +408,7 @@
 				shot.WeaponBlock = item.BlockId;
 				game.LoadedAmmo[item.BlockId] = game.LoadedAmmo[item.BlockId] - 1;
 				game.TotalAmmo[item.BlockId] = game.TotalAmmo[item.BlockId] - 1;
-				float projectilespeed = game.DeserializeFloat(game.blocktypes[item.BlockId].ProjectileSpeedFloat);
+				float projectilespeed = game.DeserializeFloat(itemBlock.ProjectileSpeedFloat);
 				if (projectilespeed == 0)
 				{
 					{
@@ -414,7 +436,7 @@
 						Entity grenadeEntity = new Entity();
 
 						Sprite sprite = new Sprite();
-						sprite.image = game.platform.StringFormat("{0}.png", game.blocktypes[item.BlockId].Animations.Shot[0]);
+						sprite.image = game.platform.StringFormat("{0}.png", itemBlock.Animations.Shot[0]);
 						sprite.width = 14;
 						sprite.height = 14;
 						sprite.animationcount = 0;
@@ -441,14 +463,14 @@
 				packet.Shot = shot;
 				game.SendPacketClient(packet);
 
-				if (game.blocktypes[item.BlockId].Sounds.ShootEndCount > 0)
+				if (itemBlock.Sounds.ShootEndCount > 0)
 				{
-					game.pistolcycle = game.rnd.Next() % game.blocktypes[item.BlockId].Sounds.ShootEndCount;
-					game.AudioPlay(game.platform.StringFormat("{0}.ogg", game.blocktypes[item.BlockId].Sounds.ShootEnd[game.pistolcycle]));
+					game.pistolcycle = game.rnd.Next() % itemBlock.Sounds.ShootEndCount;
+					game.AudioPlay(game.platform.StringFormat("{0}.ogg", itemBlock.Sounds.ShootEnd[game.pistolcycle]));
 				}
 
 				bulletsshot++;
-				if (bulletsshot < game.DeserializeFloat(game.blocktypes[item.BlockId].BulletsPerShotFloat))
+				if (bulletsshot < game.DeserializeFloat(itemBlock.BulletsPerShotFloat))
 				{
 					NextBullet(game, bulletsshot);
 				}

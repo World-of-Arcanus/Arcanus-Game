@@ -1356,8 +1356,12 @@ namespace Arcanus.Server
 					}
 					break;
 				case Packet_ClientIdEnum.Shot:
-					int shootSoundIndex = pistolcycle++ % BlockTypes[packet.Shot.WeaponBlock].Sounds.ShootEnd.Length;   //Cycle all given ShootEnd sounds
-					PlaySoundAtExceptPlayer((int)DeserializeFloat(packet.Shot.FromX), (int)DeserializeFloat(packet.Shot.FromZ), (int)DeserializeFloat(packet.Shot.FromY), BlockTypes[packet.Shot.WeaponBlock].Sounds.ShootEnd[shootSoundIndex] + ".ogg", clientid);
+					if (BlockTypes[packet.Shot.WeaponBlock].Sounds.ShootEnd.Length > 0)
+                    {
+						int shootSoundIndex = pistolcycle++ % BlockTypes[packet.Shot.WeaponBlock].Sounds.ShootEnd.Length;   // cycle all given ShootEnd sounds
+						PlaySoundAtExceptPlayer((int)DeserializeFloat(packet.Shot.FromX), (int)DeserializeFloat(packet.Shot.FromZ), (int)DeserializeFloat(packet.Shot.FromY), BlockTypes[packet.Shot.WeaponBlock].Sounds.ShootEnd[shootSoundIndex] + ".ogg", clientid);
+					}
+
 					if (BlockTypes[packet.Shot.WeaponBlock].ProjectileSpeed == 0)
 					{
 						SendBullet(clientid, DeserializeFloat(packet.Shot.FromX), DeserializeFloat(packet.Shot.FromY), DeserializeFloat(packet.Shot.FromZ),
@@ -3748,6 +3752,8 @@ namespace Arcanus.Server
 			p.SetShootEnd(soundSet.ShootEnd, soundSet.ShootEnd.Length, soundSet.ShootEnd.Length);
 			p.SetBounce(soundSet.Bounce, soundSet.Bounce.Length, soundSet.Bounce.Length);
 			p.SetExplosion(soundSet.Explosion, soundSet.Explosion.Length, soundSet.Explosion.Length);
+			p.SetHitHead(soundSet.HitHead, soundSet.HitHead.Length, soundSet.HitHead.Length);
+			p.SetHitBody(soundSet.HitBody, soundSet.HitBody.Length, soundSet.HitBody.Length);
 			p.SetWalk(soundSet.Walk, soundSet.Walk.Length, soundSet.Walk.Length);
 			return p;
 		}

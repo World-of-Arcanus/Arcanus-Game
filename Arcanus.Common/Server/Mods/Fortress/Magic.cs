@@ -185,9 +185,23 @@ namespace Arcanus.Mods.Fortress
 			{
 				m.SetPlayerHealth(targetplayer, health, m.GetPlayerMaxHealth(targetplayer));
 
+				string hitSound;
+
+				if (head)
+				{
+					int hitHead = new Random().Next() % m.GetBlockType(block).Sounds.HitHead.Length;
+					hitSound = m.GetBlockType(block).Sounds.HitHead[hitHead];
+				}
+				else
+				{
+					int hitBody = new Random().Next() % m.GetBlockType(block).Sounds.HitBody.Length;
+					hitSound = m.GetBlockType(block).Sounds.HitBody[hitBody];
+				}
+
 				m.PlaySoundAt((int)m.GetPlayerPositionX(targetplayer),
 							  (int)m.GetPlayerPositionY(targetplayer),
-							  (int)m.GetPlayerPositionZ(targetplayer), "grunt1.ogg");
+							  (int)m.GetPlayerPositionZ(targetplayer),
+							  String.Concat(hitSound, ".ogg"));
 			}
 		}
 
