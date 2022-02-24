@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace Arcanus.Mods.Fortress
 {
@@ -185,24 +186,44 @@ namespace Arcanus.Mods.Fortress
 			{
 				m.SetPlayerHealth(targetplayer, health, m.GetPlayerMaxHealth(targetplayer));
 
-				string hitSound;
-
-				if (head)
-				{
-					int hitHead = new Random().Next() % m.GetBlockType(block).Sounds.HitHead.Length;
-					hitSound = m.GetBlockType(block).Sounds.HitHead[hitHead];
-				}
-				else
-				{
-					int hitBody = new Random().Next() % m.GetBlockType(block).Sounds.HitBody.Length;
-					hitSound = m.GetBlockType(block).Sounds.HitBody[hitBody];
-				}
-
-				m.PlaySoundAt((int)m.GetPlayerPositionX(targetplayer),
-							  (int)m.GetPlayerPositionY(targetplayer),
-							  (int)m.GetPlayerPositionZ(targetplayer),
-							  String.Concat(hitSound, ".ogg"));
+				HitSound(targetplayer, block, head);
 			}
+		}
+
+		async Task HitSound(int targetplayer, int block, bool head)
+		{
+			string hitSound;
+			int hitDelay;
+
+			if (head)
+			{
+				int hitHead = new Random().Next() % m.GetBlockType(block).Sounds.HitHead.Length;
+				hitSound = m.GetBlockType(block).Sounds.HitHead[hitHead];
+			}
+			else
+			{
+				int hitBody = new Random().Next() % m.GetBlockType(block).Sounds.HitBody.Length;
+				hitSound = m.GetBlockType(block).Sounds.HitBody[hitBody];
+			}
+
+			// delay the hit sound to make it appear like the hit happens
+			// after the shot (even though they occur at the same time)
+			switch (m.GetBlockType(block).PistolType)
+			{
+				case PistolType.Magic:
+					hitDelay = 750;
+					break;
+				default:
+					hitDelay = 250;
+					break;
+			}
+
+			await Task.Delay(hitDelay);
+
+			m.PlaySoundAt((int)m.GetPlayerPositionX(targetplayer),
+						  (int)m.GetPlayerPositionY(targetplayer),
+						  (int)m.GetPlayerPositionZ(targetplayer),
+						  String.Concat(hitSound, ".ogg"));
 		}
 
 		void Die(int player)
