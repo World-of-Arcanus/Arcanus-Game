@@ -57,3 +57,17 @@ My long term goals are to add ...
 - more animations throughout the game (like improving fire)
 - an official modding API and related documentation
 - portals that link to completely different worlds
+
+OS / Graphic Requirements
+-------------------------
+
+Windows 10 or later (client and server)
+
+Intel HD Graphics 620 or better (client only)
+
+Arcanus should work on standard Linux distributions like Debian or Ubuntu, but I haven't tested it yet. I do plan on supporting this eventually. However, it will mostly not work on Mac. Please let me know if you do get it working, but otherwise I don't have any plans to support this.
+
+Build Instructions
+-------------------------
+
+Coming Soon ...
