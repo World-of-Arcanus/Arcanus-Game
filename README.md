@@ -22,7 +22,7 @@ Features
 
 - Singleplayer and multiplayer
 
-     You can run your own server and have friends connect to it remotely, or just play in world of your own creation. 
+     You can run your own server and have friends connect to it remotely, or just play in a world of your own creation. 
 
 - Customizable Worlds (work in progress)
 
