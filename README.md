@@ -1,25 +1,59 @@
 ![Arcanus](https://raw.githubusercontent.com/World-of-Arcanus/Arcanus-Game/main/data/local/gui/logo-small.png)
 ============
 
-Arcanus is a 3D voxel building game, with the ability to run as a first-person shooter. 
+Arcanus is a 3D sandbox game similar to Minecraft.
+
+Players can explore a procedurally generated world made of blocks where you can build structures, roleplay and battle each other.
+
+![Screenshot](https://raw.githubusercontent.com/World-of-Arcanus/Arcanus-Game/main/docs/images/screenshot.png)
 
 Features
 --------
 
+- Open Source
+
+     The game uses a very permissive ISC License and even the media assets are free to modify as you wish.
+     
+     If you would like to support the project, then please consider joining my Patreon (link coming soon) where you will get access to early releases, nightly binaries and a community server to play on.
+
+- Kid Friendly
+
+     There is no blood or bad language, and the fighting is kept cartoon-like as much as possible.
+
 - Singleplayer and multiplayer
-- Full support for custom textures
-- A powerful server-side modding API
-- A large 9984 x 9984 x 128 world
 
-Game Modes
-----------
+     You can run your own server and have friends connect to it remotely, or just play in world of your own creation. 
 
-**Creative Mode**
+- Customizable Worlds (work in progress)
 
-There are no limits on the amount of blocks you can place.
+     There are many settings that can be enabled or disabled to customize your world ...
 
-Build whatever you like without having to collect resources or do crafting.
+     - PvP - players can attack each other (on/off)
+     - PvE - creatures and/or the environment can attack players (on/off)
+     - Ability to add/remove permissions for who can modify your world
+     - Ability to choose a starting block set, and you can create your own blocks/sets too
+     - Ability to adjust the daylight cycle (normal, always day, always night, always twilight, pitch black)
+     - Ability to enable mods, UI themes and music/sound sets
 
-**War Mode**
+- Portals (work in progress)
 
-Craft weapons, build bases and transform your world into a strategic, first-person shooter.
+     There are no doors in Arcanus, and instead you can use portals to give access to your structures.
+     
+     You can lock out other players and/or creatures or even link them to other portals across your world.
+
+- Magic System (work in progress)
+
+     A simple magic system is in place to allow you to battle other players. More to come soon ...
+
+Future Roadmap
+--------------
+
+My long term goals are to add ...
+
+- the ability to customize your character
+- wearable items like armor, clothing and magic rings
+- a variety of creatures (some can attack or become pets)
+- a sundial block that allows you to fast-forward time
+- more animations throughout the game (like improving fire)
+- an official modding API and related documentation
+- portals that link to completely different worlds
