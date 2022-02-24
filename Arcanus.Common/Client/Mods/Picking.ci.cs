@@ -140,32 +140,6 @@
 		if (left)
 		{
 			game.handSetAttackDestroy = true;
-
-			if (ispistol)
-			{
-				if (itemBlock.Sounds.ShootCount > 0)
-				{
-					game.AudioPlay(game.platform.StringFormat("{0}.ogg", itemBlock.Sounds.Shoot[0]));
-				}
-
-				if (!isgrenade && itemBlock.Animations.ShotCount > 0)
-				{
-					Entity entity = new Entity();
-
-					Sprite sprite = new Sprite();
-					sprite.image = game.platform.StringFormat("{0}.png", itemBlock.Animations.Shot[0]);
-					sprite.positionX = pick.Start[0];
-					sprite.positionY = pick.Start[1];
-					sprite.positionZ = pick.Start[2];
-					sprite.width = 10;
-					sprite.height = 10;
-					sprite.animationcount = 5;
-
-					entity.sprite = sprite;
-					entity.expires = Expires.Create(2.0f);
-					game.EntityAddLocal(entity);
-				}
-			}
 		}
 		else if (right)
 		{
@@ -266,16 +240,39 @@
 			}
 			if (ispistolshoot)
 			{
-				if ((!(game.LoadedAmmo[item.BlockId] > 0))
-					|| (!(game.TotalAmmo[item.BlockId] > 0)))
+				if (game.LoadedAmmo[item.BlockId] > 0)
 				{
-					game.AudioPlay("Dry Fire Gun-SoundBible.com-2053652037.ogg");
+					if (itemBlock.Sounds.ShootCount > 0)
+					{
+						game.AudioPlay(game.platform.StringFormat("{0}.ogg", itemBlock.Sounds.Shoot[0]));
+					}
+
+					if (!isgrenade && itemBlock.Animations.ShotCount > 0)
+					{
+						Entity entity = new Entity();
+
+						Sprite sprite = new Sprite();
+						sprite.image = game.platform.StringFormat("{0}.png", itemBlock.Animations.Shot[0]);
+						sprite.positionX = pick.Start[0];
+						sprite.positionY = pick.Start[1];
+						sprite.positionZ = pick.Start[2];
+						sprite.width = 10;
+						sprite.height = 10;
+						sprite.animationcount = 5;
+
+						entity.sprite = sprite;
+						entity.expires = Expires.Create(2.0f);
+						game.EntityAddLocal(entity);
+					}
+				}
+				else
+				{
+					game.AudioPlay("error.ogg");
+
 					PickingEnd(left, right, middle, ispistol);
 					return;
 				}
-			}
-			if (ispistolshoot)
-			{
+
 				float toX = pick.End[0];
 				float toY = pick.End[1];
 				float toZ = pick.End[2];
