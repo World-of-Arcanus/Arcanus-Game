@@ -3,7 +3,7 @@
 
 Arcanus is a 3D sandbox game similar to Minecraft.
 
-Players can explore a procedurally generated world made of blocks where you can build structures, roleplay and battle each other.
+Players can explore a procedurally generated world made of blocks where you can build structures, roleplay and battle each other. Please see the [Getting Started](https://github.com/World-of-Arcanus/Arcanus-Game/wiki#getting-started) guide on how to play the game.
 
 ![Screenshot](https://raw.githubusercontent.com/World-of-Arcanus/Arcanus-Game/main/docs/images/screenshot.png)
 
