@@ -70,27 +70,27 @@ namespace Arcanus.Mods
 			switch (reason)
 			{
 				case DeathReason.FallDamage:
-					deathMessage = string.Format("{0} &7was doomed to fall.", ColoredPlayername(player));
+					deathMessage = string.Format("{0} &7died from a fall.", ColoredPlayername(player));
 					break;
 				case DeathReason.BlockDamage:
 					if (sourceID == m.GetBlockId("Lava"))
 					{
-						deathMessage = string.Format("{0} &7thought they could swim in Lava.", ColoredPlayername(player));
+						deathMessage = string.Format("{0} &7thought they could swim in lava.", ColoredPlayername(player));
 					}
 					else if (sourceID == m.GetBlockId("Fire"))
 					{
-						deathMessage = string.Format("{0} &7was burned alive.", ColoredPlayername(player));
+						deathMessage = string.Format("{0} &7thought they could play with fire.", ColoredPlayername(player));
 					}
 					else
 					{
-						deathMessage = string.Format("{0} &7was killed by {1}.", ColoredPlayername(player), m.GetBlockName(sourceID));
+						deathMessage = string.Format("{0} &7was defeated by {1}.", ColoredPlayername(player), m.GetBlockName(sourceID));
 					}
 					break;
 				case DeathReason.Drowning:
 					deathMessage = string.Format("{0} &7tried to breathe under water.", ColoredPlayername(player));
 					break;
 				case DeathReason.Explosion:
-					deathMessage = string.Format("{0} &7was blown into pieces by {1}.", ColoredPlayername(player), ColoredPlayername(sourceID));
+					deathMessage = string.Format("{0} &7was blown up by {1}.", ColoredPlayername(player), ColoredPlayername(sourceID));
 					break;
 				default:
 					deathMessage = string.Format("{0} &7died.", ColoredPlayername(player));

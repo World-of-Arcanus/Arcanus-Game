@@ -69,23 +69,23 @@ namespace Arcanus.Mods.Fortress
 			{
 				case DeathReason.FallDamage:
 					Die(player);
-					deathMessage = string.Format("{0}{1} &7was doomed to fall.", m.GetPlayerName(player));
+					deathMessage = string.Format("{0}{1} &7died from a fall.", m.GetPlayerName(player));
 					break;
 				case DeathReason.BlockDamage:
 					if (sourceID == m.GetBlockId("Lava"))
 					{
 						Die(player);
-						deathMessage = string.Format("{0}{1} &7thought they could swim in Lava.", m.GetPlayerName(player));
+						deathMessage = string.Format("{0}{1} &7thought they could swim in lava.", m.GetPlayerName(player));
 					}
 					else if (sourceID == m.GetBlockId("Fire"))
 					{
 						Die(player);
-						deathMessage = string.Format("{0}{1} &7was burned alive.", m.GetPlayerName(player));
+						deathMessage = string.Format("{0}{1} &7thought they could play with fire.", m.GetPlayerName(player));
 					}
 					else
 					{
 						Die(player);
-						deathMessage = string.Format("{0}{1} &7was killed by {2}.", m.GetPlayerName(player), m.GetBlockName(sourceID));
+						deathMessage = string.Format("{0}{1} &7was defeated by {2}.", m.GetPlayerName(player), m.GetBlockName(sourceID));
 					}
 					break;
 				case DeathReason.Drowning:
@@ -101,11 +101,11 @@ namespace Arcanus.Mods.Fortress
 					Die(player);
 					if (sourceID == player)
 					{
-						deathMessage = string.Format("{0}{1} &7blew himself up.", m.GetPlayerName(player));
+						deathMessage = string.Format("{0}{1} &7blew themself up.", m.GetPlayerName(player));
 						break;
 					}
 					players[sourceID].kills = players[sourceID].kills + 1;
-					deathMessage = string.Format("{0}{1} &7was blown into pieces by {2}{3}&7.", m.GetPlayerName(player), m.GetPlayerName(sourceID));
+					deathMessage = string.Format("{0}{1} &7was blown up by {2}{3}&7.", m.GetPlayerName(player), m.GetPlayerName(sourceID));
 					break;
 				default:
 					Die(player);
@@ -180,7 +180,7 @@ namespace Arcanus.Mods.Fortress
 
 				Die(targetplayer);
 
-				m.SendMessageToAll(string.Format("{0} kills {1}", m.GetPlayerName(sourceplayer), m.GetPlayerName(targetplayer)));
+				m.SendMessageToAll(string.Format("{0} defeats {1}", m.GetPlayerName(sourceplayer), m.GetPlayerName(targetplayer)));
 			}
 			else
 			{
