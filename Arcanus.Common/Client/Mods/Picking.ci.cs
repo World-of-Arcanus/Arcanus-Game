@@ -290,24 +290,30 @@
 					{
 						continue;
 					}
+
 					if (game.entities[i].drawModel == null)
 					{
 						continue;
 					}
+
 					Entity p_ = game.entities[i];
+
 					if (p_.networkPosition == null)
 					{
 						continue;
 					}
+
 					if (!p_.networkPosition.PositionLoaded)
 					{
 						continue;
 					}
+
 					float feetposX = p_.position.x;
 					float feetposY = p_.position.y;
 					float feetposZ = p_.position.z;
-					//var p = PlayerPositionSpawn;
+
 					Box3D bodybox = new Box3D();
+
 					float headsize = (p_.drawModel.ModelHeight - p_.drawModel.eyeHeight) * 2; //0.4f;
 					float h = p_.drawModel.ModelHeight - headsize;
 					float r = one * 35 / 100;
@@ -334,16 +340,23 @@
 					headbox.AddPoint(feetposX + r, feetposY + h + headsize, feetposZ - r);
 					headbox.AddPoint(feetposX + r, feetposY + h + headsize, feetposZ + r);
 
-					float[] p;
 					float localeyeposX = game.EyesPosX();
 					float localeyeposY = game.EyesPosY();
 					float localeyeposZ = game.EyesPosZ();
+
+					float[] p;
+
 					p = Intersection.CheckLineBoxExact(pick, headbox);
+
 					if (p != null)
 					{
-						// do not allow players to shoot through terrain
-						if (pick2count.value == 0 || (game.Dist(pick2[0].blockPos[0], pick2[0].blockPos[1], pick2[0].blockPos[2], localeyeposX, localeyeposY, localeyeposZ)
-							> game.Dist(p[0], p[1], p[2], localeyeposX, localeyeposY, localeyeposZ)))
+						float blockPosDist = (pick2count.value > 0) ? game.Dist(pick2[0].blockPos[0], pick2[0].blockPos[1], pick2[0].blockPos[2], localeyeposX, localeyeposY, localeyeposZ) : 0;
+						float playerDist = game.Dist(p[0], p[1], p[2], localeyeposX, localeyeposY, localeyeposZ);
+						float maxDist = CurrentPickDistance(game);
+
+						// no block has been picked or it is behind the player
+						// and we have not reached the weapon's max range
+						if ((pick2count.value == 0 || blockPosDist > playerDist) && playerDist <= maxDist)
 						{
 							if (!isgrenade && itemBlock.Animations.HitCount > 0)
 							{
@@ -367,11 +380,16 @@
 					else
 					{
 						p = Intersection.CheckLineBoxExact(pick, bodybox);
+
 						if (p != null)
 						{
-							// do not allow players to shoot through terrain
-							if (pick2count.value == 0 || (game.Dist(pick2[0].blockPos[0], pick2[0].blockPos[1], pick2[0].blockPos[2], localeyeposX, localeyeposY, localeyeposZ)
-								> game.Dist(p[0], p[1], p[2], localeyeposX, localeyeposY, localeyeposZ)))
+							float blockPosDist = (pick2count.value > 0) ? game.Dist(pick2[0].blockPos[0], pick2[0].blockPos[1], pick2[0].blockPos[2], localeyeposX, localeyeposY, localeyeposZ) : 0;
+							float playerDist = game.Dist(p[0], p[1], p[2], localeyeposX, localeyeposY, localeyeposZ);
+							float maxDist = CurrentPickDistance(game);
+
+							// no block has been picked or it is behind the player
+							// and we have not reached the weapon's max range
+							if ((pick2count.value == 0 || blockPosDist > playerDist) && playerDist <= maxDist)
 							{
 								if (!isgrenade && itemBlock.Animations.HitCount > 0)
 								{
@@ -1139,7 +1157,7 @@
 		retPick.Start[1] = tempRayStartPoint[1];// +raydirY;
 		retPick.Start[2] = tempRayStartPoint[2];// +raydirZ;
 
-		float pickDistance1 = CurrentPickDistance(game) * ((ispistolshoot) ? 100 : 1);
+		float pickDistance1 = CurrentPickDistance(game) * 1; // ((ispistolshoot) ? 100 : 1);
 		pickDistance1 += 1;
 		retPick.End = new float[3];
 		retPick.End[0] = tempRayStartPoint[0] + raydirX * pickDistance1;
