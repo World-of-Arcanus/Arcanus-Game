@@ -214,7 +214,7 @@ namespace Arcanus.Mods.Fortress
 					hitDelay = 750;
 					break;
 				default:
-					hitDelay = 250;
+					hitDelay = 200;
 					break;
 			}
 

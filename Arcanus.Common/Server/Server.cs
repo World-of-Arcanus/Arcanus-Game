@@ -1362,10 +1362,15 @@ namespace Arcanus.Server
 						PlaySoundAtExceptPlayer((int)DeserializeFloat(packet.Shot.FromX), (int)DeserializeFloat(packet.Shot.FromZ), (int)DeserializeFloat(packet.Shot.FromY), BlockTypes[packet.Shot.WeaponBlock].Sounds.ShootEnd[shootSoundIndex] + ".ogg", clientid);
 					}
 
-					if (BlockTypes[packet.Shot.WeaponBlock].ProjectileSpeed == 0)
+					float projectilespeed = BlockTypes[packet.Shot.WeaponBlock].ProjectileSpeed;
+
+					if (BlockTypes[packet.Shot.WeaponBlock].PistolType != PistolType.Grenade)
 					{
-						SendBullet(clientid, DeserializeFloat(packet.Shot.FromX), DeserializeFloat(packet.Shot.FromY), DeserializeFloat(packet.Shot.FromZ),
-						   DeserializeFloat(packet.Shot.ToX), DeserializeFloat(packet.Shot.ToY), DeserializeFloat(packet.Shot.ToZ), 150);
+						if (projectilespeed > 0)
+						{
+							SendBullet(clientid, DeserializeFloat(packet.Shot.FromX), DeserializeFloat(packet.Shot.FromY), DeserializeFloat(packet.Shot.FromZ),
+								DeserializeFloat(packet.Shot.ToX), DeserializeFloat(packet.Shot.ToY), DeserializeFloat(packet.Shot.ToZ), projectilespeed);
+						}
 					}
 					else
 					{
@@ -1373,7 +1378,7 @@ namespace Arcanus.Server
 						Vector3f to = new Vector3f(DeserializeFloat(packet.Shot.ToX), DeserializeFloat(packet.Shot.ToY), DeserializeFloat(packet.Shot.ToZ));
 						Vector3f v = to - from;
 						v.Normalize();
-						v *= BlockTypes[packet.Shot.WeaponBlock].ProjectileSpeed;
+						v *= projectilespeed;
 						SendProjectile(clientid, DeserializeFloat(packet.Shot.FromX), DeserializeFloat(packet.Shot.FromY), DeserializeFloat(packet.Shot.FromZ),
 							v.X, v.Y, v.Z, packet.Shot.WeaponBlock, DeserializeFloat(packet.Shot.ExplodesAfter));
 						//Handle OnWeaponShot so grenade ammo is correct

@@ -7,6 +7,7 @@
 		tempRay = new float[4];
 		tempRayStartPoint = new float[4];
 		fillarea = new DictionaryVector3Float();
+		lastAmmoCount = 0;
 	}
 
 	public override void OnBeforeNewFrameDraw3d(Game game, float deltaTime)
@@ -45,6 +46,8 @@
 		}
 		NextBullet(game, 0);
 	}
+
+	internal int lastAmmoCount;
 
 	internal void NextBullet(Game game, int bulletsshot)
 	{
@@ -240,35 +243,21 @@
 			}
 			if (ispistolshoot)
 			{
-				if (game.LoadedAmmo[item.BlockId] > 0)
+				// only run the shoot logic once per ammo count
+				if (game.LoadedAmmo[item.BlockId] != lastAmmoCount || lastAmmoCount == 0)
 				{
-					if (itemBlock.Sounds.ShootCount > 0)
+					lastAmmoCount = game.LoadedAmmo[item.BlockId];
+
+					if (game.LoadedAmmo[item.BlockId] <= 0)
 					{
-						game.AudioPlay(game.platform.StringFormat("{0}.ogg", itemBlock.Sounds.Shoot[0]));
-					}
+						game.AudioPlay("error.ogg");
 
-					if (!isgrenade && itemBlock.Animations.ShotCount > 0)
-					{
-						Entity entity = new Entity();
-
-						Sprite sprite = new Sprite();
-						sprite.image = game.platform.StringFormat("{0}.png", itemBlock.Animations.Shot[0]);
-						sprite.positionX = pick.Start[0];
-						sprite.positionY = pick.Start[1];
-						sprite.positionZ = pick.Start[2];
-						sprite.width = 10;
-						sprite.height = 10;
-						sprite.animationcount = 5;
-
-						entity.sprite = sprite;
-						entity.expires = Expires.Create(2.0f);
-						game.EntityAddLocal(entity);
+						PickingEnd(left, right, middle, ispistol);
+						return;
 					}
 				}
 				else
 				{
-					game.AudioPlay("error.ogg");
-
 					PickingEnd(left, right, middle, ispistol);
 					return;
 				}
@@ -276,7 +265,10 @@
 				float toX = pick.End[0];
 				float toY = pick.End[1];
 				float toZ = pick.End[2];
-				if (pick2count.value > 0)
+
+				// pick will be 0 when running
+				// and so use pick2 instead
+				if (toX == 0 && pick2count.value > 0)
 				{
 					toX = pick2[0].blockPos[0];
 					toY = pick2[0].blockPos[1];
@@ -349,11 +341,11 @@
 					p = Intersection.CheckLineBoxExact(pick, headbox);
 					if (p != null)
 					{
-						//do not allow to shoot through terrain
+						// do not allow players to shoot through terrain
 						if (pick2count.value == 0 || (game.Dist(pick2[0].blockPos[0], pick2[0].blockPos[1], pick2[0].blockPos[2], localeyeposX, localeyeposY, localeyeposZ)
 							> game.Dist(p[0], p[1], p[2], localeyeposX, localeyeposY, localeyeposZ)))
 						{
-							if (!isgrenade)
+							if (!isgrenade && itemBlock.Animations.HitCount > 0)
 							{
 								Entity entity = new Entity();
 								Sprite sprite = new Sprite();
@@ -377,11 +369,11 @@
 						p = Intersection.CheckLineBoxExact(pick, bodybox);
 						if (p != null)
 						{
-							//do not allow to shoot through terrain
+							// do not allow players to shoot through terrain
 							if (pick2count.value == 0 || (game.Dist(pick2[0].blockPos[0], pick2[0].blockPos[1], pick2[0].blockPos[2], localeyeposX, localeyeposY, localeyeposZ)
 								> game.Dist(p[0], p[1], p[2], localeyeposX, localeyeposY, localeyeposZ)))
 							{
-								if (!isgrenade)
+								if (!isgrenade && itemBlock.Animations.HitCount > 0)
 								{
 									Entity entity = new Entity();
 									Sprite sprite = new Sprite();
@@ -402,16 +394,26 @@
 						}
 					}
 				}
+
 				shot.WeaponBlock = item.BlockId;
 				game.LoadedAmmo[item.BlockId] = game.LoadedAmmo[item.BlockId] - 1;
 				game.TotalAmmo[item.BlockId] = game.TotalAmmo[item.BlockId] - 1;
-				float projectilespeed = game.DeserializeFloat(itemBlock.ProjectileSpeedFloat);
-				if (projectilespeed == 0)
+
+				if (itemBlock.Sounds.ShootCount > 0)
 				{
-					{
+					game.AudioPlay(game.platform.StringFormat("{0}.ogg", itemBlock.Sounds.Shoot[0]));
+				}
+
+				float projectilespeed = game.DeserializeFloat(itemBlock.ProjectileSpeedFloat);
+
+				if (itemBlock.PistolType != 1)
+				{
+					if (projectilespeed > 0) {
 						Entity entity = game.CreateBulletEntity(
-						  pick.Start[0], pick.Start[1], pick.Start[2],
-						  toX, toY, toZ, 150);
+							itemBlock, pick.Start[0], pick.Start[1], pick.Start[2],
+							toX, toY, toZ, projectilespeed
+						);
+
 						game.EntityAddLocal(entity);
 					}
 				}
@@ -472,7 +474,7 @@
 					NextBullet(game, bulletsshot);
 				}
 
-				//recoil
+				// recoil
 				game.player.position.rotx -= game.rnd.NextFloat() * game.CurrentRecoil();
 				game.player.position.roty += game.rnd.NextFloat() * game.CurrentRecoil() * 2 - game.CurrentRecoil();
 

@@ -436,6 +436,7 @@ public class ProcessPacketTask : Action_
 				break;
 			case Packet_ServerIdEnum.Bullet:
 				game.EntityAddLocal(game.CreateBulletEntity(
+				   game.blocktypes[packet.Projectile.BlockId],
 				   game.DeserializeFloat(packet.Bullet.FromXFloat),
 				   game.DeserializeFloat(packet.Bullet.FromYFloat),
 				   game.DeserializeFloat(packet.Bullet.FromZFloat),

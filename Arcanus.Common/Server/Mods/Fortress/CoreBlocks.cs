@@ -1491,7 +1491,6 @@
 				Animations = new AnimationSet()
 				{
 					Shot = new string[] { "magic-attack" },
-					Hit = new string[] { "hit" },
 				},
 				IsPistol = true,
 				AimRadius = 15,
@@ -1506,6 +1505,7 @@
 				AmmoMagazine = 10,
 				AmmoTotal = 10,
 				ReloadDelay = 2,
+				ProjectileSpeed = 10f,
 				DamageBody = 10,
 				DamageHead = 50,
 				PistolType = PistolType.Magic,
@@ -1526,7 +1526,6 @@
 				Animations = new AnimationSet()
 				{
 					Shot = new string[] { "magic-fire" },
-					Hit = new string[] { "hit" },
 				},
 				IsPistol = true,
 				AimRadius = 15,
@@ -1541,6 +1540,7 @@
 				AmmoMagazine = 10,
 				AmmoTotal = 10,
 				ReloadDelay = 2,
+				ProjectileSpeed = 10f,
 				DamageBody = 10,
 				DamageHead = 50,
 				PistolType = PistolType.Magic,
@@ -1561,7 +1561,6 @@
 				Animations = new AnimationSet()
 				{
 					Shot = new string[] { "magic-ice" },
-					Hit = new string[] { "hit" },
 				},
 				IsPistol = true,
 				AimRadius = 15,
@@ -1576,6 +1575,7 @@
 				AmmoMagazine = 10,
 				AmmoTotal = 10,
 				ReloadDelay = 2,
+				ProjectileSpeed = 10f,
 				DamageBody = 10,
 				DamageHead = 50,
 				PistolType = PistolType.Magic,

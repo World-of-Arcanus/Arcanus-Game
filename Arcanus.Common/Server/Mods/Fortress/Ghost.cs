@@ -39,7 +39,7 @@ namespace Arcanus.Mods
 			}
 		}
 
-		bool enabled = false;
+		bool enabled = true;
 
 		ModManager m;
 		int ghost;

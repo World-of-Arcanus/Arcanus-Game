@@ -2172,7 +2172,7 @@
 
 	internal float PlayerPushDistance;
 
-	internal Entity CreateBulletEntity(float fromX, float fromY, float fromZ, float toX, float toY, float toZ, float speed)
+	internal Entity CreateBulletEntity(Packet_BlockType block, float fromX, float fromY, float fromZ, float toX, float toY, float toZ, float speed)
 	{
 		Entity entity = new Entity();
 
@@ -2186,11 +2186,16 @@
 		bullet.speed = speed;
 		entity.bullet = bullet;
 
-		entity.sprite = new Sprite();
-		entity.sprite.image = "Sponge.png";
-		entity.sprite.width = 4;
-		entity.sprite.height = 4;
-		entity.sprite.animationcount = 0;
+		if (block.Animations.ShotCount > 0)
+		{
+			// TODO: make the sprite settings configurable in the block
+			entity.sprite = new Sprite();
+			entity.sprite.image = platform.StringFormat("{0}.png", block.Animations.Shot[0]);
+			entity.sprite.width = 100;
+			entity.sprite.height = 100;
+			entity.sprite.animationcount = 5;
+			entity.expires = Expires.Create(2.0f);
+		}
 
 		return entity;
 	}
