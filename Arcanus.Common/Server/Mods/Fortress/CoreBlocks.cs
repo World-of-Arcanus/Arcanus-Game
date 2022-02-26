@@ -1619,6 +1619,8 @@
 				PistolType = PistolType.Grenade,
 				InventoryType = InventoryType.Magic,
 			});
+
+			/*
 			m.SetBlockType(279, "ProximitySlime", new BlockType()
 			{
 				AllTextures = "WeaponSlimeBall",
@@ -1657,6 +1659,7 @@
 				PistolType = PistolType.Grenade,
 				InventoryType = InventoryType.Magic,
 			});
+			*/
 
 			#endregion
 
@@ -1845,7 +1848,7 @@
 			m.AddToCreativeInventory("FireMagic");
 			m.AddToCreativeInventory("IceMagic");
 			m.AddToCreativeInventory("ExplodingSlime");
-			m.AddToCreativeInventory("ProximitySlime");
+			// m.AddToCreativeInventory("ProximitySlime");
 
 			#endregion
 
