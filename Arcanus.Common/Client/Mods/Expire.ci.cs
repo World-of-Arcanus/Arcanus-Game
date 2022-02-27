@@ -42,7 +42,7 @@
 			spritenew.positionZ = grenadeSprite.positionZ;
 			spritenew.width = 200;
 			spritenew.height = 200;
-			spritenew.animationcount = 4;
+			spritenew.animationcount = 5;
 
 			entity.sprite = spritenew;
 			entity.expires = Expires.Create(1);

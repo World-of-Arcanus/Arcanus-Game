@@ -1581,21 +1581,22 @@
 				PistolType = PistolType.Magic,
 				InventoryType = InventoryType.Magic,
 			});
-			m.SetBlockType(278, "ExplodingSlime", new BlockType()
+			m.SetBlockType(278, "MagicOrb", new BlockType()
 			{
-				AllTextures = "WeaponSlimeBall",
-				DrawType = DrawType.Plant,
+				AllTextures = "WeaponOrb",
+				TextureIdForInventory = "WeaponOrbInventory",
+				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				Sounds = new SoundSet()
 				{
-					Shoot = new string[] { "slimeball" },
-					Bounce = new string[] { "slimeballbounce" },
-					Explosion = new string[] { "slimeballexplosion" },
+					Shoot = new string[] { "orb" },
+					Bounce = new string[] { "orbbounce" },
+					Explosion = new string[] { "orbexplosion" },
 				},
 				Animations = new AnimationSet()
 				{
-					Shot = new string[] { "WeaponSlimeBall" },
-					Explosion = new string[] { "explosion" },
+					Shot = new string[] { "WeaponOrbShot" },
+					Explosion = new string[] { "orb" },
 				},
 				IsPistol = true,
 				AimRadius = 30,
@@ -1620,21 +1621,22 @@
 			});
 
 			/*
-			m.SetBlockType(279, "ProximitySlime", new BlockType()
+			m.SetBlockType(279, "ProximityOrb", new BlockType()
 			{
-				AllTextures = "WeaponSlimeBall",
-				DrawType = DrawType.Plant,
+				AllTextures = "WeaponOrb",
+				TextureIdForInventory = "WeaponOrbInventory",
+				DrawType = DrawType.Solid,
 				WalkableType = WalkableType.Solid,
 				Sounds = new SoundSet()
 				{
-					Shoot = new string[] { "slimeball" },
-					Bounce = new string[] { "slimeballbounce" },
-					Explosion = new string[] { "slimeballexplosion" },
+					Shoot = new string[] { "orb" },
+					Bounce = new string[] { "orbbounce" },
+					Explosion = new string[] { "orbexplosion" },
 				},
 				Animations = new AnimationSet()
 				{
-					Shot = new string[] { "WeaponSlimeBall" },
-					Explosion = new string[] { "explosion" },
+					Shot = new string[] { "WeaponOrbShot" },
+					Explosion = new string[] { "orb" },
 				},
 				IsPistol = true,
 				AimRadius = 30,
@@ -1845,8 +1847,8 @@
 			m.AddToCreativeInventory("AttackMagic");
 			m.AddToCreativeInventory("FireMagic");
 			m.AddToCreativeInventory("IceMagic");
-			m.AddToCreativeInventory("ExplodingSlime");
-			// m.AddToCreativeInventory("ProximitySlime");
+			m.AddToCreativeInventory("MagicOrb");
+			// m.AddToCreativeInventory("ProximityOrb");
 
 			#endregion
 
