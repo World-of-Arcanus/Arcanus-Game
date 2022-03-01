@@ -9,7 +9,8 @@
 		if (game.guistate != GuiState.MapLoading)
 		{
 			DrawEnemyHealthBlock(game);
-			DrawAmmo(game);
+			// disabled temporarily for unlimited ammo
+			// DrawAmmo(game);
 			DrawBlockInfo(game);
 		}
 		DrawMouseCursor(game);

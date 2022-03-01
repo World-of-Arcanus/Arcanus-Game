@@ -244,23 +244,24 @@
 			if (ispistolshoot)
 			{
 				// only run the shoot logic once per ammo count
-				if (game.LoadedAmmo[item.BlockId] != lastAmmoCount || lastAmmoCount == 0)
-				{
-					lastAmmoCount = game.LoadedAmmo[item.BlockId];
-
-					if (game.LoadedAmmo[item.BlockId] <= 0)
-					{
-						game.AudioPlay("error.ogg");
-
-						PickingEnd(left, right, middle, ispistol);
-						return;
-					}
-				}
-				else
-				{
-					PickingEnd(left, right, middle, ispistol);
-					return;
-				}
+				// disabled temporarily for unlimited ammo
+				// if (game.LoadedAmmo[item.BlockId] != lastAmmoCount || lastAmmoCount == 0)
+				// {
+				// 	lastAmmoCount = game.LoadedAmmo[item.BlockId];
+				//
+				// 	if (game.LoadedAmmo[item.BlockId] <= 0)
+				// 	{
+				// 		game.AudioPlay("error.ogg");
+				//
+				// 		PickingEnd(left, right, middle, ispistol);
+				// 		return;
+				// 	}
+				// }
+				// else
+				// {
+				// 	PickingEnd(left, right, middle, ispistol);
+				// 	return;
+				// }
 
 				float toX = pick.End[0];
 				float toY = pick.End[1];
@@ -414,8 +415,9 @@
 				}
 
 				shot.WeaponBlock = item.BlockId;
-				game.LoadedAmmo[item.BlockId] = game.LoadedAmmo[item.BlockId] - 1;
-				game.TotalAmmo[item.BlockId] = game.TotalAmmo[item.BlockId] - 1;
+				// disabled temporarily for unlimited ammo
+				// game.LoadedAmmo[item.BlockId] = game.LoadedAmmo[item.BlockId] - 1;
+				// game.TotalAmmo[item.BlockId] = game.TotalAmmo[item.BlockId] - 1;
 
 				if (itemBlock.Sounds.ShootCount > 0)
 				{

@@ -134,7 +134,8 @@ namespace Arcanus.Mods.Fortress
 				players[sourceplayer].totalAmmo[block] = 0;
 			}
 
-			players[sourceplayer].totalAmmo[block] = players[sourceplayer].totalAmmo[block] - 1;
+			// disabled temporarily for unlimited ammo
+			// players[sourceplayer].totalAmmo[block] = players[sourceplayer].totalAmmo[block] - 1;
 
 			m.NotifyAmmo(sourceplayer, players[sourceplayer].totalAmmo);
 		}
