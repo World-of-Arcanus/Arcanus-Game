@@ -38,7 +38,7 @@
 			Sprite spritenew = new Sprite();
 			spritenew.image = game.platform.StringFormat("{0}.png", grenadeBlock.Animations.Explosion[0]);
 			spritenew.positionX = grenadeSprite.positionX;
-			spritenew.positionY = grenadeSprite.positionY + 1;
+			spritenew.positionY = grenadeSprite.positionY;
 			spritenew.positionZ = grenadeSprite.positionZ;
 			spritenew.width = 200;
 			spritenew.height = 200;

@@ -31,6 +31,8 @@
 		Sprite grenadeSprite = grenadeEntity.sprite;
 		Grenade_ grenade = grenadeEntity.grenade;
 
+		if (grenade.state.bounceStopped) { return; }
+
 		float oldposX = grenadeEntity.sprite.positionX;
 		float oldposY = grenadeSprite.positionY;
 		float oldposZ = grenadeSprite.positionZ;
@@ -44,9 +46,20 @@
 		grenade.velocityX = velocity.X;
 		grenade.velocityY = velocity.Y;
 		grenade.velocityZ = velocity.Z;
+
 		grenadeSprite.positionX = bouncePosition.X;
 		grenadeSprite.positionY = bouncePosition.Y;
 		grenadeSprite.positionZ = bouncePosition.Z;
+
+		// velocity will hover around 0 (+/- 0.5) when the grenade has stopped bouncing
+		if ((game.platform.FloatToIntCeiling(velocity.X) == 0 || game.platform.FloatToIntCeiling(velocity.X) == 1) &&
+			(game.platform.FloatToIntCeiling(velocity.Y) == 0 || game.platform.FloatToIntCeiling(velocity.Y) == 1) &&
+			(game.platform.FloatToIntCeiling(velocity.Z) == 0 || game.platform.FloatToIntCeiling(velocity.Z) == 1))
+		{
+			// prevents the grenade from sinking into the ground when it stops
+			grenadeSprite.positionY += (game.platform.FloatModulo(grenadeSprite.positionY, 1) * 10 >= 8) ? 0.2f : 0.1f;
+			grenade.state.bounceStopped = true;
+		}
 	}
 	float projectilegravity;
 	float bouncespeedmultiply;

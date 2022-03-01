@@ -734,11 +734,26 @@ public enum PlayerType
 
 public class Grenade_
 {
+	public Grenade_()
+	{
+		state = new GrenadeState_();
+	}
+
 	internal float velocityX;
 	internal float velocityY;
 	internal float velocityZ;
 	internal int block;
 	internal int sourcePlayer;
+	internal GrenadeState_ state;
+}
+public class GrenadeState_
+{
+	public GrenadeState_()
+	{
+		bounceStopped = false;
+	}
+
+	internal bool bounceStopped;
 }
 
 public class GetCameraMatrix : IGetCameraMatrix
