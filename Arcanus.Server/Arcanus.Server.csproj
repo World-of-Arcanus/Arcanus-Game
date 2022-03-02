@@ -47,5 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Jint" Version="2.11.58" />
+    <PackageReference Include="SQLite" Version="3.13.0" />
   </ItemGroup>
 </Project>

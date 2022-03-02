@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Windows.Forms;
+using System.Reflection;
 
 namespace Arcanus.Common
 {
@@ -13,7 +13,7 @@ namespace Arcanus.Common
 
 		public static string GetStorePath()
 		{
-			string apppath = Path.GetDirectoryName(Application.ExecutablePath);
+			string apppath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 			try
 			{
 				var di = new DirectoryInfo(apppath);

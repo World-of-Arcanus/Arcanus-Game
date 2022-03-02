@@ -315,15 +315,7 @@ namespace Arcanus.Server
 				{
 					if (!mods.ContainsKey(required_name))
 					{
-						try
-						{
-							System.Windows.Forms.MessageBox.Show(string.Format("Can't load mod {0} because its dependency {1} couldn't be loaded.", name, required_name));
-						}
-						catch
-						{
-							//This will be the case if the server is running on a headless linux server without X11 installed (previously crashed)
-							Console.WriteLine(string.Format("[Mod error] Can't load mod {0} because its dependency {1} couldn't be loaded.", name, required_name));
-						}
+						Console.WriteLine(string.Format("[Mod error] Can't load mod {0} because its dependency {1} couldn't be loaded.", name, required_name));
 					}
 					StartMod(required_name, mods[required_name], m);
 				}
