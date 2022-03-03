@@ -24,6 +24,7 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <AssemblyName>ArcanusServer</AssemblyName>
     <Nullable>enable</Nullable>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'FastBuild|AnyCPU' ">
     <OutputPath>bin\FastBuild\</OutputPath>
@@ -36,7 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arcanus.Common\Arcanus.Common.csproj" />
-    <ProjectReference Include="..\Arcanus\Arcanus.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
