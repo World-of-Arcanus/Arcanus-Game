@@ -305,6 +305,13 @@ namespace ArcanusServer
 			{
 				p.RedirectStandardInput = true;
 			}
+
+			// !!! WARNING !!! This must be done otherwise the child process will be run using the DLL
+			// and cause the following unhandled exception. It took me 3 days to figure this out!
+			// This problem ONLY appears when the application is run outside of Visual Studio.
+			// Could not load type 'System.Object' from assembly 'System.Private.CoreLib'
+			p.FileName = p.FileName.Replace(".dll", ".exe");
+
 			p.UseShellExecute = false;
 
 			ServerProcess = Process.Start(p);
