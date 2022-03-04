@@ -21,7 +21,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Arcanus.Common\Arcanus.Common.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="SQLite" Version="3.13.0" />
-  </ItemGroup>
 </Project>

@@ -23,9 +23,6 @@
     <Reference Include="LibNoise">
       <HintPath>..\Lib\LibNoise.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.SQLite">
-      <HintPath>..\Lib\System.Data.SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="websocket-sharp, Version=1.0.2.26683, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\websocket-sharp.dll</HintPath>
@@ -58,9 +55,9 @@
     <PackageReference Include="Jint" Version="2.11.58" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="protobuf-net" Version="3.0.101" />
+    <PackageReference Include="Stub.System.Data.SQLite.SEE" Version="1.0.115.6" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Server\Mods\Unused\Fluids.cs" />

@@ -35,9 +35,6 @@
     <Reference Include="ENet">
       <HintPath>..\Lib\ENet.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.SQLite">
-      <HintPath>..\Lib\System.Data.SQLite.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="icon.ico" />
@@ -46,7 +43,6 @@
     <ProjectReference Include="..\Arcanus.Common\Arcanus.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SQLite" Version="3.13.0" />
     <PackageReference Include="OpenTK" Version="4.6.7" />
   </ItemGroup>
 </Project>
