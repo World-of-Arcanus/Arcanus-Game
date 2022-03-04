@@ -116,7 +116,8 @@ namespace Arcanus.Server
 		Server server;
 		public override void Run()
 		{
-			s.SendHeartbeat(server);
+			// disabled for now
+			// s.SendHeartbeat(server);
 		}
 	}
 

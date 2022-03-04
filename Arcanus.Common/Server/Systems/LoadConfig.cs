@@ -125,7 +125,7 @@ namespace Arcanus.Server
 				//Ask for config parameters the first time the server is started
 				string line;
 				bool wantsconfig = false;
-				Console.WriteLine(server.language.ServerSetupFirstStart());
+				// Console.WriteLine(server.language.ServerSetupFirstStart());
 				Console.WriteLine(server.language.ServerSetupQuestion());
 				line = Console.ReadLine();
 				if (!string.IsNullOrEmpty(line))
@@ -138,29 +138,31 @@ namespace Arcanus.Server
 				//Only ask these questions if user wants to
 				if (wantsconfig)
 				{
-					Console.WriteLine(server.language.ServerSetupPublic());
-					line = Console.ReadLine();
-					if (!string.IsNullOrEmpty(line))
-					{
-						bool choice;
-						if (line.Equals(server.language.ServerSetupAccept(), StringComparison.InvariantCultureIgnoreCase))
-							choice = true;
-						else
-							choice = false;
-						server.config.Public = choice;
-					}
+					// disabled for now
+					// Console.WriteLine(server.language.ServerSetupPublic());
+					// line = Console.ReadLine();
+					// if (!string.IsNullOrEmpty(line))
+					// {
+					// 	bool choice;
+					// 	if (line.Equals(server.language.ServerSetupAccept(), StringComparison.InvariantCultureIgnoreCase))
+					// 		choice = true;
+					// 	else
+					// 		choice = false;
+					// 	server.config.Public = choice;
+					// }
 					Console.WriteLine(server.language.ServerSetupName());
 					line = Console.ReadLine();
 					if (!string.IsNullOrEmpty(line))
 					{
 						server.config.Name = line;
 					}
-					Console.WriteLine(server.language.ServerSetupMOTD());
-					line = Console.ReadLine();
-					if (!string.IsNullOrEmpty(line))
-					{
-						server.config.Motd = line;
-					}
+					// disabled for now
+					// Console.WriteLine(server.language.ServerSetupMOTD());
+					// line = Console.ReadLine();
+					// if (!string.IsNullOrEmpty(line))
+					// {
+					// 	server.config.Motd = line;
+					// }
 					Console.WriteLine(server.language.ServerSetupWelcomeMessage());
 					line = Console.ReadLine();
 					if (!string.IsNullOrEmpty(line))
@@ -211,17 +213,18 @@ namespace Arcanus.Server
 							Console.WriteLine(server.language.ServerSetupMaxClientsInvalidInput());
 						}
 					}
-					Console.WriteLine(server.language.ServerSetupEnableHTTP());
-					line = Console.ReadLine();
-					if (!string.IsNullOrEmpty(line))
-					{
-						bool choice;
-						if (line.Equals(server.language.ServerSetupAccept(), StringComparison.InvariantCultureIgnoreCase))
-							choice = true;
-						else
-							choice = false;
-						server.config.EnableHTTPServer = choice;
-					}
+					// disabled for now
+					// Console.WriteLine(server.language.ServerSetupEnableHTTP());
+					// line = Console.ReadLine();
+					// if (!string.IsNullOrEmpty(line))
+					// {
+					// 	bool choice;
+					// 	if (line.Equals(server.language.ServerSetupAccept(), StringComparison.InvariantCultureIgnoreCase))
+					// 		choice = true;
+					// 	else
+					// 		choice = false;
+					// 	server.config.EnableHTTPServer = choice;
+					// }
 				}
 			}
 			if (server.config.Areas.Count == 0)

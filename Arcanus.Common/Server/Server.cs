@@ -416,9 +416,9 @@ namespace Arcanus.Server
 		internal int Port;
 		public void Stop()
 		{
-			Console.WriteLine("[SERVER] Doing last tick...");
+			Console.WriteLine("[SERVER] Doing last tick ...");
 			ProcessMain();
-			Console.WriteLine("[SERVER] Saving data...");
+			Console.WriteLine("[SERVER] Saving data ...");
 			ProcessSave(true);
 			Console.WriteLine("[SERVER] Stopped the server!");
 		}

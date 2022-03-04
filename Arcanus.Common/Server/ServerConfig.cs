@@ -90,9 +90,9 @@ namespace Arcanus.Server
 			this.AllowScripting = false;
 			this.Key = Guid.NewGuid().ToString();
 			this.IsCreative = true;
-			this.Public = true;
+			this.Public = false;
 			this.AllowGuests = true;
-			this.Monsters = false;
+			this.Monsters = true;
 			this.MapSizeX = 9984;
 			this.MapSizeY = 9984;
 			this.MapSizeZ = 128;

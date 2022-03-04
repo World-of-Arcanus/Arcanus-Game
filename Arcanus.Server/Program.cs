@@ -236,7 +236,7 @@ namespace ArcanusServer
 					// I) Server wants to be shutdown (lockfile has been deleted by child server)
 					if (!File.Exists(lockFileName))
 					{
-						Console.WriteLine("[SERVER] Successful shutdown");
+						Console.WriteLine("[SERVER] Successful Shutdown");
 						return;
 					}
 
@@ -244,7 +244,7 @@ namespace ArcanusServer
 					if (restartCount < restartLimit_Count)
 					{
 						//Consider this a normal number of restarts
-						Console.WriteLine("[SERVER] Will restart");
+						Console.WriteLine("[SERVER] Will Restart");
 						restartCount++;
 						Restart();
 					}
@@ -263,7 +263,7 @@ namespace ArcanusServer
 						else
 						{
 							//Quit server
-							Console.WriteLine("[SERVER] Exiting...");
+							Console.WriteLine("[SERVER] Exiting ...");
 							return;
 						}
 					}
