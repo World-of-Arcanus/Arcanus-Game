@@ -2,35 +2,22 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworkSubset></TargetFrameworkSubset>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
-    <RegisterForComInterop>False</RegisterForComInterop>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-    <BaseAddress>4194304</BaseAddress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'FastBuild|AnyCPU' ">
     <OutputPath>bin\FastBuild\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Update="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arcanus.Common\Arcanus.Common.csproj" />
     <ProjectReference Include="..\Arcanus\Arcanus.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Jint" Version="2.11.58" />
     <PackageReference Include="OpenTK" Version="4.6.7" />
     <PackageReference Include="OpenTK.WinForms" Version="4.0.0-pre.6" />
   </ItemGroup>

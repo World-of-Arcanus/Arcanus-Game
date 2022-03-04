@@ -2,15 +2,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
-    <RootNamespace>Arcanus</RootNamespace>
-    <TargetFrameworkSubset></TargetFrameworkSubset>
-    <AssemblyOriginatorKeyFile>c.snk</AssemblyOriginatorKeyFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <RootNamespace>Arcanus</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'FastBuild|AnyCPU' ">
     <OutputPath>bin\FastBuild\</OutputPath>
@@ -21,9 +19,6 @@
     <Reference Include="ENet, Version=1.3.6.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\ENet.dll</HintPath>
-    </Reference>
-    <Reference Update="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="LibNoise">
       <HintPath>..\Lib\LibNoise.dll</HintPath>
