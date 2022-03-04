@@ -25,7 +25,7 @@ namespace Arcanus.Common
 			catch
 			{
 			}
-			return Path.Combine(apppath, "UserData");
+			return Path.Combine(apppath, "user");
 		}
 
 		public static string gamepathconfig = Path.Combine(GameStorePath.GetStorePath(), "Configuration");

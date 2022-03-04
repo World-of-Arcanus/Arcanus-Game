@@ -128,7 +128,7 @@ namespace Arcanus.Server
 		public void CompileScripts(Dictionary<string, string> scripts, bool restart)
 		{
 			//Use a local temp folder
-			DirectoryInfo dirTemp = new DirectoryInfo(Path.Combine(new FileInfo(GetType().Assembly.Location).DirectoryName, "ModDebugInfos"));
+			DirectoryInfo dirTemp = new DirectoryInfo(Path.Combine(new FileInfo(GetType().Assembly.Location).DirectoryName, "moddebug"));
 
 			//Prepare temp directory
 			if (!dirTemp.Exists)

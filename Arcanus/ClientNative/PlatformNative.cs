@@ -297,7 +297,7 @@ namespace Arcanus.ClientNative
 		{
 			// we need to use the same path defined in /Common/GameStorePath.cs
 			string apppath = Path.GetDirectoryName(Application.ExecutablePath);
-			return Path.Combine(Path.Combine(apppath, "UserData"), "Saves");
+			return Path.Combine(Path.Combine(apppath, "user"), "Saves");
 		}
 
 		public override string PathCombine(string part1, string part2)
