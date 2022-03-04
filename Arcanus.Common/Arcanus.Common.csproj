@@ -73,6 +73,9 @@ cmd /c "$(SolutionDir)BuildCito.bat" fast</PreBuildEvent>
   <PropertyGroup>
     <PreBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">cd '$(MSBuildProjectDirectory)/../'
 sh ./BuildCito.sh</PreBuildEvent>
+    <Authors>Brian Otto</Authors>
+    <PackageLicenseExpression>ISC License</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/World-of-Arcanus/Arcanus-Game</PackageProjectUrl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>DEBUG;TRACE</DefineConstants>

@@ -12,6 +12,10 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
+    <Authors>Brian Otto</Authors>
+    <PackageId>Arcanus.Server</PackageId>
+    <PackageProjectUrl>https://github.com/World-of-Arcanus/Arcanus-Game</PackageProjectUrl>
+    <PackageLicenseExpression>ISC License</PackageLicenseExpression>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'FastBuild|AnyCPU' ">
     <OutputPath>bin\FastBuild\</OutputPath>
