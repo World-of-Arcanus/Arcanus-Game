@@ -8,8 +8,9 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <Authors>Brian Otto</Authors>
-    <PackageProjectUrl>https://github.com/World-of-Arcanus/Arcanus-Game</PackageProjectUrl>
     <PackageLicenseExpression>ISC License</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/World-of-Arcanus/Arcanus-Game</PackageProjectUrl>
+    <SatelliteResourceLanguages>none</SatelliteResourceLanguages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'FastBuild|AnyCPU' ">
     <OutputPath>bin\FastBuild\</OutputPath>
