@@ -280,12 +280,12 @@
 		Add("en", "Server_SetupMaxClients", "Enter the maximum number of clients (Default: 16)");
 		Add("en", "Server_SetupMaxClientsInvalidValue", "Number may not be negative. Using default (16)");
 		Add("en", "Server_SetupMaxClientsInvalidInput", "Invalid input. Using default (16)");
-		Add("en", "Server_SetupPort", "Enter the port the server shall run on (Default: 25565)");
+		Add("en", "Server_SetupPort", "Enter the port the server will run on (Default: 25565)");
 		Add("en", "Server_SetupPortInvalidValue", "Out of port range. Using default (25565)");
 		Add("en", "Server_SetupPortInvalidInput", "Invalid input. Using default (25565)");
-		Add("en", "Server_SetupWelcomeMessage", "Enter the welcome message (displayed when joining your server)");
+		Add("en", "Server_SetupWelcomeMessage", "Enter the welcome message (Default: Welcome to my Arcanus server!)");
 		Add("en", "Server_SetupMOTD", "Enter the MOTD (displayed on server list)");
-		Add("en", "Server_SetupName", "Please enter the server's name");
+		Add("en", "Server_SetupName", "Enter the server's name (Default: Arcanus Server)");
 		Add("en", "Server_SetupPublic", "Do you want the server to be public (visible on the server list)? (Y/N)");
 		Add("en", "Server_SetupQuestion", "Would you like to configure the server's settings? (Y/N = Default)");
 		Add("en", "Server_SetupFirstStart", "It looks like this is the first time you've started the server.");
