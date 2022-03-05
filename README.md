@@ -65,7 +65,7 @@ Windows 10 or later (client and server)
 
 Intel HD Graphics 620 or better (client only)
 
-Arcanus should work on standard Linux distributions like Debian or Ubuntu (by using Mono), but I haven't tested this yet. I do plan on supporting this eventually. However, it will mostly not work on Mac. Please let me know if you do get it working, but otherwise I don't have any plans to support this.
+The client should work on standard Linux distributions like Debian or Ubuntu (by using Mono), but I haven't tested this yet. I do plan on supporting this eventually. However, it will mostly not work on Mac. Please let me know if you do get it working, but otherwise I don't have any plans to support this.
 
 Build Instructions
 -------------------------
@@ -79,7 +79,33 @@ Build Instructions
 - this should open **Visual Studio 2019**
 - go to **Build > Configuration Manager**
 - set **Active Solution Configuration** to **Release** and close
-- go to **Build > Build Solution**
+- go to **Build > Build Solution** and wait until it is successful
 - open a **Command Prompt** and cd to the root directory
 - type `build.bat` and press enter
 - the release for the client and server will be in the `build` directory
+
+The server can also be built to run on Linux ...
+
+- right-click **Arcanus.Server** and choose **Publish**
+- click the **Publish** button and wait until it is successful
+- open a **Command Prompt** and cd to the root directory
+- type `build-linux.bat` and press enter
+- the release for the server will be in the `build-linux` directory
+- upload the contents of this directory to your server
+- run the following commands ...
+
+**These instructions assume you are running Ubuntu 20.04.**
+
+**Please change the paths and/or commands to match your distribution!**
+
+- `wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb`
+- `sudo dpkg -i packages-microsoft-prod.deb`
+- `sudo apt update`
+- `sudo apt install apt-transport-https`
+- `sudo apt install aspnetcore-runtime-3.1`
+- `sudo apt install dotnet-runtime-3.1`
+- `sudo apt install libenet7`
+- `ufw allow 25565`
+- cd to the directory you uploaded to
+- `chmod u+x ArcanusServer`
+- `./ArcanusServer` to run it
