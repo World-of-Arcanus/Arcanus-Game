@@ -22,14 +22,14 @@
   <ItemGroup>
     <Reference Include="ENet, Version=1.3.6.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\ENet.dll</HintPath>
+      <HintPath>..\lib\ENet.dll</HintPath>
     </Reference>
     <Reference Include="LibNoise">
-      <HintPath>..\Lib\LibNoise.dll</HintPath>
+      <HintPath>..\lib\LibNoise.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp, Version=1.0.2.26683, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\websocket-sharp.dll</HintPath>
+      <HintPath>..\lib\websocket-sharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -46,11 +46,11 @@
     <ProjectReference Include="..\Arcanus.ScriptingApi\Arcanus.ScriptingApi.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Lib\ENetX64.dll">
+    <Content Include="..\lib\ENetX64.dll">
       <Link>ENetX64.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Lib\ENetX86.dll">
+    <Content Include="..\lib\ENetX86.dll">
       <Link>ENetX86.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

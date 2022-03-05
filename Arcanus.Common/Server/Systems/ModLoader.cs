@@ -75,7 +75,7 @@ namespace Arcanus.Server
 		Dictionary<string, string> GetScriptSources(Server server)
 		{
 			string AppRoot = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
-			string[] modpaths = new[] { Path.Combine(AppRoot, Path.Combine(Path.Combine(Path.Combine(Path.Combine(Path.Combine(Path.Combine("..", ".."), ".."), ".."), "Arcanus.Common"), "Server"), "Mods")), Path.Combine(AppRoot, "Mods")};
+			string[] modpaths = new[] { Path.Combine(AppRoot, Path.Combine(Path.Combine(Path.Combine(Path.Combine(Path.Combine(Path.Combine("..", ".."), ".."), ".."), "Arcanus.Common"), "Server"), "Mods")), Path.Combine(AppRoot, "mods")};
 
 			for (int i = 0; i < modpaths.Length; i++)
 			{
@@ -128,7 +128,7 @@ namespace Arcanus.Server
 		public void CompileScripts(Dictionary<string, string> scripts, bool restart)
 		{
 			//Use a local temp folder
-			DirectoryInfo dirTemp = new DirectoryInfo(Path.Combine(new FileInfo(GetType().Assembly.Location).DirectoryName, "moddebug"));
+			DirectoryInfo dirTemp = new DirectoryInfo(Path.Combine(new FileInfo(GetType().Assembly.Location).DirectoryName, "modsdebug"));
 
 			//Prepare temp directory
 			if (!dirTemp.Exists)
@@ -179,7 +179,7 @@ namespace Arcanus.Server
 			string AppCore = Path.GetDirectoryName(System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory());
 			string AppRoot = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
-			var compilation = CSharpCompilation.Create("Mods")
+			var compilation = CSharpCompilation.Create("mods")
 				.WithOptions(
 					new CSharpCompilationOptions(
 						OutputKind.DynamicallyLinkedLibrary,

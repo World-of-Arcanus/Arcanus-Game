@@ -18,7 +18,7 @@
   <ItemGroup>
     <Reference Include="LibNoise, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ac5ddaf0378201b7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\LibNoise.dll</HintPath>
+      <HintPath>..\lib\LibNoise.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

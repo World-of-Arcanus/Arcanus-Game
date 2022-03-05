@@ -1,33 +1,27 @@
-REM Windows build script
+@echo off
 
-del /s /q output
-mkdir output
+REM Windows Build Script
 
-xcopy /s data output\data\
+rmdir /s /q build
+mkdir build
 
-REM Dll
-xcopy /s Arcanus.Common\bin\Release\Arcanus.Common.dll output\
+robocopy /s data build\data /XD localization
 
-REM Scripting API
-xcopy /s Arcanus.ScriptingApi\bin\Release\Arcanus.ScriptingApi.dll output\
-
-REM Game Client
-xcopy /s /y Arcanus\bin\Release\*.exe output\
+REM Client
+robocopy /s Arcanus\bin\Release\netcoreapp3.1 build /XD user moddebug runtimes /XF *.pdb
 
 REM Server
-xcopy /s /y Arcanus.Server\bin\Release\*.exe output\
+robocopy /s Arcanus.Server\bin\Release\netcoreapp3.1 build /XD user moddebug runtimes /XF *.pdb
 
-REM Monster editor
-xcopy /s /y Arcanus.MonsterEditor\bin\Release\*.exe output\
+REM Monster Editor
+REM robocopy Arcanus.MonsterEditor\bin\Release\netcoreapp3.1 build
 
 REM Server Mods
-mkdir output\Mods
-xcopy /s Arcanus.Common\Server\Mods output\Mods\
+mkdir build\mods
+robocopy /s Arcanus.Common\Server\Mods build\mods *.* /XD Unused War
 
-REM Third-party libraries
-xcopy /y /s Lib\*.* output\
+REM Documentation
+copy COPYING build\COPYING
 
-del output\*vshost.exe
-copy COPYING.md output\credits.txt
-
-REM pause
+echo.
+echo Done! The release is located in build\
