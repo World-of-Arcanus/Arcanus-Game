@@ -65,9 +65,21 @@ Windows 10 or later (client and server)
 
 Intel HD Graphics 620 or better (client only)
 
-Arcanus should work on standard Linux distributions like Debian or Ubuntu, but I haven't tested it yet. I do plan on supporting this eventually. However, it will mostly not work on Mac. Please let me know if you do get it working, but otherwise I don't have any plans to support this.
+Arcanus should work on standard Linux distributions like Debian or Ubuntu (by using Mono), but I haven't tested it yet. I do plan on supporting this eventually. However, it will mostly not work on Mac. Please let me know if you do get it working, but otherwise I don't have any plans to support this.
 
 Build Instructions
 -------------------------
 
-Coming Soon ...
+- install [Visual Studio 2019](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products)
+- install the [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) SDK
+- install the [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) ASP.NET Core Runtime
+- install the [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) Desktop Runtime
+- clone or download this repository
+- open `Arcanus.sln` in the root directory
+- this should open **Visual Studio 2019**
+- go to **Build > Configuration Manager**
+- set **Active Solution Configuration** to **Release** and close
+- go to **Build > Build Solution**
+- open a **Command Prompt** and cd to the root directory
+- type `build.bat` and press enter
+- the release for the client and server will be in the `build` directory
