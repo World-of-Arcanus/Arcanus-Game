@@ -3,6 +3,7 @@ using Arcanus.Server;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 
@@ -13,51 +14,71 @@ namespace ArcanusServer
 		static volatile bool exitSystem = false;
 
 		#region Application termination
-		[DllImport("Kernel32")]
-		private static extern bool SetConsoleCtrlHandler(CloseEventHandler handler, bool add);
+		// [DllImport("Kernel32")]
+		// private static extern bool SetConsoleCtrlHandler(CloseEventHandler handler, bool add);
 
-		private delegate bool CloseEventHandler(CtrlType sig);
-		static CloseEventHandler _handler;
+		// private delegate bool CloseEventHandler(CtrlType sig);
+		// static CloseEventHandler _handler;
 
-		enum CtrlType
-		{
-			CTRL_C_EVENT = 0,
-			CTRL_BREAK_EVENT = 1,
-			CTRL_CLOSE_EVENT = 2,
-			CTRL_LOGOFF_EVENT = 5,
-			CTRL_SHUTDOWN_EVENT = 6
-		}
+		// enum CtrlType
+		// {
+		// 	CTRL_C_EVENT = 0,
+		// 	CTRL_BREAK_EVENT = 1,
+		// 	CTRL_CLOSE_EVENT = 2,
+		// 	CTRL_LOGOFF_EVENT = 5,
+		// 	CTRL_SHUTDOWN_EVENT = 6
+		// }
 
-		private static bool Handler(CtrlType sig)
-		{
-			if (IsAutoRestarter)
-			{
-				Console.WriteLine("[SYSTEM] AutoRestarter: {0}", sig);
-				//Autorestarter just needs to be told not to restart
-				exitSystem = true;
-			}
-			else
-			{
-				Console.WriteLine("[SYSTEM] ChildServer: {0}", sig);
-				//Child server needs to shutdown properly
-				if (server != null)
-				{
-					server.Exit();
-				}
-				Console.WriteLine("[SYSTEM] ChildServer: Exit() called");
-			}
-			return true;
-		}
+		// private static bool Handler(CtrlType sig)
+		// {
+		// 	if (IsAutoRestarter)
+		// 	{
+		// 		Console.WriteLine("[SYSTEM] AutoRestarter: {0}", sig);
+		// 		//Autorestarter just needs to be told not to restart
+		// 		exitSystem = true;
+		// 	}
+		// 	else
+		// 	{
+		// 		Console.WriteLine("[SYSTEM] ChildServer: {0}", sig);
+		// 		//Child server needs to shutdown properly
+		// 		if (server != null)
+		// 		{
+		// 			server.Exit();
+		// 		}
+		// 		Console.WriteLine("[SYSTEM] ChildServer: Exit() called");
+		// 	}
+		// 	return true;
+		// }
 		#endregion
 
 		static void Main(string[] args)
 		{
-			//React to close window event, CTRL-C, kill, etc
-			_handler += new CloseEventHandler(Handler);
-			if (!IsMono)
+			// React to close window event, CTRL-C, kill, etc
+			// _handler += new CloseEventHandler(Handler);
+			// if (!IsMono)
+			// {
+			// 	SetConsoleCtrlHandler(_handler, true);
+			// }
+
+			AppDomain.CurrentDomain.ProcessExit += (sender, e) =>
 			{
-				SetConsoleCtrlHandler(_handler, true);
-			}
+				if (IsAutoRestarter)
+				{
+					Console.WriteLine("[SYSTEM] AutoRestarter");
+					//Autorestarter just needs to be told not to restart
+					exitSystem = true;
+				}
+				else
+				{
+					Console.WriteLine("[SYSTEM] ChildServer");
+					//Child server needs to shutdown properly
+					if (server != null)
+					{
+						server.Exit();
+					}
+					Console.WriteLine("[SYSTEM] ChildServer: Exit() called");
+				}
+			};
 
 			//Catch unhandled exceptions
 			CrashReporter.DefaultFileName = "ArcanusServerCrash.txt";
@@ -291,13 +312,13 @@ namespace ArcanusServer
 			ProcessStartInfo p = new ProcessStartInfo();
 			if (!IsMono)
 			{
-				p.FileName = System.Windows.Forms.Application.ExecutablePath;
+				p.FileName = Assembly.GetExecutingAssembly().Location;
 				p.Arguments = Process.GetCurrentProcess().Id.ToString();
 			}
 			else
 			{
 				p.FileName = "mono";
-				p.Arguments = System.Windows.Forms.Application.ExecutablePath + " " + Process.GetCurrentProcess().Id.ToString();
+				p.Arguments = Assembly.GetExecutingAssembly().Location + " " + Process.GetCurrentProcess().Id.ToString();
 			}
 
 			p.RedirectStandardOutput = true;
@@ -310,7 +331,7 @@ namespace ArcanusServer
 			// and cause the following unhandled exception. It took me 3 days to figure this out!
 			// This problem ONLY appears when the application is run outside of Visual Studio.
 			// Could not load type 'System.Object' from assembly 'System.Private.CoreLib'
-			p.FileName = p.FileName.Replace(".dll", ".exe");
+			p.FileName = p.FileName.Replace(".dll", "");
 
 			p.UseShellExecute = false;
 

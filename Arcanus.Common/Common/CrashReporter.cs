@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
-using System.Windows.Forms;
+// using System.Windows.Forms;
 
 namespace Arcanus.Common
 {
@@ -165,7 +165,7 @@ namespace Arcanus.Common
 				}
 				else
 				{
-					DisplayInGui(strGuiMessage.ToString());
+					// DisplayInGui(strGuiMessage.ToString());
 				}
 
 				//Shutdown
@@ -203,26 +203,26 @@ namespace Arcanus.Common
 		/// <summary>
 		/// Displays a text in the gui
 		/// </summary>
-		private void DisplayInGui(string strTxt)
-		{
-			try
-			{
-				//Display error
-				for (int i = 0; i < 5; i++)
-				{
-					Cursor.Show();
-					Thread.Sleep(100);
-					Application.DoEvents();
-				}
-
-				MessageBox.Show(strTxt, "Critical error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-			catch
-			{
-				//If this fails, something is really screwed... let's hope the crash report was created
-				//Just swallow this exception, to prevent a exception endless loop (UnhandledException -> CrashReport -> UnhandledException)
-			}
-		}
+		// private void DisplayInGui(string strTxt)
+		// {
+		// 	try
+		// 	{
+		// 		//Display error
+		// 		for (int i = 0; i < 5; i++)
+		// 		{
+		// 			Cursor.Show();
+		// 			Thread.Sleep(100);
+		// 			Application.DoEvents();
+		// 		}
+		//
+		// 		MessageBox.Show(strTxt, "Critical error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		// 	}
+		// 	catch
+		// 	{
+		// 		//If this fails, something is really screwed... let's hope the crash report was created
+		// 		//Just swallow this exception, to prevent a exception endless loop (UnhandledException -> CrashReport -> UnhandledException)
+		// 	}
+		// }
 
 	}
 }
