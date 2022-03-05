@@ -65,7 +65,7 @@ Windows 10 or later (client and server)
 
 Intel HD Graphics 620 or better (client only)
 
-Arcanus should work on standard Linux distributions like Debian or Ubuntu (by using Mono), but I haven't tested it yet. I do plan on supporting this eventually. However, it will mostly not work on Mac. Please let me know if you do get it working, but otherwise I don't have any plans to support this.
+Arcanus should work on standard Linux distributions like Debian or Ubuntu (with Mono), but I haven't tested it yet. I do plan on supporting this eventually. However, it will mostly not work on Mac. Please let me know if you do get it working, but otherwise I don't have any plans to support this.
 
 Build Instructions
 -------------------------
