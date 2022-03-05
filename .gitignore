@@ -1,6 +1,7 @@
 # Arcanus #
 ###########
 build
+build-linux
 /cito/output
 bin
 obj

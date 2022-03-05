@@ -11,7 +11,7 @@ REM Client
 robocopy /s Arcanus\bin\Release\netcoreapp3.1 build /XD user moddebug runtimes /XF *.pdb
 
 REM Server
-robocopy /s Arcanus.Server\bin\Release\netcoreapp3.1 build /XD user moddebug runtimes /XF *.pdb
+robocopy /s Arcanus.Server\bin\Release\netcoreapp3.1 build /XD user moddebug runtimes linux-x64 /XF *.pdb
 
 REM Monster Editor
 REM robocopy Arcanus.MonsterEditor\bin\Release\netcoreapp3.1 build
