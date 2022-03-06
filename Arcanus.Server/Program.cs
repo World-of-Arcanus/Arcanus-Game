@@ -55,7 +55,7 @@ namespace ArcanusServer
 		{
 			// React to close window event, CTRL-C, kill, etc
 			// _handler += new CloseEventHandler(Handler);
-			// if (!IsMono)
+			// if (!IsLinux)
 			// {
 			// 	SetConsoleCtrlHandler(_handler, true);
 			// }
@@ -89,7 +89,7 @@ namespace ArcanusServer
 
 		public Program(string[] args)
 		{
-			ENABLE_REDIRECT_STANDARD_INPUT = IsMono;
+			ENABLE_REDIRECT_STANDARD_INPUT = IsLinux;
 			if (args.Length > 0)
 			{
 				IsAutoRestarter = false;
@@ -300,7 +300,7 @@ namespace ArcanusServer
 			}
 		}
 
-		public static bool IsMono = Type.GetType("Mono.Runtime") != null;
+		public static bool IsLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
 
 		void Restart()
 		{
@@ -309,19 +309,12 @@ namespace ArcanusServer
 				ServerProcess.Kill();
 				ServerProcess = null;
 			}
-			ProcessStartInfo p = new ProcessStartInfo();
-			if (!IsMono)
-			{
-				p.FileName = Assembly.GetExecutingAssembly().Location;
-				p.Arguments = Process.GetCurrentProcess().Id.ToString();
-			}
-			else
-			{
-				p.FileName = "mono";
-				p.Arguments = Assembly.GetExecutingAssembly().Location + " " + Process.GetCurrentProcess().Id.ToString();
-			}
 
+			ProcessStartInfo p = new ProcessStartInfo();
+			p.FileName = Assembly.GetExecutingAssembly().Location;
+			p.Arguments = Process.GetCurrentProcess().Id.ToString();
 			p.RedirectStandardOutput = true;
+
 			if (ENABLE_REDIRECT_STANDARD_INPUT) // fix
 			{
 				p.RedirectStandardInput = true;
