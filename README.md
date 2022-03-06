@@ -58,14 +58,38 @@ My long term goals are to add ...
 - an official modding API and related documentation
 - portals that link to completely different worlds
 
-OS / Graphic Requirements
+Client Requirements
 -------------------------
 
-Windows 10 or later (client and server)
+- Windows 10 x64 or later
+- Intel HD Graphics 620 or better
 
-Intel HD Graphics 620 or better (client only)
+You will also need to have the following [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) runtimes installed.
 
-The client should work on standard Linux distributions like Debian or Ubuntu (by using Mono), but I haven't tested this yet. I do plan on supporting this eventually. However, it will most likely not work on Mac. Please let me know if you do get it working, but otherwise I don't have any plans to support this.
+- ASP.NET Core Runtime 3.1
+- .NET Desktop Runtime 3.1
+
+Windows typically comes with these already installed.
+
+The client should work on common Linux x64 distributions like Ubuntu or Debian (by using Mono), but I haven't tested this yet. I do plan on supporting this eventually. However, it will most likely not work on Mac. Please let me know if you do get it working, but otherwise I don't have any plans to support this.
+
+Server Requirements
+-------------------------
+
+- Windows 10 x64 or later or
+- Windows Server 2016 x64 or later
+
+You will also need to have the following [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) runtimes installed.
+
+- ASP.NET Core Runtime 3.1
+
+Windows typically comes with these already installed.
+
+- Linux x64
+
+Please see the **Build Instructions** for what packages to install.
+
+The recommended hardware is 4GB memory and 2 CPUs, but you should be able to run the server on lower specs.
 
 Build Instructions
 -------------------------
@@ -73,7 +97,7 @@ Build Instructions
 - install [Visual Studio 2019](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products)
 - install the [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) SDK
 - install the [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) ASP.NET Core Runtime
-- install the [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) Desktop Runtime
+- install the [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) .NET Desktop Runtime
 - clone or download this repository
 - open `Arcanus.sln` in the root directory
 - this should open **Visual Studio 2019**
