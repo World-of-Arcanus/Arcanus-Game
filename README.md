@@ -103,9 +103,8 @@ The server can also be built to run on Linux ...
 - `sudo apt update`
 - `sudo apt install apt-transport-https`
 - `sudo apt install aspnetcore-runtime-3.1`
-- `sudo apt install dotnet-runtime-3.1`
 - `sudo apt install libenet7`
-- `ufw allow 25565`
+- `sudo ufw allow 25565`
 - cd to the directory you uploaded to
 - `chmod u+x ArcanusServer`
 - `./ArcanusServer` to run it
