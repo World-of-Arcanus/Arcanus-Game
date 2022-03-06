@@ -66,8 +66,8 @@ Client Requirements
 
 You will also need to have the following [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) runtimes installed.
 
-- ASP.NET Core Runtime 3.1
-- .NET Desktop Runtime 3.1
+- ASP.NET Core Runtime
+- .NET Desktop Runtime
 
 Windows typically comes with these already installed.
 
@@ -81,7 +81,7 @@ Server Requirements
 
 You will also need to have the following [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) runtimes installed.
 
-- ASP.NET Core Runtime 3.1
+- ASP.NET Core Runtime
 
 Windows typically comes with these already installed.
 
