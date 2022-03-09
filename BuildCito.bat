@@ -1,3 +1,5 @@
+@echo off
+
 REM Generate ProtoBuf files
 CodeGenerator Packet.proto
 
