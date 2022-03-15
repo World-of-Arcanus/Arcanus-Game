@@ -75,17 +75,17 @@
 				continue;
 			}
 
-			listButtons[i].x = x + (elementSizeY / 2 + padding) * scale;
+			listButtons[i].x = x;
 			listButtons[i].y = y + i * (elementSizeY + padding) * scale;
-			listButtons[i].sizex = sizex - (1.5f * elementSizeY * scale) - (2 * padding * scale);
+			listButtons[i].sizex = sizex - 64; // - page up / down
 			listButtons[i].sizey = elementSizeY * scale;
 
 			listButtons[i].SetTextHeading(e.textTopLeft);
 			listButtons[i].SetTextDescription(e.textBottomLeft);
-			listButtons[i].SetTextGamemode(e.textBottomRight);
-			listButtons[i].SetTextPlayercount(e.textTopRight);
-			listButtons[i].SetErrorConnect(e.imageStatusTop != null);
-			listButtons[i].SetErrorVersion(e.imageStatusBottom != null);
+			// listButtons[i].SetTextGamemode(e.textBottomRight);
+			// listButtons[i].SetTextPlayercount(e.textTopRight);
+			// listButtons[i].SetErrorConnect(e.imageStatusTop != null);
+			// listButtons[i].SetErrorVersion(e.imageStatusBottom != null);
 			listButtons[i].SetThumbnail(e.imageMain);
 
 			listButtons[i].SetVisible(true);

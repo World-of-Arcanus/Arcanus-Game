@@ -37,37 +37,25 @@
 		_fontServerHeading.style = 1;
 		_fontServerHeading.size = 14;
 		_fontServerDescription = new FontCi();
+		_fontServerDescription.size = 10;
 
 		_textHeading = new TextWidget();
 		_textHeading.SetFont(_fontServerHeading);
 		_textHeading.SetAlignment(TextAlign.Left);
 		_textHeading.SetBaseline(TextBaseline.Top);
-		_textGamemode = new TextWidget();
-		_textGamemode.SetFont(_fontServerDescription);
-		_textGamemode.SetAlignment(TextAlign.Right);
-		_textGamemode.SetBaseline(TextBaseline.Bottom);
-		_textPlayercount = new TextWidget();
-		_textPlayercount.SetFont(_fontServerDescription);
-		_textPlayercount.SetAlignment(TextAlign.Right);
-		_textPlayercount.SetBaseline(TextBaseline.Top);
+		// _textGamemode = new TextWidget();
+		// _textGamemode.SetFont(_fontServerDescription);
+		// _textGamemode.SetAlignment(TextAlign.Right);
+		// _textGamemode.SetBaseline(TextBaseline.Bottom);
+		// _textPlayercount = new TextWidget();
+		// _textPlayercount.SetFont(_fontServerDescription);
+		// _textPlayercount.SetAlignment(TextAlign.Right);
+		// _textPlayercount.SetBaseline(TextBaseline.Top);
 		_textDescription = new TextWidget();
 		_textDescription.SetFont(_fontServerDescription);
 		_textDescription.SetAlignment(TextAlign.Left);
 		_textDescription.SetBaseline(TextBaseline.Bottom);
 	}
-	//public ServerButtonWidget(float dx, float dy, float dw, float dh, string name, string motd, string gamemode, string playercount)
-	//{
-	//	x = dx;
-	//	y = dy;
-	//	sizex = dw;
-	//	sizey = dh;
-	//	_imagename = "serverlist_entry_noimage.png";
-
-	//	_textHeading = new TextWidget(x + 70, y + 5, _name, _fontServerHeading, TextAlign.Left, TextBaseline.Top);
-	//	_textGamemode = new TextWidget(x + sizex - 10, y + sizey - 5, _gamemode, _fontServerDescription, TextAlign.Right, TextBaseline.Bottom);
-	//	_textPlayercount = new TextWidget(x + sizex - 10, y + 5, _playercount, _fontServerDescription, TextAlign.Right, TextBaseline.Top);
-	//	_textDescription = new TextWidget(x + 70, y + sizey - 5, _motd, _fontServerDescription, TextAlign.Left, TextBaseline.Bottom);
-	//}
 
 	public override void Draw(float dt, UiRenderer renderer)
 	{
@@ -91,30 +79,30 @@
 		if (hasKeyboardFocus)
 		{
 			_textHeading.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _name));
-			_textGamemode.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _gamemode));
-			_textPlayercount.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _playercount));
+			// _textGamemode.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _gamemode));
+			// _textPlayercount.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _playercount));
 			_textDescription.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _motd));
 		}
 		else
 		{
 			_textHeading.SetText(_name);
-			_textGamemode.SetText(_gamemode);
-			_textPlayercount.SetText(_playercount);
+			// _textGamemode.SetText(_gamemode);
+			// _textPlayercount.SetText(_playercount);
 			_textDescription.SetText(_motd);
 		}
 
 		float scale = renderer.GetScale();
-		_textHeading.x = x + 70 * scale;
-		_textHeading.y = y + 5 * scale;
+		_textHeading.x = x + 73 * scale;
+		_textHeading.y = y + 10 + 25 * scale;
 		_textHeading.Draw(dt, renderer);
-		_textGamemode.x = x + sizex - 10 * scale;
-		_textGamemode.y = y + sizey - 5 * scale;
-		_textGamemode.Draw(dt, renderer);
-		_textPlayercount.x = x + sizex - 10 * scale;
-		_textPlayercount.y = y + 5 * scale;
-		_textPlayercount.Draw(dt, renderer);
-		_textDescription.x = x + 70 * scale;
-		_textDescription.y = y + sizey - 5 * scale;
+		// _textGamemode.x = x + sizex - 10 * scale;
+		// _textGamemode.y = y + sizey - 5 * scale;
+		// _textGamemode.Draw(dt, renderer);
+		// _textPlayercount.x = x + sizex - 10 * scale;
+		// _textPlayercount.y = y + 5 * scale;
+		// _textPlayercount.Draw(dt, renderer);
+		_textDescription.x = x + 73 * scale;
+		_textDescription.y = y + sizey - 25 * scale;
 		_textDescription.Draw(dt, renderer);
 	}
 	public override void OnMouseDown(GamePlatform p, MouseEventArgs args)

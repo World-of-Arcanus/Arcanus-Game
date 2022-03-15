@@ -48,6 +48,8 @@
 	public abstract void WebClientDownloadDataAsync(string url, HttpResponseCi response);
 	public abstract void ThumbnailDownloadAsync(string ip, int port, ThumbnailResponseCi response);
 	public abstract string FileName(string fullpath);
+	public abstract string FileImage(string fullpath);
+	public abstract string FileLastWriteTime(string fullpath);
 	public abstract void AddOnNewFrame(NewFrameHandler handler);
 	public abstract void AddOnKeyEvent(KeyEventHandler handler);
 	public abstract void AddOnMouseEvent(MouseEventHandler handler);

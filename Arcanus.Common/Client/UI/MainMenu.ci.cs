@@ -227,12 +227,9 @@ public class MainMenu
 		return length.value;
 	}
 
-	internal void StartNewWorld()
+	internal void StartModifyWorld(bool newGame)
 	{
-	}
-
-	internal void StartModifyWorld()
-	{
+		// TODO
 	}
 
 	public void StartGame(bool singleplayer, string singleplayerSavePath, ConnectData connectData)

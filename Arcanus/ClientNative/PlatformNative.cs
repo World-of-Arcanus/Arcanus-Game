@@ -238,7 +238,8 @@ namespace Arcanus.ClientNative
 			string AppRoot = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 			datapaths = new[] {
 				Path.Combine(AppRoot, Path.Combine(Path.Combine(Path.Combine(Path.Combine("..", ".."), ".."), ".."), "data")),
-				Path.Combine(AppRoot, "data")
+				Path.Combine(AppRoot, "data"),
+				PathSavegames()
 			};
 			start.Start();
 		}
@@ -398,6 +399,26 @@ namespace Arcanus.ClientNative
 		{
 			FileInfo info = new FileInfo(fullpath);
 			return info.Name.Replace(info.Extension, "");
+		}
+
+		public override string FileImage(string fullpath)
+		{
+			FileInfo info = new FileInfo(fullpath);
+			string imagePath = fullpath.Replace(info.Extension, ".png");
+
+			string image = null;
+
+			if (File.Exists(imagePath)) {
+				image = info.Name.Replace(info.Extension, ".png");
+			}
+
+			return image;
+		}
+
+		public override string FileLastWriteTime(string fullpath)
+		{
+			FileInfo info = new FileInfo(fullpath);
+			return info.LastWriteTime.ToString();
 		}
 
 		public override string GetLanguageIso6391()
