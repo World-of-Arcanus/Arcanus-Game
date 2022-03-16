@@ -9,6 +9,7 @@
 	int entriesCount;
 	int entriesPerPage;
 	int currentPage;
+	int currentPageLast;
 	float lastSizeY;
 
 	public ListWidget()
@@ -19,6 +20,7 @@
 		entriesCount = 0;
 		entriesPerPage = 0;
 		currentPage = 0;
+		currentPageLast = 0;
 		lastSizeY = 0;
 
 		wbtn_pageUp = new ButtonWidget();
@@ -41,6 +43,17 @@
 		const int padding = 6;
 		const int elementSizeY = 64;
 		float scale = renderer.GetScale();
+
+		// we have changed pages
+		if (currentPageLast != currentPage)
+		{
+			renderer.GetPlatform().SetWindowCursor(0, 0, 32, 32,
+				renderer.GetFile("mousecursor.png"),
+				renderer.GetFileLength("mousecursor.png")
+			);
+
+			currentPageLast = currentPage;
+		}
 
 		// calculation only needed if height changed
 		if (lastSizeY != sizey)
@@ -127,17 +140,31 @@
 		{
 			listButtons[i].OnMouseDown(p, args);
 		}
+
 		wbtn_pageUp.OnMouseDown(p, args);
 		if (wbtn_pageUp.HasBeenClicked(args))
 		{
 			PageUp();
 		}
+
 		wbtn_pageDown.OnMouseDown(p, args);
 		if (wbtn_pageDown.HasBeenClicked(args))
 		{
 			PageDown();
 		}
 	}
+
+	public override void OnMouseUp(GamePlatform p, MouseEventArgs args)
+	{
+		for (int i = 0; i < entriesPerPage; i++)
+		{
+			listButtons[i].OnMouseUp(p, args);
+		}
+
+		wbtn_pageUp.OnMouseUp(p, args);
+		wbtn_pageDown.OnMouseUp(p, args);
+	}
+
 	public override void OnMouseWheel(GamePlatform p, MouseWheelEventArgs e)
 	{
 		if (e.GetDelta() < 0)
@@ -148,6 +175,17 @@
 		{
 			PageDown();
 		}
+	}
+
+	public override void OnMouseMove(GamePlatform p, MouseEventArgs args)
+	{
+		for (int i = 0; i < entriesPerPage; i++)
+		{
+			listButtons[i].OnMouseMove(p, args);
+		}
+
+		wbtn_pageUp.OnMouseMove(p, args);
+		wbtn_pageDown.OnMouseMove(p, args);
 	}
 
 	public int GetPage()
@@ -209,6 +247,7 @@
 	{
 		if (!IsLastPage())
 		{
+			currentPageLast = currentPage;
 			currentPage++;
 			UpdateScrollButtons();
 		}
@@ -217,6 +256,7 @@
 	{
 		if (currentPage > 0)
 		{
+			currentPageLast = currentPage;
 			currentPage--;
 			UpdateScrollButtons();
 		}

@@ -2,6 +2,7 @@
 {
 	TextWidget _text;
 	ButtonState _state;
+	ButtonState _stateLast;
 	string _textureNameIdle;
 	string _textureNameHover;
 	string _textureNamePressed;
@@ -12,6 +13,7 @@
 		_textureNameIdle = "button.png";
 		_textureNameHover = "button_sel.png";
 		_textureNamePressed = "button_sel.png";
+
 		x = 0;
 		y = 0;
 		sizex = 0;
@@ -19,18 +21,6 @@
 		clickable = true;
 		focusable = true;
 	}
-	//public ButtonWidget(float dx, float dy, float dw, float dh, string text, FontCi font)
-	//{
-	//	_state = ButtonState.Normal;
-	//	x = dx;
-	//	y = dy;
-	//	sizex = dw;
-	//	sizey = dh;
-	//	if ((text != null) && (text != ""))
-	//	{
-	//		_text = new TextWidget(x + sizex / 2, y + sizey / 2, text, font, TextAlign.Center, TextBaseline.Middle);
-	//	}
-	//}
 
 	public override void OnMouseDown(GamePlatform p, MouseEventArgs args)
 	{
@@ -76,17 +66,43 @@
 	{
 		if (!visible) { return; }
 		if (sizex <= 0 || sizey <= 0) { return; }
-		switch (hasKeyboardFocus ? ButtonState.Hover : _state)
+		switch (_state)
 		{
-			// TODO: Use atlas textures
 			case ButtonState.Normal:
 				renderer.Draw2dTexture(renderer.GetTexture(_textureNameIdle), x, y, sizex, sizey, null, 0, color);
+
+				if (_state != _stateLast)
+				{
+					renderer.GetPlatform().SetWindowCursor(0, 0, 32, 32,
+						renderer.GetFile("mousecursor.png"),
+						renderer.GetFileLength("mousecursor.png")
+					);
+				}
+
 				break;
 			case ButtonState.Hover:
 				renderer.Draw2dTexture(renderer.GetTexture(_textureNameHover), x, y, sizex, sizey, null, 0, color);
+
+				if (_state != _stateLast)
+				{
+					renderer.GetPlatform().SetWindowCursor(0, 0, 32, 32,
+						renderer.GetFile("mousecursor-click.png"),
+						renderer.GetFileLength("mousecursor-click.png")
+					);
+				}
+
 				break;
 			case ButtonState.Pressed:
 				renderer.Draw2dTexture(renderer.GetTexture(_textureNamePressed), x, y, sizex, sizey, null, 0, color);
+
+				if (_state != _stateLast)
+				{
+					renderer.GetPlatform().SetWindowCursor(0, 0, 32, 32,
+						renderer.GetFile("mousecursor-click.png"),
+						renderer.GetFileLength("mousecursor-click.png")
+					);
+				}
+
 				break;
 		}
 
@@ -104,7 +120,9 @@
 	}
 	public void SetState(ButtonState state)
 	{
+		ButtonState last = _state;
 		_state = state;
+		_stateLast = last;
 	}
 
 	public void SetText(string text)

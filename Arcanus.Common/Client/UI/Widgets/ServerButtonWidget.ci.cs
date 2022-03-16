@@ -4,14 +4,16 @@
 	string _motd;
 	string _gamemode;
 	string _playercount;
+	ButtonState _state;
+	ButtonState _stateLast;
 
 	string _imagename;
 	bool _errorVersion;
 	bool _errorConnect;
 
 	TextWidget _textHeading;
-	TextWidget _textGamemode;
-	TextWidget _textPlayercount;
+	// TextWidget _textGamemode;
+	// TextWidget _textPlayercount;
 	TextWidget _textDescription;
 	FontCi _fontServerHeading;
 	FontCi _fontServerDescription;
@@ -29,6 +31,8 @@
 		_motd = null;
 		_gamemode = null;
 		_playercount = null;
+		_state = ButtonState.Normal;
+
 		_imagename = "serverlist_entry_noimage.png";
 		_errorVersion = false;
 		_errorConnect = false;
@@ -62,7 +66,34 @@
 		if (!visible) { return; }
 		if (sizex <= 0 || sizey <= 0) { return; }
 
-		renderer.Draw2dTexture(renderer.GetTexture("serverlist_entry_background.png"), x, y, sizex, sizey, null, 0, color);
+		switch (_state)
+		{
+			case ButtonState.Normal:
+				renderer.Draw2dTexture(renderer.GetTexture("serverlist_entry_background.png"), x, y, sizex, sizey, null, 0, color);
+
+				if (_state != _stateLast)
+				{
+					renderer.GetPlatform().SetWindowCursor(0, 0, 32, 32,
+						renderer.GetFile("mousecursor.png"),
+						renderer.GetFileLength("mousecursor.png")
+					);
+				}
+
+				break;
+			case ButtonState.Hover:
+				renderer.Draw2dTexture(renderer.GetTexture("serverlist_entry_background_sel.png"), x, y, sizex, sizey, null, 0, color);
+
+				if (_state != _stateLast)
+				{
+					renderer.GetPlatform().SetWindowCursor(0, 0, 32, 32,
+						renderer.GetFile("mousecursor-click.png"),
+						renderer.GetFileLength("mousecursor-click.png")
+					);
+				}
+
+				break;
+		}
+
 		renderer.Draw2dTexture(renderer.GetTexture(_imagename), x, y, sizey, sizey, null, 0, color);
 
 		// display warnings if server is unreachable or uses a different version
@@ -115,6 +146,33 @@
 		{
 			hasKeyboardFocus = false;
 		}
+	}
+
+	public override void OnMouseMove(GamePlatform p, MouseEventArgs args)
+	{
+		// Check if mouse is inside the button rectangle
+		if (IsCursorInside(args))
+		{
+			if (_state == ButtonState.Normal)
+			{
+				SetState(ButtonState.Hover);
+			}
+		}
+		else
+		{
+			SetState(ButtonState.Normal);
+		}
+	}
+
+	public ButtonState GetState()
+	{
+		return _state;
+	}
+	public void SetState(ButtonState state)
+	{
+		ButtonState last = _state;
+		_state = state;
+		_stateLast = last;
 	}
 
 	public string GetTextHeading()

@@ -75,7 +75,7 @@
 	}
 	public bool IsCursorInside(MouseEventArgs args)
 	{
-		return (args.GetX() >= x && args.GetX() <= x + sizex &&
+		return (visible && args.GetX() >= x && args.GetX() <= x + sizex &&
 			args.GetY() >= y && args.GetY() <= y + sizey);
 	}
 	public bool HasBeenClicked(MouseEventArgs args)
