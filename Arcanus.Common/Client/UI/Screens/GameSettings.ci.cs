@@ -6,8 +6,11 @@
 		wtxt_title.SetFont(fontTitle);
 		AddWidget(wtxt_title);
 
+		wlst_settings = new SettingsWidget();
+		AddWidget(wlst_settings);
+
 		wbtn_play = new ButtonWidget();
-		wbtn_play.SetText("Play");
+		wbtn_play.SetText("&ePlay");
 		AddWidget(wbtn_play);
 
 		wbtn_back = new ButtonWidget();
@@ -15,6 +18,7 @@
 	}
 
 	TextWidget wtxt_title;
+	SettingsWidget wlst_settings;
 	ButtonWidget wbtn_play;
 	ButtonWidget wbtn_back;
 
@@ -31,6 +35,9 @@
 		float buttonwidth = 244 * scale;
 		float spacebetween = 10 * scale;
 
+		int settingscount = 4;
+		float settingswidth = 414;
+
 		float windowX = gamePlatform.GetCanvasWidth();
 		float windowY = gamePlatform.GetCanvasHeight();
 
@@ -38,8 +45,13 @@
 		wtxt_title.y = windowY / 2 - 210;
 		wtxt_title.SetAlignment(TextAlign.Center);
 
+		wlst_settings.x = windowX / 2 - (settingswidth / 2);
+		wlst_settings.y = wtxt_title.y + wtxt_title.sizey;
+		wlst_settings.sizex = settingswidth;
+		wlst_settings.sizey = settingscount * (buttonheight + 6);
+
 		wbtn_play.x = windowX / 2 - (buttonwidth / 2);
-		wbtn_play.y = wtxt_title.y + wtxt_title.sizey + (spacebetween * 2);
+		wbtn_play.y = wlst_settings.y + wlst_settings.sizey + (spacebetween * 2);
 		wbtn_play.sizex = buttonwidth;
 		wbtn_play.sizey = buttonheight;
 
