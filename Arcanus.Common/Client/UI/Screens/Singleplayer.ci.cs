@@ -137,10 +137,10 @@
 				wlst_worldList.AddElement(e);
 			}
 
-			if (savegamesCount < gamesPerPage)
-			{
-				int emptySlots = gamesPerPage - savegamesCount;
+			int emptySlots = (savegamesCount > 0) ? savegamesCount % gamesPerPage : gamesPerPage;
 
+			if (emptySlots > 0)
+			{
 				for (int i = 0; i < emptySlots; i++)
 				{
 					ListEntry e = new ListEntry();
