@@ -31,19 +31,17 @@
 
 	public override void LoadTranslations()
 	{
-		wbtn_back.SetText(menu.lang.Get("MainMenu_ButtonBack"));
-		// wbtn_openFile.SetText(menu.lang.Get("MainMenu_SingleplayerButtonCreate"));
 		wtxt_title.SetText(menu.lang.Get("MainMenu_Singleplayer"));
+		// wbtn_openFile.SetText(menu.lang.Get("MainMenu_SingleplayerButtonCreate"));
+		wbtn_back.SetText(menu.lang.Get("MainMenu_ButtonBack"));
 	}
 
 	public override void Render(float dt)
 	{
 		float scale = menu.uiRenderer.GetScale();
-		float y = gamePlatform.GetCanvasHeight() / 2 + 0 * scale;
 		float buttonheight = 64 * scale;
 		float buttonwidth = 244 * scale;
 		float spacebetween = 10 * scale;
-		// float offsetfrommiddle = 100;
 
 		float listimage = 64;
 		float listpages = 64;
@@ -90,7 +88,7 @@
 	{
 		if (w == wbtn_newWorld)
 		{
-			menu.StartModifyWorld(true);
+			menu.StartGameSettings("");
 		}
 
 		if (w == wbtn_back)
@@ -131,6 +129,7 @@
 				e.textTopLeft = menu.p.FileName(savegames[i]);
 				e.textBottomLeft = menu.p.StringFormat("Last played on {0}", menu.p.FileLastWriteTime(savegames[i]));
 				e.imageMain = menu.p.FileImage(savegames[i]);
+				e.menu = menu;
 
 				wlst_worldList.AddElement(e);
 			}

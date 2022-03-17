@@ -6,6 +6,7 @@
 	string _playercount;
 	ButtonState _state;
 	ButtonState _stateLast;
+	MainMenu _menu;
 
 	string _imagename;
 	bool _errorVersion;
@@ -107,20 +108,20 @@
 		}
 
 		// highlight text if button is selected
-		if (hasKeyboardFocus)
-		{
-			_textHeading.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _name));
-			// _textGamemode.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _gamemode));
-			// _textPlayercount.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _playercount));
-			_textDescription.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _motd));
-		}
-		else
-		{
+		// if (hasKeyboardFocus)
+		// {
+		// 	_textHeading.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _name));
+		// 	// _textGamemode.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _gamemode));
+		// 	// _textPlayercount.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _playercount));
+		// 	_textDescription.SetText(StringTools.StringAppend(renderer.GetPlatform(), "&2", _motd));
+		// }
+		// else
+		// {
 			_textHeading.SetText(_name);
 			// _textGamemode.SetText(_gamemode);
 			// _textPlayercount.SetText(_playercount);
 			_textDescription.SetText(_motd);
-		}
+		// }
 
 		float scale = renderer.GetScale();
 		_textHeading.x = x + 73 * scale;
@@ -140,11 +141,12 @@
 	{
 		if (HasBeenClicked(args))
 		{
-			hasKeyboardFocus = true;
+			// hasKeyboardFocus = true;
+			this._menu.StartGameSettings(this._name);
 		}
 		else
 		{
-			hasKeyboardFocus = false;
+			// hasKeyboardFocus = false;
 		}
 	}
 
@@ -240,8 +242,14 @@
 	{
 		return _errorVersion;
 	}
+
 	public void SetErrorVersion(bool error)
 	{
 		_errorVersion = error;
+	}
+
+	public void SetMenu(MainMenu menu)
+	{
+		_menu = menu;
 	}
 }

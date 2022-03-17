@@ -25,8 +25,10 @@
 
 		wbtn_pageUp = new ButtonWidget();
 		wbtn_pageUp.SetVisible(false);
+
 		wbtn_pageDown = new ButtonWidget();
 		wbtn_pageDown.SetVisible(false);
+
 		FontCi fontPageNr = new FontCi();
 		wtxt_pageNr = new TextWidget();
 		wtxt_pageNr.SetAlignment(TextAlign.Right);
@@ -100,8 +102,8 @@
 			// listButtons[i].SetErrorConnect(e.imageStatusTop != null);
 			// listButtons[i].SetErrorVersion(e.imageStatusBottom != null);
 			listButtons[i].SetThumbnail(e.imageMain);
-
 			listButtons[i].SetVisible(true);
+			listButtons[i].SetMenu(e.menu);
 		}
 
 		wbtn_pageUp.x = x + sizex - elementSizeY * scale;
@@ -129,6 +131,7 @@
 		{
 			listButtons[i].Draw(dt, renderer);
 		}
+
 		wbtn_pageUp.Draw(dt, renderer);
 		wbtn_pageDown.Draw(dt, renderer);
 		wtxt_pageNr.Draw(dt, renderer);
@@ -278,6 +281,7 @@ public class ListEntry
 	public string imageMain;
 	public string imageStatusTop;
 	public string imageStatusBottom;
+	public MainMenu menu;
 
 	public ListEntry()
 	{
@@ -288,5 +292,6 @@ public class ListEntry
 		imageMain = null;
 		imageStatusTop = null;
 		imageStatusBottom = null;
+		menu = null;
 	}
 }

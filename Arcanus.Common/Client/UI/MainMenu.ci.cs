@@ -227,9 +227,10 @@ public class MainMenu
 		return length.value;
 	}
 
-	internal void StartModifyWorld(bool newGame)
+	internal void StartGameSettings(string name)
 	{
-		// TODO
+		screen = new ScreenGameSettings();
+		screen.Init(this, uiRenderer);
 	}
 
 	public void StartGame(bool singleplayer, string singleplayerSavePath, ConnectData connectData)
