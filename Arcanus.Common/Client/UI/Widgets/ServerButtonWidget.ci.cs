@@ -41,6 +41,7 @@
 		_fontServerHeading = new FontCi();
 		_fontServerHeading.style = 1;
 		_fontServerHeading.size = 14;
+
 		_fontServerDescription = new FontCi();
 		_fontServerDescription.size = 10;
 
@@ -48,14 +49,17 @@
 		_textHeading.SetFont(_fontServerHeading);
 		_textHeading.SetAlignment(TextAlign.Left);
 		_textHeading.SetBaseline(TextBaseline.Top);
+
 		// _textGamemode = new TextWidget();
 		// _textGamemode.SetFont(_fontServerDescription);
 		// _textGamemode.SetAlignment(TextAlign.Right);
 		// _textGamemode.SetBaseline(TextBaseline.Bottom);
+
 		// _textPlayercount = new TextWidget();
 		// _textPlayercount.SetFont(_fontServerDescription);
 		// _textPlayercount.SetAlignment(TextAlign.Right);
 		// _textPlayercount.SetBaseline(TextBaseline.Top);
+
 		_textDescription = new TextWidget();
 		_textDescription.SetFont(_fontServerDescription);
 		_textDescription.SetAlignment(TextAlign.Left);
@@ -95,7 +99,10 @@
 				break;
 		}
 
-		renderer.Draw2dTexture(renderer.GetTexture(_imagename), x, y, sizey, sizey, null, 0, color);
+		if (_imagename != "none")
+		{
+			renderer.Draw2dTexture(renderer.GetTexture(_imagename), x, y, sizey, sizey, null, 0, color);
+		}
 
 		// display warnings if server is unreachable or uses a different version
 		if (_errorConnect)
@@ -124,17 +131,35 @@
 		// }
 
 		float scale = renderer.GetScale();
+
 		_textHeading.x = x + 73 * scale;
 		_textHeading.y = y + 10 + 25 * scale;
 		_textHeading.Draw(dt, renderer);
+
 		// _textGamemode.x = x + sizex - 10 * scale;
 		// _textGamemode.y = y + sizey - 5 * scale;
 		// _textGamemode.Draw(dt, renderer);
+
 		// _textPlayercount.x = x + sizex - 10 * scale;
 		// _textPlayercount.y = y + 5 * scale;
 		// _textPlayercount.Draw(dt, renderer);
-		_textDescription.x = x + 73 * scale;
-		_textDescription.y = y + sizey - 25 * scale;
+
+		if (_name == "")
+		{
+			_textDescription.x = x + (this.GetSizeX() / 2) - (_textDescription.GetSizeX() / 2);
+
+			FontCi emptySlotFont = new FontCi();
+			emptySlotFont.size = 12;
+
+			_textDescription.SetFont(emptySlotFont);
+			_textDescription.y = y + sizey - 40 * scale;
+		}
+		else
+		{
+			_textDescription.x = x + 73 * scale;
+			_textDescription.y = y + sizey - 25 * scale;
+		}
+
 		_textDescription.Draw(dt, renderer);
 	}
 	public override void OnMouseDown(GamePlatform p, MouseEventArgs args)

@@ -18,6 +18,8 @@
 
 		// wbtn_openFile = new ButtonWidget();
 		// AddWidget(wbtn_openFile);
+
+		gamesPerPage = 4;
 	}
 
 	TextWidget wtxt_title;
@@ -28,6 +30,7 @@
 
 	string[] savegames;
 	int savegamesCount;
+	int gamesPerPage;
 
 	public override void LoadTranslations()
 	{
@@ -57,7 +60,7 @@
 		wlst_worldList.x = windowX / 2 - ((listwidth - 64) / 2);
 		wlst_worldList.y = wtxt_title.y + wtxt_title.sizey;
 		wlst_worldList.sizex = listwidth;
-		wlst_worldList.sizey = 4 * (buttonheight + 6);
+		wlst_worldList.sizey = gamesPerPage * (buttonheight + 6);
 
 		wbtn_newWorld.x = windowX / 2 - (buttonwidth / 2);
 		wbtn_newWorld.y = wlst_worldList.y + wlst_worldList.sizey + (spacebetween * 2);
@@ -132,6 +135,22 @@
 				e.menu = menu;
 
 				wlst_worldList.AddElement(e);
+			}
+
+			if (savegamesCount < gamesPerPage)
+			{
+				int emptySlots = gamesPerPage - savegamesCount;
+
+				for (int i = 0; i < emptySlots; i++)
+				{
+					ListEntry e = new ListEntry();
+					e.textTopLeft = "";
+					e.textBottomLeft = "Empty Slot";
+					e.imageMain = "none";
+					e.menu = menu;
+
+					wlst_worldList.AddElement(e);
+				}
 			}
 		}
 	}
