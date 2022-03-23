@@ -112,4 +112,9 @@
 		_p = p;
 		_name = name;
 	}
+
+	public string GetName()
+	{
+		return wtxt_name.GetContent();
+	}
 }

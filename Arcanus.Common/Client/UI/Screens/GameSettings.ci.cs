@@ -75,7 +75,9 @@
 	{
 		if (w == wbtn_play)
 		{
-			string filename = menu.p.PathCombine(menu.p.PathSavegames(), menu.p.StringFormat("{0}.arcanus", _name));
+			string filename = menu.p.PathCombine(menu.p.PathSavegames(),
+				menu.p.StringFormat("{0}.arcanus", wlst_settings.GetName()));
+
 			menu.ConnectToSingleplayer(filename);
 		}
 
