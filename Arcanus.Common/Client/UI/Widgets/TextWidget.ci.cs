@@ -18,16 +18,6 @@
 		_align = TextAlign.Left;
 		_baseline = TextBaseline.Top;
 	}
-	//public TextWidget(float dx, float dy, string text, FontCi font, TextAlign align, TextBaseline baseline)
-	//{
-	//	x = dx;
-	//	y = dy;
-	//	_offsetX = 0;
-	//	_offsetY = 0;
-	//	_font = font;
-	//	_align = align;
-	//	_baseline = baseline;
-	//}
 
 	public override void Draw(float dt, UiRenderer renderer)
 	{

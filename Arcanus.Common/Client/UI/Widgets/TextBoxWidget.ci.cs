@@ -12,6 +12,7 @@
 	bool _hideInput;
 	string _textContent;
 	string _textDisplay;
+	TextAlign _align;
 
 	public TextBoxWidget()
 	{
@@ -19,31 +20,15 @@
 		focusable = true;
 		_textContent = "";
 		_textDisplay = "";
-		_textureNameInactive = "button.png";
-		_textureNameActive = "button_sel.png";
+		_textureNameInactive = "textbox.png";
+		_textureNameActive = "textbox_sel.png";
 
 		_inputFont = new FontCi();
 		_text = new TextWidget();
-		_text.SetFont(_inputFont);
-		_text.SetAlignment(TextAlign.Center);
 		_text.SetBaseline(TextBaseline.Middle);
+		_text.SetFont(_inputFont);
 		_text.SetText(_placeholderColorCode + "Input");
 	}
-	//public TextBoxWidget(float dx, float dy, float dw, float dh, string placeholder, FontCi font, bool inputHidden)
-	//{
-	//	_state = TextBoxState.Normal;
-	//	_textContent = "";
-	//	_textDisplay = "";
-	//	x = dx;
-	//	y = dy;
-	//	sizex = dw;
-	//	sizey = dh;
-	//	if ((placeholder != null) && (placeholder != ""))
-	//	{
-	//		_placeholderText = _placeholderColorCode + placeholder;
-	//		_text = new TextWidget(x + sizex / 2, y + sizey / 2, _placeholderText, font, TextAlign.Center, TextBaseline.Middle);
-	//	}
-	//}
 
 	public override void OnMouseDown(GamePlatform p, MouseEventArgs args)
 	{
@@ -68,9 +53,11 @@
 	public override void OnKeyDown(GamePlatform p, KeyEventArgs args)
 	{
 		DefaultOnKeyDown(p, args);
+
 		if (hasKeyboardFocus)
 		{
 			int key = args.GetKeyCode();
+
 			// pasting text from clipboard
 			if (args.GetCtrlPressed() && key == GlKeys.V)
 			{
@@ -80,6 +67,7 @@
 				}
 				return;
 			}
+
 			// deleting characters using backspace
 			if (key == GlKeys.BackSpace)
 			{
@@ -99,16 +87,31 @@
 
 		renderer.Draw2dTexture(renderer.GetTexture(hasKeyboardFocus ? _textureNameActive : _textureNameInactive), x, y, sizex, sizey, null, 0, color);
 
-		_text.x = x + sizex / 2;
-		_text.y = y + sizey / 2;
 		if (hasKeyboardFocus)
 		{
-			_text.SetText(StringTools.StringAppend(renderer.GetPlatform(), _textDisplay, "_"));
+			_text.SetText(StringTools.StringAppend(renderer.GetPlatform(), _textDisplay, _typingChar));
 		}
 		else
 		{
 			_text.SetText(_textDisplay);
 		}
+
+		_text.x = x;
+
+		switch (_align)
+		{
+			case TextAlign.Left:
+				break;
+			case TextAlign.Center:
+				_text.x += sizex / 2;
+				break;
+			case TextAlign.Right:
+				_text.x += sizex - _text.sizex;
+				break;
+		}
+
+		_text.y = y + (sizey / 2);
+
 		_text.Draw(dt, renderer);
 	}
 
@@ -125,6 +128,7 @@
 	public void SetContent(GamePlatform p, string c)
 	{
 		_textContent = (c != null) ? c : "";
+
 		if (_hideInput)
 		{
 			// replace display text with '*' if display mode is hidden
@@ -134,6 +138,7 @@
 		{
 			_textDisplay = _textContent;
 		}
+
 		_text.SetText(_textDisplay);
 	}
 	public string GetContent()
@@ -145,15 +150,23 @@
 	{
 		int[] arr = new int[1];
 		arr[0] = a;
+
 		return p.CharArrayToString(arr, 1);
 	}
 	string CharRepeat(GamePlatform p, int c, int length)
 	{
 		int[] charArray = new int[length];
+
 		for (int i = 0; i < length; i++)
 		{
 			charArray[i] = c;
 		}
+
 		return p.CharArrayToString(charArray, length);
+	}
+
+	public void SetAlignment(TextAlign align)
+	{
+		_align = align;
 	}
 }

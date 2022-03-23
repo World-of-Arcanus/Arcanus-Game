@@ -229,7 +229,9 @@ public class MainMenu
 
 	internal void StartGameSettings(string name)
 	{
-		screen = new ScreenGameSettings();
+		ScreenGameSettings screenGameSettings = new ScreenGameSettings();
+		screenGameSettings.Load(name);
+		screen = screenGameSettings;
 		screen.Init(this, uiRenderer);
 	}
 
