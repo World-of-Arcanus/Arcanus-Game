@@ -75,6 +75,9 @@
 	{
 		if (w == wbtn_play)
 		{
+			// TODO: compare _name to wlst_settings.GetName()
+			//       if it's different then check if the filename is
+			//       being used and display an error when it is
 			string filename = menu.p.PathCombine(menu.p.PathSavegames(),
 				menu.p.StringFormat("{0}.arcanus", wlst_settings.GetName()));
 

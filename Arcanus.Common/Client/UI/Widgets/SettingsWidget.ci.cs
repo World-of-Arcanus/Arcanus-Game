@@ -110,7 +110,7 @@
 	public void Load(GamePlatform p, string name)
     {
 		_p = p;
-		_name = name;
+		_name = (name == "") ? "World" : name;
 	}
 
 	public string GetName()
