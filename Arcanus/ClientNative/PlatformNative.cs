@@ -313,7 +313,24 @@ namespace Arcanus.ClientNative
 				length.SetValue(0);
 				return new string[0];
 			}
-			string[] files = Directory.GetFiles(path);
+
+			FileSystemInfo[] fileInfos = new DirectoryInfo(path).GetFileSystemInfos();
+
+			// sort by their last modified time
+			Array.Sort<FileSystemInfo>(fileInfos,
+				delegate (FileSystemInfo a, FileSystemInfo b)
+				{
+					return b.LastWriteTime.CompareTo(a.LastWriteTime);
+				}
+			);
+
+			string[] files = new string[fileInfos.Length];
+
+			for (int i = 0; i < fileInfos.Length; i++)
+			{
+				files[i] = fileInfos[i].FullName;
+			}
+
 			length.SetValue(files.Length);
 			return files;
 		}
@@ -418,7 +435,7 @@ namespace Arcanus.ClientNative
 		public override string FileLastWriteTime(string fullpath)
 		{
 			FileInfo info = new FileInfo(fullpath);
-			return info.LastWriteTime.ToString();
+			return info.LastWriteTime.ToString("MM/dd/yyy hh:mm:ss tt");
 		}
 
 		public override string GetLanguageIso6391()
