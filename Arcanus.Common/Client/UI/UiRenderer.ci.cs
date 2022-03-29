@@ -29,6 +29,15 @@
 		_p.LoadAssetsAsyc(_assetList, _assetLoadProgress);
 	}
 
+	public void ReloadAssets()
+	{
+		_textures = new DictionaryStringInt1024();
+		_assetList = new AssetList();
+		_assetLoadProgress = new FloatRef();
+
+		_p.LoadAssetsAsyc(_assetList, _assetLoadProgress);
+	}
+
 	internal TextTexture GetTextTexture(string text, FontCi font)
 	{
 		for (int i = 0; i < textTexturesCount; i++)
