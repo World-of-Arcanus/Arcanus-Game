@@ -53,6 +53,9 @@
 		}
 		if (b == buttonMainExit)
 		{
+			game.platform.SaveScreenshotFile(game.platform.FileImagePath(game.filename));
+			game.uiRenderer.SetTexture(game.platform.FileImage(game.filename));
+
 			game.SendLeave(Packet_LeaveReasonEnum.Leave);
 			game.ExitToMainMenu_();
 		}

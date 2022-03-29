@@ -143,6 +143,7 @@
 		commitActions = ListAction.Create(16 * 1024);
 		constWallDistance = 0.3f;
 		mouseSmoothing = true;
+		filename = "";
 	}
 
 	internal AssetList assets;
@@ -3972,4 +3973,6 @@
 	internal bool reachedwall_1blockhigh;
 	internal bool reachedHalfBlock;
 	internal float movedz;
+
+	internal string filename;
 }

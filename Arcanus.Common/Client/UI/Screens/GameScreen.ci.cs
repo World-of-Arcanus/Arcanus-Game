@@ -20,6 +20,7 @@ public class ScreenGame : MainMenuScreen
 		game.assets = uiRenderer.GetAssetList();
 		game.assetsLoadProgress = menu.uiRenderer.GetAssetLoadProgress();
 		game.uiRenderer = uiRenderer;
+		game.filename = singleplayerSavePath;
 
 		game.Start();
 		Connect(gamePlatform);

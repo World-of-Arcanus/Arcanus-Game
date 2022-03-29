@@ -10,22 +10,25 @@ namespace Arcanus.ClientNative
 {
 	public interface IScreenshot
 	{
-		void SaveScreenshot();
+		void SaveScreenshot(string filename = "");
 	}
 	public class Screenshot : IScreenshot
 	{
 		public GameWindow d_GameWindow;
 
-		public void SaveScreenshot()
+		public void SaveScreenshot(string filename = "")
 		{
 			using (Bitmap bmp = GrabScreenshot())
 			{
-				string time = string.Format("{0:yyyy-MM-dd_HH-mm-ss}", DateTime.Now);
-				string filename = Path.Combine(GameStorePath.gamepathscreenshots, time + ".png");
-
-				if (!Directory.Exists(GameStorePath.gamepathscreenshots))
+				if (filename == "")
 				{
-					Directory.CreateDirectory(GameStorePath.gamepathscreenshots);
+					string time = string.Format("{0:yyyy-MM-dd_HH-mm-ss}", DateTime.Now);
+					filename = Path.Combine(GameStorePath.gamepathscreenshots, time + ".png");
+
+					if (!Directory.Exists(GameStorePath.gamepathscreenshots))
+					{
+						Directory.CreateDirectory(GameStorePath.gamepathscreenshots);
+					}
 				}
 
 				bmp.Save(filename);

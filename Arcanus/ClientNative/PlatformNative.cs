@@ -420,16 +420,21 @@ namespace Arcanus.ClientNative
 
 		public override string FileImage(string fullpath)
 		{
-			FileInfo info = new FileInfo(fullpath);
-			string imagePath = fullpath.Replace(info.Extension, ".png");
+			string imagePath = FileImagePath(fullpath);
 
 			string image = null;
 
 			if (File.Exists(imagePath)) {
-				image = info.Name.Replace(info.Extension, ".png");
+				image = new FileInfo(imagePath).Name;
 			}
 
 			return image;
+		}
+
+		public override string FileImagePath(string fullpath)
+		{
+			FileInfo info = new FileInfo(fullpath);
+			return fullpath.Replace(info.Extension, ".png");
 		}
 
 		public override string FileLastWriteTime(string fullpath)
@@ -1347,6 +1352,12 @@ namespace Arcanus.ClientNative
 		{
 			screenshot.d_GameWindow = window;
 			screenshot.SaveScreenshot();
+		}
+
+		public override void SaveScreenshotFile(string filename)
+		{
+			screenshot.d_GameWindow = window;
+			screenshot.SaveScreenshot(filename);
 		}
 
 		public override BitmapCi GrabScreenshot()

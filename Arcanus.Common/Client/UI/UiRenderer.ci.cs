@@ -84,13 +84,17 @@
 	{
 		if (!_textures.Contains(name))
 		{
-			BoolRef found = new BoolRef();
-			BitmapCi bmp = _p.BitmapCreateFromPng(GetFile(name), GetFileLength(name));
-			int texture = _p.LoadTextureFromBitmap(bmp);
-			_textures.Set(name, texture);
-			_p.BitmapDelete(bmp);
+			SetTexture(name);
 		}
 		return _textures.Get(name);
+	}
+
+	internal void SetTexture(string name)
+	{
+		BitmapCi bmp = _p.BitmapCreateFromPng(GetFile(name), GetFileLength(name));
+		int texture = _p.LoadTextureFromBitmap(bmp);
+		_textures.Set(name, texture);
+		_p.BitmapDelete(bmp);
 	}
 
 	internal byte[] GetFile(string name)

@@ -49,6 +49,7 @@
 	public abstract void ThumbnailDownloadAsync(string ip, int port, ThumbnailResponseCi response);
 	public abstract string FileName(string fullpath);
 	public abstract string FileImage(string fullpath);
+	public abstract string FileImagePath(string fullpath);
 	public abstract string FileLastWriteTime(string fullpath);
 	public abstract void AddOnNewFrame(NewFrameHandler handler);
 	public abstract void AddOnKeyEvent(KeyEventHandler handler);
@@ -71,6 +72,7 @@
 	public abstract void MonitorEnter(MonitorObject monitorObject);
 	public abstract void MonitorExit(MonitorObject monitorObject);
 	public abstract void SaveScreenshot();
+	public abstract void SaveScreenshotFile(string filename);
 	public abstract BitmapCi GrabScreenshot();
 	public abstract AviWriterCi AviWriterCreate();
 	public abstract UriCi ParseUri(string uri);
