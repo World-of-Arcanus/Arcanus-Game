@@ -443,6 +443,11 @@ namespace Arcanus.ClientNative
 			return info.LastWriteTime.ToString("MM/dd/yyy hh:mm:ss tt");
 		}
 
+		public override bool FileExists(string fullpath)
+		{
+			return File.Exists(fullpath);
+		}
+
 		public override string GetLanguageIso6391()
 		{
 			return CultureInfo.CurrentCulture.TwoLetterISOLanguageName;

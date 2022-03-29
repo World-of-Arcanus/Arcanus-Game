@@ -9,7 +9,7 @@ public class MainMenuScreen : Screen
 		fontTitle.size = 20;
 		fontTitle.style = 1;
 		fontMessage = new FontCi();
-		fontMessage.style = 3;
+		fontMessage.style = 1;
 	}
 
 	internal MainMenu menu;

@@ -9,6 +9,11 @@
 		wlst_settings = new SettingsWidget();
 		AddWidget(wlst_settings);
 
+		wtxt_error = new TextWidget();
+		wtxt_error.SetFont(fontMessage);
+		wtxt_error.SetVisible(false);
+		AddWidget(wtxt_error);
+
 		wbtn_play = new ButtonWidget();
 		wbtn_play.SetText("&ePlay");
 		AddWidget(wbtn_play);
@@ -19,6 +24,7 @@
 
 	TextWidget wtxt_title;
 	SettingsWidget wlst_settings;
+	TextWidget wtxt_error;
 	ButtonWidget wbtn_play;
 	ButtonWidget wbtn_back;
 
@@ -53,6 +59,10 @@
 		wlst_settings.sizey = settingscount * (buttonheight + 6);
 		wlst_settings.Load(gamePlatform, _name);
 
+		wtxt_error.x = windowX / 2;
+		wtxt_error.y = wlst_settings.y + wlst_settings.sizey - (spacebetween * 2);
+		wtxt_error.SetAlignment(TextAlign.Center);
+
 		wbtn_play.x = windowX / 2 - (buttonwidth / 2);
 		wbtn_play.y = wlst_settings.y + wlst_settings.sizey + (spacebetween * 2);
 		wbtn_play.sizex = buttonwidth;
@@ -75,11 +85,31 @@
 	{
 		if (w == wbtn_play)
 		{
-			// TODO: compare _name to wlst_settings.GetName()
-			//       if it's different then check if the filename is
-			//       being used and display an error when it is
+			wtxt_error.SetVisible(false);
+
+			string nameInSettings = wlst_settings.GetName();
 			string filename = menu.p.PathCombine(menu.p.PathSavegames(),
-				menu.p.StringFormat("{0}.arcanus", wlst_settings.GetName()));
+				menu.p.StringFormat("{0}.arcanus", nameInSettings));
+
+			if (nameInSettings == "")
+			{
+				wtxt_error.SetText("&4You must enter a name!");
+				wtxt_error.SetVisible(true);
+				return;
+			}
+			else if (_name != nameInSettings)
+			{
+				if (menu.p.FileExists(filename))
+				{
+					wtxt_error.SetText("&4This name already exists!");
+					wtxt_error.SetVisible(true);
+					return;
+				}
+				else
+				{
+					// TODO: rename current world when _name != ""
+				}
+			}
 
 			menu.ConnectToSingleplayer(filename);
 		}

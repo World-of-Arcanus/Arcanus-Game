@@ -51,6 +51,7 @@
 	public abstract string FileImage(string fullpath);
 	public abstract string FileImagePath(string fullpath);
 	public abstract string FileLastWriteTime(string fullpath);
+	public abstract bool FileExists(string fullpath);
 	public abstract void AddOnNewFrame(NewFrameHandler handler);
 	public abstract void AddOnKeyEvent(KeyEventHandler handler);
 	public abstract void AddOnMouseEvent(MouseEventHandler handler);
