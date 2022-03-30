@@ -448,6 +448,11 @@ namespace Arcanus.ClientNative
 			return File.Exists(fullpath);
 		}
 
+		public override void FileRename(string oldpath, string newpath)
+		{
+			File.Move(oldpath, newpath);
+		}
+
 		public override string GetLanguageIso6391()
 		{
 			return CultureInfo.CurrentCulture.TwoLetterISOLanguageName;

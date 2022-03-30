@@ -105,9 +105,12 @@
 					wtxt_error.SetVisible(true);
 					return;
 				}
-				else
+				else if (_name != "")
 				{
-					// TODO: rename current world when _name != ""
+					string filenameOld = menu.p.PathCombine(menu.p.PathSavegames(),
+						menu.p.StringFormat("{0}.arcanus", _name));
+
+					menu.p.FileRename(filenameOld, filename);
 				}
 			}
 
