@@ -156,6 +156,7 @@
 		}
 		else
 		{
+			_textDescription.SetFont(_fontServerDescription);
 			_textDescription.x = x + 73 * scale;
 			_textDescription.y = y + sizey - 25 * scale;
 		}

@@ -62,12 +62,14 @@
 		{
 			entriesPerPage = renderer.GetPlatform().FloatToInt(sizey / ((elementSizeY + padding) * scale));
 			listButtons = new ServerButtonWidget[entriesPerPage];
+
 			for (int i = 0; i < entriesPerPage; i++)
 			{
 				ServerButtonWidget b = new ServerButtonWidget();
 				b.SetVisible(false);
 				listButtons[i] = b;
 			}
+
 			UpdateScrollButtons();
 			lastSizeY = sizey;
 		}
@@ -78,12 +80,9 @@
 			listButtons[i].SetVisible(false);
 
 			int index = i + (entriesPerPage * currentPage);
-			if (index > entriesPerPage)
-			{
-				// Skip entries if list exceeds server limit
-				continue;
-			}
+
 			ListEntry e = listEntries[index];
+
 			if (e == null)
 			{
 				// Skip entries when reaching the end of the list
