@@ -171,8 +171,11 @@ public class MainMenu
 
 	internal void StartMultiplayer()
 	{
-		screen = new ScreenMultiplayer();
-		screen.Init(this, uiRenderer);
+		StartConnectToIp();
+
+		// TODO: save / display a local server list and re-enable this
+		// screen = new ScreenMultiplayer();
+		// screen.Init(this, uiRenderer);
 	}
 
 	internal void Login(string user, string password, string serverHash, string token, LoginResultRef loginResult, LoginData loginResultData)

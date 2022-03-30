@@ -85,7 +85,7 @@ public class ScreenMultiplayer : MainMenuScreen
 
 		// setup widgets
 		wtxt_title.x = gamePlatform.GetCanvasWidth() / 2;
-		wtxt_title.y = 10 * scale;
+		wtxt_title.y = gamePlatform.GetCanvasHeight() / 2 - 210;
 		wtxt_title.SetAlignment(TextAlign.Center);
 
 		wbtn_back.x = 40 * scale;

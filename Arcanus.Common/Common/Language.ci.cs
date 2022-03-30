@@ -153,15 +153,15 @@
 		Add("en", "MainMenu_LoginInvalid", "&4Invalid Username or Password");
 		Add("en", "MainMenu_LoginConnecting", "Connecting ...");
 		Add("en", "MainMenu_MultiplayerConnect", "Connect");
-		Add("en", "MainMenu_MultiplayerConnectIP", "Connect to IP");
+		Add("en", "MainMenu_MultiplayerConnectIP", "Connect to Server");
 		Add("en", "MainMenu_MultiplayerRefresh", "Refresh");
 		Add("en", "MainMenu_MultiplayerLoading", "Loading ...");
 		Add("en", "MainMenu_MultiplayerLogout", "Logout");
 		Add("en", "MainMenu_ConnectToIpConnect", "Connect");
 		Add("en", "MainMenu_ConnectToIpIp", "IP");
 		Add("en", "MainMenu_ConnectToIpPort", "Port");
-		Add("en", "MainMenu_ConnectToIpErrorIp", "&4Please enter a valid address!");
-		Add("en", "MainMenu_ConnectToIpErrorPort", "&4Please enter a valid port!");
+		Add("en", "MainMenu_ConnectToIpErrorIp", "&4You must enter a valid address!");
+		Add("en", "MainMenu_ConnectToIpErrorPort", "&4You must enter a valid port!");
 
 		Add("en", "CannotWriteChatLog", "Cannot write to chat log file {0}.");
 		Add("en", "ChunkUpdates", "Chunk Updates: {0}");

@@ -8,29 +8,42 @@ public class ScreenConnectToIp : MainMenuScreen
 	{
 		wbtn_back = new ButtonWidget();
 		AddWidget(wbtn_back);
+
 		wbtn_connect = new ButtonWidget();
 		AddWidget(wbtn_connect);
+
 		wtxt_title = new TextWidget();
 		wtxt_title.SetFont(fontTitle);
 		wtxt_title.SetAlignment(TextAlign.Center);
 		AddWidget(wtxt_title);
+
 		wtxt_statusMessage = new TextWidget();
 		wtxt_statusMessage.SetFont(fontMessage);
+		wtxt_statusMessage.SetAlignment(TextAlign.Center);
 		AddWidget(wtxt_statusMessage);
+
 		wtxt_ip = new TextWidget();
 		wtxt_ip.SetFont(fontDefault);
 		wtxt_ip.SetAlignment(TextAlign.Right);
 		wtxt_ip.SetBaseline(TextBaseline.Middle);
 		AddWidget(wtxt_ip);
+
 		wtxt_port = new TextWidget();
 		wtxt_port.SetFont(fontDefault);
 		wtxt_port.SetAlignment(TextAlign.Right);
 		wtxt_port.SetBaseline(TextBaseline.Middle);
 		AddWidget(wtxt_port);
+
 		wtbx_ip = new TextBoxWidget();
 		AddWidget(wtbx_ip);
+
 		wtbx_port = new TextBoxWidget();
 		AddWidget(wtbx_port);
+
+		wcbx_save = new CheckBoxWidget();
+		wcbx_save.SetDescription("Save to server list");
+		wcbx_save.SetChecked(true);
+		AddWidget(wcbx_save);
 
 		// tabbing setup
 		wtbx_ip.SetNextWidget(wtbx_port);
@@ -48,6 +61,7 @@ public class ScreenConnectToIp : MainMenuScreen
 	TextWidget wtxt_port;
 	TextBoxWidget wtbx_ip;
 	TextBoxWidget wtbx_port;
+	CheckBoxWidget wcbx_save;
 
 	bool loaded;
 
@@ -70,38 +84,52 @@ public class ScreenConnectToIp : MainMenuScreen
 			loaded = true;
 		}
 
-		float connectAreaWidth = 600;
-		float connectAreaHeight = 400;
-		float scale = menu.uiRenderer.GetScale();
-		float leftx = gamePlatform.GetCanvasWidth() / 2 - (connectAreaWidth / 2) * scale;
-		float topy = gamePlatform.GetCanvasHeight() / 2 - (connectAreaHeight / 2) * scale;
+		float windowX = gamePlatform.GetCanvasWidth();
+		float windowY = gamePlatform.GetCanvasHeight();
 
-		wtxt_title.x = gamePlatform.GetCanvasWidth() / 2;
+		float bkwidth = 350;
+		float bkheight = 4 * 64;
+		float scale = menu.uiRenderer.GetScale();
+		float leftx = (windowX / 2 - (bkwidth / 2)) + 50 + 25; // text width + padding
+		float topy = windowY / 2 - 210;
+
+		wtxt_title.x = windowX / 2;
 		wtxt_title.y = topy;
-		wtxt_statusMessage.x = leftx;
+
+		wtxt_statusMessage.x = windowX / 2;
 		wtxt_statusMessage.y = topy + 258 * scale;
 
-		wtxt_ip.x = leftx - 6 * scale;
-		wtxt_ip.y = topy + 82 * scale;
+		menu.uiRenderer.Draw2dTexture(menu.uiRenderer.GetTexture("serverlist_entry_background.png"),
+			windowX / 2 - (bkwidth / 2), wtxt_title.y + wtxt_title.sizey, bkwidth, bkheight, null, 0, -1);
+
+		wtxt_ip.x = leftx - 20 * scale;
+		wtxt_ip.y = topy + 66 * scale;
+
 		wtbx_ip.x = leftx;
 		wtbx_ip.y = topy + 50 * scale;
-		wtbx_ip.sizex = connectAreaWidth * scale;
-		wtbx_ip.sizey = 64 * scale;
+		wtbx_ip.sizex = bkwidth - 100;
+		wtbx_ip.sizey = 32 * scale;
 
-		wtxt_port.x = leftx - 6 * scale;
-		wtxt_port.y = topy + 162 * scale;
+		wtxt_port.x = leftx - 20 * scale;
+		wtxt_port.y = topy + 125 * scale;
+
 		wtbx_port.x = leftx;
-		wtbx_port.y = topy + 130 * scale;
-		wtbx_port.sizex = connectAreaWidth * scale;
-		wtbx_port.sizey = 64 * scale;
+		wtbx_port.y = topy + 109 * scale;
+		wtbx_port.sizex = bkwidth - 100;
+		wtbx_port.sizey = 32 * scale;
 
-		wbtn_connect.x = leftx;
+		wcbx_save.x = leftx;
+		wcbx_save.y = topy + 168 * scale;
+		wcbx_save.sizex = bkwidth - 100;
+		wcbx_save.sizey = 32 * scale;
+
+		wbtn_connect.x = windowX / 2 - (256 / 2);
 		wbtn_connect.y = topy + 336 * scale;
 		wbtn_connect.sizex = 256 * scale;
 		wbtn_connect.sizey = 64 * scale;
 
 		wbtn_back.x = 40 * scale;
-		wbtn_back.y = gamePlatform.GetCanvasHeight() - 104 * scale;
+		wbtn_back.y = windowY - 104 * scale;
 		wbtn_back.sizex = 256 * scale;
 		wbtn_back.sizey = 64 * scale;
 
@@ -110,7 +138,8 @@ public class ScreenConnectToIp : MainMenuScreen
 
 	public override void OnBackPressed()
 	{
-		menu.StartMultiplayer();
+		menu.StartMainMenu();
+		// menu.StartMultiplayer();
 	}
 
 	public override void OnButton(AbstractMenuWidget w)
