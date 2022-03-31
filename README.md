@@ -43,13 +43,14 @@ Features
 
 - Magic System (work in progress)
 
-     A simple magic system is in place to allow you to battle other players. More to come soon ...
+     A simple magic system is in place to allow you to battle other players.
 
 Future Roadmap
 --------------
 
 My long term goals are to add ...
 
+- new blocks for stairs and chests (work in progress)
 - the ability to customize your character
 - wearable items like armor, clothing and magic rings
 - a variety of creatures (some can attack or become pets)
