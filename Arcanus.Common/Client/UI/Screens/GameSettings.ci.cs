@@ -114,7 +114,11 @@
 				}
 			}
 
-			menu.ConnectToSingleplayer(filename);
+			OptionsCi options = new OptionsCi();
+			options.PvP = wlst_settings.GetPvP();
+			options.PvE = wlst_settings.GetPvE();
+
+			menu.ConnectToSingleplayer(filename, options);
 		}
 
 		if (w == wbtn_back)

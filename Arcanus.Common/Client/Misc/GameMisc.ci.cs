@@ -1001,6 +1001,8 @@ public class OptionsCi
 		BlockShadowSave = one * 6 / 10;
 		EnableBlockShadow = true;
 		Keys = new int[GlKeys.LastKey];
+		PvP = true;
+		PvE = false;
 	}
 	internal bool Shadows;
 	internal int Font;
@@ -1016,6 +1018,8 @@ public class OptionsCi
 	internal float BlockShadowSave;
 	internal bool EnableBlockShadow;
 	internal int[] Keys;
+	internal bool PvP;
+	internal bool PvE;
 }
 
 public class TextureAtlas

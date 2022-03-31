@@ -128,11 +128,11 @@
 		if (e.GetKeyCode() == GlKeys.F5)
 		{
 			menu.p.SinglePlayerServerDisable();
-			menu.StartGame(true, menu.p.PathCombine(menu.p.PathSavegames(), "World.arcanusdbg"), null);
+			menu.StartGame(true, menu.p.PathCombine(menu.p.PathSavegames(), "World.arcanusdbg"), null, null);
 		}
 		if (e.GetKeyCode() == GlKeys.F6)
 		{
-			menu.StartGame(true, menu.p.PathCombine(menu.p.PathSavegames(), "World.arcanus"), null);
+			menu.StartGame(true, menu.p.PathCombine(menu.p.PathSavegames(), "World.arcanus"), null, null);
 		}
 	}
 

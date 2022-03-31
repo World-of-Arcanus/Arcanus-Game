@@ -117,4 +117,14 @@
 	{
 		return wtxt_name.GetContent();
 	}
+
+	public bool GetPvP()
+	{
+		return wcbx_pvp.GetChecked();
+	}
+
+	public bool GetPvE()
+	{
+		return wcbx_pve.GetChecked();
+	}
 }

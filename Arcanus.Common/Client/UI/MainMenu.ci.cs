@@ -238,11 +238,11 @@ public class MainMenu
 		screen.Init(this, uiRenderer);
 	}
 
-	public void StartGame(bool singleplayer, string singleplayerSavePath, ConnectData connectData)
+	public void StartGame(bool singleplayer, string singleplayerSavePath, ConnectData connectData, OptionsCi options)
 	{
 		ScreenGame screenGame = new ScreenGame();
 		screenGame.Init(this, uiRenderer);
-		screenGame.Start(p, singleplayer, singleplayerSavePath, connectData);
+		screenGame.Start(p, singleplayer, singleplayerSavePath, connectData, options);
 		screen = screenGame;
 		drawBackground = false;
 	}
@@ -255,11 +255,11 @@ public class MainMenu
 		connectData.Auth = loginResultData.AuthCode;
 		connectData.Username = username;
 
-		StartGame(false, null, connectData);
+		StartGame(false, null, connectData, null);
 	}
 
-	public void ConnectToSingleplayer(string filename)
+	public void ConnectToSingleplayer(string filename, OptionsCi options)
 	{
-		StartGame(true, filename, null);
+		StartGame(true, filename, null, options);
 	}
 }

@@ -75,7 +75,7 @@ public class ArcanusProgram
 			ConnectData connectdata = new ConnectData();
 			connectdata = ConnectData.FromUri(new GamePlatformNative().ParseUri(args[0]));
 
-			mainmenu.StartGame(false, null, connectdata);
+			mainmenu.StartGame(false, null, connectdata, null);
 		}
 	}
 

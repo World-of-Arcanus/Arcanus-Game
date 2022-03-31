@@ -9,11 +9,12 @@ public class ScreenGame : MainMenuScreen
 	}
 	Game game;
 
-	public void Start(GamePlatform platform_, bool singleplayer_, string singleplayerSavePath_, ConnectData connectData_)
+	public void Start(GamePlatform platform_, bool singleplayer_, string singleplayerSavePath_, ConnectData connectData_, OptionsCi options_)
 	{
 		singleplayer = singleplayer_;
 		singleplayerSavePath = singleplayerSavePath_;
 		connectData = connectData_;
+		options = options_;
 
 		game.platform = gamePlatform;
 		game.issingleplayer = singleplayer;
@@ -21,6 +22,11 @@ public class ScreenGame : MainMenuScreen
 		game.assetsLoadProgress = menu.uiRenderer.GetAssetLoadProgress();
 		game.uiRenderer = uiRenderer;
 		game.filename = singleplayerSavePath;
+
+		if (options_ != null)
+		{
+			game.options = options;
+		}
 
 		game.Start();
 		Connect(gamePlatform);
@@ -94,13 +100,14 @@ public class ScreenGame : MainMenuScreen
 	ConnectData connectData;
 	bool singleplayer;
 	string singleplayerSavePath;
+	OptionsCi options;
 
 	public override void Render(float dt)
 	{
 		if (game.reconnect)
 		{
 			game.Dispose();
-			menu.StartGame(singleplayer, singleplayerSavePath, connectData);
+			menu.StartGame(singleplayer, singleplayerSavePath, connectData, options);
 			return;
 		}
 		if (game.exitToMainMenu)
