@@ -53,8 +53,11 @@
 		}
 		if (b == buttonMainExit)
 		{
-			game.platform.SaveScreenshotFile(game.platform.FileImagePath(game.filename));
-			game.uiRenderer.ReloadAssets();
+			if (game.issingleplayer)
+			{
+				game.platform.SaveScreenshotFile(game.platform.FileImagePath(game.filename));
+				game.uiRenderer.ReloadAssets();
+			}
 
 			game.SendLeave(Packet_LeaveReasonEnum.Leave);
 			game.ExitToMainMenu_();
