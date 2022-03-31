@@ -143,11 +143,12 @@
 		Add("en", "MainMenu_Quit", "&eQuit");
 		Add("en", "MainMenu_ButtonBack", "Back");
 		Add("en", "MainMenu_SingleplayerButtonCreate", "Create or Open ...");
-		Add("en", "MainMenu_Login", "Login");
-		Add("en", "MainMenu_LoginUsername", "Username");
+		Add("en", "MainMenu_Login", "Character Login");
+		Add("en", "MainMenu_LoginUsername", "Name");
 		Add("en", "MainMenu_LoginPassword", "Password");
 		Add("en", "MainMenu_LoginRemember", "Remember Me");
 		Add("en", "MainMenu_LoginCreateAccount", "Create Account");
+		Add("en", "MainMenu_LoginLogin", "Login");
 		Add("en", "MainMenu_ChoiceYes", "Yes");
 		Add("en", "MainMenu_ChoiceNo", "No");
 		Add("en", "MainMenu_LoginInvalid", "&4Invalid Username or Password");

@@ -8,30 +8,41 @@ public class ScreenLogin : MainMenuScreen
 	{
 		wbtn_back = new ButtonWidget();
 		AddWidget(wbtn_back);
+
 		wbtn_login = new ButtonWidget();
 		AddWidget(wbtn_login);
+
 		wbtn_createAccount = new ButtonWidget();
 		wbtn_createAccount.SetVisible(false);
 		AddWidget(wbtn_createAccount);
+
 		wtbx_username = new TextBoxWidget();
 		AddWidget(wtbx_username);
+
 		wtbx_password = new TextBoxWidget();
 		wtbx_password.SetInputHidden(true);
 		AddWidget(wtbx_password);
+
 		wcbx_rememberPassword = new CheckBoxWidget();
+		wcbx_rememberPassword.SetChecked(true);
 		AddWidget(wcbx_rememberPassword);
+
 		wtxt_title = new TextWidget();
 		wtxt_title.SetFont(fontTitle);
 		wtxt_title.SetAlignment(TextAlign.Center);
 		AddWidget(wtxt_title);
+
 		wtxt_statusMessage = new TextWidget();
 		wtxt_statusMessage.SetFont(fontMessage);
+		wtxt_title.SetAlignment(TextAlign.Center);
 		AddWidget(wtxt_statusMessage);
+
 		wtxt_username = new TextWidget();
 		wtxt_username.SetFont(fontDefault);
 		wtxt_username.SetAlignment(TextAlign.Right);
 		wtxt_username.SetBaseline(TextBaseline.Middle);
 		AddWidget(wtxt_username);
+
 		wtxt_password = new TextWidget();
 		wtxt_password.SetFont(fontDefault);
 		wtxt_password.SetAlignment(TextAlign.Right);
@@ -69,7 +80,7 @@ public class ScreenLogin : MainMenuScreen
 		wtxt_username.SetText(menu.lang.Get("MainMenu_LoginUsername"));
 		wtxt_password.SetText(menu.lang.Get("MainMenu_LoginPassword"));
 		wcbx_rememberPassword.SetDescription(menu.lang.Get("MainMenu_LoginRemember"));
-		wbtn_login.SetText(menu.lang.Get("MainMenu_Login"));
+		wbtn_login.SetText(menu.lang.Get("MainMenu_LoginLogin"));
 		wbtn_back.SetText(menu.lang.Get("MainMenu_ButtonBack"));
 		wbtn_createAccount.SetText(menu.lang.Get("MainMenu_LoginCreateAccount"));
 	}
@@ -91,26 +102,29 @@ public class ScreenLogin : MainMenuScreen
 
 			triedSavedLogin = true;
 		}
+
 		// store credentials and connect to server when login was successful
-		if (loginResultData != null
-			&& loginResultData.ServerCorrect
-			&& loginResultData.PasswordCorrect)
+		if (loginResultData != null && loginResultData.ServerCorrect && loginResultData.PasswordCorrect)
 		{
 			if (wcbx_rememberPassword.GetChecked())
 			{
 				Preferences preferences = gamePlatform.GetPreferences();
 				preferences.SetString("Username", wtbx_username.GetContent());
+
 				if (loginResultData.Token != null && loginResultData.Token != "")
 				{
 					preferences.SetString("Password", loginResultData.Token);
 				}
+
 				gamePlatform.SetPreferences(preferences);
 			}
+
 			menu.ConnectToGame(loginResultData, wtbx_username.GetContent());
 		}
 
 		// update login status message
 		string loginResultText = null;
+
 		switch (loginResult.value)
 		{
 			case LoginResult.Connecting:
@@ -122,45 +136,50 @@ public class ScreenLogin : MainMenuScreen
 			default:
 				break;
 		}
+
 		wtxt_statusMessage.SetText(loginResultText);
 
+		float windowX = gamePlatform.GetCanvasWidth();
+		float windowY = gamePlatform.GetCanvasHeight();
+
+		float bkwidth = 350;
+		float bkheight = 4 * 64;
 		float scale = menu.uiRenderer.GetScale();
+		float leftx = (windowX / 2 - (bkwidth / 2)) + 100 + 25; // text width + padding
+		float rightx = windowX / 2 + 44 * scale;
+		float topy = windowY / 2 - 210;
 
-		float loginAreaWidth = 600;
-		float loginAreaHeight = 400;
-		const int textboxHeight = 64;
-
-		float leftx = gamePlatform.GetCanvasWidth() / 2 - (loginAreaWidth / 2) * scale;
-		float rightx = gamePlatform.GetCanvasWidth() / 2 + 44 * scale;
-		float topy = gamePlatform.GetCanvasHeight() / 2 - (loginAreaHeight / 2) * scale;
-
-		wtxt_title.x = gamePlatform.GetCanvasWidth() / 2;
+		wtxt_title.x = windowX / 2;
 		wtxt_title.y = topy;
-		wtxt_statusMessage.x = leftx;
+
+		wtxt_statusMessage.x = windowX / 2;
 		wtxt_statusMessage.y = topy + 258 * scale;
 
-		float originy = topy + 50 * scale;
-		wtxt_username.x = leftx - 6 * scale;
-		wtxt_username.y = originy + (textboxHeight / 2) * scale;
-		wtbx_username.x = leftx;
-		wtbx_username.y = originy;
-		wtbx_username.sizex = loginAreaWidth * scale;
-		wtbx_username.sizey = textboxHeight * scale;
+		menu.uiRenderer.Draw2dTexture(menu.uiRenderer.GetTexture("serverlist_entry_background.png"),
+			windowX / 2 - (bkwidth / 2), wtxt_title.y + wtxt_title.sizey, bkwidth, bkheight, null, 0, -1);
 
-		originy = topy + 130 * scale;
-		wtxt_password.x = leftx - 6 * scale;
-		wtxt_password.y = originy + (textboxHeight / 2) * scale;
+		wtxt_username.x = leftx - 20 * scale;
+		wtxt_username.y = topy + 66 * scale;
+
+		wtbx_username.x = leftx;
+		wtbx_username.y = topy + 50 * scale;
+		wtbx_username.sizex = bkwidth - 150;
+		wtbx_username.sizey = 32 * scale;
+
+		wtxt_password.x = leftx - 20 * scale;
+		wtxt_password.y = topy + 125 * scale;
+
 		wtbx_password.x = leftx;
-		wtbx_password.y = originy;
-		wtbx_password.sizex = loginAreaWidth * scale;
-		wtbx_password.sizey = textboxHeight * scale;
+		wtbx_password.y = topy + 109 * scale;
+		wtbx_password.sizex = bkwidth - 150;
+		wtbx_password.sizey = 32 * scale;
 
 		wcbx_rememberPassword.x = leftx;
-		wcbx_rememberPassword.y = topy + 210 * scale;
-		wcbx_rememberPassword.sizex = loginAreaWidth * scale;
+		wcbx_rememberPassword.y = topy + 168 * scale;
+		wcbx_rememberPassword.sizex = bkwidth - 150;
 		wcbx_rememberPassword.sizey = 32 * scale;
 
-		wbtn_login.x = leftx;
+		wbtn_login.x = windowX / 2 - (256 / 2);
 		wbtn_login.y = topy + 336 * scale;
 		wbtn_login.sizex = 256 * scale;
 		wbtn_login.sizey = 64 * scale;
@@ -171,7 +190,7 @@ public class ScreenLogin : MainMenuScreen
 		wbtn_createAccount.sizey = 64 * scale;
 
 		wbtn_back.x = 40 * scale;
-		wbtn_back.y = gamePlatform.GetCanvasHeight() - 104 * scale;
+		wbtn_back.y = windowY - 104 * scale;
 		wbtn_back.sizex = 256 * scale;
 		wbtn_back.sizey = 64 * scale;
 
