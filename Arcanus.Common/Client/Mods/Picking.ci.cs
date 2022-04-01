@@ -349,7 +349,7 @@
 
 					p = Intersection.CheckLineBoxExact(pick, headbox);
 
-					if (p != null)
+					if (p != null && game.options.PvP)
 					{
 						float blockPosDist = (pick2count.value > 0) ? game.Dist(pick2[0].blockPos[0], pick2[0].blockPos[1], pick2[0].blockPos[2], localeyeposX, localeyeposY, localeyeposZ) : 0;
 						float playerDist = game.Dist(p[0], p[1], p[2], localeyeposX, localeyeposY, localeyeposZ);
@@ -382,7 +382,7 @@
 					{
 						p = Intersection.CheckLineBoxExact(pick, bodybox);
 
-						if (p != null)
+						if (p != null && game.options.PvP)
 						{
 							float blockPosDist = (pick2count.value > 0) ? game.Dist(pick2[0].blockPos[0], pick2[0].blockPos[1], pick2[0].blockPos[2], localeyeposX, localeyeposY, localeyeposZ) : 0;
 							float playerDist = game.Dist(p[0], p[1], p[2], localeyeposX, localeyeposY, localeyeposZ);
