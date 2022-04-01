@@ -705,6 +705,8 @@
 		options.Smoothshadows = preferences.GetBool("Smoothshadows", true);
 		options.BlockShadowSave = one * preferences.GetInt("BlockShadowSave", 70) / 100;
 		options.EnableBlockShadow = preferences.GetBool("EnableBlockShadow", true);
+		options.PvP = preferences.GetBool("PvP", true);
+		options.PvE = preferences.GetBool("PvE", false);
 
 		for (int i = 0; i < 256; i++)
 		{
@@ -760,6 +762,8 @@
 		preferences.SetBool("Smoothshadows", options.Smoothshadows);
 		preferences.SetInt("BlockShadowSave", game.platform.FloatToInt(options.BlockShadowSave * 100));
 		preferences.SetBool("EnableBlockShadow", options.EnableBlockShadow);
+		preferences.SetBool("PvP", options.PvP);
+		preferences.SetBool("PvE", options.PvE);
 
 		for (int i = 0; i < 256; i++)
 		{

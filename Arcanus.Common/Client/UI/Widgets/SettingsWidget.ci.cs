@@ -30,7 +30,7 @@
 		wlbl_settings.SetText("Settings & Mods");
 
 		wcbx_pvp = new CheckBoxWidget();
-		wcbx_pvp.SetDescription("PvP - Players can attack other players");
+		wcbx_pvp.SetDescription("PvP - Players can attack each other");
 		wcbx_pvp.SetChecked(true);
 
 		wcbx_pve = new CheckBoxWidget();
@@ -61,6 +61,11 @@
 		if (!_loaded)
         {
 			wtxt_name.SetContent(_p, _name);
+
+			Preferences preferences = _p.GetPreferences();
+			wcbx_pvp.SetChecked(preferences.GetBool("PvP", true));
+			wcbx_pve.SetChecked(preferences.GetBool("PvE", false));
+
 			_loaded = true;
 		}
 
