@@ -259,8 +259,8 @@
 		Add("en", "Server_NoBuildPermissionHere", "You need permission to build in this section of the world.");
 		Add("en", "Server_NoSpectatorUse", "Spectators are not allowed to use blocks.");
 		Add("en", "Server_NoUsePrivilege", "Insufficient privileges to use blocks.");
-		Add("en", "Server_PlayerJoin", "Player {0} has joined");
-		Add("en", "Server_PlayerDisconnect", "Player {0} has left");
+		Add("en", "Server_PlayerJoin", "{0} has joined");
+		Add("en", "Server_PlayerDisconnect", "{0} has left");
 		Add("en", "Server_UsernameBanned", "Your username has been banned from this server.{0}");
 		Add("en", "Server_NoGuests", "Guests are not allowed on this server. Login or register an account.");
 		Add("en", "Server_UsernameInvalid", "Invalid Username (allowed characters: a-z,A-Z,0-9,-,_; max. length: 16)");

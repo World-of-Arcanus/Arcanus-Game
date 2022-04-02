@@ -238,11 +238,11 @@ public class MainMenu
 		screen.Init(this, uiRenderer);
 	}
 
-	public void StartGame(bool singleplayer, string singleplayerSavePath, ConnectData connectData, OptionsCi options)
+	public void StartGame(bool singleplayer, string singleplayerSavePath, ConnectData connectData, ServerConfigCi config)
 	{
 		ScreenGame screenGame = new ScreenGame();
 		screenGame.Init(this, uiRenderer);
-		screenGame.Start(p, singleplayer, singleplayerSavePath, connectData, options);
+		screenGame.Start(p, singleplayer, singleplayerSavePath, connectData, config);
 		screen = screenGame;
 		drawBackground = false;
 	}
@@ -258,8 +258,8 @@ public class MainMenu
 		StartGame(false, null, connectData, null);
 	}
 
-	public void ConnectToSingleplayer(string filename, OptionsCi options)
+	public void ConnectToSingleplayer(string filename, ServerConfigCi config)
 	{
-		StartGame(true, filename, null, options);
+		StartGame(true, filename, null, config);
 	}
 }

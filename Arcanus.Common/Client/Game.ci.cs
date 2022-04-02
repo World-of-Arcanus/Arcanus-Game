@@ -40,6 +40,7 @@
 		enableCameraControl = true;
 		textures = new DictionaryStringInt1024();
 		ServerInfo = new ServerInformation();
+		ServerConfig = new ServerConfigCi();
 		menustate = new MenuState();
 		mouseleftclick = false;
 		mouseleftdeclick = false;
@@ -1248,6 +1249,7 @@
 	}
 
 	internal ServerInformation ServerInfo;
+	internal ServerConfigCi ServerConfig;
 	internal bool AudioEnabled;
 	internal bool AutoJumpEnabled;
 	internal MenuState menustate;

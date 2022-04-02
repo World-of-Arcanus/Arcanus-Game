@@ -2014,10 +2014,10 @@ namespace Arcanus.ClientNative
 			return singlePlayerServerAvailable;
 		}
 
-		public override void SinglePlayerServerStart(string saveFilename)
+		public override void SinglePlayerServerStart(string saveFilename, ServerConfigCi config)
 		{
 			singlepLayerServerExit = false;
-			StartSinglePlayerServer(saveFilename);
+			StartSinglePlayerServer(saveFilename, config);
 		}
 
 		public bool singlepLayerServerExit;
@@ -2026,7 +2026,7 @@ namespace Arcanus.ClientNative
 			singlepLayerServerExit = true;
 		}
 
-		public System.Action<string> StartSinglePlayerServer;
+		public System.Action<string, ServerConfigCi> StartSinglePlayerServer;
 		public bool singlePlayerServerLoaded;
 
 		public override bool SinglePlayerServerLoaded()

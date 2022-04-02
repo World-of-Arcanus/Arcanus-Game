@@ -9,12 +9,12 @@ public class ScreenGame : MainMenuScreen
 	}
 	Game game;
 
-	public void Start(GamePlatform platform_, bool singleplayer_, string singleplayerSavePath_, ConnectData connectData_, OptionsCi options_)
+	public void Start(GamePlatform platform_, bool singleplayer_, string singleplayerSavePath_, ConnectData connectData_, ServerConfigCi config_)
 	{
 		singleplayer = singleplayer_;
 		singleplayerSavePath = singleplayerSavePath_;
 		connectData = connectData_;
-		options = options_;
+		config = config_;
 
 		game.platform = gamePlatform;
 		game.issingleplayer = singleplayer;
@@ -22,26 +22,22 @@ public class ScreenGame : MainMenuScreen
 		game.assetsLoadProgress = menu.uiRenderer.GetAssetLoadProgress();
 		game.uiRenderer = uiRenderer;
 		game.filename = singleplayerSavePath;
-
-		if (options_ != null)
-		{
-			game.options = options;
-		}
+		game.ServerConfig = config;
 
 		game.Start();
-		Connect(gamePlatform);
+		Connect(gamePlatform, config);
 	}
 
 	ServerSimple serverSimple;
 	ModServerSimple serverSimpleMod;
 
-	void Connect(GamePlatform platform)
+	void Connect(GamePlatform platform, ServerConfigCi config)
 	{
 		if (singleplayer)
 		{
 			if (platform.SinglePlayerServerAvailable())
 			{
-				platform.SinglePlayerServerStart(singleplayerSavePath);
+				platform.SinglePlayerServerStart(singleplayerSavePath, config);
 			}
 			else
 			{
@@ -61,7 +57,7 @@ public class ScreenGame : MainMenuScreen
 			}
 
 			connectData = new ConnectData();
-			connectData.Username = "Local";
+			connectData.Username = "Player";
 			game.connectdata = connectData;
 
 			DummyNetClient netclient = new DummyNetClient();
@@ -100,14 +96,14 @@ public class ScreenGame : MainMenuScreen
 	ConnectData connectData;
 	bool singleplayer;
 	string singleplayerSavePath;
-	OptionsCi options;
+	ServerConfigCi config;
 
 	public override void Render(float dt)
 	{
 		if (game.reconnect)
 		{
 			game.Dispose();
-			menu.StartGame(singleplayer, singleplayerSavePath, connectData, options);
+			menu.StartGame(singleplayer, singleplayerSavePath, connectData, config);
 			return;
 		}
 		if (game.exitToMainMenu)

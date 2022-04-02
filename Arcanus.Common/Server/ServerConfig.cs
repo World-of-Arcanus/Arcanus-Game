@@ -49,6 +49,8 @@ namespace Arcanus.Server
 		public string ServerLanguage { get; set; }
 		public int PlayerDrawDistance { get; set; }
 		public bool EnablePlayerPushing { get; set; }
+		public bool PvP { get; set; }
+		public bool PvE { get; set; }
 
 		public bool IsPasswordProtected()
 		{
@@ -106,6 +108,8 @@ namespace Arcanus.Server
 			this.ServerLanguage = "en";
 			this.PlayerDrawDistance = 128;
 			this.EnablePlayerPushing = true;
+			this.PvP = true;
+			this.PvE = false;
 		}
 	}
 

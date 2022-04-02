@@ -53,7 +53,13 @@ public class ArcanusProgram
 		platform.crashreporter = crashreporter;
 		platform.singlePlayerServerDummyNetwork = dummyNetwork;
 		this.platform = platform;
-		platform.StartSinglePlayerServer = (filename) => { savefilename = filename; new Thread(ServerThreadStart).Start(); };
+
+		platform.StartSinglePlayerServer = (filename, config) => {
+			savefilename = filename;
+			saveconfig = config;
+			new Thread(ServerThreadStart).Start();
+		};
+
 		using (GameWindowNative game = new GameWindowNative())
 		{
 			game.CenterWindow();
@@ -81,6 +87,7 @@ public class ArcanusProgram
 
 	DummyNetwork dummyNetwork;
 	string savefilename;
+	ServerConfigCi saveconfig;
 	public GameExit exit = new GameExit();
 	GamePlatformNative platform;
 
@@ -90,6 +97,8 @@ public class ArcanusProgram
 		{
 			Server server = new Server();
 			server.SaveFilenameOverride = savefilename;
+			server.config.PvP = saveconfig.PvP;
+			server.config.PvE = saveconfig.PvE;
 			server.exit = exit;
 			DummyNetServer netServer = new DummyNetServer();
 			netServer.SetPlatform(new GamePlatformNative());

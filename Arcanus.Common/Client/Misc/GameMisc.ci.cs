@@ -1001,8 +1001,6 @@ public class OptionsCi
 		BlockShadowSave = one * 6 / 10;
 		EnableBlockShadow = true;
 		Keys = new int[GlKeys.LastKey];
-		PvP = true;
-		PvE = false;
 	}
 	internal bool Shadows;
 	internal int Font;
@@ -1018,8 +1016,6 @@ public class OptionsCi
 	internal float BlockShadowSave;
 	internal bool EnableBlockShadow;
 	internal int[] Keys;
-	internal bool PvP;
-	internal bool PvE;
 }
 
 public class TextureAtlas
@@ -1034,4 +1030,78 @@ public class TextureAtlas
 		r.h = one / texturesPacked;
 		return r;
 	}
+}
+
+public class ServerConfigCi
+{
+	public ServerConfigCi()
+	{
+		Format = 1;
+		Name = "Arcanus Server";
+		Motd = "World of Arcanus";
+		WelcomeMessage = "Welcome to my Arcanus server!";
+		Port = 25565;
+		MaxClients = 16;
+		ServerMonitor = true;
+		ClientConnectionTimeout = 600;
+		ClientPlayingTimeout = 60;
+		BuildLogging = false;
+		ServerEventLogging = false;
+		ChatLogging = false;
+		AllowScripting = false;
+		// Key = Guid.NewGuid().ToString();
+		IsCreative = true;
+		Public = false;
+		AllowGuests = true;
+		Monsters = true;
+		MapSizeX = 9984;
+		MapSizeY = 9984;
+		MapSizeZ = 128;
+		// Areas = new List<AreaConfig>();
+		AutoRestartCycle = 6;
+		Seed = 0;
+		RandomSeed = true;
+		EnableHTTPServer = false;
+		AllowSpectatorUse = false;
+		AllowSpectatorBuild = false;
+		ServerLanguage = "en";
+		PlayerDrawDistance = 128;
+		EnablePlayerPushing = true;
+		PvP = true;
+		PvE = false;
+	}
+
+	public int Format;
+	public string Name;
+	public string Motd;
+	public string WelcomeMessage;
+	public int Port;
+	public int MaxClients;
+	public bool ServerMonitor;
+	public int ClientConnectionTimeout;
+	public int ClientPlayingTimeout;
+	public bool BuildLogging;
+	public bool ServerEventLogging;
+	public bool ChatLogging;
+	public bool AllowScripting;
+	// public string Key;
+	public bool IsCreative;
+	public bool Public;
+	public bool AllowGuests;
+	public bool Monsters;
+	public int MapSizeX;
+	public int MapSizeY;
+	public int MapSizeZ;
+	// public List<AreaConfig> Areas;
+	public int AutoRestartCycle;
+	public int Seed;
+	public bool RandomSeed;
+	public bool EnableHTTPServer;
+	public bool AllowSpectatorUse;
+	public bool AllowSpectatorBuild;
+	public string ServerLanguage;
+	public int PlayerDrawDistance;
+	public bool EnablePlayerPushing;
+	public bool PvP;
+	public bool PvE;
 }

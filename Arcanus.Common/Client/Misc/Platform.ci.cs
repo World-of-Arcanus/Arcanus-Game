@@ -226,7 +226,7 @@
 
 	// Game
 	public abstract bool SinglePlayerServerAvailable();
-	public abstract void SinglePlayerServerStart(string saveFilename);
+	public abstract void SinglePlayerServerStart(string saveFilename, ServerConfigCi config);
 	public abstract void SinglePlayerServerExit();
 	public abstract bool SinglePlayerServerLoaded();
 	public abstract void SinglePlayerServerDisable();
