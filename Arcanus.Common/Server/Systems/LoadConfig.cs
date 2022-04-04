@@ -25,8 +25,9 @@ namespace Arcanus.Server
 		bool loaded;
 		public void LoadConfig(Server server)
 		{
-			string filename = "ServerConfig.txt";
-			if (!File.Exists(Path.Combine(GameStorePath.gamepathconfig, filename)))
+			string filename = server.GetSaveFilename().Replace(".arcanus", ".server");
+
+			if (!File.Exists(filename))
 			{
 				Console.WriteLine(server.language.ServerConfigNotFound());
 				SaveConfig(server);
@@ -34,7 +35,7 @@ namespace Arcanus.Server
 			}
 			try
 			{
-				using (TextReader textReader = new StreamReader(Path.Combine(GameStorePath.gamepathconfig, filename)))
+				using (TextReader textReader = new StreamReader(filename))
 				{
 					XmlSerializer deserializer = new XmlSerializer(typeof(ServerConfig), typeof(ServerConfig).GetNestedTypes());
 					server.config = (ServerConfig)deserializer.Deserialize(textReader);
@@ -45,7 +46,7 @@ namespace Arcanus.Server
 			{
 				try
 				{
-					using (Stream s = new MemoryStream(File.ReadAllBytes(Path.Combine(GameStorePath.gamepathconfig, filename))))
+					using (Stream s = new MemoryStream(File.ReadAllBytes(filename)))
 					{
 						server.config = new ServerConfig();
 						StreamReader sr = new StreamReader(s);
@@ -90,7 +91,7 @@ namespace Arcanus.Server
 					//ServerConfig is really messed up. Backup a copy, then create a new one.
 					try
 					{
-						File.Copy(Path.Combine(GameStorePath.gamepathconfig, filename), Path.Combine(GameStorePath.gamepathconfig, filename + ".old"));
+						File.Copy(filename, filename + ".old");
 						Console.WriteLine(server.language.ServerConfigCorruptBackup());
 					}
 					catch
@@ -107,14 +108,16 @@ namespace Arcanus.Server
 
 		public void SaveConfig(Server server)
 		{
+			string filename = server.GetSaveFilename().Replace(".arcanus", ".server");
+
 			//Verify that we have a directory to place the file into.
-			if (!Directory.Exists(GameStorePath.gamepathconfig))
+			if (!Directory.Exists(GameStorePath.gamepathsaves))
 			{
-				Directory.CreateDirectory(GameStorePath.gamepathconfig);
+				Directory.CreateDirectory(GameStorePath.gamepathsaves);
 			}
 
 			XmlSerializer serializer = new XmlSerializer(typeof(ServerConfig), typeof(ServerConfig).GetNestedTypes());
-			TextWriter textWriter = new StreamWriter(Path.Combine(GameStorePath.gamepathconfig, "ServerConfig.txt"));
+			TextWriter textWriter = new StreamWriter(filename);
 
 			//Check to see if config has been initialized
 			if (server.config == null)

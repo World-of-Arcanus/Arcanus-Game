@@ -62,10 +62,7 @@
 		{
 			wtxt_name.SetContent(_p, _name);
 
-			// string filename = _p.PathCombine(_p.PathSavegames(),
-			// 	_p.StringFormat("{0}.server", _name));
-
-			string filename = _p.PathCombine(_p.PathSavegames(), _p.PathCombine("..", _p.PathCombine("Configuration", "ServerConfig.txt")));
+			string filename = _p.PathCombine(_p.PathSavegames(), _p.StringFormat("{0}.server", _name));
 
 			if (_p.FileExists(filename))
 			{
