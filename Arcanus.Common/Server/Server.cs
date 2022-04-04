@@ -475,6 +475,7 @@ namespace Arcanus.Server
 		}
 
 		public ServerConfig config;
+		public ServerConfigCi configOverride;
 		public ServerBanlist banlist;
 		public bool configNeedsSaving;
 

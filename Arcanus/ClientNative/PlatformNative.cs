@@ -18,6 +18,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace Arcanus.ClientNative
 {
@@ -939,6 +940,25 @@ namespace Arcanus.ClientNative
 			catch
 			{
 			}
+		}
+
+		public override ServerConfigCi GetServerConfig(string filename)
+		{
+			Server.ServerConfig config;
+
+			using (TextReader textReader = new StreamReader(Path.Combine(GameStorePath.gamepathconfig, filename)))
+			{
+				XmlSerializer deserializer = new XmlSerializer(typeof(Server.ServerConfig), typeof(Server.ServerConfig).GetNestedTypes());
+				config = (Server.ServerConfig)deserializer.Deserialize(textReader);
+				textReader.Close();
+			}
+
+			ServerConfigCi configCi = new ServerConfigCi();
+			configCi.PvP = config.PvP;
+			configCi.PvE = config.PvE;
+			// TODO: add all the properties
+
+			return configCi;
 		}
 
 		public bool IsMac = Environment.OSVersion.Platform == PlatformID.MacOSX;

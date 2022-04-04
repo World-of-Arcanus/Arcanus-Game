@@ -97,8 +97,8 @@ public class ArcanusProgram
 		{
 			Server server = new Server();
 			server.SaveFilenameOverride = savefilename;
-			server.config.PvP = saveconfig.PvP;
-			server.config.PvE = saveconfig.PvE;
+			server.configOverride = saveconfig;
+			server.configNeedsSaving = true;
 			server.exit = exit;
 			DummyNetServer netServer = new DummyNetServer();
 			netServer.SetPlatform(new GamePlatformNative());

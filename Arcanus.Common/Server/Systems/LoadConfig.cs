@@ -232,6 +232,8 @@ namespace Arcanus.Server
 				server.config.Areas = ServerConfigMisc.getDefaultAreas();
 			}
 			//Serialize the ServerConfig class to XML
+			server.config.PvP = server.configOverride.PvP;
+			server.config.PvE = server.configOverride.PvE;
 			serializer.Serialize(textWriter, server.config);
 			textWriter.Close();
 		}

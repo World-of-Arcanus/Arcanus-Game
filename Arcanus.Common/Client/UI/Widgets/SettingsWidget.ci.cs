@@ -59,12 +59,20 @@
 		wtxt_name.sizey = elementSizeY * scale;
 
 		if (!_loaded)
-        {
+		{
 			wtxt_name.SetContent(_p, _name);
 
-			Preferences preferences = _p.GetPreferences();
-			wcbx_pvp.SetChecked(preferences.GetBool("PvP", true));
-			wcbx_pve.SetChecked(preferences.GetBool("PvE", false));
+			// string filename = _p.PathCombine(_p.PathSavegames(),
+			// 	_p.StringFormat("{0}.server", _name));
+
+			string filename = _p.PathCombine(_p.PathSavegames(), _p.PathCombine("..", _p.PathCombine("Configuration", "ServerConfig.txt")));
+
+			if (_p.FileExists(filename))
+			{
+				ServerConfigCi config = _p.GetServerConfig(filename);
+				wcbx_pvp.SetChecked(config.PvP);
+				wcbx_pve.SetChecked(config.PvE);
+			}
 
 			_loaded = true;
 		}

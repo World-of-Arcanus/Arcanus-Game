@@ -112,6 +112,7 @@
 	public abstract bool IsFastSystem();
 	public abstract Preferences GetPreferences();
 	public abstract void SetPreferences(Preferences preferences);
+	public abstract ServerConfigCi GetServerConfig(string filename);
 	public abstract bool IsMousePointerLocked();
 	public abstract void RequestMousePointerLock();
 	public abstract void ExitMousePointerLock();
