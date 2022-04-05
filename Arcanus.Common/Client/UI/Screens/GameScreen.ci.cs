@@ -22,7 +22,11 @@ public class ScreenGame : MainMenuScreen
 		game.assetsLoadProgress = menu.uiRenderer.GetAssetLoadProgress();
 		game.uiRenderer = uiRenderer;
 		game.filename = singleplayerSavePath;
-		game.ServerConfig = config;
+
+		if (config != null)
+		{
+			game.ServerConfig = config;
+		}
 
 		game.Start();
 		Connect(gamePlatform, config);

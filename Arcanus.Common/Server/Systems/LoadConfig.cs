@@ -230,13 +230,19 @@ namespace Arcanus.Server
 					// }
 				}
 			}
+
 			if (server.config.Areas.Count == 0)
 			{
 				server.config.Areas = ServerConfigMisc.getDefaultAreas();
 			}
-			//Serialize the ServerConfig class to XML
-			server.config.PvP = server.configOverride.PvP;
-			server.config.PvE = server.configOverride.PvE;
+
+			if (server.configOverride != null)
+			{
+				server.config.PvP = server.configOverride.PvP;
+				server.config.PvE = server.configOverride.PvE;
+			}
+
+			// serialize the ServerConfig class to XML
 			serializer.Serialize(textWriter, server.config);
 			textWriter.Close();
 		}
