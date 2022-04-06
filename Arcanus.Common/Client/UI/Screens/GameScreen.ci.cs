@@ -110,6 +110,11 @@ public class ScreenGame : MainMenuScreen
 			menu.StartGame(singleplayer, singleplayerSavePath, connectData, config);
 			return;
 		}
+		if (game.exitToSettings)
+		{
+			menu.StartGameSettings(gamePlatform.FileName(game.filename), true);
+			return;
+		}
 		if (game.exitToMainMenu)
 		{
 			game.Dispose();

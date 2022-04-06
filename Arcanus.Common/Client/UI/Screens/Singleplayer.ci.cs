@@ -91,7 +91,7 @@
 	{
 		if (w == wbtn_newWorld)
 		{
-			menu.StartGameSettings("");
+			menu.StartGameSettings("", false);
 		}
 
 		if (w == wbtn_back)

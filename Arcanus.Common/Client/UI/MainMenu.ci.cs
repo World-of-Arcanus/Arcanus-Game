@@ -230,12 +230,21 @@ public class MainMenu
 		return length.value;
 	}
 
-	internal void StartGameSettings(string name)
+	internal void StartGameSettings(string name, bool fromGame)
 	{
 		ScreenGameSettings screenGameSettings = new ScreenGameSettings();
-		screenGameSettings.Load(name);
+		screenGameSettings.Load(name, fromGame);
 		screen = screenGameSettings;
 		screen.Init(this, uiRenderer);
+
+		if (fromGame)
+		{
+			// needed when displaying the screen
+			// after the game has started
+			p.ExitMousePointerLock();
+			p.SetVSync(true);
+			drawBackground = true;
+		}
 	}
 
 	public void StartGame(bool singleplayer, string singleplayerSavePath, ConnectData connectData, ServerConfigCi config)

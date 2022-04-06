@@ -1874,6 +1874,7 @@
 	internal bool IsShiftPressed;
 	internal bool reconnect;
 	internal bool exitToMainMenu;
+	internal bool exitToSettings;
 	internal float constRotationSpeed;
 	internal void SendLeave(int reason)
 	{
@@ -2735,6 +2736,15 @@
 		}
 		redirectTo = null;
 		exitToMainMenu = true;
+	}
+
+	internal void ExitToSettings()
+	{
+		if (issingleplayer)
+		{
+			platform.SinglePlayerServerExit();
+		}
+		exitToSettings = true;
 	}
 
 	internal void ClientCommand(string s_)

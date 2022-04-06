@@ -29,6 +29,7 @@
 	ButtonWidget wbtn_back;
 
 	string _name;
+	bool _fromGame;
 
 	public override void LoadTranslations()
 	{
@@ -123,12 +124,28 @@
 
 		if (w == wbtn_back)
 		{
-			OnBackPressed();
+			if (_fromGame)
+			{
+				string filename = menu.p.PathCombine(menu.p.PathSavegames(),
+					menu.p.StringFormat("{0}.arcanus", _name));
+
+				string filenameConfig = menu.p.PathCombine(menu.p.PathSavegames(),
+					menu.p.StringFormat("{0}.server", _name));
+
+				ServerConfigCi config = gamePlatform.GetServerConfig(filenameConfig);
+
+				menu.ConnectToSingleplayer(filename, config);
+			}
+			else
+			{
+				OnBackPressed();
+			}
 		}
 	}
 
-	public void Load(string name)
+	public void Load(string name, bool fromGame)
     {
 		_name = name;
+		_fromGame = fromGame;
 	}
 }

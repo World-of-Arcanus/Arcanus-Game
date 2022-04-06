@@ -168,7 +168,7 @@
 		if (HasBeenClicked(args))
 		{
 			// hasKeyboardFocus = true;
-			this._menu.StartGameSettings(this._name);
+			this._menu.StartGameSettings(this._name, false);
 		}
 		else
 		{

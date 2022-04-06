@@ -67,6 +67,7 @@
 	Button optionsGraphics;
 	Button optionsKeys;
 	Button optionsOther;
+	Button optionsWorld;
 	Button optionsReturnToMainMenu;
 	void OptionsSet()
 	{
@@ -77,6 +78,8 @@
 		optionsKeys.Text = language.Keys();
 		optionsOther = new Button();
 		optionsOther.Text = language.Other();
+		optionsWorld = new Button();
+		optionsWorld.Text = "World";
 		optionsReturnToMainMenu = new Button();
 		optionsReturnToMainMenu.Text = language.ReturnToMainMenu();
 
@@ -84,6 +87,12 @@
 		AddWidget(optionsGraphics);
 		AddWidget(optionsKeys);
 		AddWidget(optionsOther);
+
+		if (game.issingleplayer)
+		{
+			AddWidget(optionsWorld);
+		}
+
 		AddWidget(optionsReturnToMainMenu);
 	}
 
@@ -100,6 +109,10 @@
 		if (b == optionsOther)
 		{
 			SetEscapeMenuState(EscapeMenuState.Other);
+		}
+		if (b == optionsWorld)
+		{
+			game.ExitToSettings();
 		}
 		if (b == optionsReturnToMainMenu)
 		{
