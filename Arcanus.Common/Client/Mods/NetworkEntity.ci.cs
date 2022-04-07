@@ -148,7 +148,7 @@ public class ClientPacketHandlerEntityPosition : ClientPacketHandler
 	{
 		Entity entity = game.entities[packet.EntityPosition.Id];
 		EntityPosition_ pos = ClientPacketHandlerEntitySpawn.ToClientEntityPosition(packet.EntityPosition.PositionAndOrientation);
-		if (pos == null) { return; } // the Ghost entity will return null
+		if (entity == null || pos == null) { return; } // the Ghost entity will return null
 		entity.networkPosition = pos;
 		entity.networkPosition.PositionLoaded = true;
 		entity.networkPosition.LastUpdateMilliseconds = game.platform.TimeMillisecondsFromStart();

@@ -112,6 +112,7 @@ public class ScreenGame : MainMenuScreen
 		}
 		if (game.exitToSettings)
 		{
+			game.Dispose();
 			menu.StartGameSettings(gamePlatform.FileName(game.filename), true);
 			return;
 		}

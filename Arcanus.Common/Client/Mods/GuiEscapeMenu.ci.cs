@@ -112,6 +112,7 @@
 		}
 		if (b == optionsWorld)
 		{
+			game.SendLeave(Packet_LeaveReasonEnum.Leave);
 			game.ExitToSettings();
 		}
 		if (b == optionsReturnToMainMenu)

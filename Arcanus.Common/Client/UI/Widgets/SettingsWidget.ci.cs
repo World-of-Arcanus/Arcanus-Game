@@ -7,6 +7,7 @@
 	CheckBoxWidget wcbx_pve;
 
 	GamePlatform _p;
+	bool _gameIsNew;
 	string _name;
 	bool _loaded;
 
@@ -64,7 +65,7 @@
 
 			string filename = _p.PathCombine(_p.PathSavegames(), _p.StringFormat("{0}.server", _name));
 
-			if (_p.FileExists(filename))
+			if (_gameIsNew == false && _p.FileExists(filename))
 			{
 				ServerConfigCi config = _p.GetServerConfig(filename);
 				wcbx_pvp.SetChecked(config.PvP);
@@ -120,6 +121,7 @@
 	public void Load(GamePlatform p, string name)
     {
 		_p = p;
+		_gameIsNew = (name == "") ? true : false;
 		_name = (name == "") ? "World" : name;
 	}
 
