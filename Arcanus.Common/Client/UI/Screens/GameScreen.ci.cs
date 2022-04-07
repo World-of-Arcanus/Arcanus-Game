@@ -162,6 +162,7 @@ public class ScreenGame : MainMenuScreen
 			}
 			else
 			{
+				game.Dispose();
 				menu.StartMainMenu();
 			}
 			return;
