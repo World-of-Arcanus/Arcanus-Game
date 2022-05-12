@@ -10,6 +10,13 @@ robocopy /s data build\data /XD localization
 REM Client
 robocopy /s Arcanus\bin\Release\netcoreapp3.1 build /XD user moddebug runtimes /XF *.pdb
 
+REM Client Runtimes
+mkdir build\runtimes
+mkdir build\runtimes\win
+mkdir build\runtimes\win-x64
+robocopy /s Arcanus\bin\Release\netcoreapp3.1\runtimes\win build\runtimes\win *.*
+robocopy /s Arcanus\bin\Release\netcoreapp3.1\runtimes\win-x64 build\runtimes\win-x64 *.*
+
 REM Server
 robocopy /s Arcanus.Server\bin\Release\netcoreapp3.1 build /XD user moddebug runtimes linux-x64 /XF *.pdb
 

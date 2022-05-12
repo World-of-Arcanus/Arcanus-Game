@@ -44,6 +44,7 @@
     <ProjectReference Include="..\Arcanus.Common\Arcanus.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="OpenAL.Soft" Version="1.19.1" />
     <PackageReference Include="OpenTK" Version="4.6.7" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
   </ItemGroup>
