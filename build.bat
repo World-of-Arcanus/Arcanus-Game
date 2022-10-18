@@ -18,7 +18,7 @@ robocopy /s Arcanus\bin\Release\net6.0-windows10.0.17763.0\runtimes\win build\ru
 robocopy /s Arcanus\bin\Release\net6.0-windows10.0.17763.0\runtimes\win-x64 build\runtimes\win-x64 *.*
 
 REM Server
-robocopy /s Arcanus.Server\bin\Release\net6.0-windows10.0.17763.0 build /XD user moddebug runtimes linux-x64 /XF *.pdb
+robocopy /s Arcanus.Server\bin\Release\net6.0 build /XD user moddebug runtimes linux-x64 /XF *.pdb
 
 REM Monster Editor
 REM robocopy Arcanus.MonsterEditor\bin\Release\net6.0-windows10.0.17763.0 build
