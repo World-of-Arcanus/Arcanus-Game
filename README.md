@@ -119,7 +119,7 @@ The server can also be built to run on Linux ...
 - `sudo dpkg -i packages-microsoft-prod.deb`
 - `sudo apt update`
 - `sudo apt install apt-transport-https`
-- `sudo apt install aspnetcore-runtime-6.0
+- `sudo apt install aspnetcore-runtime-6.0`
 - `sudo apt install libenet7`
 - `sudo ufw allow 25565`
 - cd to the directory you uploaded to
