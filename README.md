@@ -80,9 +80,7 @@ You will also need to have the following [.NET 6.0](https://dotnet.microsoft.com
 
 - ASP.NET Core Runtime
 
-- Linux x64
-
-Please see the **Build Instructions** for what packages to install.
+Please see the **Build Instructions** for what packages to install for Linux x64.
 
 The recommended hardware is 4GB memory and 2 CPUs, but you should be able to run the server on lower specs.
 
