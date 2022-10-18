@@ -8,7 +8,7 @@ mkdir build-linux
 robocopy /s data build-linux\data /XD localization
 
 REM Server
-robocopy /s Arcanus.Server\bin\Release\net6.0-windows10.0.17763.0\linux-x64 build-linux /XF *.pdb web.config
+robocopy /s Arcanus.Server\bin\Release\net6.0\linux-x64 build-linux /XF *.pdb web.config
 
 REM Server Mods
 mkdir build-linux\mods
