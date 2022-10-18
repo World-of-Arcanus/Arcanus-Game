@@ -13,14 +13,12 @@ Features
 - Open Source
 
      The game uses a very permissive ISC License and even the media assets are free to modify as you wish.
-     
-     If you would like to support the project, then please consider joining my Patreon (link coming soon) where you will get access to early releases, nightly binaries and a community server to play on.
 
 - Kid Friendly
 
      There is no blood or bad language, and the fighting is kept cartoon-like as much as possible.
 
-- Singleplayer and multiplayer
+- Singleplayer and Multiplayer
 
      You can run your own server and have friends connect to it remotely, or just play in a world of your own creation. 
 
@@ -65,12 +63,10 @@ Client Requirements
 - Windows 10 x64 or later
 - Intel HD Graphics 620 or better
 
-You will also need to have the following [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) runtimes installed.
+You will also need to have the following [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) runtimes installed.
 
 - ASP.NET Core Runtime
 - .NET Desktop Runtime
-
-Windows typically comes with these already installed.
 
 The client should work on common Linux x64 distributions like Ubuntu or Debian (by using Mono), but I haven't tested this yet. I do plan on supporting this eventually. However, it will most likely not work on Mac. Please let me know if you do get it working, but otherwise I don't have any plans to support this.
 
@@ -80,11 +76,9 @@ Server Requirements
 - Windows 10 x64 or later or
 - Windows Server 2016 x64 or later
 
-You will also need to have the following [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) runtimes installed.
+You will also need to have the following [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) runtimes installed.
 
 - ASP.NET Core Runtime
-
-Windows typically comes with these already installed.
 
 - Linux x64
 
@@ -95,13 +89,13 @@ The recommended hardware is 4GB memory and 2 CPUs, but you should be able to run
 Build Instructions
 -------------------------
 
-- install [Visual Studio 2019](https://visualstudio.microsoft.com/vs/older-downloads/#visual-studio-2019-and-other-products)
-- install the [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) SDK
-- install the [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) ASP.NET Core Runtime
-- install the [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) .NET Desktop Runtime
+- install [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
+- install the [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) SDK
+- install the [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) ASP.NET Core Runtime
+- install the [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) .NET Desktop Runtime
 - clone or download this repository
 - open `Arcanus.sln` in the root directory
-- this should open **Visual Studio 2019**
+- this should open **Visual Studio 2022**
 - go to **Build > Configuration Manager**
 - set **Active Solution Configuration** to **Release** and close
 - go to **Build > Build Solution** and wait until it is successful
@@ -127,7 +121,7 @@ The server can also be built to run on Linux ...
 - `sudo dpkg -i packages-microsoft-prod.deb`
 - `sudo apt update`
 - `sudo apt install apt-transport-https`
-- `sudo apt install aspnetcore-runtime-3.1`
+- `sudo apt install aspnetcore-runtime-6.0
 - `sudo apt install libenet7`
 - `sudo ufw allow 25565`
 - cd to the directory you uploaded to
